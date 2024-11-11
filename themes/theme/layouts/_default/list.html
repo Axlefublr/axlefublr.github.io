@@ -42,7 +42,7 @@
 
 {{- if .IsHome }}
 {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 {{- end }}
 
 {{- $paginator := .Paginate $pages }}
@@ -56,12 +56,7 @@
 
 {{- $class := "post-entry" }}
 
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
-{{- end }}
 
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
@@ -79,11 +74,6 @@
       {{- end }}
     </h2>
   </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
-  </div>
-  {{- end }}
   {{- if not (.Param "hideMeta") }}
   <footer class="entry-footer">
     {{- partial "post_meta.html" . -}}
