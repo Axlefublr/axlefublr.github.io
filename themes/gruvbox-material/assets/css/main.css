@@ -1,0 +1,18 @@
+:root {
+  --white: #d4be98;
+  --background: #292828;
+  --shell-pink: #ffafd7;
+}
+
+body {
+  color: var(--white);
+  background-color: var(--background);
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  margin: 1rem;
+}
+
+a {
+  color: var(--shell-pink);
+  text-decoration: none;
+}
