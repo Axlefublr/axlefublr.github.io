@@ -1,7 +1,7 @@
 baseURL: https://axlefublr.github.io/
 languageCode: en-us
 title: The blog of an insane configurator
-theme: gruvbox-material
+theme: theme
 markup:
   goldmark:
     renderer:
