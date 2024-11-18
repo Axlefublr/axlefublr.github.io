@@ -1,0 +1,158 @@
+:root {
+	--red: #ea6962;
+	--orange: #e49641;
+	--cyan: #7daea3;
+	--orange-supporting: #5f472d;
+
+	--bg-color: #292828;
+	--text-color: #d4be98;
+	--link-color: #d3ad5c;
+	--visited-link-color: #e491b2;
+	--bg-hover: var(--orange-supporting);
+	--inline-code-bg: #1f1e1e;
+	--codeblock-bg: var(--inline-code-bg);
+	--fg-heading: #d3ad5c;
+	--fg-page-title: var(--red);
+	--fg-post-date: var(--orange);
+	--quote-border-color: var(--cyan);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: Inter;
+	font-size: 15pt;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	margin: 0;
+}
+
+.page-innards {
+	display: flex;
+}
+
+.page-content {
+	padding: 0 1em;
+	flex: 3 0 0;
+}
+
+.scrolltop {
+	flex: 1 1 0;
+}
+
+a {
+	color: var(--link-color);
+	text-underline-offset: 0.2em;
+	font-weight: normal;
+
+	&:visited {
+		color: var(--visited-link-color);
+	}
+
+	&:hover {
+		background-color: var(--bg-hover);
+	}
+}
+
+p,
+pre {
+	line-height: 1.6em;
+	margin-block: 0.8em;
+}
+
+code {
+	font-family: Input Mono;
+	background-color: var(--inline-code-bg);
+	padding: 0.1em 0.25em;
+	border-radius: 0.3em;
+}
+
+pre {
+	background-color: var(--codeblock-bg) !important;
+	color: var(--text-color) !important;
+	padding: 0.3em 0.6em;
+	border-radius: 0.3em;
+	width: fit-content;
+	box-sizing: border-box;
+	span {
+		color: var(--text-color) !important;
+	}
+	> code {
+		padding: 0;
+		border-radius: 0;
+	}
+}
+
+blockquote,
+blockquote > p {
+	margin-block: 0;
+	margin-inline: 0;
+}
+
+blockquote {
+	border-left: 0.5em solid var(--quote-border-color);
+	--right-side-rounding: 0.3em;
+	border-top-right-radius: var(--right-side-rounding);
+	border-bottom-right-radius: var(--right-side-rounding);
+	background-color: hsl(164, 23.8%, 21%);
+	padding: 0.2em 0.2em 0.2em 0.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-block: 0.5em;
+}
+
+h1,
+h1 > a,
+h1 > a:visited,
+h2,
+h2 > a,
+h2 > a:visited,
+h3,
+h3 > a,
+h3 > a:visited,
+h4,
+h4 > a,
+h4 > a:visited,
+h5,
+h5 > a,
+h5 > a:visited,
+h6,
+h6 > a,
+h6 > a:visited {
+	color: var(--fg-heading);
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.page-title,
+.post-date {
+	text-align: center;
+	font-weight: bold;
+}
+
+a:has(.page-title) {
+	text-decoration: none;
+}
+
+.page-title {
+	color: var(--fg-page-title);
+	font-size: 2.5rem;
+	margin-top: 0.5em;
+	&:hover {
+		background-color: var(--bg-hover);
+	}
+}
+
+.post-date {
+	color: var(--fg-post-date);
+	font-size: 1.8rem;
+	margin-top: 0.3em;
+}
