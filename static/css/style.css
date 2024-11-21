@@ -1,7 +1,9 @@
 :root {
 	--red: #ea6962;
 	--orange: #e49641;
+	--green: #a9b665;
 	--cyan: #7daea3;
+	--blush: #e491b2;
 	--orange-supporting: #5f472d;
 
 	--bg-color: #292828;
@@ -35,7 +37,7 @@ body {
 
 .page-content {
 	padding: 0 1em;
-	flex: 3 0 0;
+	flex: 5 0 0;
 }
 
 .scrolltop {
@@ -71,17 +73,28 @@ code {
 
 pre {
 	background-color: var(--codeblock-bg) !important;
-	color: var(--text-color) !important;
 	padding: 0.3em 0.6em;
 	border-radius: 0.3em;
 	width: fit-content;
 	box-sizing: border-box;
-	span {
-		color: var(--text-color) !important;
-	}
 	> code {
 		padding: 0;
 		border-radius: 0;
+	}
+
+	& .z-storage.z-modifier,
+	.z-storage.z-function,
+	.z-keyword {
+		color: var(--red);
+	}
+
+	& .z-function.z-builtin {
+		color: var(--blush);
+	}
+
+	& .z-function.z-name,
+	.z-function.z-variable {
+		color: var(--green);
 	}
 }
 
