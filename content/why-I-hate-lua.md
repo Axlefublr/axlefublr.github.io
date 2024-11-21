@@ -1,6 +1,6 @@
 ---
-title: 'why I hate lua'
-date: 2024-11-11
+title: why I hate lua
+date: 2024-07-05
 ---
 
 What I value most in a language is *functionality* — what and how easily the language lets me do things. \
