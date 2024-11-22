@@ -7,7 +7,7 @@ What I value most in a language is *functionality* — what and how easily the l
 No wonder! That's what programming is kinda for: *doing cool things more easily*. \
 And here's lua, that doesn't even have an abstraction over something as simple as `.split()`. Ridiculous.
 
-## the horrid std
+# the horrid std
 
 Lua has a very weak standard library. You'll find yourself reimplementing functionality that you'll be flabbergasted isn't there to begin with. \
 Sure, some of that functionality might be simple to implement, but it shouldn't be my job. \
@@ -60,7 +60,7 @@ But even with this, this is a bit stupid. \
 Remember, we're not doing this to inherit some table in our designed app, we're doing this *just* to have slightly better syntax. \
 So I once again argue that it's not worth it.
 
-## locality is a fatality...
+# locality is a fatality...
 
 Notice how both that variable and function use the `local` keyword? \
 Yeah that's because both of those would otherwise be *global* by default. Because that's a very good idea for a default /s
@@ -74,7 +74,7 @@ Additionally confusingly, you need the `local` keyword even if you're not in a b
 Because without it, the variable won't just be global in the file you're working on, nope — it's going to be global to *everywhere*. \
 So you put the `local` keyword to make the variable "local to the module". This language is a god's mistake.
 
-## stupid ass convention
+# stupid ass convention
 
 But we continue on: if a feature exists, makes sense to use it. \
 Even `goto`s have their use, I'm sure. \
@@ -111,7 +111,7 @@ The majority sets a standard, and a good programmer follows standards (yes, even
 
 I haven't looked at much lua code aside from that I wrote (cause remember, I fucking despise the language!), but it seems like the convention is to just never use global variables lol. Which is, like, fair.
 
-## functions
+# functions
 
 Lua uses the concept of "first level citizen functions". Or however that concept is properly worded. \
 Basically, functions are just values that you can assign to variables, and store in tables. \
@@ -149,7 +149,7 @@ Yeah no. Most (lua) programmers are on vscode, and that editor will generally no
 By the time the suggestion window appears and you pick the correct thing (cause also remember, most people don't realize they can fuzzy search their suggestions), you would have already typed in `function`. \
 So the result is you always just typing in `function` yourself. `func` would reduce that by **half**, and would be quite ergonomic.
 
-## patterns
+# patterns
 
 Actually, forget that "approachable to newbies" point, cause it's obscene in its own sense. Let's talk about lua *patterns*. Do you know how they work? I sure don't.
 
@@ -168,7 +168,7 @@ But no, lua decides to use its own syntax, that you now have to learn, even if y
 Why do I then not complain about rust not having regex? \
 That's because it has enough features to make it very viable to not use it — you have other ways of achieving the same text parsing objective. And you have the obvious `.contains()`.
 
-## who made this 💀
+# who made this 💀
 
 Coming back to syntax: why does `then` need to exist? \
 It's used in `if` statements for example. Statements that only take a single expression as a condition anyway. \
@@ -179,7 +179,7 @@ And yet we stil have `then` for some odd reason. Fish shell very comfortably doe
 I don't like the `end`-type "bracket keywords" in programming languages, but I can see how it's needed in something like fish shell. \
 It does not need to be so in a "proper programming language" which I expected lua to be.
 
-## why even use lua then
+# why even use lua then
 
 Worst thing about lua is the fact that every goddamn configurable thingy in existence seems to immediately go for this piece of shit language, resulting in both my window manager and text editor to be configured in it. \
 Lua is unfortunately my most used programming language, however mad I am at this fact being the truth.
@@ -198,7 +198,7 @@ What I use lua for is configuration. If I want *functionality*, I'll pick fish s
 So creating a level of abstraction over my configuration-based lua is just an extra complexity that I'll have to *deal* with. Making it not worth it conceptually. \
 This is the reason why I haven't rewritten my neovim config in rust (which you can supposedly do, as it turns out).
 
-## P.S.
+# P.S.
 
 Everything I've learnt about lua was against my will, so if I'm wrong on some points in this rant, don't be surprised. \
 I'm not interested in giving a language I hate more time than I already do, to learn how to circumvent its annoyances. \
