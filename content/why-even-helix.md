@@ -16,7 +16,7 @@ And the reason why I switched off nvim is not due to the lack of knowledge about
 
 ## a brighter future 🌅
 
-Considering my [two](@/why-I-hate-lua.md) [other](https://gist.github.com/Axlefublr/6880d17221b3036f7e78033fc0980e07) blog posts, this one should be called "why I hate nvim", but I don't actually hate it! \
+Considering my [two](@/why-I-hate-lua.md) [other](@/why-I-hate-kitty/index.md) blog posts, this one should be called "why I hate nvim", but I don't actually hate it! \
 I just realize that helix is simply the better option.
 
 I've been wanting a brighter future than nvim, for a long time. And while I did look at helix, there was something that stopped me from considering actually switching to it. \
