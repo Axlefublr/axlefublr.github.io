@@ -12,15 +12,19 @@ What are they? Some special types, or special syntax introduced by the shell?
 
 Not at all actually, they're *just* strings, like `asdf` and `the` would be.
 
+{{ anc(id="test") }}
+
 You usually use `test` to check for various common equality comparisons, in shell scripting.
 
 ```fish
 if test $var = 'thingy'
-	echo yeppies
+   echo yeppies
 end
 ```
 
 If the string in variable `var` is equal to `thingy`, output `yeppies`.
+
+{{ anc(id="if-semantics") }}
 
 Let's examine more closely *why* we need `test` here to begin with. \
 What `if` does, is take in arguments, call those arguments as a command, and execute the inner block of code if the command's exitcode is 0.
@@ -33,23 +37,27 @@ So you can use *any* command in an `if`, to check for its exitcode:
 
 ```fish
 if rg 'struct' args.rs
-	echo yeppies
+   echo yeppies
 end
 ```
 
 If there is the word `struct` in the file `args.rs`, output `yeppies`. \
 I'm saying all this to highlight: `if` *just* wants to execute a command as its condition, that's it.
 
+{{ anc(id="command") }}
+
 You can even store the command in a variable:
 
 ```fish
 set -l command rg 'struct' args.rs
 if $command
-	echo yeppies
+   echo yeppies
 end
 ```
 
 The variable `$command`, will expand to be `rg 'struct' args.rs`, so this is basically equivalent to the codeblock above, where we *don't* use a variable.
+
+{{ anc(id="booleans") }}
 
 Coming back to booleans:
 
@@ -57,15 +65,17 @@ Coming back to booleans:
 set -l var1 true
 set -l var2 false
 if test $var1
-	echo yeppies
+   echo yeppies
 end
 if test $var2
-	echo yeppies
+   echo yeppies
 end
 ```
 
 Despite `true` and `false` looking colorful, and therefore seeming "special", in your editor, \
 they are actually both *just* strings, so both if statements here will execute their codeblock.
+
+{{ anc(id="false") }}
 
 I always thought, for some reason, that `false` will evaluate to, well, *false* in `test`, but now that I think about it, why would it?
 
@@ -77,11 +87,11 @@ So by setting variables to (completely normal strings) `true` or `false`, you al
 ```fish
 set -l condition true
 if $condition
-	echo yeppies
+   echo yeppies
 end
 set condition false
 if $condition
-	echo yeppies
+   echo yeppies
 end
 ```
 
@@ -89,10 +99,10 @@ Will essentially expand to:
 
 ```fish
 if true
-	echo yeppies
+   echo yeppies
 end
 if false
-	echo yeppies
+   echo yeppies
 end
 ```
 
