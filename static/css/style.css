@@ -1,10 +1,12 @@
 :root {
 	--red: #ea6962;
 	--orange: #e49641;
-	--green: #a9b665;
 	--yellow: #d3ad5c;
+	--green: #a9b665;
+	--mint: #78bf84;
 	--cyan: #7daea3;
 	--blush: #e491b2;
+	--purple: #b58cc6;
 	--orange-supporting: #5f472d;
 
 	--bg-color: #292828;
@@ -86,6 +88,14 @@ pre {
 		border-radius: 0;
 	}
 
+	& .z-string.z-quoted {
+		color: var(--yellow);
+	}
+
+	& .z-variable.z-fish {
+		color: var(--purple);
+	}
+
 	& .z-storage.z-modifier,
 	.z-storage.z-function,
 	.z-keyword {
@@ -99,6 +109,11 @@ pre {
 	& .z-function.z-name,
 	.z-function.z-variable {
 		color: var(--green);
+	}
+
+	& .z-option.z-fish,
+	.z-variable.z-parameter.z-fish:has(.z-string.z-unquoted) {
+		color: var(--mint);
 	}
 }
 
@@ -130,7 +145,7 @@ h4,
 h5,
 h6 {
 	margin-block: 0.5em;
-	font-size: 1.5em;
+	font-size: 1.3em;
 }
 
 h1::before,
