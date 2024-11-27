@@ -3,7 +3,8 @@
 
 <head>
   {% block rss %}
-  <link rel="alternate" type="application/rss+xml" title="RSS" href='{{ get_url(path="rss.xml", trailing_slash=false) }}'>
+  <link rel="alternate" type="application/rss+xml" title="RSS"
+    href='{{ get_url(path="rss.xml", trailing_slash=false) }}'>
   {% endblock %}
   {% include "head.html" %}
 </head>
@@ -13,13 +14,8 @@
     <header>
       {# include "header.html" #}
     </header>
-    <main>
-      {% block content %}
-      {% endblock content %}
-    </main>
-    <footer>
-      {# include "footer.html" #}
-    </footer>
+    {% block content %}
+    {% endblock content %}
   </div>
 </body>
 
