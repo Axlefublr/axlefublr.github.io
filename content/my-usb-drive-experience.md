@@ -10,14 +10,14 @@ Well... that's a bit of an overestimation: I have hours upon hours of content do
 You may reasonably suggest to upgrade my SSD to something like 1 terabytes. \
 However, I find it boring! Often times when I solve some issue, I do it with a completely different agenda in mind.
 
-## why I like to solve problems suboptimally sometimes
+{{ hr(id="suboptimal") }}
 
 If I upgrade the SSD, I just end up never having to worry about storage again (I keep everything pretty clean, so 1tb is more than enough) and learn *nothing*. \
 But if I try to solve the issue with a *usb drive*, now *that's* interesting.
 
 I know Linux's mechanics for mounting a drive, but mostly on paper — I've done them before, but they aren't something that I do often enough to put deeply into my workflow. If I *have to* use a usb drive, I'll learn about all the steps surrounding it more deeply, so I get a "learning benefit" by trading in effectiveness of the solution, lol.
 
-## how do we... uhhh... drive? 🚗
+{{ hr(id="simple-parts") }}
 
 As I've made clear, I don't have deep knowledge, but let's go through the simple parts that you may want to know, if you didn't already!
 
@@ -25,7 +25,7 @@ On windows, new drives appear separately, as new drives. With their own letter a
 
 Linux does this differently! You don't get another `/` or anything like that — *you* get to decide where the (usb) drive lives by *mounting* it. You say to the filesystem: "hey, act like this usb drive is located here".
 
-## I am the mountain ⛰️
+{{ hr(id="mounting") }}
 
 ```sh
 sudo mount /dev/sda1 /mnt/usb
@@ -35,7 +35,7 @@ Looks like a pretty simple command! What was most non-obvious to me in it, is th
 
 "What in the living and dying hell is `/dev/sda1`?" — that is our usb drive! Well... saying that is a bit misleading. That name is not at all guaranteed and might be different for you, and that's if the drive got recognized to begin with!
 
-## do we even have the car?
+{{ hr(id="lsblk") }}
 
 So, let's call `lsblk` in our terminal and look at the output to try to find our drive:
 
@@ -53,13 +53,13 @@ Don't worry, it's confusing to me too! -1 clue what `MAJ:MIN` means, and `RM` is
 In the `NAME` column, thingies are shown in a tree structure. \
 `nvme0n1` is the name of my SSD drive! and `sda` is the name of the usb disk. Yipee 🥳
 
-## car or car parts?
+{{ hr(id="tree-structure") }}
 
 However, there's still this tree structure. This confused me, but now I finally realize what's happening: the items that are branches (with the `└` before them) are *partitions* of the above drive. *These* are what you should be pointing at when trying to specify a drive somewhere, *not* that parent item.
 
 So, what we did so far is the following: inserted the usb drive into some port, executed `lsblk` and found a drive that isn't our SSD. Then looked at all the partitions (branches) it has (may have more than 1 potentially) and took *that* as the thing that we'll be calling our usb drive.
 
-## what about the mountain?
+{{ hr(id="arbitrary-mount-point") }}
 
 That `/mnt/usb` directory is actually pretty arbitrary! The `/mnt` directory is a conventional place where you can **m**ou**nt** your various drives. \
 It is not the only place however, I *believe* ext4 (the linux filesystem you're probably using) allows you to mount things anywhere.
@@ -72,7 +72,7 @@ Keep in mind that `/mnt` is restricted, so you'll have to create `usb/` with ele
 sudo mkdir /mnt/usb
 ```
 
-## I have the lock, but have no key...
+{{ hr(id="restriction") }}
 
 Because `/mnt` is restricted, `/mnt/usb/` is going to be restricted too. Considering that this our lovely personal usb drive, it makes sense to *own* it.
 
@@ -82,14 +82,13 @@ sudo chown username:username /mnt/usb
 
 Viola, now the directory is actually ours 🥰. I sure hope you replaced `username` with your *actual* username!
 
-## what now?
+{{ hr(id="we-can-start-now") }}
 
 After explaining what the directories mean, now `sudo mount /dev/sda1 /mnt/usb` makes a bit more sense. \
 We finally can start actually using our usb drive, as if it's just a normal directory on our filesystem!
 
-## lore time
+{{ hr(id="massive") }}
 
-And that's exactly what I did :3 \
 The 61 gigabytes of content I had downloaded, I now started moving to my shiny new drive.
 
 Quickly issues started to arise, and my mirror rolled its eyes 🙄 when I said "I told you this would be a learning experience!".
@@ -99,7 +98,7 @@ In my very rough count, it took TWO whole minutes to move a single gigabyte. The
 The last time I needed to use a usb drive *not* to install linux was back on windows, so I had no recollection of a good transfer speed. \
 However, in an interesting turn of events, this turned out to be a chehov's gun. Yes I am making a cliffhanger in a blog post, what about it >:D
 
-## I guess it's fine
+{{ hr(id="fine") }}
 
 I don't need to move a whole ass 61gb of data often, if at all, so this slow transfer speed seemed to be an okay-ish tradeoff for the extra space I now get. \
 My internet speed will be the bigger bottleneck anyway.
@@ -111,7 +110,7 @@ As I download the new videos, I decide to watch one I already have downloaded, a
 After a while, I notice a *horrifying fact*... There's buffering now! \
 What the fuck? The whole reason I download all youtube videos I watch is to *avoid* buffering.
 
-## am I fucked?
+{{ hr(id="fucked") }}
 
 So I guess write speed is a bottleneck in the place that matters more: my watching experience... 😭
 
@@ -125,7 +124,7 @@ Oh my god... I am horrified to discover that I *still* have buffering... It's *m
 
 Let's start another chehov's gun here, and talk about something that *seems* unrelated.
 
-## the light
+{{ hr(id="lights") }}
 
 I despise when hardware, like my laptop, earphones, headphones, speakers, power switches, phones, have some lights on them. \
 The reason for them to exist is to tell you information, like the charge percentage, connection state, on / off position. \
@@ -155,7 +154,7 @@ We handled chehov's gun #2, but didn't actually move to the solution.
 
 Let's check up on chehov's gun #1! What about those super slow write speeds anyway?
 
-## she is definitely silly
+{{ hr(id="specs") }}
 
 After not being to fix this buffering issue, it made me think: \
 I bought my laptop 2-3 years ago, for a pretty solid price, *new*. \
@@ -164,8 +163,6 @@ That sure sounds unlikely!
 
 So this time I *do* google the [specs of my laptop](https://www.asus.com/laptops/for-home/everyday-use/asus-m515-amd-ryzen-5000-series/techspec/). \
 Europe! I *do* have a usb 3.x port!
-
-## you've had this computer for THREE YEARS
 
 You might reasonably ask "how the hell do you not know that already?"
 
@@ -179,7 +176,7 @@ I have nothing to lose by trying to prove myself wrong, so I insert the usb into
 Well holy shit! It's moving *waaayyy* faster! Yes! This is definitely a 3.x port! \
 (however it is still massively slower than what I expected out of 3.x).
 
-## aha! chehov's gun #1 solved everything!
+# aha! chehov's gun #1 solved everything!
 
 Right?..
 
@@ -195,7 +192,7 @@ God I love mpv 😩 /srs
 
 Yipee 🥳
 
-## would be better to know about this prior, wouldn't it?
+# would be better to know about this prior, wouldn't it?
 
 Nope, not really!
 
@@ -220,7 +217,7 @@ I did it at first, of course, but after a while I noticed that it's just complet
 So what I now do is first `sync`, and then `sudo umount /mnt/usb`. \
 For a shortcut that does *both* at the same time: `sudo eject /mnt/usb`.
 
-## conclusion
+# conclusion
 
 I sure learnt a lot! And still have the opportunity to learn more: experimenting with the drive's filesystem, figuring out an auto-mounting solution (requiring sudo every time will, I'm sure, get annoying), or maybe another problem I don't yet realize I have!
 

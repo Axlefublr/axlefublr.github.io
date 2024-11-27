@@ -7,6 +7,8 @@ I came up with a concept that completely revolutionized a *lot* of my workflow.
 
 I introduce to you: magazines™!
 
+# the basics
+
 Each magazine is just a normal file that has a one letter file name, from a to z, from A to Z, and from 1 to 9. \
 All magazines are located in a single directory called `magazines`.
 
@@ -16,6 +18,7 @@ I have different *actions* I can do on any magazine. An "action" is just some sh
 
 And finally, I have chord mappings that make me pick an action, and then a magazine to act on. \
 All the magazines use either a letter or a digit for their filenames, to mimic the hotkeys I use to choose them.
+# actions
 
 All action picking hotkeys use *left* shift + a *left* side key. This is because when typing, I will always use the right shift for left side keys, so I get to have very accessible hotkeys specifically for magazine actions. \
 After I press the action hotkey, I press a letter (or digit) key, to pick the magazine I want to execute the action on.
@@ -37,6 +40,8 @@ Considering that all actions *just* act on some filepath, let's go over the acti
 
 > Further in the gist I'll refer to actions by their shortened name, with a superscript number next to it, that specifies the index in this list.
 
+# autocommitting
+
 All actions that modify a file, also *commit* it with git — the `magazines` directory is a git repo. \
 This way, I have a *very* easily traversable history, that doubles as a backup. \
 As long as something *has been* in a magazine, I will be able to restore it if necessary.
@@ -49,9 +54,13 @@ That's why there's an 11th action that *just* commits a magazine.
 All the leftover changes that *still* didn't get committed, are collected together into a single commit, daily. \
 So at the absolute worst, I have a day old backup for all magazines.
 
+# most important magazines
+
 Let me go through some of my actively used magazines and their purpose, to explain how this system helps me keep track of things in an easy way.
 
-The `r` magazine stores all things I want to read. "read" is used pretty loosely here, as the file contains a bunch of different stuff I basically want to *get to*, while not necessarily being a "task" that I can *do*.
+## magazine r
+
+...stores all things I want to read. "read" is used pretty loosely here, as the file contains a bunch of different stuff I basically want to *get to*, while not necessarily being a "task" that I can *do*.
 
 Here's part of what it contains currently:
 
@@ -73,12 +82,19 @@ https://www.howtogeek.com/how-to-see-beautiful-git-project-stats-in-your-termina
 ```
 
 This seems like a hotpot but it's pretty intentional. \
-`#` marks *docs* that I want to read (with the part I left off on written down in `()`), `$` is gists / blog posts that I want to write (`magazines` is this one!!), `&` is for *programs* that I want to discover, `%` is for questions I want to discover, figure out, or take in.
+`#` marks *docs* that I want to read (with the part I left off on written down in `()`), \
+`$` is gists / blog posts that I want to write (`magazines` is this one!!), \
+`&` is for *programs* that I want to discover, \
+`%` is for questions I want to discover, figure out, or take in.
+
+{{ hr(id="seemingly-simple") }}
 
 The two questions I have there seem simple, but they may stay there for a while because they're more loaded questions than they seem. \
 I'm sure there's more than a single way to remove the background in krita, with each being useful in a different situation — I'd want to focus on learning this properly. \
-Even more the case with [kitty](https://gist.github.com/Axlefublr/260f653c25c34c3ed6147a6638fc6512) — trying to solve this question might move me to come up with a different window managing concept that I'll then spend three more hours on. \
+Even more the case with [kitty](@/why-I-hate-kitty/index.md) — trying to solve this question might move me to come up with a different window managing concept that I'll then spend three more hours on. \
 Never underestimate a question, especially if you're autistic like me.
+
+{{ hr(id="vimium-c") }}
 
 I usually use the append² action for this magazine.
 
@@ -92,7 +108,9 @@ The section headers intentionally use ascii symbols that go before letters, so t
 Going in and editing the code for the commit action every time I want to autosort another magazine would go against my principles. \
 This is why I use *another* magazine to solve this!
 
-Magazine `O` contains all the filepaths that I want to automatically sort:
+## magazine O
+
+...contains all the filepaths that I want to automatically sort:
 
 ```
 ~/.local/share/magazine/l
@@ -104,14 +122,20 @@ So if I decide to autosort another magazine on commit, I can just add its filepa
 This autosort behavior explains the reasoning behind `!` before some section headers: `!` is the first printable character in ascii, excepting space, with its decimal index being 33. So it's guaranteed to come first. \
 I use it for reading tasks that I want to get to *first*, before any other ones.
 
-There is also magazine `P`, which is similar in concept to `O`: filepaths listed in magazine `P` are automatically made *unique*. \
+## magazine P
+
+...is similar in concept to `O`: filepaths listed in magazine `P` are automatically made *unique*. \
 If a magazine path is listed in magazine `P`, there will never be duplicate lines in the former.
 
 I could opt to join `O` and `P`, but I might want to sort a file without deduplicating lines, and may want to deduplicate lines without sorting (which you can achieve with this monstrosity: `awk '!seen[$0]++'`), so I keep them separate.
 
+{{ hr(id="dynamic") }}
+
 The above examples are magazines that are fairly dynamic and moving, but there's use in magazines that are fairly static, and are made mostly to access the information faster, than necessarily change it often.
 
-Magazine `u` contains a bunch of cool looking special symbols and nerd font symbols, that I may use in the future. Here's a small chunk of it:
+## magazine u
+
+...contains a bunch of cool looking special symbols and nerd font symbols, that I may use in the future. Here's a small chunk of it:
 
 ```
 󱞭 󱞯 󱞱 󱞳 󱞵 󱞷 󱞹 󱞻 
@@ -125,12 +149,16 @@ Magazine `u` contains a bunch of cool looking special symbols and nerd font symb
 
 The only action I may conceivably do with this one, is to edit¹⁰ it. And even then, usually from an already existing helix instance. The benefit is yet still huge, as it's very easy to get to this file to add another cool unicode symbol.
 
-Here's another magazine that is quite directly opposite: magazine `o` stores the command output of the last command I ran in my rofi command runner.
+## magazine o
+
+...is the opposite of static — it stores the command output of the last command I ran in my rofi command runner.
 
 Usually, the output of my rofi command runner is shown in a notification that stays for 3 seconds. That's plenty of time for the vast majority of usecases, but I *may* want to look at it for longer. Blammo — edit¹⁰ action.
 
 That's fairly convenient as is already, but the real power lies in the copy³ action. Any time I execute a command, I can *choose* to copy its output, if I need it. \
 So, I don't have to preemtively plan to pipe the output into `xclip`, and don't have to rerun the command once I realize I want to pipe it into `xclip`. I *just* use the copy³ action.
+
+{{ hr(id="free-power") }}
 
 Another power I get for free, is that I can choose a line to copy⁹ from the command output.
 
@@ -138,10 +166,15 @@ I didn't consider this as something I'd want to do with command output — it wa
 It just so happened I needed this action for something else (magazine `F` that stores cool fonts) and now the action is integrated into the *magazine framework*. \
 So with magazine `o`, and many other ones, I end up having editing flexibility that I didn't plan for that magazine specifically. It's a big part for why this system has been so successful for me.
 
+# special-casing
+
 I create all the hotkeys for all the actions, and all magazines, myself. There are like 900 or so lines of yaml to make them all using xremap. \
 Because I don't have some complicated system to make the mappings, nothing is stopping me from making some action for some magazine behave slightly differently, to be more useful for that magazine.
 
-Mag `l` is my "linker". It contains all the links I want to store in this format:
+## magazine l
+
+...is my "linker". It contains all the links I want to store in this format:
+
 ```
 !general my youtube channel — https://www.youtube.com/@Axlefublr/streams
 blog reasons I still love fish shell — https://jvns.ca/blog/2024/09/12/reasons-i--still--love-fish/
@@ -164,13 +197,17 @@ I created a "subaction" meant to be the append² action replacement, but *only* 
 That makes it really non-laborious to add in new links! \
 As well as showcase how flexible magazines are, considering that I was able to make a custom action for something like this.
 
+{{ hr(id="reasoning") }}
+
 Now, there's a reason I want a specific format here to begin with. I don't actually open this file directly that often. Magazine `l` is used as a "data file".
 
 All the links are stored in it because I have a global hotkey that *parses* through them all, lets me search by title, and then either opens the link or copies it to my clipboard.
 
 So, sometimes magazines *are* the behavior, other times they're an *interface* to interact with a data file conveniently, so that it could be used by something else.
 
-I also have a special symbol picker in magazine `e`, and the idea is basically the exact same:
+## magazine e
+
+'s idea is basically the exact same:
 
 ```
 ¡ a1 reversed exclamation
@@ -185,7 +222,7 @@ Easier automatic adder, that takes the symbol from my clipboard, figures out eac
 
 That's about it when it comes to the explanation of the idea! Hope you got motivated to implement something like this, or better yet — something that makes even more sense for *you*. Right now I'm going to continue explaining a bunch of my other magazines and what I use them for, to maybe help you get ideas.
 
----
+# etc etc
 
 Out of these magazines: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[];',./{}:"<>?`, \
 I'm actively using these: `acdefijklmopqrsuvwxACDEFHIJKLOPQRSTUVWXYZ134[];:`.

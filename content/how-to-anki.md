@@ -1,6 +1,6 @@
 ---
 title: how to anki
-date: 2024-07-05
+date: 2024-11-11
 draft: true
 ---
 
@@ -19,11 +19,13 @@ I'll be expecting you to have already installed anki; the pc version (which desk
 
 An extra resource along with this blog post that I can recommend, is this [youtube video](https://www.youtube.com/watch?v=Eo1HbXEiJxo).
 
-# Global settings
+# global settings
 
 Let's go to global settings by pressing <kbd>ctrl+p</kbd>.
 
-## Review
+## review
+
+<!-- TODO: individual settings should also be subheadings -->
 
 “Next day starts at”
 
@@ -51,7 +53,7 @@ yep.
 Set yourself some answer keys as well. \
 Anki is more keyboard-supporting than you'd think!
 
-# A bit of keyboard navigation
+# a bit of keyboard navigation
 
 We're done in global settings.
 
@@ -75,7 +77,7 @@ It's going to be more obvious once you have more decks (if there is even a need)
 
 Alrightie now from the yipee screen we can press <kbd>o</kbd> to open the *deck*'s settings.
 
-# Deck settings
+# deck settings
 
 I'll warn you immediately: if you press <kbd>Escape</kbd> from this point, it just discards your changes. You specifically need to press “Save” to save your deck's settings.
 

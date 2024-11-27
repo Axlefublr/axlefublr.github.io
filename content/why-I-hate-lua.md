@@ -7,7 +7,7 @@ What I value most in a language is *functionality* — what and how easily the l
 No wonder! That's what programming is kinda for: *doing cool things more easily*. \
 And here's lua, that doesn't even have an abstraction over something as simple as `.split()`. Ridiculous.
 
-# the horrid std
+{{ hr(id="std") }}
 
 Lua has a very weak standard library. You'll find yourself reimplementing functionality that you'll be flabbergasted isn't there to begin with. \
 Sure, some of that functionality might be simple to implement, but it shouldn't be my job. \
@@ -18,7 +18,7 @@ Whenever you want to push a value into an array (more precisely a list / vector)
 
 Well duh! Right? Right...
 
-## and here come tables...
+{{ hr(id="tables") }}
 
 The way you do that in lua is `table.insert(my_table, value)`.
 
@@ -29,7 +29,7 @@ Insert is not a method for any table, which is the obvious thing that you want, 
 This kind of idea repeats with stuff like `math.abs()`, but math being stored in ~~the balls~~ a module is a pretty common thing across languages, and not too insulting. \
 An *action* you're doing on an *object* being a function is **very** insulting.
 
-## the solution is even worse!
+{{ hr(id="symbol-soup") }}
 
 You know how you can fix this though? With inscrutable symbol soup!
 
@@ -52,7 +52,7 @@ You could I guess make this:
 
 ```lua
 local function get_reasonable_table()
-    return setmetatable({}, { __index = table })
+   return setmetatable({}, { __index = table })
 end
 ```
 
@@ -60,7 +60,7 @@ But even with this, this is a bit stupid. \
 Remember, we're not doing this to inherit some table in our designed app, we're doing this *just* to have slightly better syntax. \
 So I once again argue that it's not worth it.
 
-# locality is a fatality...
+{{ hr(id="local") }}
 
 Notice how both that variable and function use the `local` keyword? \
 Yeah that's because both of those would otherwise be *global* by default. Because that's a very good idea for a default /s
@@ -74,7 +74,7 @@ Additionally confusingly, you need the `local` keyword even if you're not in a b
 Because without it, the variable won't just be global in the file you're working on, nope — it's going to be global to *everywhere*. \
 So you put the `local` keyword to make the variable "local to the module". This language is a god's mistake.
 
-# stupid ass convention
+{{ hr(id="casing") }}
 
 But we continue on: if a feature exists, makes sense to use it. \
 Even `goto`s have their use, I'm sure. \
@@ -103,7 +103,7 @@ local thingy = YEP_JUST_A_GLOBAL_FUNCTION(params)
 
 What the fuck.
 
-## display: hide; that shit
+{{ hr(id="ignore") }}
 
 You might say "well you could just ignore the suggestion by the language server" — I wholeheartedly reject that notion. \
 The lua language server will be used by the overwhelming majority of people that program in lua. \
@@ -111,7 +111,7 @@ The majority sets a standard, and a good programmer follows standards (yes, even
 
 I haven't looked at much lua code aside from that I wrote (cause remember, I fucking despise the language!), but it seems like the convention is to just never use global variables lol. Which is, like, fair.
 
-# functions
+{{ hr(id="functions") }}
 
 Lua uses the concept of "first level citizen functions". Or however that concept is properly worded. \
 Basically, functions are just values that you can assign to variables, and store in tables. \
@@ -127,7 +127,7 @@ Because of how *neat* the concept of "functions are also closures" is in lua, it
 And any time you need to pass some closure as an argument, you have to boilerplate it with typing out `function`. \
 Just `fun`, `def`, `fn`, `func` would all work! I'm sure you might have a distaste for some of them, but you'll probably see at least one to be "alright as a closure starter". So yeah, it genuinely doesn't need to be that long.
 
-## think of the children!
+{{ hr(id="newbies") }}
 
 > "Oh, lua is made to be readable and approachable to newbie programmers!"
 
@@ -141,7 +141,7 @@ You ***cannot*** make this same argument for `function` vs `func`. \
 The latter is just as visible as the former, and just as obvious *literally* as soon as you define your first function in lua. \
 Your second function forward, you now have to *deal with* typing out the entirety of `function`.
 
-## you have an lsp for a reason
+{{ hr(id="lsp") }}
 
 > "Oh just autocomplete it"
 
@@ -149,7 +149,7 @@ Yeah no. Most (lua) programmers are on vscode, and that editor will generally no
 By the time the suggestion window appears and you pick the correct thing (cause also remember, most people don't realize they can fuzzy search their suggestions), you would have already typed in `function`. \
 So the result is you always just typing in `function` yourself. `func` would reduce that by **half**, and would be quite ergonomic.
 
-# patterns
+{{ hr(id="patterns") }}
 
 Actually, forget that "approachable to newbies" point, cause it's obscene in its own sense. Let's talk about lua *patterns*. Do you know how they work? I sure don't.
 
@@ -168,7 +168,7 @@ But no, lua decides to use its own syntax, that you now have to learn, even if y
 Why do I then not complain about rust not having regex? \
 That's because it has enough features to make it very viable to not use it — you have other ways of achieving the same text parsing objective. And you have the obvious `.contains()`.
 
-# who made this 💀
+{{ hr(id="then") }}
 
 Coming back to syntax: why does `then` need to exist? \
 It's used in `if` statements for example. Statements that only take a single expression as a condition anyway. \
@@ -179,7 +179,7 @@ And yet we stil have `then` for some odd reason. Fish shell very comfortably doe
 I don't like the `end`-type "bracket keywords" in programming languages, but I can see how it's needed in something like fish shell. \
 It does not need to be so in a "proper programming language" which I expected lua to be.
 
-# why even use lua then
+{{ hr(id="why") }}
 
 Worst thing about lua is the fact that every goddamn configurable thingy in existence seems to immediately go for this piece of shit language, resulting in both my window manager and text editor to be configured in it. \
 Lua is unfortunately my most used programming language, however mad I am at this fact being the truth.

@@ -3,8 +3,6 @@ title: why even helix?
 date: 2024-10-21
 ---
 
-## the unhumble beginning
-
 I've been using neovim for around two years. \
 I've rewritten my config three times: for the first time, when I switched to astronvim, and when I switched back from astronvim. \
 I've gotten into the habit of reading nvim help pages in their entirety, for fun. \
@@ -14,7 +12,7 @@ And usually spent multiple hours every day configuring nvim.
 I'm glazing myself here to point out: I have obviously given nvim a good try; matter of fact the try was unreasonably good! \
 And the reason why I switched off nvim is not due to the lack of knowledge about nvim.
 
-## a brighter future 🌅
+{{ hr(id="brighter-future") }}
 
 Considering my [two](@/why-I-hate-lua.md) [other](@/why-I-hate-kitty/index.md) blog posts, this one should be called "why I hate nvim", but I don't actually hate it! \
 I just realize that helix is simply the better option.
@@ -27,7 +25,7 @@ However, I'm autistic, so switching to things is a whole ordeal, usually taking 
 Doesn't really make sense to wait for the plugin system, to then overwhelm myself all at once, does it? \
 So I decided to do it the smart way.
 
-## the plan
+# the plan
 
 First, I go on and fully discover helix. Learn the editing model, the bindings; configure it to be fairly usable, go through the entire [documentation](https://docs.helix-editor.com/master) to not miss anyting. \
 With *this* basis, I effectively split the overwhelm into two parts, making it more manageable. \
@@ -37,7 +35,7 @@ Yes! My idea was to stick with nvim still, but think about the future in this wa
 I failed spectacularly... Or did helix succeed that much? \
 Let me elaborate on why I switched to helix so soon, despite intending not to!
 
-## the editing model
+# the editing model
 
 Helix's "selection->action" model is ultimately the biggest reason for why I switched. \
 Despite being so used to vim's "action->selection" model, it took me 1-3 days to get used to helix's one. \
@@ -51,7 +49,7 @@ rather than:
 1. "uhhhhh soooo let's do this ig"
 2. "with uhhhhh this text"
 
-## common nvim L
+{{ hr(id="pausing") }}
 
 It's fairly often that I know *subconsciously* what I wanna do, and actively "discover" what that something actually is. \
 Because of that, I may take ridiculously long pauses between my keystrokes to think.
@@ -61,7 +59,7 @@ You have to execute the whole action in some amount of time after pressing the "
 
 You can of course disable this (via `:h 'timeoutlen'`), but this is just the start of the pattern of bad defaults in nvim. For now I will just state that since this is a default, other nvim functionality (as well as plugins), will often be designed having this behavior in mind. In short, nvim penalizes pauses.
 
-## an even better point
+{{ hr(id="an-even-better-point") }}
 
 Coming back to the example above, nvim makes you decide on an action first, and the selection second; right after you just decided on an action, not encouraging pauses, it makes you decide the selection too.
 
@@ -87,7 +85,7 @@ It's a lie to say that vim has an action->selection model, because you first nee
 And because of things like dot repeat, and efficiency (generally doing an action via action->selection is less keystrokes than the visual mode (selection->action) equivalent, in nvim), actively picking to always use visual mode first is a known anti-pattern! \
 Think of any vim tutorial: things like "you should use `ciw` instead of `viwc` 🤓" are always (validly) pointed out.
 
-## core philosophy as a solution
+# core philosophy as a solution
 
 In helix, half the time you don't even need to think about how to make the selection, because you already made it just by naturally moving around.
 
@@ -100,13 +98,13 @@ This combines nicely: I move to some word, and it also *happens* to become my ta
 The reason why you'd usually want to use `ciw` rather than `ce` in vim, is due to precision. With the former, you can act on a word no matter what, and so by spending an extra keypress, you can allow yourself to spend less mental effort. Interesting tradeoff! \
 It only really makes sense because to *see* what you're going to capture with a motion, you need to actively think. What if your editor thought for you?
 
-## the visual superpower 👁️
+{{ hr(id="visuality") }}
 
 This is effectively the greatest strength of helix: rather than having to spend mental cpu cycles to figure out what you'd match with a certain motion, you *already* can clearly see what you'd match, *always*. \
 Rather than thinking "hmmmm how do I change this word?", you think "I want to act on *this* area... oh wait! it's already selected! I guess I just `c` then!". \
 This seemingly small difference ends up merging together to form a *much* nicer editor experience, especially considering that the entire editor is designed around it.
 
-## "normal" semantics
+# "normal" semantics
 
 Something that took me a bit to *get*, is the semantic of normal mode in helix. \
 I can put it to words most precisely like this: \
@@ -122,7 +120,7 @@ You may use `f` just to move and ignore the selection it makes, \
 or you can use `f` to *select* towards something to then delete it, for example. \
 Regardless of which action you decide to do, you can make the motion in the exact same way.
 
-## built in "plugins"
+# built in "plugins"
 
 Helix has the equivalents of [telescope](https://github.com/nvim-telescope/telescope.nvim), [nvim-surround](https://github.com/kylechui/nvim-surround), [whichkey](https://github.com/folke/which-key.nvim), [lspconfig](https://github.com/neovim/nvim-lspconfig), [easymotion](https://github.com/easymotion/vim-easymotion), [CamelCaseMotion](https://github.com/bkad/CamelCaseMotion), [conform.nvim](https://github.com/stevearc/conform.nvim) built in.
 
@@ -160,7 +158,7 @@ Because the mapping system is designed having this menu in mind, you create all 
 So, rather than mapping `mf` to something, you map `f` in section `m` to something. \
 Nvim's whichkey had to create this system for itself.
 
-## nicer registers
+### nicer registers
 
 Another neat thing it does, that completely solves an issue nvim otherwise has, is that when you access a register (via `"` by default), it *shows you* the contents of filled registers in that same whichkey menu!
 
@@ -191,7 +189,7 @@ First, it's an obscene amount of characters to press. \
 But more importantly, you use THREE different text objects here, and one of them uses `i` rather than `a`. \
 Doing this has always been quite a pain for me, as you need to think about what you're doing with considerable amount of focus.
 
-## the power of loyalty
+{{ hr(id="consistency") }}
 
 How does this work in helix? Remember that "motions replace your selection" thing? What if I told you surrounding did this too? \
 Genious! Of course it would! \
@@ -229,7 +227,7 @@ Formatting is similarly simple: you define how to call it (if it's not already d
 
 There's no non-lsp diagnostic sources like in none-ls or nvim-lint, unfortunately. But it's a tradeoff I'm willing to make, because I only lost fish shell diagnostics, which aren't that important to me anyway. I'm sure it'll get added in eventually, though!
 
-## registers part 2
+# registers part 2
 
 Let's go back to registers for a bit. The way that helix handles them is what initially made me *consider* switching to begin with.
 
@@ -256,7 +254,7 @@ You just select a register and continue on! :D \
 And as you collect these important yanks, when you access yet another register, helix will tell you which registers you're already using, implying what the free ones are. \
 So (if you pay attention) you won't even accidentally overwrite an important yank!
 
-## the price of mistakes
+{{ hr(id="price-of-mistakes") }}
 
 Using registers is always an *active* decision for me. Because of this, it's common that I yank something, and then think "wait nevermind, I actually want this in register `x`". This "nevermind" thing happens most commonly when my current default register contents *aren't* important.
 
@@ -270,7 +268,7 @@ In helix, after you yank something, you can re-yank without any such hassle. `y`
 The selection actually staying like that is a common "omg that's so nice" exclaim I do to myself, about helix. \
 But there are places where, at least at first, it's just really weird!
 
-## ain't no way 💀
+{{ hr(id="strange-consistency") }}
 
 Remember how your cursor is just a single-width selection? Helix stays consistent to the idea of selections mattering more than your cursor in this interesting way: \
 By default, `a` appends after your selection, and `i` prepends before your selection.
@@ -284,7 +282,7 @@ Same case with `a`, just in the opposite direction.
 
 "Ok that's just ridiculous" you might say, and at first I agreed with you! \
 While I did, I remapped `a` and `i` to get the behavior we both expect:
-```toml'
+```toml
 a = ['collapse_selection', 'append_mode']
 i = ['collapse_selection', 'insert_mode']
 ```
@@ -295,7 +293,7 @@ Having `a` and `i` fall out of this rule became annoying, rather than helpful, a
 
 But aside from consistency, turns out it's just kinda nice!
 
-## AI? in my editor?
+{{ hr(id="ai") }}
 
 Say you're writing a sentence, and as you move through it, you got some word selected. \
 You can pick whether you want to insert before *or* after the word, without having to adjust your position! \
@@ -308,7 +306,7 @@ However, I half-think that this `a`/`i` behavior is more of a side effect than i
 
 I'll admit, all this selection business takes a while to get used to, but actually now I prefer it. Even in my fish shell "helix mode", I re-made this behavior, that's how much I like it!
 
-## straighterforwarder pasting
+{{ hr(id="pasting") }}
 
 Another example is `p` and `P`. Yep, they also paste after and before the *selection*. \
 With them though, the behavior isn't particularly mind-boggling, and just ends up feeling correct immediately.
@@ -319,7 +317,7 @@ If you tried doing that in vim (same cursor position, after you yank with `yiw`)
 I massively prefer *just* pressing `p` mindlessly, rather than having to first move to the end of the word, or press `Pppp` instead. \
 And if I wanted to multiply backwards in vim, `word` vores itself in an even more horrifying way: `worworwordddword`.
 
-## aha! the perfect editor!
+# aha! the perfect editor!
 
 After all this glazing you might rightfully think "helix must be perfect!". \
 Is that the case? FUCK NO!
@@ -354,7 +352,7 @@ I don't think I'm *that* good at rust, however I keep getting surprised at how *
 
 Especially coming from a *lot* of neovim configuration, I expect to go on a whole adventure to try to make something work, and then get surprised when my endeavor cost me 5 minutes at most.
 
-## a happy dev adventure
+# a happy dev adventure
 
 One feature I have in my fork (all features are listed in the readme) is that you can remove the statusline.
 
