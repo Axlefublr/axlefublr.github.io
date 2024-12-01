@@ -34,8 +34,12 @@ body {
 	margin: 0;
 }
 
+header {
+	margin-block-end: 1em;
+}
+
 footer {
-	margin-top: 1em;
+	margin-block-start: 1em;
 }
 
 ol,
@@ -58,7 +62,7 @@ li {
 	flex: 5 0 0;
 }
 
-.scrolltop {
+.scroller {
 	flex: 1 1 0;
 }
 
@@ -247,23 +251,81 @@ h6 > a:visited {
 	font-weight: bold;
 }
 
-a:has(.page-title) {
+a:has(.page-title.inner),
+a.page-title.outer {
 	text-decoration: none;
 }
 
 .page-title {
 	color: var(--fg-page-title);
-	font-size: 2.5rem;
-	margin-top: 0.5em;
 	&:hover {
 		background-color: var(--bg-hover);
 	}
+	&.outer {
+		font-size: 2rem;
+	}
+	&.inner {
+		margin-top: 0.5em;
+		font-size: 2.5rem;
+	}
+}
+
+a.page-title {
+	color: var(--fg-page-title);
 }
 
 .post-date {
 	color: var(--fg-post-date);
-	font-size: 1.8rem;
-	margin-top: 0.3em;
+	&.inner {
+		margin-top: 0.3em;
+		font-size: 1.8rem;
+	}
+	&.outer {
+		font-size: 1.5rem;
+	}
+}
+
+.blog-item,
+.blog-list {
+	display: block flex;
+	flex-direction: column;
+	align-items: center;
+	flex: auto;
+}
+
+.blog-item {
+	margin-block: 0.5rem;
+}
+
+header.promo-holder {
+	display: block flex;
+	flex: 1 1 auto;
+	> a.promo {
+		width: 100%;
+		height: 2em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.1em;
+		text-decoration: none;
+		font-weight: bold;
+
+		&#bluesky {
+			color: var(--cyan);
+		}
+
+		&#github {
+			color: var(--green);
+		}
+
+		&#discord {
+			color: var(--yellow);
+		}
+
+		&#rss {
+			color: var(--blush);
+		}
+	}
 }
 
 @font-face {

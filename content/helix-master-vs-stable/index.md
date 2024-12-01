@@ -1,7 +1,6 @@
 ---
 title: helix master vs stable
 date: 2024-10-11
-draft: true
 ---
 
 When considering switching to helix master, I went through all the commits after stable. \

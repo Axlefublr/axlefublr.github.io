@@ -3,18 +3,20 @@
 {% block content %}
 <main>
   <div class="page-innards">
-    <a class="scrolltop" href="#"></a>
+    <a class="scroller top" href="#"></a>
     <div class="page-content">
-      <a href="..">
-        <div class="page-title">{{ page.title }}</div>
-      </a>
-      <div class="post-date">{{ page.year }}.{{ page.month }}.{{ page.day }}</div>
+      <div class="page-header">
+        <a href="..">
+          <div class="page-title inner">{{ page.title }}</div>
+        </a>
+        <div datetime="{{ page.date }}" class="post-date inner">{{ page.date | date(format="%Y.%m.%d") }}</div>
+      </div>
       <!-- <div class="reading-time">reading time: {{ page.reading_time }}</div> -->
       {{ page.content | safe }}
     </div>
-    <a class="scrolltop" href="#"></a>
+    <a class="scroller bottom" href="#absolute-bottom-of-the-page"></a>
   </div>
 </main>
-<footer>
+<footer id="absolute-bottom-of-the-page">
 </footer>
 {% endblock content %}
