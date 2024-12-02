@@ -333,7 +333,7 @@ Helix doesn't!
 And because of this, you're bound to encounter problems that are currently unsolvable, as generally a plugin for that behavior would already exist, or you'd write your own to get it. \
 This state of affairs makes it infuriating to use helix sometimes, because the `:trim` command has been bikeshed for over a year, and helix stable *still* doesn't have lsp snippets.
 
-Yes indeed, helix *master* does have lsp snippets (along with [some other cool things](/content/helix-master-vs-stable.md)); but that's it. You can't jump between them or anything, and forget trying to make your own snippets — the feature you get is just so the autocompleted text doesn't *disappear*. \
+Yes indeed, helix *master* does have lsp snippets (along with [some other cool things](@/helix-master-vs-stable/index.md)); but that's it. You can't jump between them or anything, and forget trying to make your own snippets — the feature you get is just so the autocompleted text doesn't *disappear*. \
 The PR that *implements* the snippet system already works, and has been for at least a year, and yet it just ephemerally floats around for no reason, similar to the other billion PRs that implement ***obviously*** required editor features.
 
 Have I already mentioned that you can't complete words from the document in helix? Yeah... Completions **require** an lsp. \
