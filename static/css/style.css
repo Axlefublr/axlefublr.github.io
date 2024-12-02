@@ -38,7 +38,7 @@ header {
 	margin-block-end: 1em;
 }
 
-footer {
+footer.home {
 	margin-block-start: 1em;
 }
 
@@ -53,13 +53,14 @@ li {
 	margin-block: 0.25em;
 }
 
-.page-innards {
+.page.marginalizer {
 	display: flex;
 }
 
-.page-content {
+main.page {
 	padding: 0 1em;
 	flex: 5 0 0;
+	margin-block-end: 1em;
 }
 
 .scroller {
