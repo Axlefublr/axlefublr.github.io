@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% include "nav.html" %}
 <div class="page marginalizer">
 	<a class="scroller top" href="#top"></a>
 	<div class="content page">
@@ -15,7 +15,8 @@
 			{{ page.content | safe }}
 		</main>
 	</div>
-	<a class="scroller bottom" href="#absolute-bottom-of-the-page"></a>
+	<a class="scroller bottom" href="#bottom"></a>
 </div>
-<footer id="absolute-bottom-of-the-page"></footer>
+{% include "nav.html" %}
+<footer id="bottom"></footer>
 {% endblock content %}

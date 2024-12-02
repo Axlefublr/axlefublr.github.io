@@ -1,0 +1,15 @@
+<nav class="page">
+	{% if page.lower %}
+	<a href="{{ page.lower.permalink }}" class="preview">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">{{page.lower.title}}</span>
+	</a>
+	{% endif %}
+	<a href=".."><span>home</span></a>
+	{% if page.higher %}
+	<a href="{{ page.higher.permalink }}" class="preview">
+		<span class="page name">{{page.higher.title}}</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	{% endif %}
+</nav>

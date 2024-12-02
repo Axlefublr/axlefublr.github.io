@@ -1,19 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		{% block rss %}
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='{{ get_url(path="rss.xml", trailing_slash=false) }}'
+		/>
+		{% endblock %} {% include "head.html" %}
+	</head>
 
-<head>
-  {% block rss %}
-  <link rel="alternate" type="application/rss+xml" title="RSS"
-    href='{{ get_url(path="rss.xml", trailing_slash=false) }}'>
-  {% endblock %}
-  {% include "head.html" %}
-</head>
-
-<body>
-  <div class="wrapper">
-    {% block content %}
-    {% endblock content %}
-  </div>
-</body>
-
+	<body>
+		<div class="wrapper">{% block content %} {% endblock content %}</div>
+	</body>
 </html>
