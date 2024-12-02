@@ -1,20 +1,21 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="page marginalizer">
-  <a class="scroller top" href="#top"></a>
-  <main class="page">
-    <header class="page">
-      <a href="..">
-        <div class="page-title inner">{{ page.title }}</div>
-      </a>
-      <div datetime="{{ page.date }}" class="post-date inner">{{ page.date | date(format="%Y.%m.%d") }}</div>
-    </header>
-    <!-- <div class="reading-time">reading time: {{ page.reading_time }}</div> -->
-    {{ page.content | safe }}
-  </main>
-  <a class="scroller bottom" href="#absolute-bottom-of-the-page"></a>
+	<a class="scroller top" href="#top"></a>
+	<div class="content page">
+		<header class="page">
+			<a href="..">
+				<div class="page title">{{ page.title }}</div>
+			</a>
+			<div class="page date wrapper">
+				<time datetime="{{ page.date }}">{{ page.date | date(format="%Y.%m.%d") }}</time>
+			</div>
+		</header>
+		<main class="page">
+			<!-- <div class="reading-time">reading time: {{ page.reading_time }}</div> -->
+			{{ page.content | safe }}
+		</main>
+	</div>
+	<a class="scroller bottom" href="#absolute-bottom-of-the-page"></a>
 </div>
-<footer id="absolute-bottom-of-the-page">
-</footer>
+<footer id="absolute-bottom-of-the-page"></footer>
 {% endblock content %}

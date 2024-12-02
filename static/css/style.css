@@ -57,7 +57,7 @@ li {
 	display: flex;
 }
 
-main.page {
+div.content.page {
 	padding: 0 1em;
 	flex: 5 0 0;
 	margin-block-end: 1em;
@@ -246,42 +246,42 @@ h6 > a:visited {
 	font-weight: bold;
 }
 
-.page-title,
-.post-date {
+.title,
+.date {
 	text-align: center;
 	font-weight: bold;
 }
 
-a:has(.page-title.inner),
-a.page-title.outer {
+a:has(.page.title),
+a.home.title {
 	text-decoration: none;
 }
 
-.page-title {
+.title {
 	color: var(--fg-page-title);
 	&:hover {
 		background-color: var(--bg-hover);
 	}
-	&.outer {
+	&.home {
 		font-size: 2rem;
 	}
-	&.inner {
+	&.page {
 		margin-top: 0.5em;
 		font-size: 2.5rem;
 	}
 }
 
-a.page-title {
+a.title {
 	color: var(--fg-page-title);
 }
 
-.post-date {
+.date {
 	color: var(--fg-post-date);
-	&.inner {
+	&.page {
 		margin-top: 0.3em;
 		font-size: 1.8rem;
 	}
-	&.outer {
+	&.home {
 		font-size: 1.5rem;
 	}
 }
