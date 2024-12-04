@@ -34,10 +34,6 @@ body {
 	margin: 0;
 }
 
-header {
-	margin-block-end: 1em;
-}
-
 footer.home {
 	margin-block-start: 1em;
 }
@@ -60,7 +56,7 @@ li {
 div.content.page {
 	padding: 0 1em;
 	flex: 5 0 0;
-	margin-block-end: 1em;
+	margin-block: 1em;
 }
 
 .scroller {
@@ -266,7 +262,6 @@ a.home.title {
 		font-size: 2rem;
 	}
 	&.page {
-		margin-top: 0.5em;
 		font-size: 2.5rem;
 	}
 }
