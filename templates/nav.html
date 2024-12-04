@@ -4,6 +4,9 @@
 		<span class="page direction">&lt;-</span>
 		<span class="page name">{{page.lower.title}}</span>
 	</a>
+	{% else %}
+	<div class="preview empty previous">
+	</div>
 	{% endif %}
 	<a href=".." class="go-home"><span>home</span></a>
 	{% if page.higher %}
@@ -11,5 +14,8 @@
 		<span class="page name">{{page.higher.title}}</span>
 		<span class="page direction">-&gt;</span>
 	</a>
+	{% else %}
+	<div class="preview empty next">
+	</div>
 	{% endif %}
 </nav>

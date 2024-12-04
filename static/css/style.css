@@ -328,7 +328,7 @@ header.promo-holder {
 nav.page {
 	display: flex;
 	flex: 0;
-	> a {
+	> * {
 		box-sizing: border-box;
 		height: 2.5em;
 		display: flex;
