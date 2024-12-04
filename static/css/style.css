@@ -51,16 +51,15 @@ li {
 
 .page.marginalizer {
 	display: flex;
+	justify-content: center;
+	flex: auto;
 }
 
 div.content.page {
-	padding: 0 1em;
-	flex: 5 0 0;
+	padding-inline: 1em;
 	margin-block: 1em;
-}
-
-.scroller {
-	flex: 1 1 0;
+	width: max(50em, 60vw);
+	max-width: 100vw;
 }
 
 a {
