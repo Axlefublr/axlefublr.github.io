@@ -327,10 +327,9 @@ header.promo-holder {
 
 nav.page {
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex: 0;
 	> a {
-		width: 100%;
+		box-sizing: border-box;
 		height: 2.5em;
 		display: flex;
 		align-items: center;
@@ -341,29 +340,42 @@ nav.page {
 		&:hover {
 			cursor: pointer;
 		}
-		> .direction {
-			margin-inline: 0.2em;
-		}
 		&.go-home {
 			width: 10%;
+			min-width: 10%;
+			max-width: 10%;
 			> span {
 				color: var(--purple);
 			}
 		}
 		&.preview {
 			width: 45%;
+			min-width: 45%;
+			max-width: 45%;
 			padding-inline: 0.4em;
 			> .name {
 				color: var(--yellow);
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				/* max-width: calc(100% ); */
 			}
 			> .direction {
 				color: var(--orange);
+				text-wrap: nowrap;
+				padding-inline: 0.2em;
 			}
 			&.previous {
 				justify-content: flex-start;
+				> .name {
+					padding-inline-end: 0.2em;
+				}
 			}
 			&.next {
 				justify-content: flex-end;
+				> .name {
+					padding-inline-start: 0.2em;
+				}
 			}
 		}
 	}
