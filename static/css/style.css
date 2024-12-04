@@ -352,6 +352,7 @@ nav.page {
 		}
 		&.preview {
 			width: 45%;
+			padding-inline: 0.4em;
 			> .name {
 				color: var(--yellow);
 			}
@@ -360,11 +361,9 @@ nav.page {
 			}
 			&.previous {
 				justify-content: flex-start;
-				padding-inline-start: 0.4em;
 			}
 			&.next {
 				justify-content: flex-end;
-				padding-inline-end: 0.4em;
 			}
 		}
 	}
