@@ -53,11 +53,11 @@ li {
 	display: flex;
 	justify-content: center;
 	flex: auto;
+	box-sizing: border-box;
 }
 
 div.content.page {
-	padding-inline: 1em;
-	margin-block: 1em;
+	padding: 1em;
 	width: max(50em, 60vw);
 	max-width: 100vw;
 }
@@ -88,6 +88,8 @@ kbd {
 	background-color: var(--inline-code-bg);
 	padding: 0.1em 0.25em;
 	border-radius: 0.3em;
+	white-space: pre-wrap;
+	word-break: break-all;
 }
 
 pre {
