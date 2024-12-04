@@ -34,8 +34,8 @@ body {
 	margin: 0;
 }
 
-footer.home {
-	margin-block-start: 1em;
+main.home {
+	margin-block: 1em;
 }
 
 ol,
