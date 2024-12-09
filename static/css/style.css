@@ -151,7 +151,8 @@ blockquote {
 	padding: 0.2em 0.2em 0.2em 0.5em;
 }
 
-img {
+img,
+video {
 	width: 100%;
 	height: auto;
 	box-sizing: border-box;
