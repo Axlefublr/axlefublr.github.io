@@ -8,6 +8,7 @@
 	--blush: #e491b2;
 	--purple: #b58cc6;
 	--orange-supporting: #5f472d;
+	--grey: #928374;
 
 	--bg-color: #292828;
 	--text-color: #d4be98;
@@ -107,6 +108,10 @@ pre {
 		border-radius: 0;
 	}
 
+	& .z-comment {
+		color: var(--grey);
+	}
+
 	& .z-string.z-quoted {
 		color: var(--yellow);
 	}
@@ -132,6 +137,14 @@ pre {
 
 	& .z-option.z-fish,
 	.z-variable.z-parameter.z-fish:has(.z-string.z-unquoted) {
+		color: var(--mint);
+	}
+
+	& .z-toml.z-tag.z-table {
+		color: var(--cyan);
+	}
+
+	& .z-toml.z-key {
 		color: var(--mint);
 	}
 }
