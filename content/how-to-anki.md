@@ -1,8 +1,8 @@
----
-title: how to anki
-date: 2024-11-11
-draft: true
----
++++
+title = 'how to anki'
+date = 2024-11-11
+draft = true
++++
 
 Anki is honestly a very hard to approach program. If you feel like it isn't, you're using it wrong /hj
 

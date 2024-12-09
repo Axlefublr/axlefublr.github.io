@@ -1,7 +1,7 @@
----
-title: my usb drive experience
-date: 2024-11-15
----
++++
+title = 'my usb drive experience'
+date = 2024-11-15
++++
 
 I hate buffering, so I download practically every youtube video I watch using yt-dlp. \
 That's all fun and great, however my 256gb laptop is slowly running out of space! \

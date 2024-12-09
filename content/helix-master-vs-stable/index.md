@@ -1,7 +1,7 @@
----
-title: helix master vs stable
-date: 2024-10-11
----
++++
+title = 'helix master vs stable'
+date = 2024-10-11
++++
 
 When considering switching to helix master, I went through all the commits after stable. \
 Here are the new features I discovered.

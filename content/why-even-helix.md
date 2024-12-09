@@ -1,7 +1,7 @@
----
-title: why even helix?
-date: 2024-10-21
----
++++
+title = 'why even helix?'
+date = 2024-10-21
++++
 
 I've been using neovim for around two years. \
 I've rewritten my config three times: for the first time, when I switched to astronvim, and when I switched back from astronvim. \

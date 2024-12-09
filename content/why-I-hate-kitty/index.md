@@ -1,7 +1,7 @@
----
-title: why I hate kitty
-date: 2024-09-13
----
++++
+title = 'why I hate kitty'
+date = 2024-09-13
++++
 
 I say "god I hate kitty" a lot, but I usually can't think of examples for *why* on the spot. \
 I just encountered yet another "god I hate" about kitty, so I'm gonna write it down while it's hot to transfer why I hate this terminal emulator so much.
