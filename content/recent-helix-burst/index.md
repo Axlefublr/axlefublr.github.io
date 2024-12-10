@@ -34,11 +34,18 @@ I used it back in neovim, and I found it to annoy me more often than help me. An
 Additionally, in neovim the operation felt very wonky visually.
 
 The wonkiness is not an issue in helix, as this is a *core* feature, not something that was tacked on, so that's crossed out. \
-However the "annoying" part may still remain, as after ~1 minute of fiddling with it, I found a bug when you try to extend a comment upwards, when you're at the first line in the file:
+However the "annoying" part may still remain, as after ~1 minute of fiddling with it, I found a bug¹ when you try to extend a comment upwards, when you're at the first line in the file:
 
 {{ video(path="weird-bug") }}
 
 Interestingly, there is no option to disable this auto-comment-extending behavior.
+
+¹ Around two days after publishing this blog post, the bug is fixed! \
+This is surprisingly fast response speed for helix — generally things move reeeeeaaaally slowly. \
+This fills me with determination!
+
+Additionally, there *is* now an option to disable this behavior 🥳 \
+Set `continue-comments` in the `[editor]` section to `false`, if you want to.
 
 # path completions
 
@@ -197,3 +204,4 @@ I liked writing this blog post, so I might continue making these "recent new hel
 Want to make sure to not miss them? Add [this link](/rss.xml) to your RSS reader!
 
 Don't have an RSS reader? I recommend [nom](https://github.com/guyfedwards/nom).
+
