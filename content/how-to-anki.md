@@ -234,6 +234,8 @@ But that's misleading too: you *shouldn't* do them all at once. Because if one d
 Your reviews that got naturally padded out throughout the days to be balanced, will *no longer* be balanced. \
 So pressing “Reschedule cards on change” puts you between a rock and a hard place, it's simply not worth it.
 
+It's been more than 2 months after I pressed Reschedule, I'm still eating shit to this day. Don't repeat my mistake.
+
 ## Advanced
 
 ### Maximum interval
@@ -278,7 +280,7 @@ That is a lot of travel time!
 ## Decks as organisation
 
 You may think that this is an okay tradeoff for the *organisation* that decks provide. \
-But actually, decks are shit at organisation. I'll expand on the *solution* in the [note types] section, but for now I'll elaborate on why decks are bad at organisation.
+But actually, decks are shit at organisation. I'll expand on the *solution* in the [note types](#note-types) section, but for now I'll elaborate on why decks are bad at organisation.
 
 Morse code and ascii indexes. \
 How would you structure the question->answer in those?
@@ -446,5 +448,106 @@ Hides some part of an *image*, that you need to mentally *flll in*. In other wor
 
 Defaults are made to be configured away, so let's discover how you can create your *own* note types.
 
-((in ^+n, look at fields, and explain that they can be used to arbitrarily add text))
-((in ^+n, look at cards, how it can create multiple cards, the html of front and back, the css))
+In the <kbd>ctrl+shift+n</kbd> screen, click on Basic and then Fields.
+
+### Fields
+
+A field is an inputbox, the text of which is used in some way in the note type. \
+Here in Basic, you have 2: Front and Back.
+
+You can add as many extra fields as you want (at least I don't know of a limit), however they won't *do* anything by default. We'll get to how to make their text appear in your card later. \
+For now, know that you can add multiple fields to a given note (including your own ones we'll create later), and have them appear in the card in different ways.
+
+Anki supports html: when adding a card, you can press <kbd>ctrl+shift+x</kbd> to toggle the html editor. \
+But if you *always* want to edit a given field as html, here in the Fields view you can set the option below to make the field “Use HTML editor by default”. \
+On a non-html field, the <kbd>ctrl+shift+x</kbd> hotkey then toggles on the non-html editor.
+
+Go back to the previous screen by pressing <kbd>escape</kbd> and then click on “Cards”.
+
+### Cards
+
+This screen has been confusing for a while to me. So if it feels intimidating, don't worry — it *is*.
+
+The source of this intimidation for me is a couple of buttons and popups that we'll get to at the end of this section, for now let's explore the more obvious parts.
+
+Note types are templates that decide how to create cards. Each note type can create as many cards as you want it to. \
+Although by default, a note type creates just one card.
+
+#### Front Template
+
+On the left side, you can see an edit field, with three radio buttons above. \
+Here, you define the html template for the cards to be creates with this note type.
+
+The main juice that actually makes note types useful at all, is `{{Front}}`. \
+`{{Front}}` is a template (that I'll be calling a shortcode) that is replaced with the resulting html that you put in a field.
+
+Notice the name: `Front`. This is a name of one of the fields of this note type. \
+In the previous section, I mentioned that fields aren't used automatically. \
+*We* get to decide where and how they show up, by putting them in explicitly.
+
+Say we created a field called `Extra`. We can now add `{{Extra}}` somewhere in the template for the note type, and the text (resulting html) that we put in this `Extra` field is going to show up there!
+
+#### Back Template
+
+Now, click on the radio button “Back Template”. The html is a bit different now!
+
+The real semantic of the first and second templates is the following:
+
+1. This is how the card looks when I'm presented the question, and haven't yet answered the card.
+2. This is how the card looks when I answered the question, and pressed space to see the answer.
+
+By default, the Front side of the card is also included in the Back side, using the special shortcode `{{FrontSide}}`. \
+It takes the entire Front side html, and blammoes it in the Back side template.
+
+There's nothing stopping you from removing it, though. You can simply remove it from the Back side template, and you won't see the front of the card after pressing space. \
+I don't recommend doing so; you would be shooting yourself in the foot for no benefit. \
+However I hope that showcases that templating is not that magical! \
+How anki shows itself to you is defined clearly, and is changeable by you.
+
+#### Styling
+
+Probably more changeable than you expect!
+
+The third radio button is my favorite one: you get to define the CSS of your note type! \
+Yes, you can make it look however you wish!
+
+I used this to change the fonts used, the colors, and added inline and blockwise codeblocks.
+
+You might reasonably ask how you can “Inspect Element” anki to figure out how to css it correctly. \
+There is some plugin for it, and likely some people in the forums have figured out most things.
+
+However, I just guessed my way throgh most of it, so I won't give precise advice that I don't have checked. With styling selectors you need, you're on your own.
+
+#### Card Type
+
+Let's look at the popup that scared me at first. Well, even now I never touch it (I'll explain why later) \
+At the top, you can see “Card Type” with something like `1: Card 1: Front -> Back` \
+Let's process that.
+
+A note type can create any number of cards. That is what the `1:` stands for. \
+Which one? I have no clue. At least one of them, lol. The other one of them stands for god knows what.
+
+So, `1: Card 1: Front -> Back` means: out of potentially many, this is the first card that's created by this note type. In this specific card, the Front side is the question, and the Back side is the answer.
+
+Inconveniently, the fields are called the same way as another concept, making things less clear.
+
+Anki has a concept of "front side" and "back side". We glanced over that in the first two radio buttons. \
+So here, the front *template* is used for the front side. The back template is used for the back side. \
+As expected.
+
+However if we looked at “Basic and reverse”, the second card that the note type makes says `Back -> Front`. \
+So, the *back* template is used for the front side (the question) of the card, and the *front* template is used for the back side (the answer) of the card.
+
+That's how that note type achieves the "and reverse" part — it creates two cards — one is front (question) to back (answer), and another is back (question) to front (answer).
+
+Cool, isn't it? \
+However, as I mentioned, I won't be teaching you how to make use of this, because I don't use it.
+
+For the most part, adding two cards per each note, just to learn the question from both sides, is a waste of effort, in my experience. \
+I used to learn languages using anki in the past, and there the reverse thingy *was* helpful, but for what I use anki right now, it's fairly useless.
+
+{{ hr(id="note-type-meta") }}
+
+Viola! Now you have the necessary knowledge to learn about the card organizing meta that I've made for myself. I hope you'll like it as much as I do!
+
+((only basic note types, fields for section and subsection))
