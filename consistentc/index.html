@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		 <meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+	</head>
+
+	<body>
+		<div class="wrapper"> <nav class="page">
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;repgrep&#x2F;" class="preview previous">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">best find &amp; replace tool I found</span>
+	</a>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;recent-helix-burst&#x2F;" class="preview next">
+		<span class="page name">newest helix master features</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<div class="page marginalizer">
+	<!-- <div class="page margin top"></div> -->
+	<!-- <a class="scroller top" href="#top"></a> -->
+	<div class="content page">
+		<header class="page">
+			<a href="..">
+				<div class="page title">helix is ridiculously consistent</div>
+			</a>
+			<div class="page date wrapper">
+				<time datetime="2024-12-13">2024.12.13</time>
+			</div>
+		</header>
+		<main class="page">
+			<!-- <div class="reading-time">reading time: 1</div> -->
+			<p>In helix, these two actions exist:</p>
+<pre class="z-code"><code><span class="z-text z-plain">copy_selection_on_next_line
+</span><span class="z-text z-plain">copy_selection_on_prev_line
+</span></code></pre>
+<p>The default hotkeys for both of them are <kbd>shift+c</kbd> and <kbd>shift+alt+c</kbd>, respectively.</p>
+<p>From the name I instantly assumed: "ah, it's the usual "add multicursor on the next line" and "add multicursor on the previous line"", like practically every multicursor implementation has.</p>
+<p>I've talked about the elegant consistency of helix in <a href="https://axlefublr.github.io/why-even-helix/">this blog post</a>; <br />
+turns out the idea of "selections matter, not your cursor" applies here as well!</p>
+<h1 id="showcase"><a class="zola-anchor" href="#showcase" aria-label="Anchor link for: showcase">showcase</a></h1>
+<video controls>
+  <source src="lines.mp4" type="video/mp4">
+</video>
+<p>You create a new cursor below the current <em>selection</em>, <strong>not</strong> the current line!</p>
+<p>So you could possibly make use of this by selecting two lines, and then effectively make cursors on every other line.</p>
+<p>The usecase that comes in mind immediately is some long <code>if</code> chain, where the bodies are all a single line, <br />
+and you want to change something in all (or some) of the conditions / bodies.</p>
+<video controls>
+  <source src="something-else.mp4" type="video/mp4">
+</video>
+<p>To be fair, I have yet to use this for anything, but found the consistency really cool. <br />
+Being able to express editing desires in such an elegant way is part of why I switched to helix!</p>
+
+		</main>
+	</div>
+	<!-- <a class="scroller bottom" href="#bottom"></a> -->
+	<!-- <div class="page margin bottom"></div> -->
+</div>
+<nav class="page">
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;repgrep&#x2F;" class="preview previous">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">best find &amp; replace tool I found</span>
+	</a>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;recent-helix-burst&#x2F;" class="preview next">
+		<span class="page name">newest helix master features</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<footer id="bottom"></footer>
+</div>
+	</body>
+</html>
