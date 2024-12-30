@@ -166,9 +166,11 @@ blockquote {
 
 img,
 video {
-	width: 100%;
+	width: 80%;
 	height: auto;
 	box-sizing: border-box;
+	margin-block: 0.8em;
+	margin-inline: 10%;
 }
 
 a.anchorina {
