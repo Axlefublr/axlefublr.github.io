@@ -1,6 +1,6 @@
 +++
 title = 'how to anki'
-date = 2024-11-11
+date = '3333-01-01'
 draft = true
 +++
 
