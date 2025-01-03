@@ -1,7 +1,6 @@
 +++
 title = 'rust for... scripting?'
-date = '2029-01-02'
-draft = true
+date = '2025-01-04'
 +++
 
 If the title of this blog post is a genuine question you have, and you want to just skip to the most reasonable solution: <spoiler>use cargo-script</spoiler>
@@ -32,8 +31,7 @@ Diagnostics in rust are very helpful, but sometimes overwhelming. Similarly, onc
 
 I was constantly *fighting* rust, getting annoyed at how I'm meant to do seemingly simple things. \
 Getting the modification time of a file is kinda cumbersome in terms of the syntax, \
-working with files is often way too involved, \
-calling external commands is boilerplaty; especially so once you literally just need the stdout as a string.
+working with files is often way too involved, calling external commands is boilerplaty; especially so once you literally just need the stdout as a string.
 
 Often times it felt like rust overcomplicates things. For good reason, mind you, I just happen to not care. \
 I'm a very selfish programmer, I don't need cases I won't come across to need to be solved.
@@ -48,7 +46,7 @@ Making plugins for neovim in lua had the nice benefit of that I *didn't have to*
 I could just have some code in my own config for a couple of months, completely working. \
 And then, once I'm ready to, I could package it all nice and prettily.
 
-Fish is even more amazing than that, because you can have a lot of callable executables in a single files, thanks to a technique I use and will probably talk about in the future. So, the pressure of writing something new in fish is also really really small.
+Fish is even more amazing than that, because you can have a lot of callable executables in single files, thanks to a technique I use and will probably talk about in the future. So, the pressure of writing something new in fish is also really really small.
 
 Starting up a new CSS extension with stylus is *slightly* a process, but it's straightforward and fast enough where it's not that big of a commitment. If I want to, I can easily shrink the ridiculously large sidebar with css for some stupid website, without it breaking my flow particularly much.
 
@@ -69,7 +67,7 @@ IT'S TOO MUCH!
 I created myself a new system that allows me to use rust for scripting in a pretty fast and straightforward way.
 No more various bullshit to take care of for the 0 users I'll have — sheer selfish programming!
 
-Let's start where I started to figure out why I ended up creating my own system.
+Let's start where I started, to figure out why I ended up creating my own system.
 
 [scriptisto](https://github.com/igor-petruk/scriptisto) is a really neat program that I used for the various languages I have tried. It allows you to use a compiled language for scripting, conveniently!
 
@@ -85,12 +83,12 @@ When you can tell the startup speed by an eye test, that means it's *really* bad
 
 {{ hr(id="definitely-not-foreshadowing") }}
 
+*Until they weren't...*
+
 One of the first programs I wrote is called [`velvidek.rs`](https://github.com/Axlefublr/dotfiles/blob/main/scripts/velvidek.rs). \
 I don't use the number row; instead, right meta key + fdsrewvcxa are my numbers (1234567890). \
 Velvidek takes those letters, and replaces them with their appropriate digit. Using this program, I can shim in support for my number layer, without requiring me to press the right meta key. \
 Now instead of having to do `fg %2`, I can just do `f d`, thanks to the fish function I made that made use of velvidek. Very helpful and important addition to my [suspend-based workflow](@/suspend/index.md).
-
-*Until I wasn't*.
 
 I was pressing `f` to go back to the suspended process, and noticed the operation be slower than I expected. \
 I use fish shell's [`time`](https://fishshell.com/docs/current/cmds/time.html) to check how long it takes for velvidek to execute, and see ~70ms.
@@ -139,8 +137,35 @@ Considering that I *already* had a "workspace" directory, I thought "fuck it" an
 
 # my system
 
-;;;export and import, using command harps
+A "workspace" directory named `wks`. I use this place to write the scripts for the first time. \
+There's `src/main.rs` and `Cargo.toml`. Just what is needed to make rust-analyzer work.
 
-;;;have to compile yourself
+Once I finish writing a rust script, it's now time to export it. \
+I have a (rust) script that takes main.rs and Cargo.toml, and joins them into a single file. \
+The path to the target file I want to write to, I specify as the first line in main.rs, in a comment. \
+[Primary link](https://github.com/Axlefublr/dotfiles/blob/main/scripts/scriptister/export-rust-script.rs), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/export-rust-script.rs).
 
-;;;fooling binary name to be as if the script
+While writing this export step, I started thinking about how I'd make a script executable. I would probably write another script, that would act as the program in the shebang. But I found something more elegant!
+
+What I want, effectively, is to:
+1. not pollute where the scripts are, with their compiled binaries
+2. to execute a script, you simply use the script name (for example, `velvidek.rs`)
+
+To achieve that, I can make use of `$PATH`! Once I compile a script, I will rename the resulting binary to the name of a the file, and put that binary somewhere on the `PATH`. This way, I'm typing in a name of a script to execute, but sneakily I'm actually executing the compiled binary stored somewhere else.
+
+This is where the second script comes in. This one is in fish though: [primary link](https://github.com/Axlefublr/dotfiles/blob/main/scripts/scriptister/compile-rust-script.fish), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/compile-rust-script.fish).
+
+While the export script just writes to the target script file, *this* is the compilation script. It compiles the project, and copies the resulting binary somewhere on the PATH.
+
+While one ensures my work is *backed up* (as a single file "script" in my dotfiles repository), the other one actually makes sure it's executable, by providing a binary with the exact same name, that I can call.
+
+A very sneaky and elegant solution, I'd say! :3<
+
+In the future, if I need to *edit* some rust script, that's where the *import* script comes into play. \
+[Primary link](https://github.com/Axlefublr/dotfiles/blob/main/scripts/scriptister/import-rust-script.rs), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/import-rust-script.rs).
+
+It takes a path to a rust script that I exported into previously, splits it into main.rs and Cargo.toml, and writes those files in the workspace directory `wks`. After I import, I'm ready to edit the script in my workspace, to then export it back again.
+
+Thanks to my [helix fork](https://github.com/Axlefublr/helix)'s command harps, running all of these scripts is really easy, and this has become a way nicer workflow than I expected!
+
+Now that rust is so fast to get running, I'm way more excited to write it, and I already am rewriting some things as rust scripts, when they were written in fish before. It's super nice!
