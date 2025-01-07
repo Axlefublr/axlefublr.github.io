@@ -1,7 +1,6 @@
 +++
 title = 'how to anki'
-date = '3333-01-01'
-draft = true
+date = '2025-01-07'
 +++
 
 Anki is honestly a very hard to approach program. If you feel like it isn't, you're using it wrong /hj
@@ -161,6 +160,20 @@ Sequential (oldest cards first).
 
 Same as [above](#learning-steps), but for mature cards.
 
+### Leech threshold
+
+At least 3, but then it depends. Personally I use 5.
+
+The concept of leeching is made so that you can notice which cards you keep pressing “Again” on *repeatedly*.
+So, once you press “Again” on the same card n times in a row, it gets the `leech` tag.
+
+This by itself does absolutely nothing: it's up to you to decide what to do with that information.
+It's your wakeup call basically, that "hey! this card is really difficult! try coming up with a mnemonic for it maybe?".
+
+Once one of my cards becomes a leech, I take some extra time to really burn it into my brain, and press <kbd>ctrl+alt+n</kbd> to reset it back into a new card, so that I can relearn it again, without the ease factor being fucked up.
+
+With FSRS, it's probably a bad idea to reset it like that, so I don't necessarily recommend it. Just, make sure to pay extra attention to the card.
+
 ### Leech action
 
 ‼️Tag only. \
@@ -289,7 +302,7 @@ What I find to be most effective is *just* the symbol as the question, and *just
 This way, I don't spend extra energy on parsing useless words like "what is the x character in morse code?", and instead *just* focus on the question at hand. \
 Getting to the *core*, the *meat* of the question, without all the extra fluff, that *really* piles up, believe it or not!
 
-I'll expand on card creation in [this upcoming section], but for now let's stop at the idea that cards should be very minimal.
+I'll expand on card creation in [this upcoming section](#card-creation), but for now let's stop at the idea that cards should be very minimal.
 
 {{ hr(id="minimal") }}
 
@@ -550,4 +563,113 @@ I used to learn languages using anki in the past, and there the reverse thingy *
 
 Viola! Now you have the necessary knowledge to learn about the card organizing meta that I've made for myself. I hope you'll like it as much as I do!
 
-((only basic note types, fields for section and subsection))
+Rather than using a bunch of different decks (as I mentioned, I only have 2), or a bunch of different note types per subject (used to do that, very laborious), \
+I only have a couple of note types.
+
+Each of those note types includes two extra fields: one is called “Header” and the other is called “Subheader”.
+
+Because the anki browser allows you to search by each field if necessary (`header:ruby` for example), this works amazingly for card organization.
+
+If I need to do bulk actions on a bunch of cards of a certain subject, I *can*!
+Just as easily as I would with the many decks approach, and *more* easily than with the many note types approach.
+
+In terms of the note types, I basically only have Basic and Cloze. Except, I split Basic into 4 different note types:
+1. the normal Basic one
+2. 1 but back side is a codeblock
+3. 1 but front side is a codeblock
+4. 1 but both sides are codeblocks
+
+I think this is niche? But I use it so much that it made sense to make a shortcut like this for myself, rather than always having to wrap things in a codeblock in the html of the card manually.
+
+The approach is pretty simple: you come up with an element (I use `<cd></cd>`) and make css for that element to display it as a codeblock. \
+The note type then wraps `{{Front}}` in that element like `<cd>{{Front}}</cd>`. Blammo.
+
+I will link to my html templates and css file, but be warned: I made this specifically for myself so I give no guarantees it will be a good starting point.
+
+[html templates main link](https://github.com/Axlefublr/dotfiles/blob/main/anki/card.html) \
+[html templates backup link](https://github.com/Axlefublr/dotfiles/blob/d21744e691c09e9980fd01b013c0daaf64a2234c/anki/card.html) \
+[css main link](https://github.com/Axlefublr/dotfiles/blob/main/anki/card.css) \
+[css backup link](https://github.com/Axlefublr/dotfiles/blob/d21744e691c09e9980fd01b013c0daaf64a2234c/anki/card.css)
+
+As I alluded to prevously, this approach also solves another issue: I am never confused as to what subject I'm currently studying. It's right there at the top! Decks simply don't do this.
+
+So, I get to blammo all the cards in 1-2 decks, and go through them all at once; I don't have to experience the annoyance of jumping between 15 or so decks.
+
+# Card Creation
+
+First of all, [read this](https://www.supermemo.com/en/blog/twenty-rules-of-formulating-knowledge). \
+This blog post has massively helped me create better and more efficient cards.
+
+I won't attempt to tldr it, but here are some things that I ended up implementing into how I make cards.
+
+## Why use many word when few word do trick
+
+"What was the year at which Marie Currie did x?"
+
+Is very wordy. I'm exagerating in this example, but even still you'll find yourself making cards that use many extra useless words, kinda like the sentence above.
+
+Ideally, you will be doing anki until you die. That is a long ass time! (Hopefully?) \
+So all the time you spend parsing words that don't help you arrive to the *core* of the question, is time wasted.
+
+It's not like reading a novel: *there* reading 20 useless words in a row is fun (allegedly).
+*Anki* you are doing for an exact benefit. So cutting down on non-core words is actually crucial.
+
+"Marie Currie did x when"
+
+That ↑ is all you need. Even the `?` at the end is bloat. You don't need it.
+
+Your target should be to minimize the amount of time it takes you to process the question. Sometimes adding an extra word can actually *help*, because it looks more natural to you that way.
+
+So, try different approaches for debloating cards, and see what works for you. You will notice just how much faster and easier you can do reviews, because there's much less for your brain to process.
+
+You can then use this extra energy to do *more* cards, or to do the same amount of cards in less effort, to spend that effort elsewhere.
+
+## Make use of headers
+
+The note type approach I use helps the previous point.
+
+"jj revset operator that gives you the intersection of two other revsets"
+
+becomes:
+
+```
+jj
+revset
+intersection operator
+```
+
+Header `jj`, subheader `revset`, and less wordy question. The word `operator` there I'd remove. \
+Headers and subheaders let you encode a part of your question into a section above the question, that you will be able to skip over most of the time.
+
+If you read the question and you naturally remember that the question is about jj, you won't need to pay attention to the header *or* subheader.
+
+At least for me, it's natural to read the question first, and so header + subheader lets you move out a part of the question that otherwise, you would have to read *every* time. Small optimization that sums up to more than you would expect.
+
+## One thing per thing
+
+Split the question into as many cards as you reasonably can. \
+The blog post I linked above goes into good detail on what that entails, please read it.
+
+If you make a question and a part of it could become a whole another question, then it *should*.
+It might look kind of ridiculous, but the amount of time you spend is actually pretty big.
+
+❌ question: "shell -> pueue group -> delete a group, moving all of its tasks to the default group" \
+❌ answer: "pueue group remove"
+
+This question is worded in such a way that you hope you'll remember some extra information in parallel. Memory doesn't work like that, you won't be able to "brush off" information in an effective manner. That part should just become its own question if you want to remember it, and be discarded if you don't.
+
+✅ question 1: "shell -> pueue group -> delete group" \
+✅ answer 1: "pueue group remove"
+
+✅ question 2: "shell -> pueue group remove -> what happens to the tasks when you delete a group?" \
+✅ answer 2: "they get moved to default group"
+
+If each individual question is really easy to answer, all of them will quickly rank up in their intervals, and not take much of your time. So, prefer more cards to less cards, counter-intuitively.
+
+If you make one complicated question, you will hit your head against it time and time again, and end up wasting a lot more time overall.
+
+Similarly, if you expect yourself to give a big, multi-stage answer to a single question, you should also split it into multiple cards.
+
+{{ hr(id="thanks") }}
+
+Thanks for reading! This took me multiple months to write, lmao. Kinda burnt out on it; you might've noticed towards the end. Hope my experience will be useful to you!
