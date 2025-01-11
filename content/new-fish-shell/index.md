@@ -55,4 +55,4 @@ Depending on your terminal, now <kbd>shift+enter</kbd> will insert a newline rat
 
 In vim mode, the cursor will no longer be beyond the end of the line. I kinda got used to my cursor being 2 character after the end of the line at this point, lol.
 
-Also, `%` motion, as well as functions to `f`/`t` to the matching bracket.
+Also, `%` motion, as well as functions to `f`/`t` to the matching bracket. 
