@@ -190,3 +190,12 @@ My goal isn't to teach you the entirety of `ov`, but to *sell you* on it. \
 Go check out [the project's readme](https://github.com/noborus/ov) to learn about it more deeply!
 
 I love how it's written: generally I get super overwhelmed when discovering a program of a certain bigness, but ov's readme is structured in a pretty nice way where I was able to learn it effectively!
+
+# P.S.
+
+ov has an interesting bug I experienced: *sometimes*, for *some* of my configured hotkeys (it's random, and doesn't apply to all of them at once), they stop getting recognized and get defaulted back to ov's defaults.
+
+So, for example, I set <kbd>j</kbd> to go a line down; it sometimes happens that pressing <kbd>j</kbd> will go back to its default function, despite me disabling that in my configuration.
+
+So if you're experiencing the same bug as me, build [my fork of ov](https://github.com/Axlefublr/ov) from source. \
+All I do in it, is remove *all* default mappings, so that *your* configured mappings are guaranteed to work.
