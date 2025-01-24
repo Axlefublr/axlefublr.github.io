@@ -1,15 +1,13 @@
 +++
 title = 'fish shell 4.0.0'
-date = '2029-01-09'
-draft = true
+date = '2025-01-25'
 +++
 
-New fish shell major version is coming out!
+New fish shell major version is coming out! \
+I want to share with you all the changes that caught my attention. \
+Incidentally, this blog is my excuse to *read* the [release notes](https://fishshell.com/docs/4.0b1/relnotes.html) to begin with c:
 
-To give myself a better reason to read the entire [release notes](https://fishshell.com/docs/4.0b1/relnotes.html), I want to mention / go over the changes that I found the most interesting in this blog post. \
-This is not at all a comprehensive list; if you want one, read the link above.
-
-First of all, fish shell got rewritten from c++ to rust.
+First of all, fish shell got rewritten from c++ to rust. This is big because it reduces the barrier of entry for contribution and probably makes fish faster.
 
 `fish_should_add_to_history` function lets you decide which commands to add to history or not.
 
@@ -56,3 +54,15 @@ Depending on your terminal, now <kbd>shift+enter</kbd> will insert a newline rat
 In vim mode, the cursor will no longer be beyond the end of the line. I kinda got used to my cursor being 2 character after the end of the line at this point, lol.
 
 Also, `%` motion, as well as functions to `f`/`t` to the matching bracket. 
+
+Options can now be fuzzy completed!! So, `--fbr` -> `--foobar` will happen, if there's no better match.
+
+When you complete something that has characters that need to be escaped, previously each character would be *escaped*. Now the completed token uses *quotes*. \
+Say you are completing a directory named `my directory`. \
+Previously, it would turn into `my\ directory`, now it will turn into `'my directory'`.
+
+{{ hr(id="done") }}
+
+I opened the release notes, saw the ridiculously small scrollbar, and got terrified like "HOW HUGE IS THIS UPDATE??", but turns out the page is so long because it contains *all* the release notes.
+
+So yeah, everything listed above are the neat changes that I found the most significant for myself. Keep in mind though, I might've skipped some that aren't important to me but might be important for you!
