@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		 <meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>fish shell 4.0.0</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div class="wrapper"> <nav class="page">
+	
+	<div class="preview empty previous">
+	</div>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;ov&#x2F;" class="preview next">
+		<span class="page name">finally, a good pager</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<div class="page marginalizer">
+	<!-- <div class="page margin top"></div> -->
+	<!-- <a class="scroller top" href="#top"></a> -->
+	<div class="content page">
+		<header class="page">
+			<a href="..">
+				<div class="page title">fish shell 4.0.0</div>
+			</a>
+			<div class="page date wrapper">
+				<time datetime="2025-01-25">2025.01.25</time>
+			</div>
+		</header>
+		<main class="page">
+			<!-- <div class="reading-time">reading time: 4</div> -->
+			<p>New fish shell major version is coming out! <br />
+I want to share with you all the changes that caught my attention. <br />
+Incidentally, this blog is my excuse to <em>read</em> the <a rel="noopener" target="_blank" href="https://fishshell.com/docs/4.0b1/relnotes.html">release notes</a> to begin with c:</p>
+<p>First of all, fish shell got rewritten from c++ to rust. This is big because it reduces the barrier of entry for contribution and probably makes fish faster.</p>
+<p><code>fish_should_add_to_history</code> function lets you decide which commands to add to history or not.</p>
+<p><code>--command</code> flag for <code>abbr</code> allows you to make command-specific abbreviations. Basically, you get to make subcommand aliases but with the power of your <em>shell</em>, not having to rely on the program to support aliasing.</p>
+<p>Take a look at this:</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">test</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">n</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>variable</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">  <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">success</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>Previously, if <code>variable</code> is <em>unset</em> (rather than an empty string), fish would error out — <code>test -n</code> expects an argument after. <br />
+It's the reason why it's good practice to surround the variable with <code>"</code> like <code>"$variable"</code>, so that it resolves to a single argument even if the variable is unset.</p>
+<p>Now <code>test -n</code> and <code>test -z</code> <em>don't</em> require an argument after, so passing an unset variable is now valid. <br />
+Interestingly, only those two options. All the other options work as they did before.</p>
+<p>This feature is not enabled by default, you'd enable it with <code>set -Ua fish_features test-require-arg</code>.</p>
+<p><code>bind</code> recognizes more modifier combinations and differentiates more keys, for example it can tell apart <kbd>Tab</kbd> and <kbd>ctrl+i</kbd>.</p>
+<p>Also, a more convenient syntax for specifying the key like <kbd>ctrl-x</kbd> is now available. <br />
+Previously you had to use <code>bind -k</code> for that, now you don't have to.</p>
+<p>Omg, I literally needed this so bad: <code>history append</code> lets you append a command to fish history, without executing it.</p>
+<p><code>&lt;?/path/to/file</code> tries reading the file as input; if reading fails for any reason, outputs from <code>/dev/null</code> (which should be an empty string). <br />
+Basically, a way to say "read this file if you can, but don't fail if you can't".</p>
+<p>New <code>path basename -E</code> is like doing <code>path change-extension '' (path basename /path/to/file.txt)</code> — <code>/path/to/file.txt</code> gets turned into <code>file</code>.</p>
+<p>Math <code>--scale-mode</code> now allows you to choose how the output value's decimal points are handled. <code>truncate</code> / <code>round</code> / <code>floor</code> / <code>ceiling</code>.</p>
+<p>Abbreviations can now expand after <code>command</code>. As in, <code>command ls</code> will expand similar to how <em>just</em> <code>ls</code> would. <br />
+They now also do after <code>;</code> and <code>|</code>. But if you put a <code>|</code> right after a command without a space in between, you're a freak.</p>
+<p><code>funcsave</code>ing a function indents the body.</p>
+<p>If there is no second job, <code>fg %2</code> won't activate the latest one, and will instead fail.</p>
+<p>Depending on your terminal, now <kbd>shift+enter</kbd> will insert a newline rather than execute the command, and <kbd>ctrl+backspace</kbd> &amp; <kbd>ctrl+delete</kbd> works.</p>
+<p>In vim mode, the cursor will no longer be beyond the end of the line. I kinda got used to my cursor being 2 character after the end of the line at this point, lol.</p>
+<p>Also, <code>%</code> motion, as well as functions to <code>f</code>/<code>t</code> to the matching bracket.</p>
+<p>Options can now be fuzzy completed!! So, <code>--fbr</code> -&gt; <code>--foobar</code> will happen, if there's no better match.</p>
+<p>When you complete something that has characters that need to be escaped, previously each character would be <em>escaped</em>. Now the completed token uses <em>quotes</em>. <br />
+Say you are completing a directory named <code>my directory</code>. <br />
+Previously, it would turn into <code>my\ directory</code>, now it will turn into <code>'my directory'</code>.</p>
+<a href="#done" id="done" class="anchorina">
+  <hr class="anchorina line">
+  </hr>
+</a>
+<p>I opened the release notes, saw the ridiculously small scrollbar, and got terrified like "HOW HUGE IS THIS UPDATE??", but turns out the page is so long because it contains <em>all</em> the release notes.</p>
+<p>So yeah, everything listed above are the neat changes that I found the most significant for myself. Keep in mind though, I might've skipped some that aren't important to me but might be important for you!</p>
+
+		</main>
+	</div>
+	<!-- <a class="scroller bottom" href="#bottom"></a> -->
+	<!-- <div class="page margin bottom"></div> -->
+</div>
+<nav class="page">
+	
+	<div class="preview empty previous">
+	</div>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;ov&#x2F;" class="preview next">
+		<span class="page name">finally, a good pager</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<footer id="bottom"></footer>
+</div>
+	</body>
+</html>
