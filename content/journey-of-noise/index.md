@@ -165,8 +165,113 @@ For most of my usage, I can just set the gpu fan to like 700rpm and that'll be f
 
 To add more flexibility (although still wonky of a solution), I'll plug the gpu fan into the cpu fan port. My reasoning is that if the gpu is getting hotter, the cpu probably is too! The cpu fan will start spinning faster, and so will the gpu fan. Hopefully it's going to be good enough?
 
-‼️test with loop checking temperatures wow it's actually fine
+To make sure, I made this loop in fish shell, that would play a soundeffect if the gpu's temperature went to or over 75°C, and then started playing Dishonored to test it.
 
-‼️1 fan on gpu isn't enough, should buy another one
-‼️because of the old fan, I'm minned to 500
-‼️fuck the old fan, oh wait it made a big difference
+```fish
+while true
+  test (cat /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/hwmon/hwmon4/temp1_input) -ge 75000 && paplay ~/m/soundeffects/camera-shutter.oga
+  sleep 10
+end
+```
+
+Fascinatingly, I never heard the sound effect, in even 30 minutes of playtime! So it seems like this cooling setup is good enough :D
+
+# but not forever
+
+While this works, I feel it would be both dangerous and stupid to leave it be like this till the end of time. \
+After all, the gpu used to have *two* fans (although smaller), and now I only have one. \
+To make sure that the cooling is good enough, I think it's a good idea to *over*cool the gpu, so that even in the worst case scenario (only gpu heats up but not cpu) it's not going to overheat.
+
+Some time later I bought another 200rpm fan, and replaced the 500 one with it. \
+Just to test! Before I'd eventually add back the 500rpm fan. \
+But I ended up noticing a very interesting effect! For the first time ever, my fans started spinning *slower* than 500rpm! :o
+
+It turns out that the 500rpm fan, because of its minimum, was *speeding up* the other, 200rpm fans. \
+Also, after removing the 500rpm fan, things got significantly quieter! \
+It turns out that most of the noise was coming from not from the rpm specifically, but from the 500rpm fan being *smaller* and *shitter*.
+
+I later learnt that the bigger the fan is, the quieter it is while transporting the same volume of air. \
+The smaller fan was both trying harder, *and* doing a poorer job! \
+I got to confirm that after testing my temperatures again, with *only* the new bigger fan, and saw that my temperatures were *lower*! \
+Matter of fact, surprisingly significantly lower! At this point I don't *need* the previous fan at all!
+
+# physical equality
+
+At the time of me writing this blog post, I do still only have the two 200rpm fans. I plan to buy two more: one exhaust fan, and one intake fan. \
+However, I found something on the *software* side that let me eliminate the gpu temperature flexibility worry *completely*.
+
+`fancontrol`. \
+A program you can run as a service, that changes your fans' speeds depending on the temperature.
+
+I actually knew about it way at the start of the pc journey, but I couldn't get it to *work*. \
+And my thought process was that even if I *did* get it to work, it wouldn't allow me to have no rpm anyway, since in my head it was my motherboard that completely didn't allow that to happen.
+
+Thankfully, I was very wrong! But god, was it a spiky path to set it up. Even now, I'm not *exactly* sure of all the steps I took to make it work, but here are the basic ones (on arch):
+
+Install `lm_sensors` and run `sudo sensors-detect`. \
+This will allow you to run `sensors`: a neat program that shows you various information about your system. Here's my output:
+
+```
+amdgpu-pci-0100
+Adapter: PCI adapter
+fan1:             N/A
+edge:         +39.0°C  (crit = +120.0°C, hyst = +90.0°C)
+
+coretemp-isa-0000
+Adapter: ISA adapter
+Package id 0:  +41.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 0:        +39.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 1:        +40.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 2:        +40.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 3:        +37.0°C  (high = +80.0°C, crit = +100.0°C)
+
+acpitz-acpi-0
+Adapter: ACPI interface
+temp1:        +27.8°C  
+temp2:        +29.8°C  
+
+nct6791-isa-0290
+Adapter: ISA adapter
+Vcore:                 888.00 mV (min =  +0.00 V, max =  +1.74 V)
+in1:                     1.03 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+AVCC:                    3.33 V  (min =  +2.98 V, max =  +3.63 V)
++3.3V:                   3.33 V  (min =  +2.98 V, max =  +3.63 V)
+in4:                   1000.00 mV (min =  +0.00 V, max =  +0.00 V)  ALARM
+in5:                     2.02 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+in6:                   808.00 mV (min =  +0.00 V, max =  +0.00 V)  ALARM
+3VSB:                    3.41 V  (min =  +2.98 V, max =  +3.63 V)
+Vbat:                    3.28 V  (min =  +2.70 V, max =  +3.63 V)
+in9:                     1.02 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+in10:                  224.00 mV (min =  +0.00 V, max =  +0.00 V)  ALARM
+in11:                  184.00 mV (min =  +0.00 V, max =  +0.00 V)  ALARM
+in12:                  1000.00 mV (min =  +0.00 V, max =  +0.00 V)  ALARM
+in13:                    1.03 V  (min =  +0.00 V, max =  +0.00 V)  ALARM
+in14:                  232.00 mV (min =  +0.00 V, max =  +0.00 V)  ALARM
+fan1:                   793 RPM  (min =    0 RPM)
+fan2:                   818 RPM  (min =    0 RPM)
+SYSTIN:                  +8.0°C  (high =  +0.0°C, hyst =  +0.0°C)  ALARM  sensor = thermistor
+CPUTIN:                 +37.5°C  (high = +80.0°C, hyst = +75.0°C)  sensor = thermistor
+AUXTIN0:                +36.5°C    sensor = thermistor
+AUXTIN1:               +101.0°C    sensor = thermistor
+AUXTIN2:                +99.0°C    sensor = thermistor
+AUXTIN3:               +101.0°C    sensor = thermistor
+PECI Agent 0:           +37.0°C  
+PCH_CHIP_CPU_MAX_TEMP:   +0.0°C  
+PCH_CHIP_TEMP:           +0.0°C  
+PCH_CPU_TEMP:            +0.0°C  
+PCH_MCH_TEMP:            +0.0°C  
+PCH_DIM0_TEMP:           +0.0°C  
+intrusion0:            ALARM
+intrusion1:            ALARM
+beep_enable:           disabled
+```
+
+Most things are either invalid or useless, but some values are actually of use to us. \
+All the values here are actually read from device (?) files, so if you run `sensors -j`, you'll be able to find those paths, to be used in your waybar or something like that.
+
+Under `amdgpu-pci-0100`, we see that my gpu likes edging, but it's not very hot because of that yet. You probably have a different gpu than me, so you'll likely see a different section name, but should be able to find it pretty easily. I assume it'll have `gpu` in its name still. \
+`coretemp-isa-0000` is the temperature of the actual cpu. But according to chatgpt (lol), you're not meant to use that temperature reading for cooling purposes, and should instead consider `CPUTIN`. \
+Right next to it, we also see `fan1` and `fan2`, with their speeds in rpm. \
+`sensors` is how I did all of my temperature testing throughout this blog post.
+
+Now that you have the sensors working, you should run `sudo pwmconfig`.
