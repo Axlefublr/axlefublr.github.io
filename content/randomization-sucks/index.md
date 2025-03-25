@@ -1,7 +1,6 @@
 +++
 title = 'randomization sucks'
 date = '2025-03-25'
-draft = true
 +++
 
 You might instantly think that I'm going to be talking about how there's almost no *real* randomness in computers, and instead mostly pseudo randomization. \
