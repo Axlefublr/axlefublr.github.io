@@ -79,14 +79,21 @@ a {
 
 p,
 pre {
-	line-height: 1.6em;
 	margin-block: 0.6em;
+}
+
+p {
+	line-height: 1.7em;
+}
+
+pre {
+	line-height: 1.4em;
 }
 
 code,
 kbd {
 	font-family: Input Mono;
-	font-size: 0.9em;
+	font-size: 14pt;
 	background-color: var(--inline-code-bg);
 	padding: 0.1em 0.25em;
 	border-radius: 0.3em;
@@ -103,8 +110,8 @@ pre {
 	white-space: pre-wrap;
 	word-break: break-all;
 
-	> code,
-	> kbd {
+	>code,
+	>kbd {
 		padding: 0;
 		border-radius: 0;
 	}
@@ -151,7 +158,7 @@ pre {
 }
 
 blockquote,
-blockquote > p {
+blockquote>p {
 	margin-block: 0;
 	margin-inline: 0;
 }
@@ -177,6 +184,7 @@ spoiler {
 	background-color: var(--grey);
 	color: var(--grey);
 	border-radius: 0.1em;
+
 	&:hover {
 		background-color: inherit;
 		color: inherit;
@@ -189,7 +197,8 @@ a.anchorina {
 	width: 100%;
 	height: 1em;
 	margin-block: 0.7em;
-	&:hover > hr.anchorina.line {
+
+	&:hover>hr.anchorina.line {
 		background-color: var(--orange);
 	}
 }
@@ -247,23 +256,23 @@ h6::before {
 }
 
 h1,
-h1 > a,
-h1 > a:visited,
+h1>a,
+h1>a:visited,
 h2,
-h2 > a,
-h2 > a:visited,
+h2>a,
+h2>a:visited,
 h3,
-h3 > a,
-h3 > a:visited,
+h3>a,
+h3>a:visited,
 h4,
-h4 > a,
-h4 > a:visited,
+h4>a,
+h4>a:visited,
 h5,
-h5 > a,
-h5 > a:visited,
+h5>a,
+h5>a:visited,
 h6,
-h6 > a,
-h6 > a:visited {
+h6>a,
+h6>a:visited {
 	color: var(--fg-heading);
 	text-decoration: none;
 	font-weight: bold;
@@ -282,12 +291,15 @@ a.home.title {
 
 .title {
 	color: var(--fg-page-title);
+
 	&:hover {
 		background-color: var(--bg-hover);
 	}
+
 	&.home {
 		font-size: 2rem;
 	}
+
 	&.page {
 		font-size: 2.5rem;
 	}
@@ -299,10 +311,12 @@ a.title {
 
 .date {
 	color: var(--fg-post-date);
+
 	&.page {
 		margin-top: 0.3em;
 		font-size: 1.8rem;
 	}
+
 	&.home {
 		font-size: 1.5rem;
 	}
@@ -323,7 +337,8 @@ a.title {
 header.promo-holder {
 	display: block flex;
 	flex: 1 1 auto;
-	> a.promo {
+
+	>a.promo {
 		width: 100%;
 		height: 2em;
 		display: flex;
@@ -354,7 +369,8 @@ header.promo-holder {
 nav.page {
 	display: flex;
 	flex: 0;
-	> * {
+
+	>* {
 		box-sizing: border-box;
 		height: 2.5em;
 		display: flex;
@@ -363,43 +379,53 @@ nav.page {
 		text-decoration: none;
 		font-weight: bold;
 		font-size: 1.1em;
+
 		&:hover {
 			cursor: pointer;
 		}
+
 		&.go-home {
 			width: 10%;
 			min-width: 10%;
 			max-width: 10%;
-			> span {
+
+			>span {
 				color: var(--purple);
 			}
 		}
+
 		&.preview {
 			width: 45%;
 			min-width: 45%;
 			max-width: 45%;
 			padding-inline: 0.4em;
-			> .name {
+
+			>.name {
 				color: var(--yellow);
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				/* max-width: calc(100% ); */
 			}
-			> .direction {
+
+			>.direction {
 				color: var(--orange);
 				text-wrap: nowrap;
 				padding-inline: 0.2em;
 			}
+
 			&.previous {
 				justify-content: flex-start;
-				> .name {
+
+				>.name {
 					padding-inline-end: 0.2em;
 				}
 			}
+
 			&.next {
 				justify-content: flex-end;
-				> .name {
+
+				>.name {
 					padding-inline-start: 0.2em;
 				}
 			}
@@ -413,18 +439,21 @@ nav.page {
 	font-weight: normal;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'Input Mono';
 	src: url('fonts/InputMono-Bold.woff2') format('woff2');
 	font-weight: bold;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'Input Mono';
 	src: url('fonts/InputMono-Italic.woff2') format('woff2');
 	font-weight: normal;
 	font-style: italic;
 }
+
 @font-face {
 	font-family: 'Input Mono';
 	src: url('fonts/InputMono-BoldItalic.woff2') format('woff2');
