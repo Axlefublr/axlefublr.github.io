@@ -35,7 +35,7 @@ Here is [my css file](https://github.com/Axlefublr/dotfiles/blob/main/floorp/CSS
 
 # workspaces
 
-I used sidebery for a single reason: "worspaces". It calls it "panels", but no matter. It implements them via hiding and unhiding tabs as you move through the panels (not by default; it's an option), so you can probably imagine how hacky it feels to use. \
+I used sidebery for a single reason: "workspaces". It calls it "panels", but no matter. It implements them via hiding and unhiding tabs as you move through the panels (not by default; it's an option), so you can probably imagine how hacky it feels to use. \
 Hilariously, it's still faster and smoother than workspaces were on vivaldi. \
 Well, floorp has workspaces built in! And they are completely and incredibly smooth!
 
