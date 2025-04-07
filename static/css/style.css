@@ -46,10 +46,6 @@ ul {
 	padding-inline-start: 1.1em;
 }
 
-li {
-	margin-block: 0.35em;
-}
-
 .page.marginalizer {
 	display: flex;
 	justify-content: center;
@@ -82,7 +78,8 @@ pre {
 	margin-block: 0.6em;
 }
 
-p {
+p,
+li {
 	line-height: 1.7em;
 }
 
@@ -124,7 +121,8 @@ pre {
 		color: var(--yellow);
 	}
 
-	& .z-variable.z-fish {
+	& .z-variable.z-fish,
+	.z-constant.z-css {
 		color: var(--purple);
 	}
 
@@ -144,7 +142,9 @@ pre {
 	}
 
 	& .z-option.z-fish,
-	.z-variable.z-parameter.z-fish:has(.z-string.z-unquoted) {
+	.z-variable.z-parameter.z-fish:has(.z-string.z-unquoted),
+	.z-property-name,
+	.z-attribute-name.z-css {
 		color: var(--mint);
 	}
 
