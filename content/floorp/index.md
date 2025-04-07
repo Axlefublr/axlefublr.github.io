@@ -12,6 +12,7 @@ The actual reasons are somewhat muddy, and because of that I couldn't collect en
 2. It allows you to change hotkeys
 3. It has built in workspaces
 4. Browser level css is "better" (I didn't quite know in which way yet, but trusted it)
+5. Because of being able to change hotkeys inside, I offload the need for xremap, as I intend to switch to kanata soon
 
 # css
 
