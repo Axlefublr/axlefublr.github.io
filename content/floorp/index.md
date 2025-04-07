@@ -15,7 +15,7 @@ The actual reasons are somewhat muddy, and because of that I couldn't collect en
 
 # css
 
-The browser level css configuration turned out way better than advertised. Trully stunning! \
+The browser level css configuration turned out way better than advertised. Truly stunning! \
 Whatever I try to do just works practically immediately, everything is obvious and straightforward. \
 It took me *multiple days* to get firefox just right, and yet I'm almost there on floorp after a few measly hours. That's wild! \
 To be fair, there's likely a big bias at play: after cssing firefox, I've gotten a lot better at doing so, and am now judging floorp as if I have the same level of knowledge as I did *before* cssing firefox — this is not the case and it's likely my *knowledge*, **not** the browser that makes it that easy, but still I'm very happy! :D
