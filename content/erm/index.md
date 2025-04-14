@@ -44,11 +44,6 @@ But the biggest reason for why people might give up on home row modifiers, is be
 
 So I came up with a 💥ive idea: I will make *every single key* tapholdy, even if I don't yet have a usecase for the hold behavior. This is just to get consistency across *all* keys I press (except <kbd>Enter</kbd> for now, incidentally), while also allowing easier addition of extra behavior onto key holds, without having to retrain my muscle memory every time.
 
-God, this has helped immensely. \
-It's my second day of using Every Row Modifiers™, and while it's still kinda rough, I can definitely type normally at least in lowercase. I get caught on using modifiers correctly, but I definitely see myself getting better at them in the future. \
-Long story short, this approach made tapholdies viable for me :D \
-If you've tried home row mods in the past and didn't like them (and especially if you haven't tried them at all), try *every* row modifiers and see if you like that better!
-
 # an important caveat
 
 Having to actively wait for a timeout to elapse to use *any* modifier doesn't sound like a good value proposition. \
