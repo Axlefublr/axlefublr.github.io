@@ -128,11 +128,17 @@ pre {
 
 	& .z-storage.z-modifier,
 	.z-storage.z-function,
-	.z-keyword {
+	.z-keyword,
+	.z-type.z-genconfig {
 		color: var(--red);
 	}
 
-	& .z-function.z-builtin {
+	& .z-storage.z-type.z-ts {
+		color: var(--orange)
+	}
+
+	& .z-function.z-builtin,
+	.z-constant.z-numeric {
 		color: var(--blush);
 	}
 
@@ -144,7 +150,8 @@ pre {
 	& .z-option.z-fish,
 	.z-variable.z-parameter.z-fish:has(.z-string.z-unquoted),
 	.z-property-name,
-	.z-attribute-name.z-css {
+	.z-attribute-name.z-css,
+	.z-parameter.z-genconfig {
 		color: var(--mint);
 	}
 
