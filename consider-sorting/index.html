@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		 <meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>consider sorting</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div class="wrapper"> <nav class="page">
+	
+	<div class="preview empty previous">
+	</div>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;on-wake-actions&#x2F;" class="preview next">
+		<span class="page name">change wallpaper on wake</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<div class="page marginalizer">
+	<!-- <div class="page margin top"></div> -->
+	<!-- <a class="scroller top" href="#top"></a> -->
+	<div class="content page">
+		<header class="page">
+			<a href="..">
+				<div class="page title">consider sorting</div>
+			</a>
+			<div class="page date wrapper">
+				<time datetime="2025-05-01">2025.05.01</time>
+			</div>
+		</header>
+		<main class="page">
+			<!-- <div class="reading-time">reading time: 3</div> -->
+			<p>I'm almost certain you have a problem that you either don't realize, or don't have a good solution for.</p>
+<p>Sometimes in code, you need to place many things in some sort of order. And sometimes, there's no one order that is logically significant. <br />
+An example of this is configuration options.</p>
+<p>There isn't really an "order" to them, within each section: you are setting <em>all</em> of them.</p>
+<p>An even more obvious example I have on hand, is a function holding fish script I have, that I use to organize and back up setup processes for various programs: <a rel="noopener" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/scripts/setup/dode.fish">look here</a>.</p>
+<p>There too, there isn't some particular order to them. Sure, in the initial setup I'll make fish work, then git, then niri, then probably waybar; but aside from those "blocking" setups, that basically act like dependencies for other setups, there is no obvious order — most things simply behave like a set, rather than an array.</p>
+<p>Something that I started doing some time ago, is explicitly <em>sorting</em> things like this.</p>
+<p>Now, looking through this set is organized; it will always be obvious where a given thing is, and additionally it will always be obvious where to insert a new thing, without making the file more messy.</p>
+<p>I memorized the indexes of the letters of the alphabet using <a href="https://axlefublr.github.io/how-to-anki/">anki</a>, to make this type of manual sorting way easier for me. No need to sing the alphabet song every time. <br />
+But that's just for the manual sorting I do, like in the setup function holder above; usually things that you may consider sorting are single lines, and those you can easily sort with a command or some such, if you use a half decent text editor.</p>
+<p>However even with that functionality, it can still feel a bit too manual to feel worth it, not gonna lie.</p>
+<p>This is why I wrote a neat lil program called <a rel="noopener" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/scripts/partialsort.rs">partialsort.rs</a>!</p>
+<blockquote>
+<p>This isn't exactly a promo, as the program is written as a <a href="https://axlefublr.github.io/rust-scripting/">wks script</a> rather than a normal repo-ed rust program that you could install more easily</p>
+</blockquote>
+<p>The idea of it, is that I can mark sections of files with <code>[[sort on]]</code> and <code>[[sort off]]</code>. When I run the formatter over the file, the lines between these two markers get sorted!</p>
+<!-- [[sort off]] -->
+<p>My <a rel="noopener" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a> then has an integration that allows you to run a global formatter (that can happen to be partialsort.rs) on write. If you use something like neovim, adding a global formatter should, interestingly, be both more <em>and</em> less painful. <br />
+Another option I used to use, is to run a formatter like that on git commit hook.</p>
+<p>Regardless of how you may simplify the process of sorting things for you, you will soon find out how much cleaner things become. <br />
+Especially for various configuration files, which is my main usecase. After writing the config file for the first time, you are likely to be coming back to it again and again, changing, removing, and adding stuff. <br />
+It gets so much easier and <em>faster</em> to do so, when the items you intend to change are set in an obvious order! :D</p>
+<p>Consider sorting!</p>
+
+		</main>
+	</div>
+	<!-- <a class="scroller bottom" href="#bottom"></a> -->
+	<!-- <div class="page margin bottom"></div> -->
+</div>
+<nav class="page">
+	
+	<div class="preview empty previous">
+	</div>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;on-wake-actions&#x2F;" class="preview next">
+		<span class="page name">change wallpaper on wake</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<footer id="bottom"></footer>
+</div>
+	</body>
+</html>
