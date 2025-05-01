@@ -19,7 +19,7 @@ Something that I started doing some time ago, is explicitly *sorting* things lik
 Now, looking through this set is organized; it will always be obvious where a given thing is, and additionally it will always be obvious where to insert a new thing, without making the file more messy.
 
 I memorized the indexes of the letters of the alphabet using [anki](@/how-to-anki.md), to make this type of manual sorting way easier for me. No need to sing the alphabet song every time. \
-But that's just for the manual sorting I do, like in the setup function holder above; usually things that you may consider sorting are single lines, that you can easily do if you use a half decent text editor.
+But that's just for the manual sorting I do, like in the setup function holder above; usually things that you may consider sorting are single lines, and those you can easily sort with a command or some such, if you use a half decent text editor.
 
 However even with that functionality, it can still feel a bit too manual to feel worth it, not gonna lie.
 
