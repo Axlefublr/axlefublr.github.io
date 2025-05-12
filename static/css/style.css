@@ -23,6 +23,10 @@
 	--quote-border-color: var(--cyan);
 }
 
+* {
+	box-sizing: border-box;
+}
+
 html {
 	scroll-behavior: smooth;
 	font-family: Inter;
@@ -73,6 +77,10 @@ a {
 	}
 }
 
+sup {
+	line-height: 1;
+}
+
 p,
 pre {
 	margin-block: 0.6em;
@@ -94,23 +102,26 @@ kbd {
 	background-color: var(--inline-code-bg);
 	padding: 0.1em 0.25em;
 	border-radius: 0.3em;
-	white-space: pre-wrap;
-	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 pre {
 	background-color: var(--codeblock-bg) !important;
-	padding: 0.3em 0.6em;
+	padding: 0.3em 0 0.3em 0.6em;
 	border-radius: 0.3em;
 	width: 100%;
 	box-sizing: border-box;
-	white-space: pre-wrap;
-	word-break: break-all;
+	overflow-x: auto;
 
 	>code,
 	>kbd {
 		padding: 0;
 		border-radius: 0;
+		white-space: pre;
+
+		>span {
+			padding: 0 0.6em 0 0;
+		}
 	}
 
 	& .z-comment {
