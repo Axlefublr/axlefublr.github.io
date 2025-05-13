@@ -4,7 +4,7 @@ date = 2024-10-21
 +++
 
 I've been using neovim for around two years. \
-I've rewritten my config three times: for the first time, when I switched to astronvim, and when I switched back from astronvim. \
+I've rewritten my config three times: for the first time, when I switched to astronvim, and when I switched back from astronvim. At the most recent point, my config was 5000 lines long. \
 I've gotten into the habit of reading nvim help pages in their entirety, for fun. \
 I have also written [s](https://github.com/Axlefublr/edister.nvim)[e](https://github.com/Axlefublr/harp-nvim)[v](https://github.com/Axlefublr/qfetter.nvim)[e](https://github.com/Axlefublr/lupa.nvim)[n](https://github.com/Axlefublr/selabel.nvim)[!](https://github.com/Axlefublr/dress.nvim)[!](https://github.com/Axlefublr/wife.nvim) plugins. \
 And usually spent multiple hours every day configuring nvim.
