@@ -673,3 +673,56 @@ Similarly, if you expect yourself to give a big, multi-stage answer to a single 
 {{ hr(id="thanks") }}
 
 Thanks for reading! This took me multiple months to write, lmao. Kinda burnt out on it; you might've noticed towards the end. Hope my experience will be useful to you!
+
+# addendum
+
+I'm writing this on 2025.05.19.
+
+While most things hold up exactly as before, I'm now using a slightly different approach in terms of taking in new cards. \
+Not entirely sure if it ends up being more or less efficient, but the consistency of it is awesome.
+
+I learn for the love of the game, so there isn't necessarily some deadline up until when I have to learn everything I want to. \
+What matters far more to me, is to ensure that I never burn out on anki.
+
+I found that for my type of cards, I can review 70 every day. I can (and did, before finding this method) in theory do more, but I know that more than 70 will end up burning me out, if prolonged.
+
+> This is a type of thing that you get a feel for after a while of using anki, so don't worry if you don't know your number yet.
+
+I found a way to review exactly my limit of cards every day, without fucking up the algorithm too much!
+
+First, a setting that this entire approach relies on: Deck Options -> Display Order -> New/review order -> Show after reviews. \
+Now, when we start doing our reviews for the day, we go through all the red and all the green cards first. \
+Say I have 15 reds, and 45 greens. That's 60 total reviews to go through. I got 10 extra in me though! And those 10 extra are for the new cards :D
+
+So, as I review, I check every now and again:
+1. how many reviews (not new cards) are left
+2. how many reviews I've done so far
+
+After I get through all the reds and all the greens (unless they are already more than 70, I elaborate on this later), I check `70 - total_reviews` to figure out how many new cards to take in today. \
+Your total reviews are shown on the main / home screen, so that's what I'm relying on. I wonder if there's a plugin that would show that info *while* I'm reviewing! \
+For easier math, I set the amount of daily new cards to 100. For reasons I explained in this blog post above, *obviously* we aren't meant to gulp all that 100. We simply take from that 100 every day, however much we can handle (`70 - total_reviews`).
+
+Why this appproach is amazing, is that it's quite dynamic while being consistent in terms of my effort. You have a low amount of reviews? Yipeee you get to get more new cards today! Too many reviews? No big deal, we simply take less / no new cards.
+
+But what happens if you have more than 70 reviews? This happens to me every time I rotate my sleep schedule, for example. Or say you miss a day for other reasons.
+
+Generally, it's a bad idea to gulp all the reviews at once, that you got from the previous day that you skipped. \
+Sure, the anki algorithm works better this way, but that's only in theory. In practice you are human. \
+Additionally, you're creating a fucky effect: if you get a sudden spike of reviews on a given day, this spike will repeat some days later (although it won't be as strong).
+
+This is why instead of gulping all reviews in a bad situation like this, I tend to instead increase my daily reviews temporarily, until the extra cards are all sorted out. This happens over the course of multiple days, and so the spike repeat is not as big of an issue. \
+Deck Options -> Display Order -> Review Sort Order -> Ascending retrievability is quite important to make this as effective as it can be, to not fuck with the anki algorithm as much.
+
+So! If you take the same strategy, my "up to 70 reviews" approach makes even more sense. In the general case, my reds + greens are less than 70, and I fill the rest with new cards. So when shit hits the fan, what ends up happening is that reds + greens fill up the entire 70, and I simply don't take new cards for a couple of days. So, this approach has built in overflow protection! Although it's not like you should want to use it :p \
+To add, when I get an overflow, I increase my cap from 70 to 80, until it's sorted. I consider a shitfan sorted, when to get 70 reviews, I'd have to take new cards. At *that* point I go back to the 70 cap, and take as many new cards as fit into the 70 cap, rather than the otherwise increased 80.
+
+In the case where I get more than 70 reds + greens, but there *isn't* an overflow from me skipping a day, the same rules apply, except I don't touch the cap. So, I basically allow the remaining reds + greens go to the next day, and let them get sorted out automatically via me taking in less new cards. Quite dynamic!
+
+Aside from the overflow protection, what I love most about this approach, is that I never get "unlucky". \
+I never get too many reviews on a day where I'm exhausted. \
+I never get too little reviews on a day where I'm extra energetic. \
+It's always the same exact number of reviews :D
+
+And what's fun about this, is that it lets you more clearly tell what your cap is. If you do exactly 70 (or your other number) reviews *every single day*, you will realize sooner, whether it's too much or too little. \
+My cap used to be 65, but over time I noticed that I wanted to do more, and so I increased my cap to 70. I want to increase it again, but I'm intentionally waiting for a while to make sure that would be the correct move. \
+Don't rush when changing your cap, and change it by small amounts.
