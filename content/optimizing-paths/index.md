@@ -110,9 +110,8 @@ All the directories inside of `fes` will come after `fes`, obviously, so now I o
 After a heavy left-side, I now introduce the right side keys quite a bit more.
 
 I figured out what felt good by repetitively typing in the full path to the directory, and feeling it out. \
-For example, `iwm` was first `int`! \
-But after typing it out a bunch of times, I noticed that pressing `n` so close after `~/` simply didn't feel that good; which is a big nono for such a core, commonly typed directory. Additionally, `int` is a real thing that may come up in searches, as a false positive, so that's another reason to not use it. \
-`fes` was at first `fea`.
+For example, `fes` was first `int`!{{fn(id=2)}} \
+But after typing it out a bunch of times, I noticed that pressing `n` so close after `~/` simply didn't feel that good; which is a big nono for such a core, commonly typed directory. Additionally, `int` is a real thing that may come up in searches, as a false positive, so that's another reason to not use it.
 
 After making the highest level directories, I went on to rename a bunch of directories inside of there. Look at a tree again, but now with context of how the directory used to be called.
 
@@ -159,3 +158,5 @@ This is why I cannot give any specific suggestions to what *your* directory name
 # footnotes
 
 {{hn(i=1)}} I'll talk about zoxide later, don't worry. Part of god's plan.
+
+{{hn(i=2)}} The subdirectory `eli` comes from a pun based on the upper directory being named `int`. If I named a future project `gents`, I'd have a path `~/int/eli/gents`. Which is of course hilarious.
