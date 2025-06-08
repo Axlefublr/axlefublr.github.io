@@ -1,3 +1,4 @@
+title = 'blog of axlefublr'
 base_url = 'https://axlefublr.github.io'
 generate_feeds = true
 feed_filenames = ['rss.xml']
