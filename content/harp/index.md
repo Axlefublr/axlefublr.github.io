@@ -6,7 +6,7 @@ draft = true
 
 Travelling to files in text editors is very slow at best.
 
-There are three main ways to travel to a file from your text editor. Let's discuss them.
+There are four main ways to travel to a file from your text editor. Let's discuss them.
 
 # fuzzy picker
 
@@ -101,7 +101,26 @@ Basically, you have to rotate through the results.
 However, if you typed `~/progr` and pressed <kbd>Tab</kbd>, now you *don't* have to choose: there is only one valid match for the substring `progr`! And it's `programming`. \
 So, to complete the path `~/programming/dotfiles/colors.css` most efficiently, I'd type `~/progr<Tab>/d<Tab>/colo<Tab>`.
 
-❗this sucks because of downloads and documents
-❗you're led to optimize your filepaths, which makes them look stupider
+You can pretty quickly realize how it's beneficial for a path to become unique quickly; `Downloads` and `Documents` both existing make me kinda mad for this reason. \
+While you can [optimize directory names](@/optimizing-paths/index.md) like `Downloads`, `Documents`, etc to be faster and easier to tab complete (or type in), there will ultimately be some directories that you cannot / should not optimize, like `~/.config`, `~/.local/share`, `~/.cache`. \
+They unfortunately also carry wonderful semantics, that make a lot of sense to make use of. And of course, they are used by all of your programs! But getting to them is a pain! :c
 
-❗perfect query requirement again, but now even stronger
+With perfect fuzzy queries, you at least have a bit more space to move around in. \
+With tab completing a path, you need to complete each part of the path separately, rather than being able to match the entirety of the full path with some perfect fuzzy query. \
+Considering that it's not often that tab completing supports fuzzy matching, it makes the most sense to get used to (and internalize) perfect tab queries for the paths you might want to travel to often.
+
+Why even use this method ever? \
+Fuzzy matching file pickers generally open within your current working directory, and if you're in `~/fes/dot` rather than `~/.config`, you won't be able to pick a file that's in `~/.config`. So that's the main reason you'd ever use `:edit` over fuzzy picking. \
+Once again, this solution is not the bees knees; matter of fact, it might be the absolute worst approach, depending on how you look at it! :»
+
+# bookmarking
+
+As you find pathing pain points, you might be led towards a certain idea.
+
+❗also has the issue of perfect query being broken
+❗perfect query is even worse here because you usually can't fuzzy
+❗this is of course not optimal anyway for editing files, main usecase is when you can't fuzzy because you're not in the correct directory in your editor
+
+❗aliases / mappings to go to dirs / files, might be worth for some, but gets out of hand quick;
+going to your config every time is laborious, having a quick way to add stuff fills up your config with rubbish
+I wanted to have a fast to use bookmarking system, that I would also set in, interactively
