@@ -117,10 +117,80 @@ Once again, this solution is not the bees knees; matter of fact, it might be the
 
 As you find pathing pain points, you might be led towards a certain idea.
 
-❗also has the issue of perfect query being broken
-❗perfect query is even worse here because you usually can't fuzzy
-❗this is of course not optimal anyway for editing files, main usecase is when you can't fuzzy because you're not in the correct directory in your editor
+You find yourself editing some specific config file over and over again; \
+`cd`ing into some same directory. \
+So you decide to make a mapping in your editor to open that file, \
+And an alias in your shell to `cd` to the directory.
 
-❗aliases / mappings to go to dirs / files, might be worth for some, but gets out of hand quick;
-going to your config every time is laborious, having a quick way to add stuff fills up your config with rubbish
-I wanted to have a fast to use bookmarking system, that I would also set in, interactively
+Yay! Now a pain point is gone :» \
+You can navigate to things you navigate to often, quicker and more comfortably. \
+But there's an issue: this method doesn't scale that well.
+
+First, you start with having aliases for `~/.config`, `~/.local/share`, `~/.cache`. All directories that you will for sure be jumping to over and over again. \
+But then you suddenly realize you need to jump to a directory `~/.local/share/Steam/steamapps/common/Enter the Gungeon/mods`.
+
+Navigating into your config (which you have on a mapping, let's say), finding the new place where you'd like to add the alias ([unless that's not a problem for you](@/consider-sorting/index.md)), and typing in that path + the syntax for making an alias is undeniably a bit of a workflow break. \
+It is something you stop to do, and at best will spend 20 seconds on. Then “wait, what was I doing again? ah right”. I experienced this many times.
+
+So you might be led to making some hotkey that creates an alias for you, and also adds it to your configuration. But while that solves the stoppage issue, it has another one.
+
+You create an alias for that enter the gungeon mods directory, and after some time you realize you don't play the game anymore, and haven't been using its alias for a long time. \
+This alias indeed used to be quite a useful one, but now it's just trash in your shell configuration; something that you need to scroll through / think through when doing something unrelated. Unclean.
+
+# solution
+
+I created a bookmarking system, where I both “get” and “set” the data interactively, on a hotkey, and therefore don't experience any stoppages. \
+The name of each bookmark is simply a *key* that I press, rather than a name I have to type out. \
+All of these bookmarks are kept in a json file, so that I can easily back them up, and so the same bookmarks could be reused in multiple different programs for possibly different purposes, and different contexts.
+
+This is how the program [harp](https://github.com/Axlefublr/harp) came to life.
+
+There are multiple concepts that harp the idea (rather than harp the program) brings to the table.
+
+First, I need to be able to store multiple separate sets of bookmarks (a bookmark is called a “harp”): in our beginner example, I want a set of harps which stores file paths, and another set of harps that stores directory paths. \
+To accomodate this, harp has “sections”. A section is a namespace, that isolates a set of harps, so that they don't conflict with other sets of harps. \
+So I may have a harp section named `harp_files` that will store file paths, and another harp section named `harp_dirs` that will store directory paths.
+
+Next, I mentioned that a given harp (bookmark) is named via me pressing some key. I have a harp `a`, a harp `f`, a harp `ctrl+j`. \
+These harp keys / names are called “registers”. \
+You can think of vim registers, that you access via `"a` — harp registers are a very similar idea. \
+Under each register, we hold some data. \
+So, file path harp `a` may store the path `~/fes/dot/colors.css`. Directory harp `alt+k` may store the path `~/fes/lai/bog`{{fn(i=1)}}. \
+The data of a register is called a “harp”.
+
+Since registers are simply keys that I press, they can start to collide pretty quick: *this* is why we have sections to separate the sets of registers — I can simultenously have a file harp `a`, and a directory harp `a`, and they won't conflict. \
+There is an extra feature I'll talk about later that minimizes collisions even further.
+
+To accomodate this entire idea, I would need to interact with a `HashMap<HashMap<String, Vec<String>>>` in every program that I want to implement harp in. I would also need to interact with the json file that actually holds this data, deserializing it into the program, and then serializing it again. \
+This is quite doable in some programs, but completely impossible in others; \
+That's where harp *the program* comes into play: it's a single, simple interface to interact with harps.
+
+In most places, I simply use `harp` as an external shell command, to either supply data, or get data from stdout of. \
+In other cases where I'm editing the rust source code, I can use `harp` as a library. \
+This ends up making it *much* simpler and faster to integrate harp into a given program, as all the boilerplate steps are taken care of for me by `harp`.
+
+# harp actions
+
+Let's start looking into what a harp implementation ends up looking like on a more practical scale, now that we have the main concepts understood.
+
+The main idea of how harp is practically useful is via “harp action”s. \
+Each harp action has a “set” and a “get” method. \
+“set” takes some data from the environment, and stores it. \
+“get” retrieves that stored data, and uses it somehow.
+
+Let's take the most basic harp action, the one that started it all: file harps. \
+File harp set takes the filepath of the current buffer, and stores it. \
+File harp get takes the stored path, and *opens* it.
+
+Even just this is flabbergastingly powerful. All of your various offshoot config files that you want to jump to frequently? \
+Set file harps for them, and now you can jump to them incredibly quickly.
+
+❗but you'll run out of them quick, no?
+
+# the power
+
+❗relativity
+
+# footnotes
+
+{{hn(i=1)}} To your possible surprise, yes this is a [real file path](@/optimizing-paths/index.md) I have. It's for this blog!
