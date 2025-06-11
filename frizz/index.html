@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		 <meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>autocurling</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div class="wrapper"> <nav class="page">
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;optimizing-paths&#x2F;" class="preview previous">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">optimizing paths</span>
+	</a>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview next">
+		<span class="page name">consider sorting</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<div class="page marginalizer">
+	<!-- <div class="page margin top"></div> -->
+	<!-- <a class="scroller top" href="#top"></a> -->
+	<div class="content page">
+		<header class="page">
+			<a href="..">
+				<div class="page title">autocurling</div>
+			</a>
+			<div class="page date wrapper">
+				<time datetime="2025-05-13">2025.05.13</time>
+			</div>
+		</header>
+		<main class="page">
+			<!-- <div class="reading-time">reading time: 4</div> -->
+			<p>Often times, various programs don't provide you a way to look at the default config file locally, but do provide one in the github repo. <br />
+Having to 1. need internet and 2. use my browser to get to some default config is quite meh. The documentation being the readme falls into a similar issue. <br />
+Cloning the repo so that you have it locally is overkill, too.</p>
+<p>Let me explain the idea of how I solve this problem.</p>
+<p>You can <code>curl</code> files directly from github<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+ by converting a normal link to a file into its raw version:</p>
+<pre class="z-code"><code><span class="z-text z-plain">https://github.com/Axlefublr/dotfiles/blob/main/kanata/kanata.kbd
+</span></code></pre>
+<p>…Turns into…</p>
+<pre class="z-code"><code><span class="z-text z-plain">https://raw.githubusercontent.com/Axlefublr/dotfiles/refs/heads/main/kanata/kanata.kbd
+</span></code></pre>
+<p>So, you replace <code>github.com</code> with <code>raw.githubusercontent.com</code>, and replace <code>blob</code> with <code>refs/heads</code>. <br />
+I wrote a fish function that takes the link from stdin, and converts it for me:</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">function</span></span> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-entity z-name z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">lh</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish">    <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">read</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-operator z-pipe z-stdout z-implicit z-fish"><span class="z-keyword z-operator z-pipe z-fish">|</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">string</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">replace</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-string z-quoted z-single z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&#39;</span>github.com<span class="z-punctuation z-definition z-string z-end z-fish">&#39;</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-string z-quoted z-single z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&#39;</span>raw.githubusercontent.com<span class="z-punctuation z-definition z-string z-end z-fish">&#39;</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-operator z-pipe z-stdout z-implicit z-fish"><span class="z-keyword z-operator z-pipe z-fish">|</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">string</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">replace</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">blob</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">refs/heads</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>Which is useful because in helix, I can pipe my current selection(s) into a shell command, and replace them with the output, letting me transform github links I copied pretty painlessly!</p>
+<p>So, once we get the raw link, we can <code>curl &lt;the-link-here&gt; -o output-file</code> to grab a remote github file into a local one. <br />
+This is pretty awesome! But just grabbing the file once is not enough — it can become outdated.</p>
+<p>My idea is to store all the links I want to keep locally, so that they can be updated daily automatically. <br />
+Using a <a href="https://axlefublr.github.io/magazines/">magazine</a> is awesome for this usecase, as it's both easily accessible and modifiable — adding new links isn't going to be bothersome.</p>
+<p>My magazine C now contains this:</p>
+<pre class="z-code"><code><span class="z-text z-plain">defconf/waybar.jsonc https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/config.jsonc
+</span><span class="z-text z-plain">defconf/niri.kdl https://raw.githubusercontent.com/YaLTeR/niri/refs/heads/main/resources/default-config.kdl
+</span><span class="z-text z-plain">defconf/dunst.ini https://raw.githubusercontent.com/dunst-project/dunst/refs/heads/master/dunstrc
+</span><span class="z-text z-plain">defconf/ov.yaml https://raw.githubusercontent.com/noborus/ov/refs/heads/master/ov.yaml
+</span><span class="z-text z-plain">source/systemd-exponential-restart.c https://raw.githubusercontent.com/systemd/systemd/refs/heads/main/src/core/service.c
+</span></code></pre>
+<p>First, I specify a path to where the file should be downloaded; then the actual link. <br />
+The path is relative to <code>~/.local/share/frizz</code> — a directory I created specifically for files that will be downloaded like this. <br />
+I then have a fish abbreviation (similar to an alias) that <code>cd</code>s me to that directory and does <code>helix .</code> — I can quickly open a new terminal and instantly fuzzy search through my downloaded files this way.<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">function</span></span> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-entity z-name z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">frizz</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish">    <span class="z-meta z-block z-for-in z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">for</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish">c</span><span class="z-meta z-string z-unquoted z-fish">u</span><span class="z-meta z-string z-unquoted z-fish">r</span><span class="z-meta z-string z-unquoted z-fish">l</span><span class="z-meta z-string z-unquoted z-fish">i</span><span class="z-meta z-string z-unquoted z-fish">e</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">in</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-parens z-command-substitution z-fish"><span class="z-punctuation z-section z-parens z-begin z-fish">(</span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">tac</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-keyword z-operator z-tilde z-fish">~</span></span><span class="z-meta z-string z-unquoted z-fish">/.local/share/magazine/C</span></span><span class="z-punctuation z-section z-parens z-end z-fish">)</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-block z-for-in z-fish">        <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">set</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">l</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">bits</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-parens z-command-substitution z-fish"><span class="z-punctuation z-section z-parens z-begin z-fish">(</span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">string</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">split</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-string z-quoted z-single z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&#39;</span> <span class="z-punctuation z-definition z-string z-end z-fish">&#39;</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>curlie</span></span></span></span><span class="z-punctuation z-section z-parens z-end z-fish">)</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-block z-for-in z-fish">        <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">curl</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>bits</span><span class="z-meta z-brackets z-index-expansion z-fish"><span class="z-punctuation z-section z-brackets z-begin z-fish">[</span><span class="z-constant z-numeric z-fish">2</span><span class="z-punctuation z-section z-brackets z-end z-fish">]</span></span></span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-long z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-long z-begin z-fish"><span class="z-meta z-string z-unquoted z-fish">--</span></span><span class="z-meta z-string z-unquoted z-fish">create-dirs</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">o</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-keyword z-operator z-tilde z-fish">~</span></span><span class="z-meta z-string z-unquoted z-fish">/.local/share/frizz/</span><span class="z-string z-quoted z-double z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&quot;</span><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>bits</span><span class="z-meta z-brackets z-index-expansion z-fish"><span class="z-punctuation z-section z-brackets z-begin z-fish">[</span><span class="z-constant z-numeric z-fish">1</span><span class="z-punctuation z-section z-brackets z-end z-fish">]</span></span></span><span class="z-punctuation z-definition z-string z-end z-fish">&quot;</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-block z-for-in z-fish">    <span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish">    <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">notify-send</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">frizz</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-function z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>This is the function that actually does the downloading, by reading the magazine in <em>reverse order</em>. <br />
+The reason to download specifically in reverse order, is that aside from being executed daily, this function is also executed every time magazine C <em>changes</em>.</p>
+<p>I add some new link to magazine C, and that new link gets download priority, letting me start doing things with the file quicker, while all the other links are also redownloaded just to be safe.</p>
+<p>You can achieve this functionality just by using <code>inotifywait</code> directly, but I find a systemd path unit to feel safer / more stable. <br />
+Put the following in <code>~/.config/systemd/user/frizz.path</code>:</p>
+<pre data-lang="ini" class="language-ini z-code"><code class="language-ini" data-lang="ini"><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Path]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">PathModified</span><span class="z-keyword z-operator z-genconfig">=</span></span><span class="z-storage z-source z-genconfig">%h</span><span class="z-keyword z-operator z-genconfig">/</span><span class="z-keyword z-operator z-genconfig">.</span>local<span class="z-keyword z-operator z-genconfig">/</span>share<span class="z-keyword z-operator z-genconfig">/</span>magazine<span class="z-keyword z-operator z-genconfig">/</span><span class="z-support z-constant z-genconfig">C</span>
+</span><span class="z-source z-genconfig">
+</span><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Install]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">WantedBy</span><span class="z-keyword z-operator z-genconfig">=</span></span>paths<span class="z-keyword z-operator z-genconfig">.</span>target
+</span></code></pre>
+<p>And this in <code>~/.config/systemd/user/frizz.service</code>:</p>
+<pre data-lang="ini" class="language-ini z-code"><code class="language-ini" data-lang="ini"><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Unit]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">StartLimitBurst</span><span class="z-keyword z-operator z-genconfig">=</span></span><span class="z-constant z-numeric z-genconfig">0</span>
+</span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">StartLimitIntervalSec</span><span class="z-keyword z-operator z-genconfig">=</span></span><span class="z-constant z-numeric z-genconfig">0</span>
+</span><span class="z-source z-genconfig">
+</span><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Service]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">Type</span><span class="z-keyword z-operator z-genconfig">=</span></span>oneshot
+</span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">ExecStart</span><span class="z-keyword z-operator z-genconfig">=</span></span>env fish <span class="z-keyword z-operator z-genconfig">-</span>c frizz
+</span></code></pre>
+<p>Then execute <code>systemctl --user enable --now frizz.path</code>, and you should be good to go.</p>
+<a href="#done" id="done" class="anchorina">
+  <hr class="anchorina line">
+  </hr>
+</a>
+<p>What I like the most about my approach, is that rather than hyperfocusing on raw github links, it simply wants a "link that will be <code>curl</code>ed". What exactly you get from it as a result is a completely different question — basically it's quite satisfyingly flexible. <br />
+Think of the many programs you've seen whose installer is some form of <code>curl link | sh</code>. You could now instead add that link to magazine C and soon open it in your editor, to confirm the safety of; <em>Then</em> you can manually execute it. As a bonus, you get to autoupdate that installation script, if that's for some reason something you want to do. <br />
+You can curl straight up files this way, too. If there's some place that you can curl to download some file (that may update over time), that's another usecase for frizz. <br />
+Truthfully I don't know the extent of this idea, but it sure feels quite powerful!</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ As well as other git remotes I'm sure, I just don't know how.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ This was truthful at the time I wrote it, but at this point it's a lie :p <br />
+Now I use a harp<a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+ to get to the frizz data directory, and I have an abbreviation <code>e.</code> that resolves to <code>helix .</code>, which is somewhat hilariously significantly nicer than having to <code>e .</code>, which was the case before. Crazy how much of a difference really small things can make! (that's what she said)</p>
+<p><a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ A "mostly travelling"-related concept I came up with and have been dragging along through programs I use a lot. The actual program behind this is <a rel="noopener" target="_blank" href="https://github.com/Axlefublr/harp">here</a>, but for an actual introduction about what harps can <em>do</em> for you, read the harp section in my <a rel="noopener" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>. (TLDR is that you can interactively but permanently alias files and directories, for fastest access time)</p>
+
+		</main>
+	</div>
+	<!-- <a class="scroller bottom" href="#bottom"></a> -->
+	<!-- <div class="page margin bottom"></div> -->
+</div>
+<nav class="page">
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;optimizing-paths&#x2F;" class="preview previous">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">optimizing paths</span>
+	</a>
+	
+	<a href=".." class="go-home"><span>home</span></a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview next">
+		<span class="page name">consider sorting</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<footer id="bottom"></footer>
+</div>
+	</body>
+</html>
