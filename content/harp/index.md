@@ -178,13 +178,141 @@ Each harp action has a “set” and a “get” method. \
 “set” takes some data from the environment, and stores it. \
 “get” retrieves that stored data, and uses it somehow.
 
+## file harps
+
 Let's take the most basic harp action, the one that started it all: file harps. \
 File harp set takes the filepath of the current buffer, and stores it. \
 File harp get takes the stored path, and *opens* it.
 
 Even just this is flabbergastingly powerful. All of your various offshoot config files that you want to jump to frequently? \
-Set file harps for them, and now you can jump to them incredibly quickly.
+Set file harps for them, and now you can get to them incredibly quickly.
 
+Most of what I do is edit config files… So I use this incredibly often. \
+I have file harps bound on <kbd>space+s</kbd>, so to get to all of my most wanted files, I only need to press three keys. \
+Helix config — <kbd>space+s+c</kbd> \
+Foot config (what a strange combination of words) — <kbd>space+s+f</kbd> \
+[Program setups](https://github.com/Axlefublr/dotfiles/blob/main/scripts/setup/dode.fish) — <kbd>space+s+d</kbd>; yada yada etc etc.
+
+Now, how did I *set* all of those harps? \
+<kbd>space+S</kbd> is my file harp *set* hotkey! pretty natural, right? :3 \
+I get to the file that I want to mark, and press <kbd>space+S+some_key</kbd>. \
+Similar to how the get action interactively asks me for a key to press, the set action does too.
+
+So immediately as I realize I want to access the same file over and over again, I can set a harp for it on the fly, and just continue on: I don't need to divert myself into some config file, I just press a key!
+
+{{hr(id="why-config")}}
+
+I strangely specify “config files”; there's nothing about file harps that enforces you to use them only for config files though! \
+Why did I choose that wording?
+
+You will set file harps for the files that you visit the most often, as I mentioned. \
+When coming up with a harp you'll like using for a file, you go through an interesting process.
+
+Say I want to make a harp for my helix config. \
+I access it so often that I don't want to press <kbd>h</kbd> for it, which would be the most obvious key to pick. \
+<kbd>c</kbd> feels quite comfortable to press, so I'll go with that.
+
+I have a file where I store various [colors I use often](https://github.com/Axlefublr/dotfiles/blob/main/colors.css). \
+The obvious harp key for it is <kbd>c</kbd>, but it's already taken by my helix config! \
+I could of course just move the helix config to somewhere else, but I don't want to: it's far more important and common than going to my colors file. \
+Next idea is to put the colors file at capital <kbd>C</kbd>, but whoops! It's already taken by my [anki](@/how-to-anki.md) css file. *That* one I could reasonably move as it's not particularly important, but I decide I don't wanna bother right now, \
+and arrive at <kbd>ctrl+c</kbd>.
+
+Because of [home row mods](@/erm/index.md), it's actually still quite convenient to press for me, so it's still a good harp key. \
+But you can probably see how, as you harp more and more files, you'll end up making bigger and bigger compromises with yourself, coming up with less and less memorable harps, which ends up in you underusing them — you're never quite sure what that one harp was for that one file, because it's <kbd>ctrl+alt+y</kbd> or some shit at this point.
+
+This poor scalability is the reason why I specify “config files” — within this scope, I absolutely have more than enough potential nice harps to use, and don't have to get to the <kbd>ctrl+alt+y</kbd> point (unless it specifically makes sense for some given file). \
+But this poor scalability is what will make it unpleasant / unlikely / unreasonable to use harps for temporary-ish files, like files in some project you're working on.
+
+Now this is the part where you'll shit you're pants. I solved this.
+
+I present to you the next harp concept 🗣️✍️🔥:
+
+# relativity
+
+The default harp relativity is “global” — it's not relative to anything and the sections used for the harp actions are also normal: `harp_files`, `harp_dirs`, etc. \
+When you set a global harp, you'll be able to get it no matter where you are; This is the default behavior for all harp actions.
+
+But other relativities, aside from “global”, work in a different way. \
+They limit the *scope* of your reach depending on some context from your editor.
+
+Let's learn with an example. \
+Say I'm working on my [helix fork](https://github.com/Axlefublr/helix), and noticed a file that I want to harp: `helix-term/src/commands.rs` \
+The obvious harp key that comes to mind is <kbd>c</kbd>. \
+But as you've now seen above, all of <kbd>c</kbd>, <kbd>C</kbd> and even <kbd>ctrl+c</kbd> are already taken; \
+And I sure as hell don't want to use <kbd>alt+c</kbd> for this.
+
+The “directory” relativity comes to the rescue! \
+Rather than using the global `harp_files` section, the directory relativity creates a new section by using your current working directory. \
+I store my helix fork at path `~/fes/ork/hx`, and when I open the editor to work on the editor (lol), \
+`~/fes/ork/hx` *also* becomes the current working directory of *helix*. \
+**That** is what's used by the directory relativity, and you end up using the section `harp_files_~/fes/ork/hx`. \
+Notice how the path to the current working directory became a part of the section name! \
+This is how all relativities are implemented :3
+
+What this actually *gives* us, is the following behavior.
+
+I press <kbd>space+S</kbd> to set a new harp for `helix-term/src/commands.rs`, \
+and see `harp file set (global)` in my prompt, notifying me that I'm currently in the global relativity (using section `harp_files`). \
+Next, I press <kbd>.</kbd> to switch to the directory relativity, \
+and notice that in my prompt: `harp file set (directory)` (now using section `harp_files_~/fes/ork/hx`). \
+I now press the actual key I want to use for the harp — <kbd>c</kbd>. \
+The harp is now set! And it will not conflict with that other harp I have on <kbd>c</kbd> for my helix config, because it's stored in a different section!
+
+Chances are, if I want to go to `helix-term/src/commands.rs`, that means that I already opened the helix fork directory and started helix there. \
+So storing the harp for the file *globally* doesn't really make any sense — it's quite a waste! \
+Storing it “inside” the only directory from which I'll ever want to access it is far more efficent.
+
+So, to reiterate, now I press <kbd>space+s+c</kbd> to harp into my helix config (from anywhere), \
+and press <kbd>space+s+.+c</kbd> to harp into `helix-term/src/commands.rs` (from `~/fes/ork/hx`).
+
+I can create and use project specific harps, resulting in the seemingly restrictive system being quite scaleable!
+
+*All* relativities{{fn(i=2)}} exist for *all* harp actions{{hn(i=3)}}. \
+Some relativities don't make logical sense for some harp actions, so I'll introduce the other two as they come up in usefulness, as we go.
+
+{{hn(i=2)}} You only know “global” and “directory” so far. \
+{{hn(i=3)}} You only know harp files and have *heard* of harp directories so far.
+
+You might find yourself almost always using the directory relativity for file harps; That's a pretty reasonable approach! \
+You can change the default relativity *per* harp action. For example, you could set file harps to automatically assume the “directory” relativity. \
+Where to access the global relativity again, you'd have to press <kbd>'</kbd> before the harp key, but wouldn't have to press <kbd>.</kbd> every single time. \
+As you discover your own harp workflow, you'll find the relativities you use most for each harp action, and will be able to make it more ergonomic and fast 🚀 for yourself :3
+
+## directory harps
+
+Harps don't have to be exclusive to your editor! \
+This harp action exists for me both in helix, *and* fish shell!
+
+Zoxide is wonderful, but still requires me to type at least a few characters to get to a specific directory that I want. \
+And if I stand my ground and use only one character, it'll likely jump me to the wrong directory; at least, I can never tell ahead of time where I'll end up in, and so it all ends up being a waste of mental cycles.
+
+Instead, I use directory harps! \
+“set” takes my current working directory,
+“get” `cd`s into it.
+
+My shell, of course, has a current working directory; but did you know your editor (helix / nvim) has its own, separate, current working directory? That's the reason I have directory harps for both!
+
+I do a lot of configuration, so I always need to travel to my dotfiles directory quickly and directly. \
+Directory harp `d` lets me jump to `~/fes/dot`. \
+My blog, similarly, is something I need to get to often; `~/fes/lai/bog` is on harp `x`. \
+The various notes I have that may or may not be temporary are extra important to be instantenous: `~/fes/foe` on `k`. \
+I fuck up something in a [magazine](@/magazines.md) — use harp `m` to quickly get to `~/.local/share/magazine` and `git reset` some magazine action.
+
+I used the keys/letters that were easiest for me to remember for each path, so they got into my muscle memory pretty quickly. \
+I now consistently save mental effort getting to these directories, and can instead think about anything else instead :> \
+I never had to type out any of those paths to *set* them, either! \
+I simply get to that directory somehow (maybe by using zoxide, too!), then press <kbd>ctrl+alt+m+some_key</kbd> in my shell. \
+My current working directory is automatically passed, so no need to provide it manually!
+
+Then in helix, if I ever realize I need to change directory to one of those paths, I can use the directory harp action *within helix* — I made *shell* directory harps and *helix* directory harps share the same section, so setting a harp in one will set it in the other! Very convenient.
+
+The pain point of `~/.config`, `~/.local/share`, etc, is also completely solved by directory harps! And *you* get to decide what key makes the most sense to you to press to get to them. \
+With fuzzying, you get your perfect query enforced on you — with harp, *you* get to name it. \
+`~/.local/share` makes you feel like pressing <kbd>z</kbd>? Sure whatever. \
+`~/.cache` is <kbd>ctrl+alt+h</kbd>? You go girl.
+
+❗actually I use an extra space
 ❗but you'll run out of them quick, no?
 
 # the power
