@@ -1,5 +1,5 @@
 +++
-title = 'home row modifiers? every row modifiers'
+title = 'every row modifiers'
 date = '2025-04-14'
 +++
 
