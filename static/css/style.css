@@ -9,9 +9,10 @@
 	--purple: #b58cc6;
 	--orange-supporting: #5f472d;
 	--grey: #928374;
+	--white: #d4be98;
 
 	--bg-color: #292828;
-	--text-color: #d4be98;
+	--text-color: var(--white);
 	--link-color: #d3ad5c;
 	--visited-link-color: #e491b2;
 	--bg-hover: var(--orange-supporting);
@@ -448,6 +449,24 @@ nav.page {
 				}
 			}
 		}
+	}
+}
+
+/*-----------------tables-----------------*/
+table {
+	border: 3px solid var(--green);
+	border-collapse: collapse;
+
+	th {
+		font-weight: inherit;
+		border: 1px solid var(--white);
+		border-bottom: 2px solid var(--green);
+		padding: 7px;
+	}
+
+	td {
+		border: 1px solid var(--white);
+		padding: 7px;
 	}
 }
 
