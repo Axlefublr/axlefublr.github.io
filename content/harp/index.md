@@ -231,7 +231,8 @@ I present to you the next harp concept 🗣️✍️🔥:
 # relativity
 
 The default harp relativity is “global” — it's not relative to anything and the sections used for the harp actions are also normal: `harp_files`, `harp_dirs`, etc. \
-When you set a global harp, you'll be able to get it no matter where you are; This is the default behavior for all harp actions.
+When you set a global harp, you'll be able to get to it no matter where you are. \
+This is the default behavior for all harp actions.
 
 But other relativities, aside from “global”, work in a different way. \
 They limit the *scope* of your reach depending on some context from your editor.
@@ -269,7 +270,7 @@ and press <kbd>space+s+.+c</kbd> to harp into `helix-term/src/commands.rs` (from
 I can create and use project specific harps, resulting in the seemingly restrictive system being quite scaleable!
 
 *All* relativities{{fn(i=2)}} exist for *all* harp actions{{hn(i=3)}}. \
-Some relativities don't make logical sense for some harp actions, so I'll introduce the other two as they come up in usefulness, as we go.
+Some relativities don't make logical sense for some harp actions, so I'll introduce the other ones as they come up in usefulness for the other harp actions, as we go.
 
 {{hn(i=2)}} You only know “global” and “directory” so far. \
 {{hn(i=3)}} You only know harp files and have *heard* of harp directories so far.
@@ -312,13 +313,159 @@ With fuzzying, you get your perfect query enforced on you — with harp, *you* g
 `~/.local/share` makes you feel like pressing <kbd>z</kbd>? Sure whatever. \
 `~/.cache` is <kbd>ctrl+alt+h</kbd>? You go girl.
 
-❗actually I use an extra space
-❗but you'll run out of them quick, no?
+# I lied
 
-# the power
+None of the relativities are particularly useful with directory harps! So let's talk about a lie I told you.
 
-❗relativity
+My harp file *set* hotkey is not actually <kbd>space+S</kbd>!
+
+Changing relativities is not a one time deal: <kbd>.</kbd> to switch to the directory relativity, <kbd>'</kbd> to switch to the global one, and other relativities you do not yet know, all act as *hotkeys*.
+
+You press those keys to change your current ‘mode’. \
+What this means, is that you can press them as many times as you want — you can jump between the relativities, doing like 15 “nevermind”s, before ultimately deciding (or cancelling with <kbd>Escape</kbd>) on the one that you want and pressing the actual harp key. \
+<kbd>.'.'.''.'.'..'.'..'</kbd> is something you can press in sequence while using a harp action, and it's completely normal.
+
+It didn't always function this way, and I am really satisfied with my recent harp refactor that made this behavior possible. \
+I really enjoy not being rushed to pick, and instead be able to stay 🤔ing for a while until I decide.
+
+My previous set hotkey *was* <kbd>space+S</kbd> at the time, and I quite disliked how I needed to think *ahead of time* (which is quite [unhelix-like](@/why-even-helix.md)) whether I wanted to set or to get. \
+Then also, having to hold shift for the set variants made a certain upcoming harp action kind of not worth it to use, to its fullest extent. \
+And that's why I made the change:
+
+Pressing <kbd>Space</kbd> while in a harp action toggles between the `get` variant, and the `set` variant. \
+Instead of pressing your “harp file get” hotkey to open a file, and your “harp file set” hotkey to harp it, you *simply* use your “harp file” mapping, and *then* decide. \
+You start off in the `get` mode, but can press <kbd>Space</kbd> to go into the set mode. \
+Then if you realized you didn't want to set, you can simply press <kbd>Space</kbd> again to go back to get. \
+And you can do this infinitely!
+
+## relative file harps
+
+As I started actively using harp, I noticed an interesting pattern. \
+Project structures are often not that unique!
+
+In a rust project, there will always be `Cargo.toml`, one or both of `src/main.rs` / `src/lib.rs`. Possibly `.rustfmt.toml`. \
+In lua, `.luarc.json` might be something you want to access every so often. \
+Basically every project will have a `README.md`, maybe a `CONTRIBUTING.md`; some of my projects have a `RELEASE.md` that is automatically attached to the github release.
+
+With harp, you might find yourself *set*ting the same relative paths over and over again, per each project. \
+And the file first needs to exist and be open, for you to *set* it, so that's a lil extra effort as well. \
+Seems like a bit of a waste, no?
+
+This is where relative file harps come in.
+
+When normal file harps store the *full* path, relative file harps only store the *relative* path of the buffer, from your current working directory.
+
+So say your cwd is `~/fes/dot` and you have `~/fes/dot/project.txt` open. \
+If you set a normal file harp for it, the entire `~/fes/dot/project.txt` would be stored, and you would only be able to travel to `~/fes/dot`'s `project.txt` file. \
+But if you set a *relative* file harp, only `project.txt` is stored. \
+And now, whenever you *get* the harp, you will open the `project.txt` file of the *current* project, rather than some exact file.
+
+What this lets you do is access files that do not even exist yet! \
+Rather than having to first create the file somehow, you immediately jump to where it would be, and on your next write it will automatically get created. \
+So we're solving two problems here:
+1. having to set harps for the same files for every project is laborious
+2. having to first create the files to then make harps for is laborious also
+
+To reiterate: use relative file harps when you might want to get to different *actual* files, but that are of the same *structure*. \
+Use normal file harps when you want to get to *exact* files.
+
+Here are my relative harps:
+
+|Register|Filepath|
+|-|-|
+|<kbd>r</kbd>|README.md|
+|<kbd>e</kbd>|RELEASE.md|
+|<kbd>k</kbd>|[project.txt](@/magazines.md)|
+|<kbd>g</kbd>|.gitignore|
+|<kbd>j</kbd>|justfile|
+|<kbd>l</kbd>|lib.rs|
+|<kbd>c</kbd>|Cargo.toml|
+|<kbd>m</kbd>|main.rs|
+
+I underuse relative harps honestly; I should harp some more 🗣️
+
+## register harps
+
+If you're a vim / helix / kakoune user, you might have noticed how using harps is kinda similar to using vim registers. \
+With vim registers, you access a “key”, and then get text that you can interact with in some way; usually by pasting it.
+
+In helix, the contents of your registers do not stay across sessions, making them fairly useless. \
+And that's why register *harps* is a very useful idea!
+
+As I (hopefully) mentioned already, *set*ting a harp makes it *instantly* available in *all* sessions, \
+so you don't have to worry about helix “forgetting” the contents of your registers after you exit it.
+
+To *set* a register harp, first simply copy (yank) something to your `default-yank-register` \
+(`"` by default (meaning that you simply copy normally, no special magic required)). \
+This is the “context” that this harp action uses for the set action: it takes the contents in the `default-yank-register`.
+
+Later on when you *get* that register, it places the stored contents back into your `default-yank-register`, letting you paste them normally.
+
+I'm gitty of the power of this harp action, and explaining it to you!! \
+But first, let's introduce *another* relativity :o
+
+## filetype relativity
+
+You can make a harp relative to the current buffer's filetype. \
+It uses the filetype that helix sets for the buffer, rather than just taking the buffer's file extension! \
+So if you use the filetype relativity on a markdown file, `!markdown` will be appended to the section name, rather than `!.md` that you may have expected. \
+The filetype relativity even works for files that don't *have* a “real” filetype! \
+When the buffer doesn't resolve to any real filetype, its filetype is set to “text”. \
+So, if you use the filetype relativity in an `example.txt` file, `!text` will be appended to the section name.
+
+To switch to the filetype relativity, press <kbd>;</kbd> while accessing a harp action.
+
+## back to register harps
+
+The filetype relativity + register harps lets us create a simple snippet system!
+
+For example, [I despise lua](@/why-I-hate-lua.md), and don't like how long it takes to type in the syntax for a function object / closure, and I also happen to dislike the default snippets that the lua language server provides for them.
+
+I could yank the following:
+
+```lua
+function()
+  →
+end
+```
+
+(the `→` there is a tab)
+
+And put it into a filetype-relative register harp (just make sure you're in a lua file while you do this). \
+Now I can “summon” it whenever I want, by pressing `<space>w;f` + the paste key{{fn(i=4)}}.
+
+Pressing 4 keys to get to it *may* be not worth it for you for the specific example, but you can probably see how a bunch of various language-specific boilerplate you don't like typing out can instead be harped, consistently saving you effort :3 \
+In my personal usage, I find myself using the filetype relativity the most often with register harps, so I set it as my default relativity for them. \
+In other words, getting that function object syntax example is just `<space>wf` for me.
+
+Also, I use register harps really frequently for shebang lines! \
+For example:
+```sh
+#!/usr/bin/env fish
+```
+I store this in register harp <kbd>#</kbd>, relative to the `fish` language. Then I store the following relative to `nushell`:
+```sh
+#!/usr/bin/env -S nu -n --no-std-lib
+```
+Once again, *also* in harp <kbd>#</kbd>.
+
+So you can create a semantic for yourself that makes it easy to remember the *intent* behind a harp, yet store many different ones thanks the various relativities. \
+Here, it makes sense for me that a shebang line starts with a <kbd>#</kbd>, and so I use that key as a neat mnemonic. \
+Making use of easy to remember mnemonics / going with what feels the most natural is a great way to make a good use of harp.
+
+❗shebang
+
+## search harps
+❗introduce the last, buffer relativity
+## mark harps
+## command harps
+
+❗talk about how the relativities affed each of the harp actions, including the useless ones
 
 # footnotes
 
 {{hn(i=1)}} To your possible surprise, yes this is a [real file path](@/optimizing-paths/index.md) I have. It's for this blog!
+
+{{hn(i=4)}} Which is <kbd>p</kbd> for you, but <kbd>o</kbd> [for me](@/stray-from-defaults/index.md). \
+Also, you don't necessarily have to *paste* it. You can replace your selection with it, for example! \
+So register harps simply blammo the text into your `default-yank-register`, and then you can use it how you normally would — no specialcasey usage required!
