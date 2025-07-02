@@ -171,7 +171,8 @@ This ends up making it *much* simpler and faster to integrate harp into a given 
 
 # harp actions
 
-Let's start looking into what a harp implementation ends up looking like on a more practical scale, now that we have the main concepts understood.
+Let's start looking into what a harp implementation ends up looking like on a more practical scale, now that we have the main concepts understood. \
+I'll be showcasing the harp implementation I have in my [helix fork](https://github.com/Axlefublr/helix), but the ideas are quite flexible and can be implemented into other editors and various programs.
 
 The main idea of how harp is practically useful is via “harp action”s. \
 Each harp action has a “set” and a “get” method. \
@@ -453,10 +454,55 @@ So you can create a semantic for yourself that makes it easy to remember the *in
 Here, it makes sense for me that a shebang line starts with a <kbd>#</kbd>, and so I use that key as a neat mnemonic. \
 Making use of easy to remember mnemonics / going with what feels the most natural is a great way to make a good use of harp.
 
-❗shebang
+{{hr(id="another-alternative")}}
+
+Another good default relativity you could use instead of global, is the directory relativity. \
+Then, by default, you will simply have vim-like registers that are scoped to a project, so you can use them a bit more willy-nillily than global ones or filetype-relative ones, and simply temporarily switch your relativity when you *do* want those.
+
+No need to worry about your registers disappearing, and no need to worry what else you saved for later while working on a completely different project.
 
 ## search harps
+
+Whenever you search for something, the search pattern you used is stored in the `/` register. \
+Interestingly, this works not only for the `search` action (<kbd>/</kbd>), but also for the “ripgrep project” action (`global_search`).
+
+When you *set* a search harp, the regex pattern stored in your `/` register is stored. \
+When you *get* a search harp, it is taken from the storage and placed back into your `/` register.
+
+The way that searching and the `/` register works in helix specifically makes this a very nice to use and flexible functionality. \
+You see, `/` doesn't store “your *last* search”, it stores “your search”. \
+So when you change the contents of your `/` register, you change what you will be searching for when you press <kbd>n</kbd>/<kbd>N</kbd>. \
+There's no need for the harp action to automatically trigger a “and now you jump to the match!” action, *you* get to decide how you proceed. \
+So you can get a search harp, and then decide to jump backwards with <kbd>N</kbd>, or forwards with <kbd>n</kbd> — harp doesn't make the decision for you because helix's design doesn't require it to, muah!
+
+But another really powerful thing that filling the `/` register does for you, comes back to `global_search` once again. \
+If you open `global_search` and don't type in any pattern yet, it shows the pattern stored in the `/` register, greyed out. \
+Now, if you press <kbd>Enter</kbd>, it is automatically accepted as your input.
+
+In other words, you could get a search harp, then invoke `global_search` and simply press enter, to search for a stored query!
+
+This capability is not unique to `global_search` though, as if you press `/` to do a buffer search, you will *also* see the same greyed out search pattern that you can accept with <kbd>Enter</kbd>. \
+Ooooor, you can press <kbd>Up</kbd> to actually paste in that pattern, for you to *edit*.
+
+The way that searching and the search register works in helix allows it to be very flexible, as you can see; \
+It is thanks to this that register harps is the first harp action that makes great use of *every* relativity! \
+Let's go through them.
+
+### directory
+
+The `global_search` capability lets us have lsp-like capabilities without relying on an lsp! \
+First you notice what things you keep searching for in the project, and interactively try to match them with regex by using <kbd>/</kbd>.
+
+You can take your time doing so, trying out different approaches until you confirm it works by simply <kbd>n</kbd>ing to it. \
+Then, you set a harp for that, using the directory relativity.
+
+Now, whenever you want to search for the query again, you *get* this search harp you created, open `global_search` and press enter. \
+Especially if the directory relativity is your default one for search harps, this is not too bad!
+
+We created a basic snippet system with register harps, and now we can use *search* harps to create a basic textobject system!
+
 ❗introduce the last, buffer relativity
+
 ## mark harps
 ## command harps
 
