@@ -484,7 +484,7 @@ In other words, you could get a search harp, then invoke `global_search` and sim
 This capability is not unique to `global_search` though, as if you press `/` to do a buffer search, you will *also* see the same greyed out search pattern that you can accept with <kbd>Enter</kbd>. \
 Ooooor, you can press <kbd>Up</kbd> to actually paste in that pattern, for you to *edit*.
 
-The way that searching and the search register works in helix allows it to be very flexible, as you can see; \
+Searching and the search register semantics in helix are very clean, as you can see; \
 It is thanks to this that register harps is the first harp action that makes great use of *every* relativity! \
 Let's go through them.
 
@@ -497,11 +497,45 @@ You can take your time doing so, trying out different approaches until you confi
 Then, you set a harp for that, using the directory relativity.
 
 Now, whenever you want to search for the query again, you *get* this search harp you created, open `global_search` and press enter. \
-Especially if the directory relativity is your default one for search harps, this is not too bad!
+Especially if the directory relativity is your default one for search harps, this is not too bad! \
+Considering it's your first result, you simply press <kbd>Enter</kbd> again, but you don't *necessarily* have to use this functionality for intentionally a single result. \
+You can also make a query that searches for potentially many things, so that you can quickly gain an overlay over all of them. \
+The simplest example of this in the context of the directory relativity, is checking the *usage* of some given thing.
+
+But of course, if you can use an lsp for this sort of basic functionality, use it. \
+The benefit of using search harps instead is for when you don't have access to an lsp, or it is obscenely slow, or you want to check references for a thing which is not technically a symbol (“get all comments”, as an example).
+
+Plus, the lsp starts loading once you're actually in some file, and generally to get all references of a symbol, you need to first *arrive* at that symbol. \
+There will be some situations where it's just much faster to use a search harp, especially if you keep reopening this given project and travelling to the same thing.
+
+### filetype
 
 We created a basic snippet system with register harps, and now we can use *search* harps to create a basic textobject system!
 
+The idea is pretty simple: you create regexes to jump to some syntactical structures.
+
+Here's a search harp I made for rust:
+```
+-> [^ ]+
+```
+Using it, I can jump to a function's output type:
+```rust
+pub fn count(&self) -> usize {
+    self.count.map_or(1, |v| v.get())
+}
+```
+Here, I would arrive at `-> usize`.
+
+Unfortunately, helix uses rust regex, rather than `fancyregex`, so backreferences are not possible; I'd like to remove the `-> ` from the selection that's made, but still use it in the pattern — currently that's not a thing I can do inside of the pattern.
+
+I looked into replacing `regex` with `fancyregex` in helix, but I couldn't even figure out where to start, ngl. \
+Maybe in the future, me or someone else will do this, and then search-based text objects are going to become even more powerful than they already can be.
+
+❗top level public functions for example
+
 ❗introduce the last, buffer relativity
+
+❗global relativity for TODO and the like
 
 ## mark harps
 ## command harps

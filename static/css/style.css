@@ -125,6 +125,7 @@ pre {
 		}
 	}
 
+	/*---------------code---------------*/
 	& .z-comment {
 		color: var(--grey);
 	}
@@ -146,7 +147,11 @@ pre {
 	}
 
 	& .z-storage.z-type.z-ts {
-		color: var(--orange)
+		color: var(--orange);
+	}
+
+	& .z-meta.z-function.z-closure.z-rust .z-punctuation.z-section.z-parameters.z-rust {
+		color: var(--orange);
 	}
 
 	& .z-function.z-builtin,
@@ -155,7 +160,8 @@ pre {
 	}
 
 	& .z-function.z-name,
-	.z-function.z-variable {
+	.z-function.z-variable,
+	.z-support.z-function.z-rust {
 		color: var(--green);
 	}
 
