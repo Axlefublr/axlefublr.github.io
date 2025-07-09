@@ -331,13 +331,17 @@ Your fridge probably has a plugin system. \
 Helix doesn't!
 
 And because of this, you're bound to encounter problems that are currently unsolvable, as generally a plugin for that behavior would already exist, or you'd write your own to get it. \
-This state of affairs makes it infuriating to use helix sometimes, because the `:trim` command has been bikeshed for over a year, and helix stable *still* doesn't have lsp snippets.
+This state of affairs makes it infuriating to use helix sometimes, because the `:trim` command has been bikeshed for over a year, and some seemingly basic lsp methods are not implemented, leading to some lsps literally not working!
 
-Yes indeed, helix *master* does have lsp snippets (along with [some other cool things](@/helix-master-vs-stable/index.md)); but that's it. You can't jump between them or anything, and forget trying to make your own snippets — the feature you get is just so the autocompleted text doesn't *disappear*. \
-The PR that *implements* the snippet system already works, and has been for at least a year, and yet it just ephemerally floats around for no reason, similar to the other billion PRs that implement ***obviously*** required editor features.
+The example I'm immediately thinking of, is the Scala lsp not working because it can't show its startup message. This may be niche, but papercuts do pile up!
 
-Have I already mentioned that you can't complete words from the document in helix? Yeah... Completions **require** an lsp. \
-On one hand, a genius of consistency! But the more I learn about helix and its decisions, the more I think it holds itself back just to reach unecessary perfection; never trading "perfect" for "done".
+Have I already mentioned that you can't complete words from the document in helix ~~stable~~ master? Yeah... \
+This feature is completely working and finished, *but* is floating around as a PR for seemingly no reason at all. \
+As I like to say: “if we consider all the unmerged completely finished and working PRs, we have a functioning editor!”. \
+On one hand, we already have way more than enough features to have a really fucking good editor. \
+Because it's designed so well, you tend to be able to work around the missing parts not too difficultly. \
+But still, the more I learn about helix and its decisions, the more I think it holds itself back just to reach unecessary perfection; never trading "perfect" for "done". \
+And basic editor features are so important, that I'd rather see them get merged asap, and then evolve over time into becoming perfect. But maybe that's unrealistic?
 
 ## is this a worthy tradeoff?
 
