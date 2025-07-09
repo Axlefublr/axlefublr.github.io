@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		 <meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>change wallpaper on wake</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div class="wrapper"> <nav class="page">
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview previous">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">consider sorting</span>
+	</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;erm&#x2F;" class="preview next">
+		<span class="page name">every row modifiers</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<div class="page marginalizer">
+	<!-- <div class="page margin top"></div> -->
+	<!-- <a class="scroller top" href="#top"></a> -->
+	<div class="content page">
+		<header class="page">
+			<a href="..">
+				<div class="page title">change wallpaper on wake</div>
+			</a>
+			<div class="page date wrapper">
+				<time datetime="2025-04-30">2025.04.30</time>
+			</div>
+		</header>
+		<main class="page">
+			<!-- <div class="reading-time">reading time: 3</div> -->
+			<p>I managed to do something really neat.</p>
+<p>I wake up at almost random times, and so simply changing my wallpaper every day at 5am will be wonky. <br />
+Sure, often times that does match up to be before I wake up, but other times it's in the middle of the day for me.</p>
+<h1 id="change-wallpaper"><a class="zola-anchor" href="#change-wallpaper" aria-label="Anchor link for: change-wallpaper">change wallpaper</a></h1>
+<p>First, we start by having a script that will actually do the wallpaper change.</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">swww</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">img</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">t</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">any</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-long z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-long z-begin z-fish"><span class="z-meta z-string z-unquoted z-fish">--</span></span><span class="z-meta z-string z-unquoted z-fish">transition-fps</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-numeric z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-constant z-numeric z-fish">255</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-long z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-long z-begin z-fish"><span class="z-meta z-string z-unquoted z-fish">--</span></span><span class="z-meta z-string z-unquoted z-fish">transition-duration</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-numeric z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-constant z-numeric z-fish">3</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-parens z-command-substitution z-fish"><span class="z-punctuation z-section z-parens z-begin z-fish">(</span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">propose.rs</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">wallpaper</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">70%</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-keyword z-operator z-tilde z-fish">~</span></span><span class="z-meta z-string z-unquoted z-fish">/.local/share/magazine/T</span></span><span class="z-punctuation z-section z-parens z-end z-fish">)</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>I'm sure you already know what it is for you, assuming that you already set up a wallpaper daemon. <br />
+If you haven't, I strongly believe <code>swww</code> is just directly the best one (for wayland).</p>
+<p>"Wtf is <a rel="noopener" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/scripts/propose.rs">propose.rs</a>" you might ask? Ah! It is proof that <a href="https://axlefublr.github.io/randomization-sucks/">my idea</a> ended up being not that viable, and so I changed my approach. Irrelevant for this blog post though.</p>
+<h1 id="catch-suspend"><a class="zola-anchor" href="#catch-suspend" aria-label="Anchor link for: catch-suspend">catch suspend</a></h1>
+<p>The next step is to make the suspend handler. <br />
+I assumed at first I would be able to simply use systemd's existing mechanisms to make my script run <code>After=</code> suspend.target, but the docs specifically mention how that is not a thing.</p>
+<p>Intead, you put all the scripts you want to run on suspend into <code>/usr/lib/systemd/system-sleep/</code>.</p>
+<p>Two caveats with this! The scripts run twice: before <em>and</em> after suspend. <br />
+To differentiate, they are passed either <code>pre</code> or <code>post</code> as the first argument, among other things you can learn about by reading <code>man systemd-sleep</code>.</p>
+<p>The more annoying to deal with part, is that these scripts are explicitly stated in the docs to not interact with the currently active user graphical session. In simpler words, these scripts should assume that all of your wm, waybar, and significantly <em>wallpaper</em> daemon aren't a thing and won't work, at the time of execution. <br />
+Notably, this is not an issue of running on root level (which it does), that could be solved by the <code>-u</code> flag of <code>sudo</code>; This is simply a timing issue.</p>
+<p>This is why we can't just make <em>this</em> script run the wallpaper changing script — it won't work. <br />
+Instead, we will do it in a very roundabout way.</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-comment z-line z-fish"><span class="z-punctuation z-definition z-comment z-fish">#</span>!/usr/bin/env fish
+</span></span><span class="z-source z-shell z-fish">
+</span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">test</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>argv</span><span class="z-meta z-brackets z-index-expansion z-fish"><span class="z-punctuation z-section z-brackets z-begin z-fish">[</span><span class="z-constant z-numeric z-fish">1</span><span class="z-punctuation z-section z-brackets z-end z-fish">]</span></span></span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">=</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">post</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">    <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">touch</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">/tmp/cami-just-suspended</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">    <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">chown</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">axlefublr:axlefublr</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">/tmp/cami-just-suspended</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>When the computer wakes up (<code>post</code>), we will creat a file that is both accessible by root and the user. I <code>chown</code> it for good measure, but I'm not sure it's necessary.</p>
+<p>Next, we create a <em>user</em>-level systemd path unit. A path unit is simply a thingy that watches for filechanges. You could alternatively simply have a script that uses <code>inotifywait</code>, but I find a systemd unit to be more trustworthy.</p>
+<p>Place this file as <code>~/.config/systemd/user/wake.path</code></p>
+<pre data-lang="ini" class="language-ini z-code"><code class="language-ini" data-lang="ini"><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Path]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">PathExists</span><span class="z-keyword z-operator z-genconfig">=</span></span><span class="z-keyword z-operator z-genconfig">/</span>tmp<span class="z-keyword z-operator z-genconfig">/</span>cami<span class="z-keyword z-operator z-genconfig">-</span>just<span class="z-keyword z-operator z-genconfig">-</span>suspended
+</span><span class="z-source z-genconfig">
+</span><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Install]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">WantedBy</span><span class="z-keyword z-operator z-genconfig">=</span></span>paths<span class="z-keyword z-operator z-genconfig">.</span>target
+</span></code></pre>
+<p>And this file as <code>~/.config/systemd/user/wake.service</code></p>
+<pre data-lang="ini" class="language-ini z-code"><code class="language-ini" data-lang="ini"><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Unit]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">Requisite</span><span class="z-keyword z-operator z-genconfig">=</span></span>graphical<span class="z-keyword z-operator z-genconfig">-</span>session<span class="z-keyword z-operator z-genconfig">.</span>target
+</span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">After</span><span class="z-keyword z-operator z-genconfig">=</span></span>graphical<span class="z-keyword z-operator z-genconfig">-</span>session<span class="z-keyword z-operator z-genconfig">.</span>target
+</span><span class="z-source z-genconfig">
+</span><span class="z-source z-genconfig"><span class="z-storage z-type z-genconfig">[Service]
+</span></span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">Type</span><span class="z-keyword z-operator z-genconfig">=</span></span>oneshot
+</span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">ExecStart</span><span class="z-keyword z-operator z-genconfig">=</span></span>rm <span class="z-keyword z-operator z-genconfig">/</span>tmp<span class="z-keyword z-operator z-genconfig">/</span>cami<span class="z-keyword z-operator z-genconfig">-</span>just<span class="z-keyword z-operator z-genconfig">-</span>suspended
+</span><span class="z-source z-genconfig"><span class="z-meta z-param z-genconfig"><span class="z-variable z-parameter z-genconfig">ExecStart</span><span class="z-keyword z-operator z-genconfig">=</span></span><span class="z-keyword z-operator z-genconfig">/</span>home<span class="z-keyword z-operator z-genconfig">/</span>username<span class="z-keyword z-operator z-genconfig">/</span>r<span class="z-keyword z-operator z-genconfig">/</span>dot<span class="z-keyword z-operator z-genconfig">/</span>scripts<span class="z-keyword z-operator z-genconfig">/</span>wallpaper<span class="z-keyword z-operator z-genconfig">-</span>change<span class="z-keyword z-operator z-genconfig">-</span>script<span class="z-keyword z-operator z-genconfig">.</span>fish
+</span></code></pre>
+<p>To enable this, you'd run <code>systemctl --user enable --now wake.path</code>. Thanks to the <code>--now</code> flag, it will activate immediately. <br />
+Thanks to the <code>WantedBy</code> in the <code>[Install]</code> section of the path unit configuration, this will autostart on your next boots 👢</p>
+<p>Because I'm not sure how soon the suspend handling scripts come into effect, I'd reboot for good measure. <br />
+But in case you don't need to, test it out!</p>
+<p>Sleep / suspend the computer, then wake it up. The wallpaper should change! :D</p>
+<p>If you set this all up, and <code>systemctl --user status wake.service</code> shows an error saying "wallpaper-change-script.fish wasn't found", it is entirely your fault.¹ /j</p>
+<a href="#ps" id="ps" class="anchorina">
+  <hr class="anchorina line">
+  </hr>
+</a>
+<p>¹ I'm making fun of the strawman reader that didn't intuit to change <code>/home/username/r/dot/scripts/wallpaper-change-script.fish</code> to the actual location of their wallpaper changing script. <br />
+In the case you forgot to chmod the script (or the suspend handling one), that's far more understandable.</p>
+
+		</main>
+	</div>
+	<!-- <a class="scroller bottom" href="#bottom"></a> -->
+	<!-- <div class="page margin bottom"></div> -->
+</div>
+<nav class="page">
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview previous">
+		<span class="page direction">&lt;-</span>
+		<span class="page name">consider sorting</span>
+	</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+	<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;erm&#x2F;" class="preview next">
+		<span class="page name">every row modifiers</span>
+		<span class="page direction">-&gt;</span>
+	</a>
+	
+</nav>
+
+<footer id="bottom"></footer>
+</div>
+	</body>
+</html>
