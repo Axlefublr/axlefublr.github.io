@@ -105,6 +105,7 @@ I'll show you some tricks to help circumvent that, but if your wm has a mechanis
 ❗now we start building the service file
 
 ❗run through shell trick
+❗https://mysystemd.talos.sh/
 
 # footnotes
 

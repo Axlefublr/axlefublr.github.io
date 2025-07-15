@@ -526,16 +526,51 @@ pub fn count(&self) -> usize {
 ```
 Here, I would arrive at `-> usize`.
 
-Unfortunately, helix uses rust regex, rather than `fancyregex`, so backreferences are not possible; I'd like to remove the `-> ` from the selection that's made, but still use it in the pattern — currently that's not a thing I can do inside of the pattern.
+Unfortunately, helix uses rust regex, rather than `fancyregex`, so backreferences are not possible; I'd like to remove the `-> ` from the selection that's made, but still use it in the pattern — currently that's not a thing I can do.
 
 I looked into replacing `regex` with `fancyregex` in helix, but I couldn't even figure out where to start, ngl. \
 Maybe in the future, me or someone else will do this, and then search-based text objects are going to become even more powerful than they already can be.
 
-❗top level public functions for example
+{{hr(id="pubfun")}}
+
+You can jump to the previous / next function using <kbd>[f</kbd> and <kbd>]f</kbd>, in helix. \
+This is pretty neat and useful, but often has inconvenient semantics. \
+*Closures* generally count as functions, and if you have a function inside of a function, that will count too. \
+While in reality, I want to “jump to the next function” the most often for the usecase of travelling through the file the fastest, arriving at some top level function. \
+Having to travel through every itty bitty closure makes this not particularly viable.
+
+We can once again use filetype search harps for this usecase, using a simple pattern:
+```
+^pub fn
+```
+Here I specificially search for all *public* functions that are top level; So *methods* wouldn't get caught with this — this can be either beneficial or detrimental depending on what you want, but you have the power to define what exactly you want, by changing the regex! :D
+
+Maybe jumping to a *function* specifically is not that useful to you, but overall being able to jump to the next public top-level *symbol* is — you could simply use `^pub ` in that case. \
+Regardless of what you want, *you* get to decide what search “shortcuts” you have, by creating them all to fit *your* specific needs. \
+Not having to make do with overly specific design restrictions is part of why I love harp so much.
+
+### global
+
+Coming back to how we used search harps with the directory relativity, we can also make use of `global_search` with the global relativity.
+
+`TODO`, `FIXME`, `BUG`, `HACK`, etc are something that you may either see or even use in your code, as pointers for things to take a look at in the future. \
+You could make a global search harp for them all (or some of them), to be able to quickly get an overview of all places of note, via `global_search`.
+```
+\bTODO|FIXME|BUG|HACK\b
+```
+…And here you go.
+
+So far this is the only pattern that I can expect to be useful in any language and any project, but I'm sure there are more things like that! \
+For example, the `[[sort etc]]` of [my autosorter](@/consider-sorting/index.md) could potentially be a useful pattern to keep stored 🤔
+
+### buffer
+
+And now I introduce to you the last, fourth harp relativity: buffer. \
+You can make your harps local to the filepath of the current buffer.
 
 ❗introduce the last, buffer relativity
-
-❗global relativity for TODO and the like
+❗get to sections of this file quick
+❗turn your brain off relativity for possibly temporary things
 
 ## mark harps
 ## command harps
