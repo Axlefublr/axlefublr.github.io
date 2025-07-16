@@ -14,7 +14,7 @@ Today I'm going to share with you my experience with different types of earplugs
 I am very poor, so I can't afford the more fancy earplugs; \
 Thankfully even while being cheap, you can get yourself a pretty stellar experience.
 
-Let's start with the earplug type that showcases this the most
+Let's start with the earplug type that showcases this the most!
 
 # silicone tree shaped
 
@@ -145,9 +145,39 @@ I sometimes find this technique useful to push *in* the earplug, too; however fo
 
 ## sleep
 
-❗a bit weird to sleep in
-❗weird technique that's better than it sounds
-❗if you sleep on your back, stellar and amazing but next type is going to be even better
+The biggest usecase people usually have for earplugs is sleep. \
+So I'll be elaborating on how well each earplug type works for sleeping in!
+
+If you sleep on your back, I envy you. You can easily sleep in trees with no issues whatsoever, however another earplug type might be even better for you. \
+I exclusively sleep on my sides, though.
+
+If you skipped cutting off most of the trunks, trees will be impossible to sleep with, so I'm assuming you *did* cut them. \
+Trees aren't made to perfectly align with the shape of your ear, and kind of work on a best effort basis. \
+This “best effort” is great anyway, but the material *will* be applying pressure onto your ear canal. \
+When it's in your ears for 8+ hours while sleeping, this ends up resulting in ringing in your ears, when you wake up.
+
+This is not that particularly bad: especially if you only use earplugs for sleeping, this is a non-issue. \
+But if you intend to continue on your day using earplugs, all this ear pressure may sum up to be quite bad!
+
+I found a weird technique that helps alleviate this. \
+It's gimmicky as hell, but far more viable than it sounds.
+
+The biggest pressure that's applied while sleeping, is on the ear that's resting on the pillow. \
+You put pressure against the earplug, and in turn against your ear canal,
+moving it around in unnatural ways as you move in your sleep. \
+To an extent, you can think of it as putting the weight of your head on your ear canal.{{fn(i=3)}}
+
+When your ear is directly on the pillow, most sound is already muted, so the earplug isn't doing much there aside from creating this pressure issue. \
+So what I do, is put the earplug only into the ear that will *not* be on the pillow!
+
+I rotate in my sleep a lot though, I can't just keep the earplug in only one ear. \
+When I want to rotate, I pull out the earplug from one ear and put it in the other, and continue sleeping. \
+To rotate in my sleep, I wake up slightly, and that seems to be enough to do such a seemingly complex action. \
+This way, I alternate the ear canal pressure throughout the night, effectively letting each ear rest. \
+And the pressure that *is* applied, is only on the “free” side, rather than the pillow side, so the sum of the pressure is reduced too. \
+Maybe this technique will work for you too!
+
+{{hn(i=3)}} This is probably not an issue on a soft pillow, though. Mine is hard.
 
 {{hr(id="friend")}}
 
@@ -155,9 +185,18 @@ Silicone tree shaped earplugs are going to be your best friend. \
 Reliable, cheap, easy to install (lmao), surprisingly comfortable. \
 If you don't intend to spend *as* much time as I do in earplugs, these might just be all you need.
 
-# loops
+# loop
 
-❗everyone keeps saying they're great
+[Loop](https://www.loopearplugs.com/) is a specific brand of silicone tree (?) based (?) earplugs, that I keep hearing about. \
+As mentioned in the beginning of this blog, I'm broke so I cannot afford these, but am very curious about them!
+
+Every time I come across a loop user in the wild, I ask them what they think about them. \
+So far, *everyone* has replied with “oh yeah they're great, I love them”. \
+No one has expressed “overpriced for what they do, considering you can buy something similar for a buck”, which is a take I expected to hear quite a bit!
+
+So, if you have the money to spend, they seem like a pretty great pick. Complete hearsay, though. \
+If you do use these, or buy these after reading this blog, please share what you think about them! \
+You can find my contacts on the main page of this blog; Most direct is to dm me on discord @axlefublr
 
 # silicone moldable
 
