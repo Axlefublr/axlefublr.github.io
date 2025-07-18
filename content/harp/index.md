@@ -461,8 +461,12 @@ Then, by default, you will simply have vim-like registers that are scoped to a p
 
 No need to worry about your registers disappearing, and no need to worry what else you saved for later while working on a completely different project.
 
-❗footnotes and headnotes of this blog
-❗headers for anki
+Sometimes, I keep them for long, though! \
+For example, I keep the syntax required to make a footnote{{fn(i=7)}} in this blog, as two register harps — \
+one for the head part of the note (the uppercase number in the previous sentence) and another for the foot part of the note (what you are jumped to). \
+I need to type in the index myself, so to make it easy to do so, I leave in `j` in place of the number. \
+Once I paste the syntax, I can hop directly to `j` to then replace with the index. \
+This workflow makes it much more comfortable to create footnotes!
 
 ## search harps
 
@@ -663,7 +667,7 @@ The kakoune design, that helix takes after, makes storing :commands quite flexib
 `:pipe` lets you *transform* text \
 `:pipe-to` is really useful for running or “using” some existing text in some form \
 `:run-shell-command` lets you do literally anything \
-And the power of command expansions (that are indeed supported by command harps), makes all the commands even more dynamic than otherwise. \
+And the power of command expansions{{fn(i=9)}} (that are indeed supported by command harps), makes all the commands even more dynamic than otherwise. \
 Even `:noop` and `:echo` suddenly become quite useful.
 
 *But*, typing in a lot of powerful commands can quickly become impractical. \
@@ -678,6 +682,9 @@ What if you only need this command for this specific file, or for a filetype?
 
 A lot of power that's impractical to use is a good hint that harp could make it a lot better. \
 And oh god does it do exactly that!
+
+{{hn(i=9)}} My helix fork adds some extra command expansions: `working_directory`, `relative_path`, `full_path`, `buffer_parent`. \
+Their semantics are explained in the [fork's readme](https://github.com/Axlefublr/helix).
 
 ### global
 
@@ -697,7 +704,7 @@ This is because I will *never* bother typing in the long ass `--no-format` flag 
 
 Being able to “try out” things before considering putting them into your direct mappings, I've found to be incredibly helpful.
 
-### :open
+#### :open
 
 Command harps are so powerful that they can completely mimic a whole entire different harp action! /hj
 
@@ -705,31 +712,53 @@ The `:open` command lets you open some file, which is exactly what file harps do
 You could, if you wanted to, make a *command* harp that `:open`s some file, which is really funny. \
 But there's a genuine usecase for this, too — opening *directories*.
 
-If you try to `:open` a directory rather than a file, a fuzzy file search is opened for that directory instead{{fn(i=7)}} \
+If you try to `:open` a directory rather than a file, a fuzzy file search is opened for that directory instead{{fn(i=8)}} \
 So if you keep finding yourself specifically fuzzy searching for files in some directory, making a command harp with `:open` for it could be a pretty great solution.
 
 Directory harps exist, sure, but they are more so meant to travel to directories that you intend to *stay* in. \
 If *all* you ever want to do is open a singular file in a directory, travelling to it, opening the fuzzy finder, and then `:cd -`ing feels like a bit of a waste.
 
-{{hn(i=7)}} Fun fact: this also works on the commandline. \
+{{hn(i=8)}} Fun fact: this also works on the commandline. \
 `helix .` will open helix, and immediately launch the file picker, for example.
-
-### directory
-
-❗directory specific build/setup/check actions
 
 ### filetype
 
-❗reflow
+The filetype relativity is where it's really at. \
+You can make harps harps to do language-specific run-like things.
 
-❗language specific run, check, test, lauch, whatever
-❗use the same key to mean the same thing
+Almost every filetype you can “run” in some sort of sense. \
+Interpreted languages usually go like `:sh intlang %(full_path)`. \
+Compiled languages want you to compile and *then* run the file, so that's something like `:sh complang compile %(full_path) ; ./build/debug/bin`. \
+Some have a convenient command to compile+run in a single step, like `:sh coollang run`. \
+For something like html, you might just want to use your browser with `:sh xdg-open %(full_path)`.
 
-❗talk about how the relativities affed each of the harp actions, including the useless ones
+And that's just “run”!
+You don't have to stop there. \
+You can have filetype command harps for “lint”, “build”, “build but use [pueue](https://github.com/nukesor/pueue)”, “test”, “open docs”, “pipe my selection into the interpreter, rather than the whole file”, and any other language specific *actions* that you might wanna do.
+
+What I recommend for this workflow, is to try to use the same keys for the same sort of semantic, so that they're easier to remember. \
+Just like always using `#` for the shebang register harps, remember? \
+My “run” is always on `s`, my “open docs” always on `d`, “build” always on `b`.
+
+### directory
+
+Some actions are *project* specific, not just language specific.
+
+To “run” a markdown file, I'll probably want to convert it to html and open that html in my browser. \
+For this blog though, I use [`zola`](https://github.com/getzola/zola). \
+So, I made myself a *directory*-relative command harp that “compiles” the blog with zola and opens it in my browser.
+
+Because of treesitters, I can't just `cargo build --release` my helix fork normally, so my *language*-relative build harp for rust isn't sufficient. \
+And so, I have a project-relative harp to install my helix fork.
+
+It doesn't have to be so language action focused, though. \
+Ultimately, if you find yourself running *some* command frequently, shell or not, for a given project, directory-relative command harps can help you.
 
 ### buffer
 
 ❗example of how I sort the loago list in that file specifically, with a specific sort command that doesn't make sense to make a mapping for
+
+❗talk about how the relativities affed each of the harp actions, including the useless ones
 
 # footnotes
 
@@ -742,3 +771,5 @@ So register harps simply blammo the text into your `default-yank-register`, and 
 {{hn(i=5)}} The global one is still the *actual* default though, as usual.
 
 {{hn(i=6)}} Although my fork introduces a :random command that lets you sorts the contents of your selections, rather than specifically lines.
+
+{{hn(i=7)}} Like this one!
