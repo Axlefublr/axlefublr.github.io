@@ -461,6 +461,9 @@ Then, by default, you will simply have vim-like registers that are scoped to a p
 
 No need to worry about your registers disappearing, and no need to worry what else you saved for later while working on a completely different project.
 
+❗footnotes and headnotes of this blog
+❗headers for anki
+
 ## search harps
 
 Whenever you search for something, the search pattern you used is stored in the `/` register. \
@@ -566,16 +569,167 @@ For example, the `[[sort etc]]` of [my autosorter](@/consider-sorting/index.md) 
 ### buffer
 
 And now I introduce to you the last, fourth harp relativity: buffer. \
-You can make your harps local to the filepath of the current buffer.
+You can make your harps local to the absolute filepath of the current buffer. \
+You can access it by pressing <kbd>,</kbd> while using a harp action.
 
-❗introduce the last, buffer relativity
-❗get to sections of this file quick
-❗turn your brain off relativity for possibly temporary things
+Vim-like marks, inherently, store a line+column position. \
+What this means, is that if you add or remove line(s) before that position, you invalidate the stored position. \
+At best, you'll be slightly off, but at worst you're now storing a completely useless position. \
+With vim-like marks, you will find yourself updating the position over and over again, making yourself disheartened to use marks at all.
+
+With buffer-relative search harps, we can implement a marking system that completely avoids this issue.
+
+Select some area of your code, that is like a landmark. Then, press <kbd>*</kbd> to search for it. \
+Now if you set a search harp for it relative to the buffer, you can invoke it at any time to quickly jump to it! \
+I use this so frequently, that buffer relativity is my default one for search harps.
+
+Thanks to <kbd>*</kbd>, you don't actually need to enter the search pattern yourself a lot of the time, making the *set* process quite comfortable. \
+In this same sense, you can consider how helpful it can be for the previous relativities of search harps, too.
+
+To show how I use buffer-relative search harps, let's take my [helix config generating script](https://github.com/Axlefublr/dotfiles/blob/main/helix/generator.py).
+
+To define my mappings, I have hashmaps per each mode combination that I want to have mappings for. \
+Basically, I can just add a mapping to `normal_select_mappings` to add it to both modes, rather than having to separately add it to `normal_mappings` and `select_mappings`. \
+Since all of these hashmaps are huge, it's incredibly helpful to be able to jump to each of them individually. \
+The variable definitions are unique, and that helps them be unique search patterns!
+```
+normal_select_mappings: dict[str, Any] = {
+normal_mappings: dict[str, Any] = {
+select_mappings: dict[str, Any] = {
+```
+
+With all of them, I can simply select the entire line and press <kbd>*</kbd> to search for it; \
+This way, I can make a search harp with no extra hassle. \
+It will then remain valid forever, unlike with vim-like marks. \
+I'm not going to a line+column position, but *searching* for `normal_select_mappings: dict[str, Any] = {`. \
+Thanks to it being a search, I will always land at where the landmark is actually located, not at where it *was* located.
+
+You don't necessarily need to only match a single thing, though. \
+You can also make a buffer-relative search harp that can take you to multiple places.
+
+I have two layers in my [kanata config](@/erm/index.md), that let me launch programs quickly.
+```
+(deflayermap (apps)
+(deflayermap (apps-revengeance)
+```
+In the config, I might want to jump to either of the two layers, and I can unify them under a single search harp!
+This is how the two layer definitions start, so I can use the pattern `\(deflayermap \(apps` to grab them *both* in a single search harp, and then simply press <kbd>n</kbd> to get to either one I want to get to.
+
+Aside from being genuinely specific to some file, the buffer relativity can act as your “I really don't wanna think about harp conflicts right now” relativity, that you can use for the truly ad-hoc harp that you don't intend to use later.
 
 ## mark harps
+
+Search harps for navigating to some specific place, still, are best suited for things that you intend to get back to at least every so often. \
+After all, you need to think about whether the given search pattern will stay valid (are you sure you aren't going to change the contents of the line you're using as a landmark?), and you do need to press an extra key (<kbd>n</kbd> usually) or even multiple keys (when using `global_search` + searh harps).
+
+But for ad-hoc things (“I just need to store this position quickly, I'll come back to it in a sec”), or for things that you're sure will remain unchanging for the most part, *mark harps* are a better pick.
+
+Setting a mark harp stores the filepath of the current buffer, and your line + column position in it. \
+Getting a mark harp opens the stored filepath, and travels to the line + column position stored.
+
+This makes it a much better ad-hoc harp action, as to set one, you don't need to come up with an appropriate search pattern, you simply *set* and go on with your day. \
+The position invalidation argument I made in the search harp section still remains true, so mark harps are best used for when an invalidated position wouldn't matter that much.
+
+The helix jump list is not trustworthy, it keeps invalidating itself for seemingly no good reason. \
+And when *it* invalidates, the position you explicitly stored with <kbd>ctrl+s</kbd> is simply *gone*, rather than just *off*, like it *might* be with mark harps.
+
+I find the directory relativity to make the most sense as a default for mark harps{{fn(i=5)}}. \
+You scope your ad-hocs per project, so you never need to worry about overriding something you were working on 5 seconds ago, in a different project. \
+Yet, it's not as restrictive as defaulting to the buffer relativity: since mark harps remember the buffer path as well, you can more freely express “wherever I last been” — you don't need to first remember which file you were in, to then jump to a position inside of.
+
+This harp action is the most recent, actually! Search harps are so good, that I didn't feel the need for this harp action to exist; I also trusted the jumplist more than I should have. \
+But now that I have mark harps, they're really nice! Being able to turn my brain off and not worry about losing my train of workflow is really convenient.
+
 ## command harps
 
+On set, the last command mode :command you executed (stored in the `:` register) is stored. \
+On get, it is *executed*.
+
+In classic harp fashion, the process of setting is interactive. \
+First, you try out the command, until you finalize it into the one you want to store. \
+Only *after* do you actually “commit” it.
+
+If I just made you enter the command into an inputbox, you could have a typo, or simply be using the command incorrectly, and never be the wiser! \
+At least, not until the next time you plan to *use* that harp, where it may be crucial to not distract yourself with fixing some harp command :p
+
+Of course, there might be some commands that you want to store without necessarily running them first; Something destructive perhaps? \
+For those usecases, you can simply write out the command in some buffer, and copy it directly into the `:` register. \
+That will allow you to fill the “context” that command harps use, without running the command just yet.
+
+This is by far the most *powerful* harp action, and is my second most used one, after file harps. \
+The kakoune design, that helix takes after, makes storing :commands quite flexible.
+
+`:insert-output` and `:append-output` let you generate text on a whim \
+`:pipe` lets you *transform* text \
+`:pipe-to` is really useful for running or “using” some existing text in some form \
+`:run-shell-command` lets you do literally anything \
+And the power of command expansions (that are indeed supported by command harps), makes all the commands even more dynamic than otherwise. \
+Even `:noop` and `:echo` suddenly become quite useful.
+
+*But*, typing in a lot of powerful commands can quickly become impractical. \
+Sure, you can `:pipe` into `shuf` and not worry much about it{{fn(i=6)}}, but what about more complex commandlines?
+
+For really really common things you do you might create hotkeys. \
+But for many other ones, doing so is highly impractical for many different reasons!
+
+Having to modify your config for something you aren't even sure you're going to use yet, is painful. \
+If that hotkey is actually project specific, now you're polluting a project with yet another config file (for helix). \
+What if you only need this command for this specific file, or for a filetype?
+
+A lot of power that's impractical to use is a good hint that harp could make it a lot better. \
+And oh god does it do exactly that!
+
+### global
+
+You might want to `:toggle-option` something in a highly specific way, that doesn't happen often enough to warrant a hotkey. \
+For example, I don't use my left gutter at all.
+But I *could* forsee wanting to temporarily enable it to see the git hunks in a buffer.
+
+I used to have a hotkey for this, but I found myself using it so rarely that I kept forgetting what the hotkey is. \
+That's because all the other, more convenient / easy to remember hotkeys are already occupied by other things, so the “toggle gutter” hotkey is in a rough spot. \
+I can now simply move it to be a command harp, on something like global harp `g`, and be quite happy about it!
+
+My `:write` hotkey is just <kbd>'</kbd>. \
+Just a few days ago, a new flag has been added to `:write`, that allows you to write *without* formatting the file first — `--no-format`. \
+This sounds pretty useful of a thing! But I'm not yet sure if I'd actually use it in my workflow. \
+So I can blammo it on global command harp `w` and let time tell me if I need the functionality or not. \
+This is because I will *never* bother typing in the long ass `--no-format` flag normally — I *need* a shortcut of some kind to even consider using the feature.
+
+Being able to “try out” things before considering putting them into your direct mappings, I've found to be incredibly helpful.
+
+### :open
+
+Command harps are so powerful that they can completely mimic a whole entire different harp action! /hj
+
+The `:open` command lets you open some file, which is exactly what file harps do. \
+You could, if you wanted to, make a *command* harp that `:open`s some file, which is really funny. \
+But there's a genuine usecase for this, too — opening *directories*.
+
+If you try to `:open` a directory rather than a file, a fuzzy file search is opened for that directory instead{{fn(i=7)}} \
+So if you keep finding yourself specifically fuzzy searching for files in some directory, making a command harp with `:open` for it could be a pretty great solution.
+
+Directory harps exist, sure, but they are more so meant to travel to directories that you intend to *stay* in. \
+If *all* you ever want to do is open a singular file in a directory, travelling to it, opening the fuzzy finder, and then `:cd -`ing feels like a bit of a waste.
+
+{{hn(i=7)}} Fun fact: this also works on the commandline. \
+`helix .` will open helix, and immediately launch the file picker, for example.
+
+### directory
+
+❗directory specific build/setup/check actions
+
+### filetype
+
+❗reflow
+
+❗language specific run, check, test, lauch, whatever
+❗use the same key to mean the same thing
+
 ❗talk about how the relativities affed each of the harp actions, including the useless ones
+
+### buffer
+
+❗example of how I sort the loago list in that file specifically, with a specific sort command that doesn't make sense to make a mapping for
 
 # footnotes
 
@@ -584,3 +738,7 @@ You can make your harps local to the filepath of the current buffer.
 {{hn(i=4)}} Which is <kbd>p</kbd> for you, but <kbd>o</kbd> [for me](@/stray-from-defaults/index.md). \
 Also, you don't necessarily have to *paste* it. You can replace your selection with it, for example! \
 So register harps simply blammo the text into your `default-yank-register`, and then you can use it how you normally would — no specialcasey usage required!
+
+{{hn(i=5)}} The global one is still the *actual* default though, as usual.
+
+{{hn(i=6)}} Although my fork introduces a :random command that lets you sorts the contents of your selections, rather than specifically lines.
