@@ -104,6 +104,7 @@ kbd {
 	padding: 0.1em 0.25em;
 	border-radius: 0.3em;
 	overflow-wrap: break-word;
+	tab-size: 3;
 }
 
 pre {
