@@ -1,7 +1,6 @@
 +++
 title = 'harp'
-date = '2025-06-02'
-draft = true
+date = '2025-07-20'
 +++
 
 Travelling to files in text editors is very slow at best.
