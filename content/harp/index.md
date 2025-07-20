@@ -126,7 +126,8 @@ Yay! Now a pain point is gone :» \
 You can navigate to things you navigate to often, quicker and more comfortably. \
 But there's an issue: this method doesn't scale that well.
 
-First, you start with having aliases for `~/.config`, `~/.local/share`, `~/.cache`. All directories that you will for sure be jumping to over and over again. \
+First, you start with having aliases for `~/.config`, `~/.local/share`, `~/.cache`. \
+All directories that you will for sure be jumping to over and over again. \
 But then you suddenly realize you need to jump to a directory `~/.local/share/Steam/steamapps/common/Enter the Gungeon/mods`.
 
 Navigating into your config (which you have on a mapping, let's say), finding the new place where you'd like to add the alias ([unless that's not a problem for you](@/consider-sorting/index.md)), and typing in that path + the syntax for making an alias is undeniably a bit of a workflow break. \
@@ -155,13 +156,15 @@ Next, I mentioned that a given harp (bookmark) is named via me pressing some key
 These harp keys / names are called “registers”. \
 You can think of vim registers, that you access via `"a` — harp registers are a very similar idea. \
 Under each register, we hold some data. \
-So, file path harp `a` may store the path `~/fes/dot/colors.css`. Directory harp `alt+k` may store the path `~/fes/lai/bog`{{fn(i=1)}}. \
+So, file path harp `a` may store the path `~/fes/dot/colors.css`. \
+Directory harp `alt+k` may store the path `~/fes/lai/bog`{{fn(i=1)}}. \
 The data of a register is called a “harp”.
 
-Since registers are simply keys that I press, they can start to collide pretty quick: *this* is why we have sections to separate the sets of registers — I can simultenously have a file harp `a`, and a directory harp `a`, and they won't conflict. \
-There is an extra feature I'll talk about later that minimizes collisions even further.
+Since registers are simply keys that I press, they can start to collide pretty quick: \
+*this* is why we have sections to separate the sets of registers — I can simultenously have a file harp `a`, and a directory harp `a`, and they won't conflict.
 
-To accomodate this entire idea, I would need to interact with a `HashMap<HashMap<String, Vec<String>>>` in every program that I want to implement harp in. I would also need to interact with the json file that actually holds this data, deserializing it into the program, and then serializing it again. \
+To accomodate this entire idea, I would need to interact with a `HashMap<HashMap<String, Vec<String>>>` in every program that I want to implement harp in. \
+I would also need to interact with the json file that actually holds this data, deserializing it into the program, and then serializing it again. \
 This is quite doable in some programs, but completely impossible in others; \
 That's where harp *the program* comes into play: it's a single, simple interface to interact with harps.
 
@@ -181,14 +184,15 @@ Each harp action has a “set” and a “get” method. \
 
 ## file harps
 
-Let's take the most basic harp action, the one that started it all: file harps. \
-File harp set takes the filepath of the current buffer, and stores it. \
-File harp get takes the stored path, and *opens* it.
+The most basic harp action, the one that started it all: file harps. \
+File harp *set* takes the filepath of the current buffer, and stores it. \
+File harp *get* retrieves the stored path, and *opens* it in the editor.
 
-Even just this is flabbergastingly powerful. All of your various offshoot config files that you want to jump to frequently? \
+Even just this is flabbergastingly powerful. \
+All of your various offshoot config files that you want to jump to frequently? \
 Set file harps for them, and now you can get to them incredibly quickly.
 
-Most of what I do is edit config files… So I use this incredibly often. \
+Most of what I do is edit config files… So I use this a *lot*. \
 I have file harps bound on <kbd>space+s</kbd>, so to get to all of my most wanted files, I only need to press three keys. \
 Helix config — <kbd>space+s+c</kbd> \
 Foot config (what a strange combination of words) — <kbd>space+s+f</kbd> \
@@ -199,7 +203,7 @@ Now, how did I *set* all of those harps? \
 I get to the file that I want to mark, and press <kbd>space+S+some_key</kbd>. \
 Similar to how the get action interactively asks me for a key to press, the set action does too.
 
-So immediately as I realize I want to access the same file over and over again, I can set a harp for it on the fly, and just continue on: I don't need to divert myself into some config file, I just press a key!
+Immediately as I realize I want to access the same file over and over again, I set a harp for it on the fly, and just continue on: I don't need to divert myself into some config file, I just press a key!
 
 {{hr(id="why-config")}}
 
@@ -270,15 +274,16 @@ and press <kbd>space+s+.+c</kbd> to harp into `helix-term/src/commands.rs` (from
 
 I can create and use project specific harps, resulting in the seemingly restrictive system being quite scaleable!
 
-*All* relativities{{fn(i=2)}} exist for *all* harp actions{{hn(i=3)}}. \
+*All* relativities{{fn(i=2)}} exist for *all* harp actions{{fn(i=3)}}. \
 Some relativities don't make logical sense for some harp actions, so I'll introduce the other ones as they come up in usefulness for the other harp actions, as we go.
 
 {{hn(i=2)}} You only know “global” and “directory” so far. \
 {{hn(i=3)}} You only know harp files and have *heard* of harp directories so far.
 
 You might find yourself almost always using the directory relativity for file harps; That's a pretty reasonable approach! \
-You can change the default relativity *per* harp action. For example, you could set file harps to automatically assume the “directory” relativity. \
-Where to access the global relativity again, you'd have to press <kbd>'</kbd> before the harp key, but wouldn't have to press <kbd>.</kbd> every single time. \
+You can change the default relativity *per* harp action. \
+For example, you could set file harps to automatically assume the “directory” relativity. \
+Then to access the global relativity again, you'd have to press <kbd>'</kbd> before the harp key, but would no longer need to press <kbd>.</kbd> every single time for the directory relativity — *that* is now your default instead of “global”. \
 As you discover your own harp workflow, you'll find the relativities you use most for each harp action, and will be able to make it more ergonomic and fast 🚀 for yourself :3
 
 ## directory harps
@@ -287,7 +292,8 @@ Harps don't have to be exclusive to your editor! \
 This harp action exists for me both in helix, *and* fish shell!
 
 Zoxide is wonderful, but still requires me to type at least a few characters to get to a specific directory that I want. \
-And if I stand my ground and use only one character, it'll likely jump me to the wrong directory; at least, I can never tell ahead of time where I'll end up in, and so it all ends up being a waste of mental cycles.
+And if I stand my ground and use only one character, it'll likely jump me to the wrong directory; \
+at least, I can never tell ahead of time where I'll end up in, and so it all ends up being a waste of mental cycles.
 
 Instead, I use directory harps! \
 “set” takes my current working directory,
@@ -337,7 +343,7 @@ Pressing <kbd>Space</kbd> while in a harp action toggles between the `get` varia
 Instead of pressing your “harp file get” hotkey to open a file, and your “harp file set” hotkey to harp it, you *simply* use your “harp file” mapping, and *then* decide. \
 You start off in the `get` mode, but can press <kbd>Space</kbd> to go into the set mode. \
 Then if you realized you didn't want to set, you can simply press <kbd>Space</kbd> again to go back to get. \
-And you can do this infinitely!
+And you can do this infinitely! Very stimmy.
 
 ## relative file harps
 
@@ -352,7 +358,7 @@ With harp, you might find yourself *set*ting the same relative paths over and ov
 And the file first needs to exist and be open, for you to *set* it, so that's a lil extra effort as well. \
 Seems like a bit of a waste, no?
 
-This is where relative file harps come in.
+Relative file harps solve this.
 
 When normal file harps store the *full* path, relative file harps only store the *relative* path of the buffer, from your current working directory.
 
@@ -462,7 +468,7 @@ Then, by default, you will simply have vim-like registers that are scoped to a p
 No need to worry about your registers disappearing, and no need to worry what else you saved for later while working on a completely different project.
 
 Sometimes, I keep them for long, though! \
-For example, I keep the syntax required to make a footnote{{fn(i=7)}} in this blog, as two register harps — \
+For example, I keep the syntax required to make a footnote{{fn(i=5)}} in this blog, as two register harps — \
 one for the head part of the note (the uppercase number in the previous sentence) and another for the foot part of the note (what you are jumped to). \
 I need to type in the index myself, so to make it easy to do so, I leave in `j` in place of the number. \
 Once I paste the syntax, I can hop directly to `j` to then replace with the index. \
@@ -473,8 +479,8 @@ This workflow makes it much more comfortable to create footnotes!
 Whenever you search for something, the search pattern you used is stored in the `/` register. \
 Interestingly, this works not only for the `search` action (<kbd>/</kbd>), but also for the “ripgrep project” action (`global_search`).
 
-When you *set* a search harp, the regex pattern stored in your `/` register is stored. \
-When you *get* a search harp, it is taken from the storage and placed back into your `/` register.
+When you *set* a search harp, the regex pattern in your `/` register is stored. \
+When you *get* a search harp, the pattern is taken from storage and placed back into your `/` register.
 
 The way that searching and the `/` register works in helix specifically makes this a very nice to use and flexible functionality. \
 You see, `/` doesn't store “your *last* search”, it stores “your search”. \
@@ -550,7 +556,8 @@ We can once again use filetype search harps for this usecase, using a simple pat
 ```
 ^pub fn
 ```
-Here I specificially search for all *public* functions that are top level; So *methods* wouldn't get caught with this — this can be either beneficial or detrimental depending on what you want, but you have the power to define what exactly you want, by changing the regex! :D
+Here I specificially search for all *public* functions that are top level; \
+So *methods* wouldn't get caught with this — this can be either beneficial or detrimental depending on what you want, but you have the power to define what exactly you want, by changing the regex! :D
 
 Maybe jumping to a *function* specifically is not that useful to you, but overall being able to jump to the next public top-level *symbol* is — you could simply use `^pub ` in that case. \
 Regardless of what you want, *you* get to decide what search “shortcuts” you have, by creating them all to fit *your* specific needs. \
@@ -604,22 +611,22 @@ select_mappings: dict[str, Any] = {
 
 With all of them, I can simply select the entire line and press <kbd>*</kbd> to search for it; \
 This way, I can make a search harp with no extra hassle. \
-It will then remain valid forever, unlike with vim-like marks. \
 I'm not going to a line+column position, but *searching* for `normal_select_mappings: dict[str, Any] = {`. \
 Thanks to it being a search, I will always land at where the landmark is actually located, not at where it *was* located.
 
 You don't necessarily need to only match a single thing, though. \
 You can also make a buffer-relative search harp that can take you to multiple places.
 
-I have two layers in my [kanata config](@/erm/index.md), that let me launch programs quickly.
+I have two layers in my [kanata config](@/erm/index.md), that let me launch programs quickly. \
+In the config file, I might want to jump to either of the two layers, and so I unify them under a single search harp! \
+This is how the two layer definitions start:
 ```
 (deflayermap (apps)
 (deflayermap (apps-revengeance)
 ```
-In the config, I might want to jump to either of the two layers, and I can unify them under a single search harp!
-This is how the two layer definitions start, so I can use the pattern `\(deflayermap \(apps` to grab them *both* in a single search harp, and then simply press <kbd>n</kbd> to get to either one I want to get to.
+So I can use the pattern `\(deflayermap \(apps` to grab them *both* in a single search harp, and then simply press <kbd>n</kbd> to get to either one I want to get to.
 
-Aside from being genuinely specific to some file, the buffer relativity can act as your “I really don't wanna think about harp conflicts right now” relativity, that you can use for the truly ad-hoc harp that you don't intend to use later.
+Aside from being genuinely specific to some file, the buffer relativity can act as your “I really don't wanna think about harps conflicts right now” relativity, that you can use for the truly ad-hoc harp that you don't intend to use later.
 
 ## mark harps
 
@@ -637,12 +644,19 @@ The position invalidation argument I made in the search harp section still remai
 The helix jump list is not trustworthy, it keeps invalidating itself for seemingly no good reason. \
 And when *it* invalidates, the position you explicitly stored with <kbd>ctrl+s</kbd> is simply *gone*, rather than just *off*, like it *might* be with mark harps.
 
-I find the directory relativity to make the most sense as a default for mark harps{{fn(i=5)}}. \
+I find the directory relativity to make the most sense as a default for mark harps{{fn(i=6)}}. \
 You scope your ad-hocs per project, so you never need to worry about overriding something you were working on 5 seconds ago, in a different project. \
 Yet, it's not as restrictive as defaulting to the buffer relativity: since mark harps remember the buffer path as well, you can more freely express “wherever I last been” — you don't need to first remember which file you were in, to then jump to a position inside of.
 
-This harp action is the most recent, actually! Search harps are so good, that I didn't feel the need for this harp action to exist; I also trusted the jumplist more than I should have. \
-But now that I have mark harps, they're really nice! Being able to turn my brain off and not worry about losing my train of workflow is really convenient.
+This harp action is the most recent, actually! \
+Search harps are so good, that I didn't feel the need for this harp action to exist; \
+I also trusted the jumplist more than I should have.
+
+Pressing an uppercase letter to set something this “fast”, also felt like a bad value proposition. \
+So it's *this* harp action that sparked the “space to toggle get/set” change, as well as the refactor that made it possible.
+
+Now that I have mark harps, they're really nice! \
+Being able to turn my brain off and not worry about losing my train of workflow is really convenient.
 
 ## command harps
 
@@ -660,18 +674,52 @@ Of course, there might be some commands that you want to store without necessari
 For those usecases, you can simply write out the command in some buffer, and copy it directly into the `:` register. \
 That will allow you to fill the “context” that command harps use, without running the command just yet.
 
+{{hr(id="command-expansions")}}
+
 This is by far the most *powerful* harp action, and is my second most used one, after file harps. \
 The kakoune design, that helix takes after, makes storing :commands quite flexible.
 
-`:insert-output` and `:append-output` let you generate text on a whim \
-`:pipe` lets you *transform* text \
-`:pipe-to` is really useful for running or “using” some existing text in some form \
-`:run-shell-command` lets you do literally anything \
-And the power of command expansions{{fn(i=9)}} (that are indeed supported by command harps), makes all the commands even more dynamic than otherwise. \
-Even `:noop` and `:echo` suddenly become quite useful.
+First, helix has command expansions. Variables that expand to some string, depending on some context. \
+The most useful one that immediately comes to mind, is `%(buffer_name)` — it resolves to the path of the buffer. \
+Through trying it out, though, I found it largely inconsistent and strange, so my fork adds the following 4 useful command expansions:
+```
+full_path
+relative_path
+buffer_parent
+working_directory
+```
+You can probably guess what they resolve to; otherwise you can read about their semantics in the [readme of the fork](https://github.com/Axlefublr/helix).
 
-*But*, typing in a lot of powerful commands can quickly become impractical. \
-Sure, you can `:pipe` into `shuf` and not worry much about it{{fn(i=6)}}, but what about more complex commandlines?
+I *believe* that command expansions can be used in *any* :command. \
+But there are a couple of most useful ones.
+
+`:run-shell-command`, or just `:sh`, lets you execute a shell command asyncronously, and will show its output in a popup, once it finishes.
+
+You don't always want to do things asyncronously, though; \
+We can use the `%sh()` command expansion for the syncronous usecases! \
+`%sh(echo hi)` will execute the shell command `echo hi`, wait for it to finish, and then resolve to the output.
+
+The call of a :command itself is syncronous, so `%sh()` *must* resolve to a value before the :command that contains the `%sh()` actually runs.
+
+To make use of this property, you have the `:echo` command. \
+It displays the arguments given to it in the messages line (rather than in a popup). \
+You can use `%sh()` inside of `:echo` to effectively mimic `:sh`, but ensure it's syncronous. \
+This little bit of knowledge may especially be useful for your mappings, not just harps.
+
+`:noop` is exactly like `:echo`, except it doesn't show the output in the messages line. \
+It's made basically specifically for doing `%sh()`, but when you don't care about the output.
+
+`:insert-output` and `:append-output` are like `:sh`, but will insert the output of the command before/after the cursor; syncronously.
+
+`:pipe` pipes the contents of your selections into a shell command, and replaces them (contents) with the output of that shell command. \
+Each selection is piped individually, rather than collected somehow.
+
+`:pipe-to` is the same thing as `:pipe`, but the contents of your selection(s) are not replaced. \
+Basically, you can *use* your selection(s) as input to a command, without caring about the output.
+
+With such powerful building blocks, you can create quite complex editing actions, without the editor having to provide them for you. \
+However, typing in a lot of powerful commands can quickly become impractical. \
+Sure, you can `:pipe` into `shuf` and not worry much about it{{fn(i=7)}}, but what about more complex commandlines?
 
 For really really common things you do you might create hotkeys. \
 But for many other ones, doing so is highly impractical for many different reasons!
@@ -683,14 +731,11 @@ What if you only need this command for this specific file, or for a filetype?
 A lot of power that's impractical to use is a good hint that harp could make it a lot better. \
 And oh god does it do exactly that!
 
-{{hn(i=9)}} My helix fork adds some extra command expansions: `working_directory`, `relative_path`, `full_path`, `buffer_parent`. \
-Their semantics are explained in the [fork's readme](https://github.com/Axlefublr/helix).
-
 ### global
 
 You might want to `:toggle-option` something in a highly specific way, that doesn't happen often enough to warrant a hotkey. \
 For example, I don't use my left gutter at all.
-But I *could* forsee wanting to temporarily enable it to see the git hunks in a buffer.
+But I *could* foresee wanting to temporarily enable it to see the git hunks in a buffer.
 
 I used to have a hotkey for this, but I found myself using it so rarely that I kept forgetting what the hotkey is. \
 That's because all the other, more convenient / easy to remember hotkeys are already occupied by other things, so the “toggle gutter” hotkey is in a rough spot. \
@@ -740,6 +785,19 @@ What I recommend for this workflow, is to try to use the same keys for the same 
 Just like always using `#` for the shebang register harps, remember? \
 My “run” is always on `s`, my “open docs” always on `d`, “build” always on `b`.
 
+{{hr(id="piping")}}
+
+`:pipe` can come in useful for implementing custom code actions, by using a custom script. \
+You could use `:insert-output` as a way to generate some boilerplate for a language (if, for example, it is not static (where it'd make more sense to use a register harp instead)).
+
+As an example, you could make a command harp that generates the java class boilerplate. \
+Usually the name of the class is the same as the name of the file, so you could use `%sh(full_path)`, then extract the basename, and pass it on to your script that outputs the boilerplate.
+
+If the *input* to the script is not deterministic like that, you could instead use `:pipe` — \
+Type in the input in the buffer, then select it and use the command harp that `:pipe`s it into the afforementioned script.
+
+Thanks to all this, filetype-relative command harps can become a very useful extension to your lsps.
+
 ### directory
 
 Some actions are *project* specific, not just language specific.
@@ -752,13 +810,45 @@ Because of treesitters, I can't just `cargo build --release` my helix fork norma
 And so, I have a project-relative harp to install my helix fork.
 
 It doesn't have to be so language action focused, though. \
-Ultimately, if you find yourself running *some* command frequently, shell or not, for a given project, directory-relative command harps can help you.
+Ultimately, if you find yourself running *some* command frequently, shell or not, for a given project, directory-relative command harps can help you. \
+You can think of them as your personal justfile directly in your editor, that you don't need to gitignore or commit upstream.
 
 ### buffer
 
-❗example of how I sort the loago list in that file specifically, with a specific sort command that doesn't make sense to make a mapping for
+You can sometimes find yourself doing hyperspecific transformations in specific files, over and over again.
 
-❗talk about how the relativities affed each of the harp actions, including the useless ones
+In my loago{{fn(i=9)}} helper script, I have this section…
+```nu
+const known = {
+	razor: 4
+	bed: 6
+	towels: 7
+	vacuum: 8
+	update: 10
+	bottle: 15
+	keyboard: 30
+	filter: 45
+	fsrs: 60
+	toothbrush: 122
+}
+```
+
+…That I constantly want to sort by the *numbers*, rather than key names. \
+I don't know of a way to express this semantic directly (and so I'll write a crystal program for this eventually), but in this file specifically all the numbers are the second *field*. \
+So I can use `:pipe sort -nk 2` as a buffer-relative command harp, to solve this usecase 🥳
+
+This is pretty convenient — instead of feeling rushed to create a generic solution for the problem, I can for now make a hyperspecific one, and use the buffer relativity to store it in a convenient way.
+
+# conclusion
+
+This is the conclusion part of the blog post, that sums up everything you've read, and provides an emotional release to all the effort you've spent reading. \
+It creates a logical stop to the experience, naturally leading you to exclaim “wow! what a read”, or some such.
+
+{{hr(id="fr-now")}}
+
+I've been on and off writing this blog post for over 50 days so I wanted to spare myself writing a genuine conclusion hahahaha \
+I'm sure you're tired from reading, too, genuine thank you for taking the time. \
+Hope you can now take the harp concept, and make it as, if not even *more* useful for yourself, as it is for me.
 
 # footnotes
 
@@ -768,8 +858,10 @@ Ultimately, if you find yourself running *some* command frequently, shell or not
 Also, you don't necessarily have to *paste* it. You can replace your selection with it, for example! \
 So register harps simply blammo the text into your `default-yank-register`, and then you can use it how you normally would — no specialcasey usage required!
 
-{{hn(i=5)}} The global one is still the *actual* default though, as usual.
+{{hn(i=5)}} Like this one!
 
-{{hn(i=6)}} Although my fork introduces a :random command that lets you sorts the contents of your selections, rather than specifically lines.
+{{hn(i=6)}} The global one is still the *actual* default though, as usual.
 
-{{hn(i=7)}} Like this one!
+{{hn(i=7)}} Although my fork introduces a :random command that lets you randomize the contents of your selections, rather than specifically lines.
+
+{{hn(i=9)}} A chore-tracking program of mine that I will eventually write a blog post about.
