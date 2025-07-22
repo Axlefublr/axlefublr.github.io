@@ -341,6 +341,7 @@ h6>a:visited {
 	color: var(--fg-heading);
 	text-decoration: none;
 	font-weight: bold;
+	text-align: left;
 }
 
 .title,
