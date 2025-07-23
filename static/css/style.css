@@ -426,8 +426,12 @@ header.promo-holder {
 			color: var(--yellow);
 		}
 
-		&#rss {
+		&#email {
 			color: var(--blush);
+		}
+
+		&#rss {
+			color: var(--purple);
 		}
 	}
 }
