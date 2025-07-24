@@ -8,10 +8,11 @@
 			title="RSS"
 			href='{{ get_url(path="rss.xml", trailing_slash=false) }}'
 		/>
-		{% endblock %} {% include "head.html" %}
+		{% endblock %}
+		{% include "head.html" %}
 	</head>
 
 	<body>
-		<div class="wrapper">{% block content %} {% endblock content %}</div>
+		<div>{% block content %} {% endblock content %}</div>
 	</body>
 </html>
