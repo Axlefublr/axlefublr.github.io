@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>elegant fish shell booleans</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;magazines&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">magazines</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;why-even-helix&#x2F;" class="preview next">
+			<span class="name">why even helix?</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">elegant fish shell booleans</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-10-24">2024.10.24</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 3</div> -->
+				<p>I recently <em>finally</em> figured out how booleans work in fish shell, and turns out they're very elegant!</p>
+<p>You can use <code>set</code> to set variables to values; you can set them to <code>true</code> or <code>false</code> too. <br />
+If your editor supports fish shell as a language, it will probably highlight them as booleans.</p>
+<p>What are they? Some special types, or special syntax introduced by the shell?</p>
+<p>Not at all actually, they're <em>just</em> strings, like <code>asdf</code> and <code>the</code> would be.</p>
+<a href="#test" id="test" class="anchorina">
+  <hr></hr>
+</a>
+<p>You usually use <code>test</code> to check for various common equality comparisons, in shell scripting.</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">test</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>var</span></span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">=</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-string z-quoted z-single z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&#39;</span>thingy<span class="z-punctuation z-definition z-string z-end z-fish">&#39;</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>If the string in variable <code>var</code> is equal to <code>thingy</code>, output <code>yeppies</code>.</p>
+<a href="#if-semantics" id="if-semantics" class="anchorina">
+  <hr></hr>
+</a>
+<p>Let's examine more closely <em>why</em> we need <code>test</code> here to begin with.</p>
+<p>What <code>if</code> does, is take in arguments, call those arguments as a command, and execute the inner block of code if the command's exitcode is 0.</p>
+<p><code>test $var = 'thingy'</code> are the arguments to the <code>if</code> command. <br />
+If <code>test</code> executes successfully (meaning <code>$status</code> is 0 after it exits), <code>if</code> will execute the code block, which is <code>echo yeppies</code></p>
+<p>What this means is that both <code>test</code> and <code>if</code> are not that special. They're just commands doing command stuff. <br />
+So you can use <em>any</em> command in an <code>if</code>, to check for its exitcode:</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">rg</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-string z-quoted z-single z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&#39;</span>struct<span class="z-punctuation z-definition z-string z-end z-fish">&#39;</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">args.rs</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>If there is the word <code>struct</code> in the file <code>args.rs</code>, output <code>yeppies</code>. <br />
+I'm saying all this to highlight: <code>if</code> <em>just</em> wants to execute a command as its condition, that's it.</p>
+<a href="#command" id="command" class="anchorina">
+  <hr></hr>
+</a>
+<p>You can even store the command in a variable:</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">set</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">l</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">command</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">rg</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-string z-quoted z-single z-fish"><span class="z-punctuation z-definition z-string z-begin z-fish">&#39;</span>struct<span class="z-punctuation z-definition z-string z-end z-fish">&#39;</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">args.rs</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>command</span></span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>The variable <code>$command</code>, will expand to be <code>rg 'struct' args.rs</code>, so this is basically equivalent to the codeblock above, where we <em>don't</em> use a variable.</p>
+<a href="#booleans" id="booleans" class="anchorina">
+  <hr></hr>
+</a>
+<p>Coming back to booleans:</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">set</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">l</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">var1</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">true</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">set</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">l</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">var2</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">false</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">test</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>var1</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">test</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>var2</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>Despite <code>true</code> and <code>false</code> looking colorful, and therefore seeming "special", in your editor, <br />
+they are actually both <em>just</em> strings, so both if statements here will execute their codeblock.</p>
+<a href="#false" id="false" class="anchorina">
+  <hr></hr>
+</a>
+<p>I always thought, for some reason, that <code>false</code> will evaluate to, well, <em>false</em> in <code>test</code>, but now that I think about it, why would it?</p>
+<p>The real gold lies in something interesting: both <code>true</code> and <code>false</code> are also <em>commands</em>. Fish shell built in commands. <br />
+<code>true</code> always returns with exitcode 0, <code>false</code> always returns with exitcode 1.</p>
+<p>So by setting variables to (completely normal strings) <code>true</code> or <code>false</code>, you also happen to set those variables to commands that can be executed in <code>if</code> conditionals.</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">set</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-option z-short z-fish"><span class="z-variable z-parameter z-fish"><span class="z-punctuation z-definition z-option z-short z-fish"><span class="z-meta z-string z-unquoted z-fish">-</span></span><span class="z-meta z-string z-unquoted z-fish">l</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">condition</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">true</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>condition</span></span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">set</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">condition</span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">false</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish"><span class="z-meta z-variable-expansion z-fish"><span class="z-variable z-other z-fish"><span class="z-punctuation z-definition z-variable z-fish">$</span>condition</span></span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>Will essentially expand to:</p>
+<pre data-lang="fish" class="language-fish z-code"><code class="language-fish" data-lang="fish"><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">true</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">if</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">false</span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish">   <span class="z-meta z-function-call z-name z-fish"><span class="z-variable z-function z-fish"><span class="z-meta z-string z-unquoted z-fish">echo</span></span></span><span class="z-meta z-function-call z-fish"> </span><span class="z-meta z-function-call z-parameter z-argument z-path z-fish"><span class="z-meta z-string z-unquoted z-fish">yeppies</span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></span><span class="z-source z-shell z-fish"><span class="z-meta z-block z-if z-fish"><span class="z-meta z-function-call z-name z-fish"><span class="z-keyword z-control z-conditional z-fish"><span class="z-meta z-string z-unquoted z-fish">end</span></span></span></span><span class="z-meta z-function-call z-operator z-control z-fish">
+</span></span></code></pre>
+<p>It's much more clear this way, why <code>true</code> and <code>false</code> seem special! <br />
+It's entirely <em>just</em> because they also happen to be commands that you can call to get your wanted exitcode, <br />
+<strong>not</strong> because fish shell uses them as special syntax.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;magazines&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">magazines</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;why-even-helix&#x2F;" class="preview next">
+			<span class="name">why even helix?</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>
