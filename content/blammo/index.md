@@ -1,7 +1,6 @@
 +++
 title = 'blammo'
-date = '2025-07-28'
-draft = true
+date = '2025-07-30'
 +++
 
 I use the [yazi](https://github.com/sxyazi/yazi) file manager, and like it a lot! \
