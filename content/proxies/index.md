@@ -171,7 +171,7 @@ to make more things work more easily.
 
 # ok ok let's use this proxy, let's use this proxy in our apps
 
-([/ref](https://www.youtube.com/watch?v=H1M7Fj6T91c&pp=ygUaYmVhdCB0aGlzIGd1eSB3aXRoIGhhbW1lcnM%3D))
+([/ref](https://www.youtube.com/watch?v=H1M7Fj6T91c))
 
 Socks5 is the new nugget of information, because of which I wanted you to read more before acting; \
 When buying a proxy, make sure it's *both* an https *and* a socks5 proxy —
