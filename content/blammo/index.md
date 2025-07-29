@@ -164,7 +164,7 @@ In nushell, `$in` means “whatever was piped into the current thing”, so here
 # footnotes
 
 {{hn(i=1)}} Sounds similar to the types of situations that [harp](@/harp/index.md) solves, doesn't it? \
-You're correct! Harp could be implemented into yazi to provide a pretty nice productivity boost, but *so far* I don't find myselfexecuting enough commands from the context of yazi to really need harp.
+You're correct! Harp could be implemented into yazi to provide a pretty nice productivity boost, but *so far* I don't find myself executing enough commands from the context of yazi to really need harp.
 
 {{hn(i=2)}} I'm aware of the built in yazi unarchiver, but it's been super wonky for me. \
 I'd much rather use the behavior I'm more familiar with, using `ouch`. \
