@@ -157,9 +157,38 @@ So, we put yazi's latest selected files into a global variable `in`, that we can
 ```fish
 magick $in (path change-extension webp $in)
 ```
+And if we do indeed select multiple files, you could blammo a loop:
+```fish
+for the in $in
+    magick $the (path change-extension webp $the)
+end
+```
 Semantically, this is quite a bit better :D
 
 In nushell, `$in` means “whatever was piped into the current thing”, so here it's as if we're piping the list of filenames into fish, quite neat!
+
+# p.s.
+
+Ahhhh... no better way to get the correct solution than to post the wrong one on the internet 😌{{fn(i=3)}} \
+The *yazi author* read this blog post, and shared the more proper way of doing what `(blammo)` was initially made for!
+
+```
+'''
+shell --block -- fish -c 'ffmpeg_convert_to_mp3 "$argv"' "$@"
+'''
+```
+
+First of all, you can now omit the `--confirm` flag. \
+But more importantly, you can probably intuit the semantics of yazi's `"$@"` now.
+
+It is only resolved as a *top level* argument to the overall command; it's not a find and replace across all text of all arguments. \
+So here, we specify *the fish program* in the string after `-c`. \
+The program makes use of the arguments provided to it. \
+After the stringed fish program, we pass arguments to it with `"$@"`.
+
+With *this* knowledge, you can now avoid needing blammo to pass selected files to predefined mappings, and can use this concept to pass arguments into other interpreted programming languages, like nushell probably.
+
+But the main idea of blammo, and why I wrote this in the first place — connecting yazi's selected files into your shell — is still alive and useful, even with this new discovery! :D
 
 # footnotes
 
@@ -170,3 +199,6 @@ You're correct! Harp could be implemented into yazi to provide a pretty nice pro
 I'd much rather use the behavior I'm more familiar with, using `ouch`. \
 This hotkey still exists, but I actually made “opening” archives automatically use `ouch decompress`. \
 How did I do that? Exercise for the reader 😌
+
+{{hn(i=3)}} To be fair, I never *asked* anywhere for how to solve the issue of passing arguments to fish, neither have I searched. \
+I have a tendency to solve my problems my own way before considering grabbing some pre-existing solution :>
