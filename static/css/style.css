@@ -196,7 +196,8 @@ pre {
 
 	& .z-function.z-name,
 	.z-function.z-variable,
-	.z-support.z-function.z-rust {
+	.z-support.z-function.z-rust,
+	.z-function-call.z-shell:not(.z-arguments) {
 		color: var(--green);
 	}
 
@@ -212,7 +213,8 @@ pre {
 		color: var(--cyan);
 	}
 
-	& .z-toml.z-key {
+	& .z-toml.z-key,
+	.z-shell.z-parameter.z-option {
 		color: var(--mint);
 	}
 }
