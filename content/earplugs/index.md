@@ -204,6 +204,8 @@ You can find my contacts on the main page of this blog; Most direct is to dm me 
 
 ❗sequential container for drying off and protecting from dust
 
+❗it might be a good idea to pull apart some bit, but don't rush with that as you may waste some of them in the process, as putting it back together doesn't particularly work
+
 # footnotes
 
 {{hn(i=1)}} Disgusting, I know. Bear with me. Aaaargh!! 🏃‍♀️🧸
