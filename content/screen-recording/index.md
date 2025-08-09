@@ -94,8 +94,7 @@ The `copyl` that is now called `sl.fish` because I'm returning half a year after
 
 This is a lot better!
 Than dedicating a terminal window for the recording script, and then manually pressing <kbd>ctrl+c</kbd> on it to finish it. \
-Doing so is not too bad all things considered, but recordings where you see the author start and finish the recording, have always felt a bit awkward to me. \
-And regardless, that seems a bit too similar to the ~~IBS~~ OBS workflow.
+Doing so is not too bad all things considered, but is a bit too close to the ~~IBS~~ OBS workflow.
 
 So now we *don't* see when the recording starts and ends 🥳... Wait, what? \
 Right! Let's integrate this recording toggle into waybar, so it's actually clear to us when we're recording, when we're compressing, and when we're done.
@@ -182,6 +181,10 @@ echo >~/.local/share/mine/waybar-screen-record
 Now it's clear what's currently happening, if anything! \
 After you press the hotkey the second time, you can quickly confirm that the recording did indeed complete, and is now compressing. \
 Once it's in the compressing stage, you basically wait for the waybar module to become empty again — *that's* the marker that it `copyl`ed, and is now pasteable 🚀
+
+{{video(path="recording")}}
+
+I can't exactly show you all the steps, but here's my waybar saying “recording”, lol!
 
 # footnotes
 
