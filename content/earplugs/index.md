@@ -31,7 +31,7 @@ I have 4 pairs, so 8 earplugs (of this type) in total, and that seems like a goo
 
 This is completely a guess on my part, but you probably shouldn't leave your earplugs “dirty” for more than a day. Which is why just buying a billion pairs isn't a great idea.
 
-Especially if you plan to spend most of your life in earplugs, like I do, something that you need to future proof is ear infectioons.
+Especially if you plan to spend most of your life in earplugs, like I do, something that you need to future proof is ear infections.
 
 ## ear infections
 
@@ -49,7 +49,7 @@ But only use soap for the *outside* of your ear — *not* the ear canal itself. 
 For the ear canal, I simply take my wet finger{{fn(i=1)}} and blammo it in there, rotating it very gently and slightly. You probably know the drill. \
 After doing this, ideally while the ear canal is still wet, I use q-tips.
 
-Q-tips that are stuck on plastic “sticks” I find to be unsafe/unstable — there have been more times than I'd like where the cotton part almost fell off inside of my ear. \
+Q-tips that are stuck on *plastic* “sticks” I find to be unsafe/unstable — there have been more times than I'd like where the cotton part almost fell off inside of my ear. \
 Because of this, you should buy q-tips on *wooden* “sticks”. Those, I find, keep the cotton attached *way* better.
 
 Go figure! \
@@ -157,7 +157,7 @@ This “best effort” is great anyway, but the material *will* be applying pres
 When it's in your ears for 8+ hours while sleeping, this ends up resulting in ringing in your ears, when you wake up.
 
 This is not that particularly bad: especially if you only use earplugs for sleeping, this is a non-issue. \
-But if you intend to continue on your day using earplugs, all this ear pressure may sum up to be quite bad!
+But if you intend to continue on your day using earplugs, all this ear pressure may sum up to be quite jarring!
 
 I found a weird technique that helps alleviate this. \
 It's gimmicky as hell, but far more viable than it sounds.
@@ -200,11 +200,67 @@ You can find my contacts on the main page of this blog; Most direct is to dm me 
 
 # silicone moldable
 
-❗but canal pressure buildup is a thing
+I used trees for a long time before trying these out, and the thing that inspired me to do so is *canal pressure*.
+
+When you use earplugs genuinely *most* of the day, the best effort basis of trees isn't perfect — your ears feel the wear & tear after a while 😔
+
+![](./moldables.jpg)
+
+Silicone moldable earplugs solve this issue in a funky way. \
+While most earplugs are meant to be inserted *into* your ear canal, these *aren't*!
+
+The idea with these is that they're *malleable*, yet sturdy. \
+Kinda similar to modeling clay!
+
+Intead of pushing them inside of your ear, you *cover* the ear canal. \
+Thanks to the plasticity of the material, it can go *exactly* along your ear shape, and it's how it can be really effective at blocking sound!
+
+You'd think you'd get a sound blocking *downgrade* by *not* filling your ear canal, but actually I can't tell a difference in sound, compared to trees! \
+But most importantly, you are no longer abusing your quite sensitive holes, and that lets you keep them filled for a lot longer, without any downside.
+
+## pushing in
+
+When I first got these, I didn't quite get the memo about how I'm meant to use these... \
+Nothing bad happened from me inserting them into my ear, but it's technically incorrect!
+
+“Why *not* insert them, if that's chill?”, you might ask. \
+Unlike trees, that use an inherently hard-ish material, moldables are more on the viscous side. \
+Not sure what to compare them to actually, maybe like 10x harder honey?
+
+Anyway, due to the more liquidy nature of these, you're running some risk by putting them *inside* of your ear. \
+The hotter the material becomes, the more squishy it is. \
+While on the *outside* of your ear, that's not a problem whatsoever: it's not that hot there, and even if it becomes extra sticky, you can still easily pull it away. \
+But the *inside* of your ear is a different question! \
+If, god forbid, you pull on it not carefully enough, trying to pull it out of your ear canal, \
+and a piece of it stuck really tightly to an ear wall, \
+you now have a piece of bullshit in your ear!
+
+You definitely don't want to run that risk, especially considering that there's actually *no upside* to doing so. \
+Let me teach you the *correct* way to use them!
+
+First, squish the “tablet” for a bit, forming it into a ball that's a bit warm from your hands. \
+Note, a *ball*, not an elongated shape how you might expect! \
+Place it on your thumb.
+
+Remember the whole dance we did with straightening the ear canal, back in the trees section? \
+We don't need the canal to be straight in this instance, we are supportive parents; \
+But still I find that “unwrapping” the ear is quite helpful in putting the tablet into place.
+
+For putting the tablet on your right ear, “unwrap” the ear with your left hand. \
+Now get the tablet on your right thumb close to your ear canal, and start pushing it on top of it, with a sliiiiight rotation. \
+Our goal here, mainly, is to *cover* the ear canal. Remember, we don't need to push it *inside*.
+
+Moldables are sticky by design, and are especially so when new. \
+So after you push it *on*, just pulling away your thumb is a fool's errand — you'll pull away the tablet with it, a bit, and loosen the connection, which you want to avoid!
+
+What I like to do is
+❗take the other finger cause we don't need to unwrap anymore (we're done with the important part), and hold down a piece of the moldable to be able to pull away the right thumb, now you push all the bits into place, so that it hugs the ear properly
+
+❗you need to replace these, here's for how long they lasted me
 
 ❗sequential container for drying off and protecting from dust
 
-❗it might be a good idea to pull apart some bit, but don't rush with that as you may waste some of them in the process, as putting it back together doesn't particularly work
+❗it might be a good idea to pull apart some bit, but don't rush with that as you may waste some of them in the process, as putting it back together doesn't particularly work “deeply unpleasant, despite being technically usable”
 
 # footnotes
 
