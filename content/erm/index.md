@@ -7,7 +7,7 @@ An AI hallucinated, and god am I thankful that it did.
 
 {{ hr(id="start") }}
 
-I've been trying to find reasons to finally switch to kanata: I've tried it before in the past, and while it was really cool, ultimately it didn't feel worth the effort.
+I've been trying to find reasons to finally switch to [kanata](https://github.com/jtroo/kanata): I've tried it before in the past, and while it was really cool, ultimately it didn't feel worth the effort.
 
 **But**! If I collect enough significant advantages over [xremap](https://github.com/xremap/xremap), I'll be able to power through the magnitudional task of reading through the docs, and processing the very hard concept of how remapping works in kanata.
 
