@@ -107,6 +107,9 @@ I'll show you some tricks to help circumvent that, but if your wm has a mechanis
 ❗run through shell trick
 ❗https://mysystemd.talos.sh/
 
+❗used to [change wallpaper on wake], but that changed too frequently
+❗now change on every x hour, but use lockfile to not change twice if two elapsed
+
 # footnotes
 
 {{hn(i=1)}} There's allegedly `anacron` that solves this issue, but it didn't work for me when I tried it.
