@@ -1,7 +1,6 @@
 +++
 title = 'i overuse anki'
-date = '2025-08-15'
-draft = true
+date = '2025-08-31'
 +++
 
 No, I have not burned out on anki. \
@@ -229,9 +228,54 @@ If I ever need to refresh my snake skills, I know where to go — my note for py
 I'll then go through the entire file, going “oh huh! good to know” until I'm ready to use the language again.
 Or, you know, just search within the note for things that are relevant :p
 
-❗git who, git, systemd,
+There are quite a few other things, that truthfully I should have never carded in the first place. \
+Systemd-related information is unfathomably difficult to memorize.
+All the various properties you have access to, are named incredibly inconsistently, so as soon as you start to develop a helpful memory semantic, another property completely breaks it.
+Is it “delay” or “interval”? You never know 😌
 
-❗Is the blog post one full document, or is it broken up into anki cards that cover each individual aspect? /s
+Programs that I use in some limited capability, and probably will never use the full power of, simply due to lack of need. \
+The two examples that come to my head immediately are [`zola`](https://github.com/getzola/zola) (the SSG I use for this website) and [`just`](https://github.com/casey/just) (project-specific command executor) \
+There's quite a few niche and hyperspecific details I memorize about both, that I have literally never used and likely won't. \
+But as usual, just straight up losing that knowledge would feel bad :c \
+Really really excited to convert this genre of cards into notes, to never have to plague my mind with maintaining it in my memory.
+
+Then there's the *really* wack kind — programs I literally never even used, but learned. \
+[`git-who`](https://github.com/sinclairtarget/git-who) is one of them.
+A really nifty program for viewing history of contributions over time, getting a better overview about who contributed where at which periods of time. \
+Pretty awesome! However, I don't think I have *ever* used git blame :p \
+So you can probably see how I wouldn't have yet used `git-who` either — yet the anki cards remain. Simply hilarious!
+
+{{hr(id="conclusion")}}
+
+I can't wait until I finish converting all of this and that into notes, and can get back into *learning* new things.
+
+Now, unbounded by anki, I'll be able to learn in a much different way than before. \
+Yesterday, I got a taste of this new way of learning, and it is RAVENOUS /pos
+
+I have a couple of interactive ffmpeg functions I wrote for myself in fish shell: I get asked a series of questions and that results in some specific ffmpeg command to be executed. \
+The logic is of course written by me, but the ffmpeg flags I figured out with ai.
+
+Now, it all *works*, but I'm well aware that I shouldn't trust an ai to give me *the best* / most optimized output; \
+Learning ffmpeg would be insurmountable with my previous anki workflow, but now that I *don't need to* have 100% correct knowledge, I can far more reasonably just “look around” the ffmpeg manpages, the internet, and more **naturally** collect information, not requiring myself to learn from the absolute base.
+
+It was **so** fun! \
+Like, holy shit! I always assumed learning ffmpeg in any capacity would be basically impossible, but no, not really!
+
+As I looked through the flags my functions were using, I discovered and learned about them bit by bit. \
+Intead of a third of my energy being spent worrying about how to anki the details succinctly, I was free to roam in the flowers, *exploring* the sea of ffmpeg options, and to be enthralled by the process.
+
+No longer was that learning that I had to “get through” — no, the journey itself became much more enjoyable, because the expectations are much more reasonable. \
+I now have a nice note about ffmpeg, where all I know so far is collected, no matter how wrong or inprecise; as now, more naturally, it's something that can be developed over time, not set in stone while I'm not even certain about the material.
+
+It is *heavenly*!
+
+# a quote
+
+I announced writing this blog post on my [discord server](https://discord.gg/bgVSg362dK), and got this absolute peak response: \
+“Is the blog post one full document, or is it broken up into anki cards that cover each individual aspect?”
+
+Really puts into words, how silly my obsession of “anki only, no notes” was. \
+Now all that's left, is to **not** develop the opposite one, where I refuse anki for very good-to-anki things :p
 
 # footnotes
 
