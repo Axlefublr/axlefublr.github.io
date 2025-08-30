@@ -233,7 +233,7 @@ Systemd-related information is unfathomably difficult to memorize.
 All the various properties you have access to, are named incredibly inconsistently, so as soon as you start to develop a helpful memory semantic, another property completely breaks it.
 Is it “delay” or “interval”? You never know 😌
 
-Programs that I use in some limited capability, and probably will never use the full power of, simply due to lack of need. \
+Programs that I use in some limited capacity, and probably will never use the full power of, simply due to lack of need. \
 The two examples that come to my head immediately are [`zola`](https://github.com/getzola/zola) (the SSG I use for this website) and [`just`](https://github.com/casey/just) (project-specific command executor) \
 There's quite a few niche and hyperspecific details I memorize about both, that I have literally never used and likely won't. \
 But as usual, just straight up losing that knowledge would feel bad :c \
