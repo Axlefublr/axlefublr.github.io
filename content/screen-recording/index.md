@@ -25,7 +25,12 @@ This is why I compress the video after, with ffmpeg:
 
 ```fish
 wf-recorder -Dyf ~/i/s/original.mkv
-ffmpeg -y -i ~/i/s/original.mkv -c:v libx264 -preset slow -crf 21 -b:v 2M -maxrate 3M -bufsize 4M -c:a aac -b:a 96k -movflags +faststart ~/i/s/compressed.mp4
+ffmpeg -y -i ~/i/s/original.mkv \
+    -an \
+    -c:v libx264 -preset medium -crf 21 \
+    -movflags +faststart \
+    -b:v 3M -maxrate 4.5M -bufsize 6M \
+    ~/iwm/sco/compressed.mp4
 ```
 
 This greatly reduces the size, while not being that huge of a difference in quality. Take a look!
@@ -74,7 +79,12 @@ And then the screen-record.fish script is:
 #!/usr/bin/env fish
 touch /tmp/mine/recordilock
 wf-recorder -Dyf ~/iwm/sco/original.mp4
-ffmpeg -y -i ~/iwm/sco/original.mkv -c:v libx264 -preset slow -crf 21 -b:v 2M -maxrate 3M -bufsize 4M -c:a aac -b:a 96k -movflags +faststart ~/iwm/sco/compressed.mp4
+ffmpeg -y -i ~/iwm/sco/original.mp4 \
+    -an \
+    -c:v libx264 -preset medium -crf 21 \
+    -movflags +faststart \
+    -b:v 3M -maxrate 4.5M -bufsize 6M \
+    ~/iwm/sco/compressed.mp4
 rm -f /tmp/mine/recordilock
 sl.fish ~/iwm/sco/compressed.mp4
 ```
@@ -171,7 +181,12 @@ touch /tmp/mine/recordilock
 echo recording >~/.local/share/mine/waybar-screen-record
 wf-recorder -Dyf ~/iwm/sco/original.mp4
 echo compressing >~/.local/share/mine/waybar-screen-record
-ffmpeg_compress ~/iwm/sco/original.mp4 ~/iwm/sco/compressed.mp4 -preset slow -crf 21 -b:v 2M -maxrate 3M -bufsize 4M -b:a 96k
+ffmpeg -y -i ~/iwm/sco/original.mp4 \
+    -an \
+    -c:v libx264 -preset medium -crf 21 \
+    -movflags +faststart \
+    -b:v 3M -maxrate 4.5M -bufsize 6M \
+    ~/iwm/sco/compressed.mp4
 rm -f /tmp/mine/recordilock
 echo copying >~/.local/share/mine/waybar-screen-record
 sl.fish ~/iwm/sco/compressed.mp4
