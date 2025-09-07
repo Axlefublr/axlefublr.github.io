@@ -10,7 +10,7 @@ An example of this is configuration options.
 
 There isn't really an "order" to them, within each section: you are setting *all* of them.
 
-An even more obvious example I have on hand, is a function holding fish script I have, that I use to organize and back up setup processes for various programs: [look here](https://github.com/Axlefublr/dotfiles/blob/main/scripts/setup/dode.fish).
+An even more obvious example I have on hand, is a function holding fish script I have, that I use to organize and back up setup processes for various programs: [look here](https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish).
 
 There too, there isn't some particular order to them. Sure, in the initial setup I'll make fish work, then git, then niri, then probably waybar; but aside from those "blocking" setups, that basically act like dependencies for other setups, there is no obvious order — most things simply behave like a set, rather than an array.
 
@@ -23,7 +23,7 @@ But that's just for the manual sorting I do, like in the setup function holder a
 
 However even with that functionality, it can still feel a bit too manual to feel worth it, not gonna lie.
 
-This is why I wrote a neat lil program called [partialsort.rs](https://github.com/Axlefublr/dotfiles/blob/main/scripts/partialsort.rs)!
+This is why I wrote a neat lil program called [partialsort.rs](https://github.com/Axlefublr/dotfiles/blob/main/eli/partialsort.rs)!
 
 > This isn't exactly a promo, as the program is written as a [wks script](@/rust-scripting/index.md) rather than a normal repo-ed rust program that you could install more easily
 

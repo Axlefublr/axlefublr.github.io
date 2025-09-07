@@ -9,7 +9,7 @@ In your home directory, you probably have `Documents`, `Downloads`, `Pictures`, 
 To follow the semantic, you might create directories like `Programming`, `Notes`, and the like. \
 All of them are pretty long words, and annoyingly they all start with an uppercase letter: neither of that helps if you need to type out full paths to things pretty often.
 
-Unfortunately I do: my biggest usecase is [how I handle program setups](https://github.com/Axlefublr/dotfiles/blob/main/scripts/setup/dode.fish), but typing out paths comes up in all sorts of places. \
+Unfortunately I do: my biggest usecase is [how I handle program setups](https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish), but typing out paths comes up in all sorts of places. \
 `~/Programming/Projects/Mine/Rust/2025` quickly becomes up exhausting to type in, over time. \
 Tab completing paths *helps*, but has other issues that I'll go over in another upcoming blog post.
 

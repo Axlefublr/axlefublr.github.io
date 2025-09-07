@@ -19,7 +19,7 @@ swww img -t any --transition-fps 255 --transition-duration 3 (propose.rs wallpap
 I'm sure you already know what it is for you, assuming that you already set up a wallpaper daemon. \
 If you haven't, I strongly believe `swww` is just directly the best one (for wayland).
 
-"Wtf is [propose.rs](https://github.com/Axlefublr/dotfiles/blob/main/scripts/propose.rs)" you might ask? Ah! It is proof that [my idea](@/randomization-sucks/index.md) ended up being not that viable, and so I changed my approach. Irrelevant for this blog post though.
+"Wtf is [propose.rs](https://github.com/Axlefublr/dotfiles/blob/main/eli/propose.rs)" you might ask? Ah! It is proof that [my idea](@/randomization-sucks/index.md) ended up being not that viable, and so I changed my approach. Irrelevant for this blog post though.
 
 # catch suspend
 

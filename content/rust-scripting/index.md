@@ -85,7 +85,7 @@ When you can tell the startup speed by an eye test, that means it's *really* bad
 
 *Until they weren't...*
 
-One of the first programs I wrote is called [`velvidek.rs`](https://github.com/Axlefublr/dotfiles/blob/main/scripts/velvidek.rs). \
+One of the first programs I wrote is called [`velvidek.rs`](https://github.com/Axlefublr/dotfiles/blob/main/eli/velvidek.rs). \
 I don't use the number row; instead, right meta key + fdsrewvcxa are my numbers (1234567890). \
 Velvidek takes those letters, and replaces them with their appropriate digit. Using this program, I can shim in support for my number layer, without requiring me to press the right meta key. \
 Now instead of having to do `fg %2`, I can just do `f d`, thanks to the fish function I made that made use of velvidek. Very helpful and important addition to my [suspend-based workflow](@/suspend/index.md).
@@ -143,7 +143,7 @@ There's `src/main.rs` and `Cargo.toml`. Just what is needed to make rust-analyze
 Once I finish writing a rust script, it's now time to export it. \
 I have a (rust) script that takes main.rs and Cargo.toml, and joins them into a single file. \
 The path to the target file I want to write to, I specify as the first line in main.rs, in a comment. \
-[Primary link](https://github.com/Axlefublr/dotfiles/blob/main/scripts/scriptister/export-rust-script.rs), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/export-rust-script.rs).
+[Primary link](https://github.com/Axlefublr/dotfiles/blob/main/eli/scriptister/export-rust-script.rs), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/export-rust-script.rs).
 
 While writing this export step, I started thinking about how I'd make a script executable. I would probably write another script, that would act as the program in the shebang. But I found something more elegant!
 
@@ -153,7 +153,7 @@ What I want, effectively, is to:
 
 To achieve that, I can make use of `$PATH`! Once I compile a script, I will rename the resulting binary to the name of a the file, and put that binary somewhere on the `PATH`. This way, I'm typing in a name of a script to execute, but sneakily I'm actually executing the compiled binary stored somewhere else.
 
-This is where the second script comes in. This one is in fish though: [primary link](https://github.com/Axlefublr/dotfiles/blob/main/scripts/scriptister/compile-rust-script.fish), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/compile-rust-script.fish).
+This is where the second script comes in. This one is in fish though: [primary link](https://github.com/Axlefublr/dotfiles/blob/main/eli/scriptister/compile-rust-script.fish), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/compile-rust-script.fish).
 
 While the export script just writes to the target script file, *this* is the compilation script. It compiles the project, and copies the resulting binary somewhere on the PATH.
 
@@ -162,7 +162,7 @@ While one ensures my work is *backed up* (as a single file "script" in my dotfil
 A very sneaky and elegant solution, I'd say! :3<
 
 In the future, if I need to *edit* some rust script, that's where the *import* script comes into play. \
-[Primary link](https://github.com/Axlefublr/dotfiles/blob/main/scripts/scriptister/import-rust-script.rs), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/import-rust-script.rs).
+[Primary link](https://github.com/Axlefublr/dotfiles/blob/main/eli/scriptister/import-rust-script.rs), [backup link](https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/import-rust-script.rs).
 
 It takes a path to a rust script that I exported into previously, splits it into main.rs and Cargo.toml, and writes those files in the workspace directory `wks`. After I import, I'm ready to edit the script in my workspace, to then export it back again.
 

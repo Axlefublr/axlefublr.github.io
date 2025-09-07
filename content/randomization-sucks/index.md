@@ -193,4 +193,4 @@ Even though my algorithm might show me the same thing twice in a row, it **guara
 When I see a wallpaper I saw just recently, I no longer worry: I know that after this one, I'll get to enjoy my entire collection, and none will be forgotten. \
 This made me take picking wallpapers more seriously, actually! There is no way I just happen to not see a given wallpaper for a while due to random chance, so I filter out which wallpapers I actually want to use more aggressively.
 
-Here is the [source code](https://github.com/Axlefublr/dotfiles/blob/main/scripts/suggest.rs) for the program that I wrote for this. It is very much a "for myself" thing so I don't intend to publish it in a convenient way; this blog post more so exists to give you ideas to approach randomization differently, and make it work better for yourself.
+Here is the [source code](https://github.com/Axlefublr/dotfiles/blob/main/eli/suggest.rs) for the program that I wrote for this. It is very much a "for myself" thing so I don't intend to publish it in a convenient way; this blog post more so exists to give you ideas to approach randomization differently, and make it work better for yourself.

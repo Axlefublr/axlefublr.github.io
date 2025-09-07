@@ -195,7 +195,7 @@ Most of what I do is edit config files… So I use this a *lot*. \
 I have file harps bound on <kbd>space+s</kbd>, so to get to all of my most wanted files, I only need to press three keys. \
 Helix config — <kbd>space+s+c</kbd> \
 Foot config (what a strange combination of words) — <kbd>space+s+f</kbd> \
-[Program setups](https://github.com/Axlefublr/dotfiles/blob/main/scripts/setup/dode.fish) — <kbd>space+s+d</kbd>; yada yada etc etc.
+[Program setups](https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish) — <kbd>space+s+d</kbd>; yada yada etc etc.
 
 Now, how did I *set* all of those harps? \
 <kbd>space+S</kbd> is my file harp *set* hotkey! pretty natural, right? :3 \
