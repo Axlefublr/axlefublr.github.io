@@ -1,7 +1,6 @@
 +++
 title = 'smooth scrolling'
 date = '2025-09-16'
-draft = true
 +++
 
 I tried out Zen Browser recently, and one of the many good things about it that I noticed, is how *smooth* the scrolling feels. \
