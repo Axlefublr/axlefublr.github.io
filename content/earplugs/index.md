@@ -247,25 +247,47 @@ We don't need the canal to be straight in this instance, we are supportive paren
 But still I find that “unwrapping” the ear is quite helpful in putting the tablet into place.
 
 For putting the tablet on your right ear, “unwrap” the ear with your left hand. \
-Now get the tablet on your right thumb close to your ear canal, and start pushing it on top of it, with a sliiiiight rotation. \
+Now get the tablet on your right thumb close to your ear canal, and start pushing it on top of it, with a sliiiiight twist{{fn(i=4)}}. \
 Our goal here, mainly, is to *cover* the ear canal. Remember, we don't need to push it *inside*.
 
 Moldables are sticky by design, and are especially so when new. \
 So after you push it *on*, just pulling away your thumb is a fool's errand — you'll pull away the tablet with it, a bit, and loosen the connection, which you want to avoid!
 
-What I like to do is
-❗take the other finger cause we don't need to unwrap anymore (we're done with the important part), and hold down a piece of the moldable to be able to pull away the right thumb, now you push all the bits into place, so that it hugs the ear properly
+To handle that, I have a process. \
+We don't need the left hand to be holding the unwrapped ear anymore, so use a finger from that hand to lightly hold the earplug in place — you can now pull away the right hand thumb without pulling the earplug away with it. \
+We're not *fully* done yet; moldable earplugs work by *plugging* your ear, so that sound doesn't come through. \
+So now your job is to push it around, to make it hug the ear and have a quite strong connection that way.
 
-❗you need to replace these, here's for how long they lasted me
+How exactly to *spread* it is a bit of a skill in its own right, and I don't think I can fully explain it away. But the main idea is that you should stay within the area of where the ear canal starts; no need to go far — you'll block no sound covering an area that isn't near the ear canal.
+
+## lastness
+
+Trees last you infinitely, but moldables don't! You will need to replace them every so often. \
+I've been measuring how long they've been lasting me; I like to use 4 pairs (8 in total) at a time, and to replace them based on a fairly consistent feeling — once I catch myself thinking “goddamn these are so inconvenient, I'd rather just use trees”, *that's* when I replace them. \
+In-shape moldables *are* convenient, which I find out again and again after a replacement: “ohhhh that's how good they are at start”.
+
+22 27 31 — these are the three recorded times, in days, that 4 pairs have lasted me. \
+As you can see, the number keeps increasing :o (for now) \
+I think that's in part due to some techniques I'm using, that I'm going to share with you. \
+But the bottom line is — 20 days is conservative, 30 days is pushing it, 40 days is a dream and forget about it, genuinely. \
+Although if you're not deafmaxxing like me, they may last you longer due to you using them less? \
+But considering that *dust buildup* is probably the highest concern, it's probably not by much.
+
+## washing
+
+❗trees can manage being dirty kinda (if you be lazy), these just lose effectiveness so really need to be washed
+❗trees just get washed by incident, moldables need individual care; gently brush them with your fingers to wash off the soap that you are using (have you mentioned your preference for hard soap? mention that it matters a lot more here) — soapiness will reduce stickiness which you wanna retain
+
+## back to lastness
 
 ❗sequential container for drying off and protecting from dust
 
 ❗it might be a good idea to pull apart some bit, but don't rush with that as you may waste some of them in the process, as putting it back together doesn't particularly work “deeply unpleasant, despite being technically usable”
-
-❗deafmaxxing
 
 # footnotes
 
 {{hn(i=1)}} Disgusting, I know. Bear with me. Aaaargh!! 🏃‍♀️🧸
 
 {{hn(i=2)}} Like in [rfc 2119](https://datatracker.ietf.org/doc/html/rfc2119) (lmao)
+
+{{hn(i=4)}} In season 2 we learn that it was the villain all along /j
