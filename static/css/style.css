@@ -131,7 +131,7 @@ table {
 /*--------------------code--------------------*/
 code,
 kbd {
-	font-family: IBM Plex Mono;
+	font-family: Google Sans Code;
 	font-size: 14pt;
 	background-color: var(--inline-code-bg);
 	padding: 0.1em 0.25em;
