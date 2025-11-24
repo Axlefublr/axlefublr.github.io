@@ -78,7 +78,7 @@ table {
 }
 
 blockquote,
-blockquote>p {
+blockquote > p {
 	margin-block: 0;
 	margin-inline: 0;
 }
@@ -150,13 +150,13 @@ pre {
 	padding: 0.3em 0 0.3em 0.6em;
 	border-radius: 0.3em;
 
-	>code,
-	>kbd {
+	> code,
+	> kbd {
 		padding: 0;
 		border-radius: 0;
 		white-space: pre;
 
-		>span {
+		> span {
 			padding: 0 0.6em 0 0;
 		}
 	}
@@ -206,7 +206,7 @@ pre {
 	.z-attribute-name.z-css,
 	.z-parameter.z-genconfig,
 	.z-toml.z-key,
-	.z-json.z-mapping.z-key.z-meta>.z-string.z-quoted,
+	.z-json.z-mapping.z-key.z-meta > .z-string.z-quoted,
 	.z-shell.z-parameter.z-option {
 		color: var(--mint);
 	}
@@ -247,11 +247,11 @@ a.anchorina {
 	height: 1em;
 	margin-block: 0.7em;
 
-	&:hover>hr {
+	&:hover > hr {
 		background-color: var(--orange);
 	}
 
-	>hr {
+	> hr {
 		color: var(--orange);
 		background-color: var(--orange);
 		height: 3px;
@@ -320,7 +320,6 @@ h6::after {
 	border-top-right-radius: 99px;
 	flex-grow: 1;
 	margin-left: 10px;
-
 }
 
 h2::before {
@@ -344,23 +343,23 @@ h6::before {
 }
 
 h1,
-h1>a,
-h1>a:visited,
+h1 > a,
+h1 > a:visited,
 h2,
-h2>a,
-h2>a:visited,
+h2 > a,
+h2 > a:visited,
 h3,
-h3>a,
-h3>a:visited,
+h3 > a,
+h3 > a:visited,
 h4,
-h4>a,
-h4>a:visited,
+h4 > a,
+h4 > a:visited,
 h5,
-h5>a,
-h5>a:visited,
+h5 > a,
+h5 > a:visited,
 h6,
-h6>a,
-h6>a:visited {
+h6 > a,
+h6 > a:visited {
 	color: var(--fg-heading);
 	font-weight: bold;
 	text-align: left;
@@ -435,7 +434,7 @@ a.title {
 	display: block flex;
 	flex-wrap: wrap;
 
-	>.promo {
+	> .promo {
 		display: flex;
 		box-sizing: border-box;
 		align-items: center;
@@ -478,7 +477,7 @@ nav {
 	display: flex;
 	flex: 0;
 
-	>* {
+	> * {
 		align-items: center;
 		box-sizing: border-box;
 		display: flex;
@@ -513,14 +512,14 @@ nav {
 				max-width: 50%;
 			}
 
-			>.name {
+			> .name {
 				color: var(--yellow);
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 			}
 
-			>.direction {
+			> .direction {
 				color: var(--orange);
 				text-wrap: nowrap;
 				padding-inline: 0.2em;
@@ -529,7 +528,7 @@ nav {
 			&.previous {
 				justify-content: flex-start;
 
-				>.name {
+				> .name {
 					padding-inline-end: 0.2em;
 				}
 			}
@@ -537,7 +536,7 @@ nav {
 			&.next {
 				justify-content: flex-end;
 
-				>.name {
+				> .name {
 					padding-inline-start: 0.2em;
 				}
 			}
