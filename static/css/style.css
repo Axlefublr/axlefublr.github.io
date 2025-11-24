@@ -33,7 +33,7 @@ html {
 }
 
 body {
-	font-family: IBM Plex Sans;
+	font-family: Inter;
 	font-size: 15pt;
 	background-color: var(--bg-color);
 	color: var(--text-color);
