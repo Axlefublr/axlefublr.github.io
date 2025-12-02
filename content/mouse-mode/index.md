@@ -62,5 +62,70 @@ My speed doesn't change though! It only will once I *release* and then re-press 
 That makes it uncomfortable to *fully* rely on.
 So the fast mode needs to be mostly fast, but *usable* for smaller movements as well.
 
+Do you ever notice how you use the real mouse? \
+To click on some spot, you first do a big inaccurate movement to “almost there”, and then you stop to do a few small movements to get to the exact spot you want to click. \
+Turns out this is so engrained in me, that replicating it in my mouse mode works really well.
+
+Mouse mode's speed is not constant: it starts out somewhat slow, and increases up to its maximum within 200ms. \
+Thanks to this, when I make a big movement, my speed is fantasic! Then when I need to get a bit preciser, I can tap the movement keys some amount of times to make use of the slower speed, to get my cursor where I wan't without *needing* to enter the slow mode.
+
+I still do have and do use slow mode quite often, mind you; it's just that I don't need it for *most* movements.
+
+The time window where the speed increases is so small on purpose: it should mostly be to make taps viable; otherwise I don't want most of my movement to be a slog.
+
+Another thing I often noticed with moving the mouse from keyboard, is that it's very *jagged*. \
+You can actively see the cursor *jumping*, rather than moving, and it feels very wack!
+
+I solved this by using a quite small time period between moves: 5ms. \
+It's frequent enough that mouse movement looks *smooth* and continuous. \
+Of course to make it *perfect* I wanted to set it to 1ms, but then I can't do the above “taps are slow” thing as well.
+
+Kanata's `movemouse-accel` actions change your speed by changing the amount of pixels you move by, with your every move. \
+I move every 5ms; initially, by *zero* pixels (yep) at a time. \
+Over the course of 200ms, that amount of pixels rises, maxing out at 10 pixels. \
+Now that the 200ms have passed, I'm moving at the maximum speed of 10 pixels per each 5ms.
+
+Pretty sure the speed changes linearly, so we can graph it out:
+|Time passed|Pixels per move|
+|-----------|---------------|
+|0ms        |0px            |
+|20ms       |1px            |
+|40ms       |2px            |
+|60ms       |3px            |
+|80ms       |4px            |
+|100ms      |5px            |
+|120ms      |6px            |
+|140ms      |7px            |
+|160ms      |8px            |
+|180ms      |9px            |
+|200ms      |10px           |
+
+The starting speed being *0* pixels per move sounds silly, but it *really* helps the taps be more precise, as effectively there's more time for my mere human fingers to be holding the keyboard key, and it not mattering. \
+Still, the speed increases *so fast*, that this period of not doing anything isn't jarring — it's *helpful*.
+
+And so, if I try to move every **1ms**, the 10 pixels maximum is waaaaaay too fast. \
+But actually, even the 0 pixel *minimum* is sort of too fast, for my usecase of “tap is slow” — 200ms is an awfully short time. \
+Which is why 5ms is so far the best tradeoff that I found that feels good to use.
+
+Very important to play with the values here; I changed these after like *months* of using the same config. \
+So don't be afraid to change them even if they're in your muscle memory now! \
+Hell, I'm even changing these values as I'm writing this blog post! Changed 6ms → 5ms, 1px → 0px, 200ms → 160ms
+(leading to easier to access precision without losing long distance travelling speed)
+
+The slow moving sublayer, that I access by holding <kbd>l</kbd>, is a lot simpler. \
+Its speed is constant; it always moves by a single pixel, just more *rarely*. \
+Currently, it does a move every 16ms; Athough with the recent (i.e. 5 minutes ago) change, I may make it even slower.
+
+Most of my normal movements should be, and *are* easily doable with the **normal** speed. \
+For example, I can move my cursor in a continuous motion onto any given message on discord 95% of the time, without needing to make a second nudge. \
+Browser tabs (which are vertical for me), I can successfully point at about 70% of the time (didn't measure this, vibes based)
+
+The basic idea is that I shouldn't feel like I need to bring out precise mode *constantly*. \
+It's most useful for more rare-ish situations, like taking (precise) screenshots or interacting with really small buttons / scrollbars / sliders; sometimes for selecting text (although double click selecting helps to not need it there).
+
+In situations where slow mode is warranted, I first use the normal speed to get *almost there*, then release the movement key(s), hold down <kbd>l</kbd>, and correct my position. \
+After I do so, I release <kbd>l</kbd>, move to the ending location (screenshots, text telect, slider, etc), and similarly use <kbd>l</kbd> to correct my position there too (if needed). \
+**Very** important to not get baited into holding <kbd>l</kbd> for the entire move, most of which doesn't need to be that precise (and by extension *slow*).
+
 ❗tapholdy has to be space for convenient usage of both sides at the same time
 ❗you can differentiate on press / on release events, but your action *has to* be a virtual key. think of it as if you're being required to use an alias as soon as you need to differentiate press/release. otherwise it's not more complex really
