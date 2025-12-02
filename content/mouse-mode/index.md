@@ -117,8 +117,8 @@ Its speed is constant; it always moves by a single pixel, just more *rarely*. \
 Currently, it does a move every 16ms; Athough with the recent (i.e. 5 minutes ago) change, I may make it even slower.
 
 Most of my normal movements should be, and *are* easily doable with the **normal** speed. \
-For example, I can move my cursor in a continuous motion onto any given message on discord 95% of the time, without needing to make a second nudge. \
-Browser tabs (which are vertical for me), I can successfully point at about 70% of the time (didn't measure this, vibes based)
+For example, I can move my cursor in a continuous motion onto any given message on discord 70% of the time, without needing to make a second nudge. \
+Similar case for browser tabs (which are vertical for me).
 
 The basic idea is that I shouldn't feel like I need to bring out precise mode *constantly*. \
 It's most useful for more rare-ish situations, like taking (precise) screenshots or interacting with really small buttons / scrollbars / sliders; sometimes for selecting text (although double click selecting helps to not need it there).
