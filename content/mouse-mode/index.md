@@ -88,17 +88,17 @@ Now that the 200ms have passed, I'm moving at the maximum speed of 10 pixels per
 Pretty sure the speed changes linearly, so we can graph it out:
 |Time passed|Pixels per move|
 |-----------|---------------|
-|0ms        |0px            |
-|20ms       |1px            |
-|40ms       |2px            |
-|60ms       |3px            |
-|80ms       |4px            |
-|100ms      |5px            |
-|120ms      |6px            |
-|140ms      |7px            |
-|160ms      |8px            |
-|180ms      |9px            |
-|200ms      |10px           |
+|0ms  | 0px|
+|20ms | 1px|
+|40ms | 2px|
+|60ms | 3px|
+|80ms | 4px|
+|100ms| 5px|
+|120ms| 6px|
+|140ms| 7px|
+|160ms| 8px|
+|180ms| 9px|
+|200ms|10px|
 
 The starting speed being *0* pixels per move sounds silly, but it *really* helps the taps be more precise, as effectively there's more time for my mere human fingers to be holding the keyboard key, and it not mattering. \
 Still, the speed increases *so fast*, that this period of not doing anything isn't jarring — it's *helpful*.
@@ -126,6 +126,8 @@ It's most useful for more rare-ish situations, like taking (precise) screenshots
 In situations where slow mode is warranted, I first use the normal speed to get *almost there*, then release the movement key(s), hold down <kbd>l</kbd>, and correct my position. \
 After I do so, I release <kbd>l</kbd>, move to the ending location (screenshots, text telect, slider, etc), and similarly use <kbd>l</kbd> to correct my position there too (if needed). \
 **Very** important to not get baited into holding <kbd>l</kbd> for the entire move, most of which doesn't need to be that precise (and by extension *slow*).
+
+❗retract the 0, suggest the simple math to showcase the maximum constant speed
 
 ❗tapholdy has to be space for convenient usage of both sides at the same time
 ❗you can differentiate on press / on release events, but your action *has to* be a virtual key. think of it as if you're being required to use an alias as soon as you need to differentiate press/release. otherwise it's not more complex really
