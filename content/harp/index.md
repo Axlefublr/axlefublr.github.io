@@ -849,6 +849,133 @@ I've been on and off writing this blog post for over 50 days so I wanted to spar
 I'm sure you're tired from reading, too, genuine thank you for taking the time. \
 Hope you can now take the harp concept, and make it as, if not even *more* useful for yourself, as it is for me.
 
+# sike
+
+I come back yet again! \
+It's now 2025.12.10 (i.e. almost half a year since this post's initial release), and I have new thoughts (and features :o)
+
+Harp doesn't have a “view all currently set registers” feature, half on purpose and half due to my laziness.
+
+If you are given a chance to *look* at your existing registers, you will ultimately feel encouraged to *clean them up* all the time. \
+It can feel like a bit of a waste of time, considering how relativities give you essentially infinite registers, that you'll then indefinitely clean. \
+My thought process was that if you need some sort of view to remember what key you placed some harp on, \
+it's probably because you placed it on an unmemorable key, and should instead re-make the harp on a better one.
+
+This is the hotkey master in me talking, mainly: **the** thing I am best at, is creating hotkey systems. \
+So both creating memorable hotkeys and remembering them is my forte.
+
+My thinking works quite well for *most* harp actions.
+There's not much effort in making a file or cwd harp for example. \
+But once you get into the more fancy harp actions, my approach starts to crumble.
+
+Making *any* harp is somewhat of a mental energy investment: “what key should I use, that feels the most ‘correct’ for this file / working directory / search pattern / etc?”, “what relativity should I use for this?”, “should I store this as a mark or as a search harp?”. \
+This investment is worth it mainly because of how much mental energy you *save* in the future, over time.
+
+You decide to pay this price, and make a somewhat complex / long command harp. \
+It sets up the testing environment for this project in some specific way, massively helping you iterate on it faster. \
+You use it quite a lot, feeling sheer bliss over how productive it helps you be.
+
+But new excitements come! \
+You switch to working on a new project for a while, with it own harps and gimmicks.
+Many months go by, and you come back to the first project again. \
+“Uhhhhhh what was that useful harp again?”{{fn(i=10)}} — you try the most likely key that you might've placed it on, but it does a completely different command, maybe starting some build that now you need to annoyingly figure out how to cancel. \
+“Hmmm what about this one?” — ‘harp `h` unset’ it tells you.
+
+Well... I don't want to just keep mashing keys until I find it.
+Maybe some of my command harps are quite destructive, after all.
+Ugh, it's frustrating but I think it's not worth trying to re-find the harp, let me remake it again.
+
+But here's a caveat when it comes to making things, as a developer. \
+The first time, the energy investment is fueled by your excitement at how cool the thing you're creating is going to be.
+For example, you're learning nushell! And making this specific command is great practice that you're quite pumped for. \
+But the *second* time solving the same exact problem, you're not quite as excited. \
+Well, it would be one thing if it was the same *problem*, but no you solved LITERALLY this already, so it feels even worse to have to redo.
+
+This wouldn't matter much if the command was short and simple, but you made quite a bit of a monster of a command harp. \
+It inserts the dates in some specific way, autofills some info by curling an api, and even does your dishes for you. \
+“Grrrr I don't wanna do all that again”.
+
+You toss it up as a skill issue with using harp and do indeed do it again. \
+But this experience will be remembered by your psyche. \
+Maybe next time, you won't feel so ready to make a harp *as* complex. \
+“What if I lose it again?”
+
+{{hr(id="discovery")}}
+
+Yes, what I noticed over months of using harp, is that the current system *discourages* you from using harps to their full potential, hilariously. \
+You will be taught to only make harps that you're **sure** you can remember, or only if they're easy enough to remake. \
+The latter type you end up using once and never again, because it's too much of a pain to try to remember where you put them.
+
+What's the point of all these infinite potential keys if my human brain can only remember a subsection of them!
+
+NOT ANYMORE!
+
+Now harp actually **does** show you all of the set registers you have. \
+In every harp action, in every relativity. \
+You don't need to go into some submode to take a look — they are displayed to you automatically in the whichkey-like window{{fn(i=11)}}
+
+Now you press your hotkey for command harps, and immediately see all the registers you have for your default relativity (which let's say stays `global`). \
+You press <kbd>.</kbd> and go into the directory relativity: the whichkey window changes to now show the command harps in the directory relativity. \
+You can keep changing relativities, or get/set, and throughout all of that, the whichkey menu will continue reminding you what you currently have set.
+
+This reopens harp possibilities to insane extents! \
+I've already noticed just how much more harps I'm using, thanks to me never *losing* any. \
+If I can be sure I can *keep* the harp with me forever, I feel a lot more *encouraged* to completely abuse them 🚀 \
+(which is the whole point!!)
+
+I forked a gtk theme and am “fixing” it; but the file is fucking six to seven thousand lines long so it's a massive pain in the asss to traverse. \
+Despite that, before making this whichkey feature, I was rawdogging travel for the most part! No harps for what can so benefit from them. \
+But *after* implementing it? Oooh boy!
+
+I made a command harp to reopen gtk3-widget-factory on loop for me (useful to test how my changes look),
+started using marks a lot more frequently for quick “remember this position” movements,
+made command harps for converting colors (no hsl in gtk3 😭),
+register harps for common colors I'm using in the theme,
+and now also *search* harps to jump to various rules quickly.
+
+I am now *actually* living the harp dream, making use of them as much as I intended for them to be used. \
+I used to say quite frequently: “oh yeah even I underuse harps, I should use them more” — this was due to a misdesign!
+
+{{hr(id="bad-defaults")}}
+
+Even *before* reigniting my usage of harps, I noticed how *uncomfortable* it is to switch relativites, with them all being on keys that aren't on the home row. \
+<kbd>,</kbd>, <kbd>.</kbd>, <kbd>;</kbd>, <kbd>'</kbd> all make *sense* as defaults, but if you use relativities a LOT, pressing those keys becomes jarring after a while.
+
+I changed them to <kbd>j</kbd> → buffer, <kbd>k</kbd> → global, <kbd>l</kbd> → directory. \
+Yay, now they're all on the home row! And are a *lot* more pleasant to reach thanks to it. \
+But they are *ridiculous* as defaults...
+
+Because now you can't use <kbd>j</kbd>/<kbd>k</kbd>/<kbd>l</kbd> as *registers*! \
+I'm okay losing out on that, but forcing *you* to, too, feels pretty wack.
+
+So now the hotkeys are configurable! \
+You can decide for yourself: what keys switch to what relativity, what key switches get/set (instead of <kbd>Space</kbd>), and what keys do the mystery XXX and YYY I'm going to explain in the next section.
+
+The *defaults* stay the “reasonable but kinda yuck to use” <kbd>,</kbd>, <kbd>.</kbd>, <kbd>;</kbd>, <kbd>'</kbd>, <kbd>Space</kbd>, for the record.
+
+{{hr(id="delete")}}
+
+Now that you can *view* your set registers, you have to be able to delete some of them, too; so that all the ones you are no longer using aren't creating a visual mess that takes up half your screen.
+
+I do still think that it's unfortunate that you'll be encouraged to clean things up (often a bit of a waste of time), but it's just SO worth it considering how much more easily you can rely on and abuse harps, now that you can see them.
+
+When you invoke a harp action, you start in `get` mode and get a view of all of the set registers. \
+At this point, you can press <kbd>Backspace</kbd>: after that, the next key that you press will get *deleted*, the ui will update to reflect that deletion, and you'll go back to `get` mode.
+
+So `del` is a new mode, along with `get` and `set`, but unlike the latter two, it only stays for a single key and **doesn't** finish / close the harp action (only brings you back to `get`). \
+So you can press <kbd>Backspace</kbd><kbd>a</kbd><kbd>Backspace</kbd><kbd>b</kbd><kbd>Backspace</kbd><kbd>c</kbd> to delete three different registers in a sequence — you enter the `del` mode three different times here.
+
+At first, I made the del mode “stay”: once you pressed <kbd>Backspace</kbd>, all of the following keys would be deletions, and you'd need to press <kbd>Space</kbd> to go back to `get` when you wanted to. \
+Very quickly I started to accidentally delete harps that I was meaning to `get` 💀 \
+So I changed it to the “chord the next key” variation that is the current behavior — it seems a lot more natural.
+
+If you press <kbd>Backspace</kbd> and go “nevermind actually”, you can go back to `get` without deleting anything by pressing <kbd>Space</kbd>, or close the action altogether by pressing <kbd>Escape</kbd>.
+
+There will be some situations where you want to delete *all* of the registers in a section, and for that you can press <kbd>Alt+Backspace</kbd>, instead of spamming <kbd>Backspace</kbd> + a key. \
+*That* immediately closes / finishes the harp action, unlike `del` mode.
+
+These two hotkeys are the mystery XXX and YYY I mentioned! So you can change them too 😌
+
 # footnotes
 
 {{hn(i=1)}} To your possible surprise, yes this is a [real file path](@/optimizing-paths/index.md) I have. It's for this blog!
@@ -864,3 +991,7 @@ So register harps simply blammo the text into your `default-yank-register`, and 
 {{hn(i=7)}} Although my fork introduces a :random command that lets you randomize the contents of your selections, rather than specifically lines.
 
 {{hn(i=9)}} A chore-tracking program of mine that I will eventually write a blog post about.
+
+{{hn(i=10)}} Hell, do you even remember that that harp exists?
+
+{{hn(i=11)}} I'm referring to the menu that appears on the bottom right when you use chorded mappings, or when you try to `select_register`. In helix terms, its proper name is `auto-info` — which is a stupid and unmemorable name.
