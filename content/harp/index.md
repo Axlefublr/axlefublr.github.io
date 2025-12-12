@@ -972,7 +972,8 @@ So I changed it to the “chord the next key” variation that is the current be
 If you press <kbd>Backspace</kbd> and go “nevermind actually”, you can go back to `get` without deleting anything by pressing <kbd>Space</kbd>, or close the action altogether by pressing <kbd>Escape</kbd>.
 
 There will be some situations where you want to delete *all* of the registers in a section, and for that you can press <kbd>Alt+Backspace</kbd>, instead of spamming <kbd>Backspace</kbd> + a key. \
-*That* immediately closes / finishes the harp action, unlike `del` mode.
+That hotkey works regardless of the mode you're currently in (get / set / del), and will put you into `set` after clearing the registers. \
+The thinking here is that you're *probably* cleaning things up because you want to set a new harp on a blank canvas 🎨
 
 These two hotkeys are the mystery XXX and YYY I mentioned! So you can change them too 😌
 
