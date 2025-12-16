@@ -11,7 +11,7 @@ All of them are pretty long words, and annoyingly they all start with an upperca
 
 Unfortunately I do: my biggest usecase is [how I handle program setups](https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish), but typing out paths comes up in all sorts of places. \
 `~/Programming/Projects/Mine/Rust/2025` quickly becomes up exhausting to type in, over time. \
-Tab completing paths *helps*, but has other issues that I'll go over in another upcoming blog post.
+Tab completing paths *helps*, but has other issues that I'll go over in another upcoming blog post{{fn(i=1)}}.
 
 To minimize effort of typing in paths, as well as travelling to such paths, some time ago I renamed most of my directory structure to all be single characters, basically. Look at the tree below:
 
@@ -42,7 +42,7 @@ To minimize effort of typing in paths, as well as travelling to such paths, some
 
 The core directories, that I'll be typing in the most often, are all single characters. But deeper directories are named normally.
 
-This worked pretty well! Now to get to my screenshots directory, I simply need to type out `~/i/s`, rather than `~/Pictures/screenshots`{{fn(i=1)}}.
+This worked pretty well! Now to get to my screenshots directory, I simply need to type out `~/i/s`, rather than `~/Pictures/screenshots`{{fn(i=2)}}.
 But there are two things that this approach misses.
 
 First, it's ugly. \
@@ -110,7 +110,7 @@ All the directories inside of `fes` will come after `fes`, obviously, so now I o
 After a heavy left-side, I now introduce the right side keys quite a bit more.
 
 I figured out what felt good by repetitively typing in the full path to the directory, and feeling it out. \
-For example, `fes` was first `int`!{{fn(i=2)}} \
+For example, `fes` was first `int`!{{fn(i=3)}} \
 But after typing it out a bunch of times, I noticed that pressing `n` so close after `~/` simply didn't feel that good; which is a big nono for such a core, commonly typed directory. Additionally, `int` is a real thing that may come up in searches, as a false positive, so that's another reason to not use it.
 
 After making the highest level directories, I went on to rename a bunch of directories inside of there. Look at a tree again, but now with context of how the directory used to be called.
@@ -157,6 +157,8 @@ This is why I cannot give any specific suggestions to what *your* directory name
 
 # footnotes
 
-{{hn(i=1)}} I'll talk about zoxide later, don't worry. Part of god's plan.
+{{hn(i=1)}} [Here it is](@/harp/index.md)
 
-{{hn(i=2)}} The subdirectory `eli` comes from a pun based on the upper directory being named `int`. If I named a future project `gents`, I'd have a path `~/int/eli/gents`. Which is of course hilarious.
+{{hn(i=2)}} I'll talk about zoxide later, don't worry. Part of god's plan.
+
+{{hn(i=3)}} The subdirectory `eli` comes from a pun based on the upper directory being named `int`. If I named a future project `gents`, I'd have a path `~/int/eli/gents`. Which is of course hilarious.
