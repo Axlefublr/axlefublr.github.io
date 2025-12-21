@@ -67,11 +67,11 @@ To click on some spot, you first do a big inaccurate movement to “almost there
 Turns out this is so engrained in me, that replicating it in my mouse mode works really well.
 
 Mouse mode's speed is not constant: it starts out somewhat slow, and increases up to its maximum within 200ms. \
-Thanks to this, when I make a big movement, my speed is fantasic! Then when I need to get a bit preciser, I can tap the movement keys some amount of times to make use of the slower speed, to get my cursor where I wan't without *needing* to enter the slow mode.
+Thanks to this, when I make a big movement, my speed is fantasic! Then when I need to get a bit preciser, I can tap the movement keys some amount of times to make use of the slower speed, to get my cursor where I want without *needing* to enter the slow mode.
 
 I still do have and do use slow mode quite often, mind you; it's just that I don't need it for *most* movements.
 
-The time window where the speed increases is so small on purpose: it should mostly be to make taps viable; otherwise I don't want most of my movement to be a slog.
+The time window where the speed increases is so small on purpose: it should mostly be to make taps viable; otherwise I want most of my movement to **not** be a slog.
 
 Another thing I often noticed with moving the mouse from keyboard, is that it's very *jagged*. \
 You can actively see the cursor *jumping*, rather than moving, and it feels very wack!
@@ -101,7 +101,8 @@ Pretty sure the speed changes linearly, so we can graph it out:
 |200ms|10px|
 
 The starting speed being *0* pixels per move sounds silly, but it *really* helps the taps be more precise, as effectively there's more time for my mere human fingers to be holding the keyboard key, and it not mattering. \
-Still, the speed increases *so fast*, that this period of not doing anything isn't jarring — it's *helpful*.
+Although after trying it for a bit, I realized that it does still feel kind of sluggish, so I went back to 1px. \
+But worth a try! It might work perfect for you.
 
 And so, if I try to move every **1ms**, the 10 pixels maximum is waaaaaay too fast. \
 But actually, even the 0 pixel *minimum* is sort of too fast, for my usecase of “tap is slow” — 200ms is an awfully short time. \
@@ -109,7 +110,7 @@ Which is why 5ms is so far the best tradeoff that I found that feels good to use
 
 Very important to play with the values here; I changed these after like *months* of using the same config. \
 So don't be afraid to change them even if they're in your muscle memory now! \
-Hell, I'm even changing these values as I'm writing this blog post! Changed 6ms → 5ms, 1px → 0px, 200ms → 160ms
+Hell, I'm even changing these values as I'm writing this blog post! Changed 6ms → 5ms, 1px → 0px → 1px, 200ms → 160ms
 (leading to easier to access precision without losing long distance travelling speed)
 
 The slow moving sublayer, that I access by holding <kbd>l</kbd>, is a lot simpler. \
@@ -127,7 +128,54 @@ In situations where slow mode is warranted, I first use the normal speed to get 
 After I do so, I release <kbd>l</kbd>, move to the ending location (screenshots, text telect, slider, etc), and similarly use <kbd>l</kbd> to correct my position there too (if needed). \
 **Very** important to not get baited into holding <kbd>l</kbd> for the entire move, most of which doesn't need to be that precise (and by extension *slow*).
 
-❗retract the 0, suggest the simple math to showcase the maximum constant speed
+{{hr(id="simple-math")}}
 
-❗tapholdy has to be space for convenient usage of both sides at the same time
+When playing around with the values, I found a convenient (although a bit naive) way to compare the overall maximum speeds of the different settings.
+
+100/rate\*max_step
+
+`rate` is how often you make a nudge, `max_step` is your maximum nudge bigness, in pixels. \
+My current config results in a value of 180 — I (very roughly) move 180 pixels per 100 milliseconds. \
+With this simple formula you can kinda compare how fast or slow your config is, so that you don't have to fight your biases as much.
+
+Of course it completely ignores a very important value: the period in which you speed *increases*.
+But my goal with this was more so testing “at my peak, how fast am I?”
+
+## buttons
+
+The actual mouse *buttons* need to be extremely accessible.
+I want it to be viable to click and *drag* all three possible buttons, while moving around at the same time. \
+That is why <kbd>j</kbd> is left click, <kbd>k</kbd> is right click, and <kbd>m</kbd> is middle click.
+
+So one side, the left, is for movement. And the right side is for clickment. \
+That's why it's so important that the key that enters mouse mode is *Space* — I will be using **both** sides of my keyboard, so holding something like <kbd>z</kbd> instead{{fn(i=1)}} would just be deeply unpleasant.
+
+But aside from making dragging viable, I also made clicking with a modifier, and even *dragging* with a modifier viable in mouse mode.
+|Key|Modifier|
+|-|-|
+|<kbd>a</kbd>|shift|
+|<kbd>g</kbd>|ctrl|
+|<kbd>q</kbd>|meta|
+|<kbd>r</kbd>|alt|
+
+Tapping one of those keys “enables” (holds down) the modifier until the next mouse button (<kbd>j</kbd> / <kbd>k</kbd> / <kbd>m</kbd>) release.
+For example, I can tap <kbd>a</kbd>, then press and release <kbd>j</kbd> — that will result in a shift+click.
+I can tap multiple modifier keys one after the other and they will all stack for that next mouse button press.
+
+The modifier starts to be held immediately, rather than only once I start to hold down the mouse button.
+In some places, just *hovering* your mouse over something while holding a modifier grants you access to some different behavior.
+For example on discord, you start to see more possible actions when you hover over a message with <kbd>Shift</kbd> held.
+
+Modifier support is somewhat of a recent development of mine, and it's been a massive world opener. \
+Especially in image editing programs like krita, pressing all sorts of modifiers and dragging some mouse button at the same time is *incredibly* common and powerful — now I finally have full access to that!
+
+This is also the first quite complex thing *implementation*-wise.
+I'll share my total config at the end of the blog post, but I also want to *explain* how it works.
+
+# footnotes
+
+{{hn(i=1)}} It's actually what I went with at first! Before I realized I could actually achieve comfortable drag.
+
+❗mod keys use virtual keys
 ❗you can differentiate on press / on release events, but your action *has to* be a virtual key. think of it as if you're being required to use an alias as soon as you need to differentiate press/release. otherwise it's not more complex really
+❗smooth scrolling blog post
