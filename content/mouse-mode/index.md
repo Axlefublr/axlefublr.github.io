@@ -162,7 +162,7 @@ Tapping one of those keys “enables” (holds down) the modifier until the next
 For example, I can tap <kbd>a</kbd>, then press and release <kbd>j</kbd> — that will result in a shift+click.
 I can tap multiple modifier keys one after the other and they will all stack for that next mouse button press.
 
-The modifier starts to be held immediately, rather than only once I start to hold down the mouse button.
+The modifier starts to be held **immediately**, rather than only once I start to hold down the mouse button.
 In some places, just *hovering* your mouse over something while holding a modifier grants you access to some different behavior.
 For example on discord, you start to see more possible actions when you hover over a message with <kbd>Shift</kbd> held.
 
@@ -172,10 +172,64 @@ Especially in image editing programs like krita, pressing all sorts of modifiers
 This is also the first quite complex thing *implementation*-wise.
 I'll share my total config at the end of the blog post, but I also want to *explain* how it works.
 
+### holding modifiers
+
+The basic idea is: tapping some key starts holding down a modifier.
+*Releasing* some other key releases the modifier.
+
+We can use the kanata feature “virtual keys” for this!
+They are somewhat similar to aliases, but unlike those, they can be sent individual press/release events, rather than being bound directly to a press of a physical key.
+Hence *virtual* key :D
+
+First we define virtual keys for each modifier. To each, we're going to be able to send individual press and release events.
+
+```kanata
+(defvirtualkeys
+	shift lsft
+	ctrl  lctl
+	alt   lalt
+	meta  lmet
+)
+```
+
+Then in the mouse mode layer, we make hotkeys that send only the press event to their relevant virtual key.
+```kanata
+a (on-press press-vkey shift)
+q (on-press press-vkey meta)
+t (on-press press-vkey alt)
+g (on-press press-vkey ctrl)
+```
+
+Awesome! Now when I press <kbd>a</kbd> for example, <kbd>Shift</kbd> starts to get held.
+When I release the next mouse button, I want that <kbd>Shift</kbd> to be released.
+Well, *all* modifiers actually! And since sending a release event to a key that's not currently pressed doesn't do any strange behavior, we might as well make the <kbd>j</kbd>, <kbd>k</kbd>, <kbd>m</kbd> hotkeys send releases to all the modifiers!
+
+Let's first make another virtual key for convenience:
+```kanata
+(defvirtualkeys
+	any-modifier (multi (on-press release-vkey shift) (on-press release-vkey ctrl) (on-press release-vkey alt) (on-press release-vkey meta))
+)
+```
+
+And send a tap to it, on release, in the <kbd>j</kbd>, <kbd>k</kbd>, <kbd>m</kbd> hotkeys (as well as the actual mouse button event).
+```kanata
+m (multi mmid (on-release tap-vkey any-modifier))
+j (multi mlft (on-release tap-vkey any-modifier))
+k (multi mrgt (on-release tap-vkey any-modifier))
+```
+
+You might reasonably ask: “why is `any-modifier` even a virtual key anyway?”, since it just does a series of actions and doesn't need to care about the separate press/release events.
+That's because of a restriction of `on-release` and `on-press` — they *have to* “call” a *virtual* key.
+They cannot call an alias, and you can't just blammo the command in there either.
+So we only make it a virtual key for technical limitations reasons.
+
+Multi is an interesting action: unlike `macro`, all the actions you specify inside of it are done “simultaneously, in unspecified order”.
+Which is how it can handle the press/release events towards `mlft` while *also* handling the release event of the `on-release`.
+
+I don't go into virtual keys much there, but [erotic meta feet](@/kanata-layers/index.md) is a blog post of mine that shows the power and importance of them, when it comes to making composite layers. Have a read if you're interested!
+
 # footnotes
 
 {{hn(i=1)}} It's actually what I went with at first! Before I realized I could actually achieve comfortable drag.
 
-❗mod keys use virtual keys
-❗you can differentiate on press / on release events, but your action *has to* be a virtual key. think of it as if you're being required to use an alias as soon as you need to differentiate press/release. otherwise it's not more complex really
 ❗smooth scrolling blog post
