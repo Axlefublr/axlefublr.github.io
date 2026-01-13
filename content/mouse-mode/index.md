@@ -141,7 +141,7 @@ With this simple formula you can kinda compare how fast or slow your config is, 
 Of course it completely ignores a very important value: the period in which you speed *increases*.
 But my goal with this was more so testing “at my peak, how fast am I?”
 
-## buttons
+# buttons
 
 The actual mouse *buttons* need to be extremely accessible.
 I want it to be viable to click and *drag* all three possible buttons, while moving around at the same time. \
@@ -172,17 +172,16 @@ Especially in image editing programs like krita, pressing all sorts of modifiers
 This is also the first quite complex thing *implementation*-wise.
 I'll share my total config at the end of the blog post, but I also want to *explain* how it works.
 
-### holding modifiers
+## holding modifiers
 
-The basic idea is: tapping some key starts holding down a modifier.
+Tapping some key starts holding down a modifier.
 *Releasing* some other key releases the modifier.
 
-We can use the kanata feature “virtual keys” for this!
-They are somewhat similar to aliases, but unlike those, they can be sent individual press/release events, rather than being bound directly to a press of a physical key.
+We can use the kanata feature “virtual keys” for this idea.
+They are somewhat similar to aliases, but unlike those, they can be sent individual press/release events, rather than being bound directly to the press and release of a physical key.
 Hence *virtual* key :D
 
-First we define virtual keys for each modifier. To each, we're going to be able to send individual press and release events.
-
+First we define virtual keys for each modifier.
 ```kanata
 (defvirtualkeys
 	shift lsft
@@ -192,7 +191,7 @@ First we define virtual keys for each modifier. To each, we're going to be able 
 )
 ```
 
-Then in the mouse mode layer, we make hotkeys that send only the press event to their relevant virtual key.
+Then in the mouse mode layer, we make hotkeys that send only the press event to their relevant virtual key — meaning, a press (but not release!) of a specific modifier.
 ```kanata
 a (on-press press-vkey shift)
 q (on-press press-vkey meta)
@@ -200,9 +199,10 @@ t (on-press press-vkey alt)
 g (on-press press-vkey ctrl)
 ```
 
-Awesome! Now when I press <kbd>a</kbd> for example, <kbd>Shift</kbd> starts to get held.
+Awesome! Now when I tap <kbd>a</kbd> for example, <kbd>Shift</kbd> starts to get held. \
 When I release the next mouse button, I want that <kbd>Shift</kbd> to be released.
-Well, *all* modifiers actually! And since sending a release event to a key that's not currently pressed doesn't do any strange behavior, we might as well make the <kbd>j</kbd>, <kbd>k</kbd>, <kbd>m</kbd> hotkeys send releases to all the modifiers!
+Well, *all* currently held modifiers actually! \
+And since sending a release event to a key that's not currently pressed doesn't do any strange behavior, we might as well make the <kbd>j</kbd>, <kbd>k</kbd>, <kbd>m</kbd> hotkeys send releases to **all** the modifiers!
 
 Let's first make another virtual key for convenience:
 ```kanata
@@ -220,13 +220,21 @@ k (multi mrgt (on-release tap-vkey any-modifier))
 
 You might reasonably ask: “why is `any-modifier` even a virtual key anyway?”, since it just does a series of actions and doesn't need to care about the separate press/release events.
 That's because of a restriction of `on-release` and `on-press` — they *have to* “call” a *virtual* key.
-They cannot call an alias, and you can't just blammo the command in there either.
+They cannot call an alias, and you can't just blammo the action in there directly either.
 So we only make it a virtual key for technical limitations reasons.
 
 Multi is an interesting action: unlike `macro`, all the actions you specify inside of it are done “simultaneously, in unspecified order”.
 Which is how it can handle the press/release events towards `mlft` while *also* handling the release event of the `on-release`.
 
 I don't go into virtual keys much there, but [erotic meta feet](@/kanata-layers/index.md) is a blog post of mine that shows the power and importance of them, when it comes to making composite layers. Have a read if you're interested!
+
+# scrolling
+
+# holding frame
+
+# thingymabops
+
+# chord layer
 
 # footnotes
 
