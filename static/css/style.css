@@ -160,60 +160,6 @@ pre {
 			padding: 0 0.6em 0 0;
 		}
 	}
-
-	/*------------syntax highlighting-------------*/
-	/* .z-comment { */
-	/* color: var(--grey); */
-	/* } */
-
-	/* .z-string.z-quoted { */
-	/* color: var(--yellow); */
-	/* } */
-
-	/* .z-variable.z-fish, */
-	/* .z-constant.z-css, */
-	/* .z-json.z-constant.z-language { */
-	/* color: var(--purple); */
-	/* } */
-
-	/* .z-storage.z-modifier, */
-	/* .z-storage.z-function, */
-	/* .z-keyword, */
-	/* .z-type.z-genconfig { */
-	/* color: var(--red); */
-	/* } */
-
-	/* .z-storage.z-type.z-ts, */
-	/* .z-meta.z-function.z-closure.z-rust .z-punctuation.z-section.z-parameters.z-rust { */
-	/* color: var(--orange); */
-	/* } */
-
-	/* .z-function.z-builtin, */
-	/* .z-constant.z-numeric { */
-	/* color: var(--blush); */
-	/* } */
-
-	/* .z-function.z-name, */
-	/* .z-function.z-variable, */
-	/* .z-support.z-function.z-rust, */
-	/* .z-function-call.z-shell:not(.z-arguments) { */
-	/* color: var(--green); */
-	/* } */
-
-	/* .z-option.z-fish, */
-	/* .z-variable.z-parameter.z-fish:has(.z-string.z-unquoted), */
-	/* .z-property-name, */
-	/* .z-attribute-name.z-css, */
-	/* .z-parameter.z-genconfig, */
-	/* .z-toml.z-key, */
-	/* .z-json.z-mapping.z-key.z-meta > .z-string.z-quoted, */
-	/* .z-shell.z-parameter.z-option { */
-	/* color: var(--mint); */
-	/* } */
-
-	/* .z-toml.z-tag.z-table { */
-	/* color: var(--cyan); */
-	/* } */
 }
 
 .giallo-l {
