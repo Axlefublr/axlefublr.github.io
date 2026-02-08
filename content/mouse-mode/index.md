@@ -81,11 +81,11 @@ It's frequent enough that mouse movement looks *smooth* and continuous. \
 Of course to make it *perfect* I wanted to set it to 1ms, but then I can't do the above “taps are slow” thing as well.
 
 Kanata's `movemouse-accel` actions change your speed by changing the amount of pixels you move by, with your every move. \
-I move every 5ms; initially, by *zero* pixels (yep) at a time. \
+I move every 5ms; initially, by 1 pixel at a time. \
 Over the course of 200ms, that amount of pixels rises, maxing out at 10 pixels. \
 Now that the 200ms have passed, I'm moving at the maximum speed of 10 pixels per each 5ms.
 
-Pretty sure the speed changes linearly, so we can graph it out:
+Pretty sure the speed changes linearly, so we can graph it out. Let's set the minimum to 0 instead though, so that the graph is easier to look at.
 |Time passed|Pixels per move|
 |-----------|---------------|
 |0ms  | 0px|
@@ -100,18 +100,35 @@ Pretty sure the speed changes linearly, so we can graph it out:
 |180ms| 9px|
 |200ms|10px|
 
-The starting speed being *0* pixels per move sounds silly, but it *really* helps the taps be more precise, as effectively there's more time for my mere human fingers to be holding the keyboard key, and it not mattering. \
-Although after trying it for a bit, I realized that it does still feel kind of sluggish, so I went back to 1px. \
-But worth a try! It might work perfect for you.
+Setting the minimum to *0* sounds silly, but it can help the taps be more precise, as effectively there's more time for my mere human fingers to be holding the keyboard key, and it not mattering. \
+I tried it for a bit, but realized that it **does** still feel kind of sluggish, so I went back to 1px. \
+Worth a try! Maybe it will work great for you.
 
-And so, if I try to move every **1ms**, the 10 pixels maximum is waaaaaay too fast. \
-But actually, even the 0 pixel *minimum* is sort of too fast, for my usecase of “tap is slow” — 200ms is an awfully short time. \
-Which is why 5ms is so far the best tradeoff that I found that feels good to use.
+Coming back to trying to solve jaggedness.
+If I try to move every **1ms** rather than 5ms, the 10 pixels maximum is waaaaaay too fast.
+Even if I set that maximum to 1 pixel, it's still a bit too unwieldy. \
+You'd think a minimum of 0 would be viable here, but all you get in this case is a 100 millseconds of not moving at all, and then a 100 milliseconds of moving way too fast. Not viable.
 
-Very important to play with the values here; I changed these after like *months* of using the same config. \
-So don't be afraid to change them even if they're in your muscle memory now! \
-Hell, I'm even changing these values as I'm writing this blog post! Changed 6ms → 5ms, 1px → 0px → 1px, 200ms → 160ms
-(leading to easier to access precision without losing long distance travelling speed)
+That lands me into using a repeat rate of 5ms, minimum of 1px, maximum of 9px, and time period of 210ms.
+But don't just take my word for it: it's very important to play with the values to try to find what feels best for **you**.
+I changed these after like *months* of using the same config, so don't be afraid to change them even if they're in your muscle memory now!
+Hell, I'm even changing these values as I'm writing this blog post! \
+Changed 6ms → 5ms, 1px → 0px → 1px, 200ms → 160ms → 210ms, 10px → 9px.
+
+{{hr(id="simple-math")}}
+
+When playing around with the values, I found a convenient (although a bit naive) way to compare the overall maximum speeds of the different settings.
+
+100/rate\*max_step
+
+`rate` is how often you make a nudge, `max_step` is your maximum nudge bigness, in pixels. \
+My current config results in a value of 180 — I (very roughly) move 180 pixels per 100 milliseconds. \
+With this simple formula you can kinda compare how fast or slow your config is, so that you don't have to fight your biases as much.
+
+Of course it completely ignores a very important value: the period in which you speed *increases*.
+But my goal with this was more so testing “at my peak, how fast am I?”
+
+### slow sublayer
 
 The slow moving sublayer, that I access by holding <kbd>l</kbd>, is a lot simpler. \
 Its speed is constant; it always moves by a single pixel, just more *rarely*. \
@@ -128,26 +145,13 @@ In situations where slow mode is warranted, I first use the normal speed to get 
 After I do so, I release <kbd>l</kbd>, move to the ending location (screenshots, text telect, slider, etc), and similarly use <kbd>l</kbd> to correct my position there too (if needed). \
 **Very** important to not get baited into holding <kbd>l</kbd> for the entire move, most of which doesn't need to be that precise (and by extension *slow*).
 
-{{hr(id="simple-math")}}
-
-When playing around with the values, I found a convenient (although a bit naive) way to compare the overall maximum speeds of the different settings.
-
-100/rate\*max_step
-
-`rate` is how often you make a nudge, `max_step` is your maximum nudge bigness, in pixels. \
-My current config results in a value of 180 — I (very roughly) move 180 pixels per 100 milliseconds. \
-With this simple formula you can kinda compare how fast or slow your config is, so that you don't have to fight your biases as much.
-
-Of course it completely ignores a very important value: the period in which you speed *increases*.
-But my goal with this was more so testing “at my peak, how fast am I?”
-
 # buttons
 
 The actual mouse *buttons* need to be extremely accessible.
-I want it to be viable to click and *drag* all three possible buttons, while moving around at the same time. \
+I want it to be viable to click and *drag* all three possible buttons, while moving around at the same time.
 That is why <kbd>j</kbd> is left click, <kbd>k</kbd> is right click, and <kbd>m</kbd> is middle click.
 
-So one side, the left, is for movement. And the right side is for clickment. \
+So one side, the left, is for movement. And the right side is for clickment.
 That's why it's so important that the key that enters mouse mode is *Space* — I will be using **both** sides of my keyboard, so holding something like <kbd>z</kbd> instead{{fn(i=1)}} would just be deeply unpleasant.
 
 But aside from making dragging viable, I also made clicking with a modifier, and even *dragging* with a modifier viable in mouse mode.
@@ -202,7 +206,7 @@ g (on-press press-vkey ctrl)
 Awesome! Now when I tap <kbd>a</kbd> for example, <kbd>Shift</kbd> starts to get held. \
 When I release the next mouse button, I want that <kbd>Shift</kbd> to be released.
 Well, *all* currently held modifiers actually! \
-And since sending a release event to a key that's not currently pressed doesn't do any strange behavior, we might as well make the <kbd>j</kbd>, <kbd>k</kbd>, <kbd>m</kbd> hotkeys send releases to **all** the modifiers!
+And since sending a release event to a key that's not currently pressed doesn't do any strange behavior{{fn(i=2)}}, we might as well make the <kbd>j</kbd>, <kbd>k</kbd>, <kbd>m</kbd> hotkeys send releases to **all** the modifiers!
 
 Let's first make another virtual key for convenience:
 ```kanata
@@ -221,7 +225,7 @@ k (multi mrgt (on-release tap-vkey any-modifier))
 You might reasonably ask: “why is `any-modifier` even a virtual key anyway?”, since it just does a series of actions and doesn't need to care about the separate press/release events.
 That's because of a restriction of `on-release` and `on-press` — they *have to* “call” a *virtual* key.
 They cannot call an alias, and you can't just blammo the action in there directly either.
-So we only make it a virtual key for technical limitations reasons.
+And since I want modifiers to only be released on a *release* of a mouse button, I must make `any-modifier` a virtual key.
 
 Multi is an interesting action: unlike `macro`, all the actions you specify inside of it are done “simultaneously, in unspecified order”.
 Which is how it can handle the press/release events towards `mlft` while *also* handling the release event of the `on-release`.
@@ -230,14 +234,37 @@ I don't go into virtual keys much there, but [erotic meta feet](@/kanata-layers/
 
 # scrolling
 
-# holding frame
+Surprisingly, the most common usecase of mouse mode for me has become scrolling.
+<kbd>i</kbd> scrolls down, <kbd>o</kbd> scrolls up, <kbd>w</kbd> scrolls left, <kbd>r</kbd> scrolls right.
+```
+o (mwheel-up    30 60)
+i (mwheel-down  30 60)
+w (mwheel-left  20 60)
+r (mwheel-right 20 60)
+```
 
-# thingymabops
+Normally, a single “nudge” of the scrollwheel is 120 (units??) of distance.
+For my [smooth scrolling improvements](@/smooth-scrolling/index.md) in firefox, I changed the distance from 120 to 60, but it's a *tradeoff* rather than direct improvement: some applications get confused and act weirdly due to my scroll nudge distance not being divisible by 120.
+But god, the scrolling in the browser I get thanks to this is just *unbeatable*.
 
-# chord layer
+Initially I had vertical scrolling on <kbd>,</kbd> and <kbd>.</kbd>, but I realized that my hand naturally rests *forwards*, where keeping fingers on <kbd>i</kbd> and <kbd>o</kbd> is actually a lot more comfortable! \
+So now it is *them* that I use for scrolling while reading blog posts, manga, documentation, etc.
+
+To accompany the slow-ish wheel scrolling, I also add <kbd>PageDown</kbd> on <kbd>.</kbd> and <kbd>PageUp</kbd> on <kbd>,</kbd>. \
+Whenever I need to scroll for a large ass chunk and realize holding <kbd>i</kbd> is a bit too long, I start holding <kbd>.</kbd> instead and I get where I wanted to get to very quickly 😌
+
+# holding frame (toggle into mouse mode)
+
+# zooming hotkeys
+
+# offhand mappings for wallpaper workflow
+
+# convenience layers and their inconveniences
 
 # footnotes
 
 {{hn(i=1)}} It's actually what I went with at first! Before I realized I could actually achieve comfortable drag.
+
+{{hn(i=2)}} Slight lie that we will get to later.
 
 ❗smooth scrolling blog post
