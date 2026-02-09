@@ -10,7 +10,11 @@
 		{
 			"scope": [
 				"entity.name.class.lua",
-				"entity.other.attribute.lua"
+				"entity.other.attribute.lua",
+				"keyword.operator.redirect.target",
+				"string.unquoted.argument.shell",
+				"constant.other.option",
+				"keyword.operator.access.dot"
 			],
 			"settings": {
 				"fontStyle": "normal",
@@ -43,7 +47,9 @@
 		},
 		{
 			"scope": [
-				"keyword.operator"
+				"keyword.operator",
+				"keyword.control.nushell",
+				"punctuation.separator.key-value"
 			],
 			"settings": {
 				"fontStyle": "bold",
@@ -62,7 +68,8 @@
 		{
 			"scope": [
 				"constant.language",
-				"constant.numeric"
+				"constant.numeric",
+				"keyword.operator.glob"
 			],
 			"settings": {
 				"foreground": "#e491b2"
@@ -71,7 +78,9 @@
 		{
 			"scope": [
 				"entity.name.class",
-				"variable.language.self"
+				"variable.language.self",
+				"entity.name.type",
+				"entity.name.section.group-title"
 			],
 			"settings": {
 				"foreground": "#7daea3"
@@ -88,7 +97,9 @@
 		},
 		{
 			"scope": [
-				"constant.language"
+				"constant.language",
+				"punctuation.definition.variable",
+				"constant.other.caps"
 			],
 			"settings": {
 				"foreground": "#b58cc6"
@@ -96,7 +107,8 @@
 		},
 		{
 			"scope": [
-				"entity.other.attribute"
+				"entity.other.attribute",
+				"keyword.other.definition.ini"
 			],
 			"settings": {
 				"foreground": "#78bf84"
