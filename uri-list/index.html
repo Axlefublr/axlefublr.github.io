@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>stop picking on files</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;screen-recording&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">wayland screen recording</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;new-fish-shell&#x2F;" class="preview next">
+			<span class="name">fish shell 4.0.0</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">stop picking on files</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-02-16">2025.02.16</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 3</div> -->
+				<p>When using linux, over time you might naturally arrive at hating guis and preferring a more terminal-centric workflow. <br />
+One thing that always stood out to me as unescapable though, is <em>picking files</em>.</p>
+<p>Say you wanna send a file on a messenging app, or maybe blammo an image over another one in krita. <br />
+You will most likely need to open a file picker to pick the file that you want, or a gui file manager that will allow you to drag &amp; drop.</p>
+<p>Always found it very annoying. <br />
+In my terminal, I have tooling like <a rel="noopener external" target="_blank" href="https://github.com/ajeetdsouza/zoxide">zoxide</a>, <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/harp">harp</a>, <a rel="noopener external" target="_blank" href="https://github.com/sxyazi/yazi">yazi</a>, <code>fd</code>, <code>rg</code>, and everything else that makes getting to a file a comfortable experience. <br />
+But when I need to interact with The™ Outside™ World™ (the browser, mostly), now suddenly that tooling is not very helpful. <br />
+What I do now is copy the filepath in the terminal in one way or another, and then paste it in the file picker that gets opened; this is better but still kinda ass to have to do.</p>
+<p>Recently my <a rel="noopener external" target="_blank" href="https://github.com/titaniumtraveler">friend</a> showed me something incredible: the uri-list.</p>
+<p>Executing the following in my shell:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">echo</span><span> file:///home/axlefublr/i/e/memes/blackbeard-writing.gif </span><span style="color: #E49641;font-weight: bold;">|</span><span style="color: #A9B665;"> wl-copy</span><span> -t text/uri-list</span></span></code></pre>
+<p>Lets me go on discord and just <kbd>ctrl+v</kbd> the file.</p>
+<p><img src="https://axlefublr.github.io/uri-list/./blackbeard-writing.gif" alt="" /></p>
+<p>I'm fairly certain that this is the mechanic that file managers use for drag and drop functionality, so this solves the need for a gui file manager or a file picker in practically every place 🤯</p>
+<a href="#alias" id="alias" class="anchorina">
+  <hr></hr>
+</a>
+<p>First, it makes a lot of sense to make an alias for this. I'm on fish, so the syntax may differ for you:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> copyl</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">  echo</span><span> file://(</span><span style="color: #A9B665;">realpath</span><span style="color: #B58CC6;"> $</span><span>argv[1])</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> wl-copy</span><span> -t text/uri-list</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">funcsave</span><span> copyl </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>/dev/null</span></span></code></pre>
+<p>Now I can do something like <code>copyl blackbeard-writing.gif</code> while my current working directory is <code>~/i/e/memes</code>, and that will resolve to the full path that is required, letting me input a file into my clipboard quickly.</p>
+<p>I don't like typing in paths though, so for the usecase of picking a file I will generally use <code>yazi</code>. <br />
+I made a mapping that does <code>copyl</code> there, and now the process of sending memes or whatever else is really nice! <a rel="noopener external" target="_blank" href="https://github.com/GermainZ/xdg-desktop-portal-termfilechooser">termfilechooser</a> begone!</p>
+<a href="#filotkis" id="filotkis" class="anchorina">
+  <hr></hr>
+</a>
+<p>A more overcomplicated idea, is that now you can put <em>files</em> on <strong>hotkeys</strong>. <br />
+Use something like <a rel="noopener external" target="_blank" href="https://github.com/xremap/xremap">xremap</a> for hotkeys that put specific files into your clipboard, like above; now you can drive a meme to the ground even faster! This is what you get by learning linux 😎 <br />
+For this idea to be slightly more viable though, I heavily recommend using harp. Changing your xremap configuration every time you wanna update your image hotkeys is bound to be very annoying.</p>
+<a href="#screen-record" id="screen-record" class="anchorina">
+  <hr></hr>
+</a>
+<p>Also, this is useful for screen recordings. <br />
+Screenshotting tools generally put the image into your clipboard, so you just paste it directly. <br />
+A screen<em>video</em>ing tool can't put the video into your clipboard (?), but you can just make it <code>copyl</code> the file uri, to be practically the same thing as the file being in your clipboard. <br />
+Very convenient! Now I can make a screen recording and immediately paste it, no need to open a file picker :3</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;screen-recording&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">wayland screen recording</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;new-fish-shell&#x2F;" class="preview next">
+			<span class="name">fish shell 4.0.0</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

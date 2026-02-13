@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>newest helix master features</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consistentc&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">helix is ridiculously consistent</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;my-usb-drive-experience&#x2F;" class="preview next">
+			<span class="name">my usb drive experience</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">newest helix master features</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-12-10">2024.12.10</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 9</div> -->
+				<p><a href="https://axlefublr.github.io/helix-master-vs-stable/">As you may know</a>, I maintain my own <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>. <br />
+Recently I noticed a huuuuuuuge burst of new commits, and here's what new features I found!</p>
+<h1 id="cd-improvement"><a class="zola-anchor" href="#cd-improvement" aria-label="Anchor link for: cd-improvement">cd improvement</a></h1>
+<p>The <code>:change-current-directory</code> (<code>:cd</code>) command now more closely mimics the useful behavior of <code>cd</code> in the shell: <br />
+With no arguments (<code>:cd</code>), it now changes directory to <code>~</code> (<code>$HOME</code>). <br />
+<code>:cd -</code> changes directory to the most recent one. So, if you <code>:cd ~/Documents</code> and then <code>:cd ~/Downloads</code>, <code>:cd -</code> will put you back into <code>~/Documents</code>.</p>
+<h1 id="auto-trim-trailing-whitespace-with-a-caveat"><a class="zola-anchor" href="#auto-trim-trailing-whitespace-with-a-caveat" aria-label="Anchor link for: auto-trim-trailing-whitespace-with-a-caveat">auto-trim trailing whitespace with a caveat</a></h1>
+<p>The <code>insert_newline</code> action now trims that line's trailing whitespace.</p>
+<p>So if you make custom mappings for <code>insert_newline</code>, or far more likely when you press <kbd>Enter</kbd> in insert mode, that line's trailing whitespace is automatically removed.</p>
+<video controls>
+  <source src="trim-trailing-whitespace.mp4" type="video/mp4">
+</video>
+<p>While this is cool to have and will fix most trailing whitespace moving forward, the issue is the <em>moving forward</em> part. <br />
+Somehow we still don't have a <code>:trim</code> command or on-write hooks that would trim for us, so this on-newline behavior won't help you clean up a codebase — only to not mess up (as much) when writing a new one.</p>
+<h1 id="auto-continue-line-comments"><a class="zola-anchor" href="#auto-continue-line-comments" aria-label="Anchor link for: auto-continue-line-comments">auto-continue line comments</a></h1>
+<p>Our second on-newline feature! Although this one doesn't depend on the <code>insert_newline</code> action, and will happen even if you use something like <kbd>o</kbd> / <kbd>O</kbd></p>
+<video controls>
+  <source src="extending-comments.mp4" type="video/mp4">
+</video>
+<p>This feature has actually been in core for about a month I think, but I didn't rush to rebase to get it because honestly I didn't want the feature. <br />
+I used it back in neovim, and I found it to annoy me more often than help me. An extra <code>// </code> / <code># </code> / etc to type in is not as much effort as possibly having to <em>fix</em> them. <br />
+Additionally, in neovim the operation felt very wonky visually.</p>
+<p>The wonkiness is not an issue in helix, as this is a <em>core</em> feature, not something that was tacked on, so that's crossed out. <br />
+However the "annoying" part may still remain, as after ~1 minute of fiddling with it, I found a bug¹ when you try to extend a comment upwards, when you're at the first line in the file:</p>
+<video controls>
+  <source src="weird-bug.mp4" type="video/mp4">
+</video>
+<p>Interestingly, there is no option to disable this auto-comment-extending behavior.</p>
+<p>¹ Around two days after publishing this blog post, the bug is fixed! <br />
+This is surprisingly fast response speed for helix — generally things move reeeeeaaaally slowly. <br />
+This fills me with determination!</p>
+<p>Additionally, there <em>is</em> now an option to disable this behavior 🥳 <br />
+Set <code>continue-comments</code> in the <code>[editor]</code> section to <code>false</code>, if you want to.</p>
+<h1 id="path-completions"><a class="zola-anchor" href="#path-completions" aria-label="Anchor link for: path-completions">path completions</a></h1>
+<p>Now you get autocomplete for filepaths! :D</p>
+<video controls>
+  <source src="filepath-completions.mp4" type="video/mp4">
+</video>
+<p>If you were using my fork prior, you already had these! <br />
+I've been following the PR that implements this feature for a month or two, and I had it merged into my fork. <br />
+I'm quite surprised to see it get merged into core! So now that's one less responsibility on my fork.</p>
+<p>But also, before this point, there was a bug where you could only complete a single filepath on a given line. If you tried to complete another path, the completions wouldn't show up. <br />
+This is no longer an issue!</p>
+<p>This feature is enabled by default, but if you wanted to disable it, set the <code>path-completion</code> option in the <code>[editor]</code> section to false.</p>
+<h1 id="default-comment-token"><a class="zola-anchor" href="#default-comment-token" aria-label="Anchor link for: default-comment-token">default comment token</a></h1>
+<p>For unrecognized languages (if you just open a file with no extension and no inferrable text, for example), the comment token used to be <code>//</code>. Now it is <code>#</code>. <br />
+Makes sense, considering that more often than not, an unrecognized file is a config file that <em>probably</em> uses <code>#</code> for comments (if it even supports them).</p>
+<h1 id="conf-language"><a class="zola-anchor" href="#conf-language" aria-label="Anchor link for: conf-language">conf "language"</a></h1>
+<p>You might notice that the syntax highlighting for random <code>.conf</code> files is now gone. <br />
+This happened because of a commit that (as it says in the commit message) “Fix language configuration for .conf files”. <br />
+“Fix” my ass.</p>
+<p>Put this in your languages.toml to bring it back:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="toml"><span class="giallo-l"><span>[[language]]</span></span>
+<span class="giallo-l"><span>name</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;hocon&quot;</span></span>
+<span class="giallo-l"><span>file-types</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">  &quot;conf&quot;</span><span>,</span></span>
+<span class="giallo-l"><span>  { glob</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;**/src/*/resources/**/*.conf&quot;</span><span> },</span></span>
+<span class="giallo-l"><span>  { glob</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;*scalafmt*.conf&quot;</span><span> },</span></span>
+<span class="giallo-l"><span>  { glob</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;*scalafix*.conf&quot;</span><span> },</span></span>
+<span class="giallo-l"><span>]</span></span></code></pre><h1 id="safer-paste"><a class="zola-anchor" href="#safer-paste" aria-label="Anchor link for: safer-paste">safer paste</a></h1>
+<p>If you use <code>paste</code> in insert mode, that makes an undo "checkpoint":</p>
+<video controls>
+  <source src="paste-checkpoint.mp4" type="video/mp4">
+</video>
+<p>I needed to press <kbd>u</kbd> three times there, to undo the second line. <br />
+Previously, a single <kbd>u</kbd> would undo the whole line.</p>
+<p>This is pretty great! It's somewhat often that I start typing in a line and then paste from my system clipboard, only to realize I pasted in the wrong thing. Now after I undo, I <em>don't</em> lose the extra text I typed in before the paste.</p>
+<p>About clipboards...</p>
+<h1 id="configurable-clipboard-providers"><a class="zola-anchor" href="#configurable-clipboard-providers" aria-label="Anchor link for: configurable-clipboard-providers">configurable clipboard providers</a></h1>
+<p>Previously, helix figured them out automatically. <br />
+Now, you have an option to set them explicitly.</p>
+<h2 id="bit-from-the-docs"><a class="zola-anchor" href="#bit-from-the-docs" aria-label="Anchor link for: bit-from-the-docs">bit from the docs:</a></h2>
+<p><code>clipboard-provider</code> — Which API to use for clipboard interaction. <br />
+One of <code>pasteboard</code> (MacOS), <code>wayland</code>, <code>x-clip</code>, <code>x-sel</code>, <code>win-32-yank</code>, <code>termux</code>, <code>tmux</code>, <code>windows</code>, <code>termcode</code>, <code>none</code>, or a custom command set.</p>
+<h3 id="editor-clipboard-provider-section"><a class="zola-anchor" href="#editor-clipboard-provider-section" aria-label="Anchor link for: editor-clipboard-provider-section"><code>[editor.clipboard-provider]</code> Section</a></h3>
+<p>Helix can be configured wither to use a builtin clipboard configuration or to use a provided command. <br />
+For instance, setting it to use OSC 52 termcodes, the configuration would be:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="toml"><span class="giallo-l"><span>[editor]</span></span>
+<span class="giallo-l"><span>clipboard-provider</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;termcode&quot;</span></span></code></pre>
+<p>Alternatively, Helix can be configured to use arbitary commands for clipboard integration:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="toml"><span class="giallo-l"><span>[editor.clipboard-provider.custom]</span></span>
+<span class="giallo-l"><span>yank</span><span style="color: #E49641;font-weight: bold;"> =</span><span> { command</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;cat&quot;</span><span>,  args</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span><span style="color: #D3AD5C;">&quot;test.txt&quot;</span><span>] }</span></span>
+<span class="giallo-l"><span>paste</span><span style="color: #E49641;font-weight: bold;"> =</span><span> { command</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;tee&quot;</span><span>,  args</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span><span style="color: #D3AD5C;">&quot;test.txt&quot;</span><span>] }</span></span>
+<span class="giallo-l"><span>primary-yank</span><span style="color: #E49641;font-weight: bold;"> =</span><span> { command</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;cat&quot;</span><span>,  args</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span><span style="color: #D3AD5C;">&quot;test-primary.txt&quot;</span><span>] }</span><span style="color: #928374;"> # optional</span></span>
+<span class="giallo-l"><span>primary-paste</span><span style="color: #E49641;font-weight: bold;"> =</span><span> { command</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &quot;tee&quot;</span><span>,  args</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span><span style="color: #D3AD5C;">&quot;test-primary.txt&quot;</span><span>] }</span><span style="color: #928374;"> # optional</span></span></code></pre>
+<p>For custom commands the contents of the yank/paste is communicated over stdin/stdout.</p>
+<a href="#wither" id="wither" class="anchorina">
+  <hr></hr>
+</a>
+<blockquote>
+<p>Yes it really said “wither”</p>
+</blockquote>
+<p>This is of course cool for the (I think unlikely?) situation if your clipboard provider didn't work, but what I find more interesting is the <em>custom</em> clipboard provider. <br />
+As you see in the example they specify, you can straight up just use a random file. <br />
+Interestingly, that's a hack to get your latest register to stay across helix sessions (unless helix deletes the file on exit, which would be mean).</p>
+<p>If you use my fork though, you don't need to bother doing that, as I merge in a PR that adds persistence to various things, including your default register.</p>
+<p>However: the "primary selection" (register <code>*</code>) is something that I never use, so I could potentially change it to give me fairly arbitrary behavior. <br />
+I could easily write a script that would act as my <code>*</code> register, and do different things on paste / yank.</p>
+<p>For the most part, actions like <code>shell_pipe</code>, <code>insert_output</code>, <code>append_ouput</code> along with command harps (my fork's feature) already provide you this "easily accessible script" behavior, but maybe you can come up with a strong enough contender that would make sense to put directly as the <code>*</code> register.</p>
+<p>Share your ideas with me on <a rel="noopener external" target="_blank" href="https://bsky.app/profile/axlefublr.bsky.social">bluesky</a> or <a rel="noopener external" target="_blank" href="https://discord.gg/bgVSg362dK">discord</a>, I would love to hear them.</p>
+<h1 id="configurable-default-register"><a class="zola-anchor" href="#configurable-default-register" aria-label="Anchor link for: configurable-default-register">configurable default register</a></h1>
+<p>The default register used to be just <code>"</code>. Used when you don't explicitly specify any other register.</p>
+<p>But <em>now</em>, there's an option in the <code>[editor]</code> section called <code>default-yank-register</code> that you can set to override that.</p>
+<p>Aside from path completion, I feel this is the biggest "fuck yes finally!" recent feature.</p>
+<p>In neovim, there was some option (don't remember lol) to let you use your system clipboard as your default register. So if you set it, you could just <code>y</code> directly into the clipboard and <code>p</code> directly from the clipboard.</p>
+<p>I used it, actually! And I loved it. <br />
+And now, helix has it too 🥳</p>
+<p>However, unsurprisingly, it's <em>better</em> — you aren't restricted to just set the <code>+</code>/<code>*</code> registers as your default ones, you can use whichever you want! <br />
+It could be just <code>a</code>, or even the <code>/</code> register, terrifyingly: that would give you the behavior that all yanks set your current search.</p>
+<p>Or remember that custom clipboard provider feature from the last section? Nobody is stopping you from combining these two features, and setting your default register to behave differently somehow. <br />
+Default register set to <code>*</code>, and default provider for <code>*</code> is your custom script. ??? -&gt; profit.</p>
+<p>Currently, <kbd>y</kbd>¹ yanks to default register for me, and <kbd>Y</kbd> to the system clipboard. It was more of a workaround than preferred solution, since now I'll just set <code>default-yank-register</code> to <code>+</code> to sync it to my clipboard, and I'll never need to worry about it again 🥳</p>
+<blockquote>
+<p>¹ this is technically a lie, because it's <kbd>s</kbd> and <kbd>S</kbd> that are my yanking hotkeys (I hate pressing <kbd>y</kbd>), <br />
+but the example would be less clear if I said it to begin with</p>
+</blockquote>
+<p>Keep in mind, the default register using your clipboard directly <em>may introduce overhead</em>. <br />
+Meaning: some operations, especially when you yank / paste in bulk, may slow down; sometimes considerably. <br />
+But I'm saying this from experience in <em>neovim</em>, and even then it was only noticeable in the most obscene of situations. <br />
+So, it's something to consider, but not something to particularly worry about.</p>
+<h1 id="word-bounded-autosearch"><a class="zola-anchor" href="#word-bounded-autosearch" aria-label="Anchor link for: word-bounded-autosearch">word-bounded autosearch</a></h1>
+<p><kbd>*</kbd> lets you search for your selection. But it slightly changed!</p>
+<p><em>Now</em> it places <code>\b</code> around the selection to only match it word-bounded. In other words, if you <kbd>*</kbd> on <code>word</code>, you will no longer match <code>wordword</code>.</p>
+<p>The default behavior of <kbd>*</kbd> changed to the new action called <code>search_selection_detect_word_boundaries</code>. <br />
+The <em>old</em> behavior is in the action called <code>search_selection</code> and can be accessed by pressing <kbd>alt+*</kbd>.</p>
+<p>Arrest me: I was <em>just</em> booting up to complain that I don't like this new default behavior because <code>\b</code> doesn't work for non-word characters... <br />
+But they thought of this!</p>
+<p>If you select <code>*just*</code> and press <kbd>*</kbd>, it will search for <code>*just*</code>. <br />
+If you select <code>just</code> and press <kbd>*</kbd>, it will search for <code>\bjust\b</code>.</p>
+<p>So it's actually being smart about word boundaries, and only applies them when they would <em>work</em>. <br />
+Bravo, Vince.</p>
+<a href="#bravo" id="bravo" class="anchorina">
+  <hr></hr>
+</a>
+<p>All of these new features are now also available in <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">my fork</a> 🥳</p>
+<p>I liked writing this blog post, so I might continue making these "recent new helix features" blog posts in the future.</p>
+<p>Want to make sure to not miss them? Add <a href="/rss.xml">this link</a> to your RSS reader!</p>
+<p>Don't have an RSS reader? I recommend <a rel="noopener external" target="_blank" href="https://github.com/guyfedwards/nom">nom</a>.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consistentc&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">helix is ridiculously consistent</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;my-usb-drive-experience&#x2F;" class="preview next">
+			<span class="name">my usb drive experience</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

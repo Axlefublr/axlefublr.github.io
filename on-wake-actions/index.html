@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>change wallpaper on wake</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">consider sorting</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;erm&#x2F;" class="preview next">
+			<span class="name">every row modifiers</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">change wallpaper on wake</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-04-30">2025.04.30</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 3</div> -->
+				<p>I managed to do something really neat.</p>
+<p>I wake up at almost random times, and so simply changing my wallpaper every day at 5am will be wonky. <br />
+Sure, often times that does match up to be before I wake up, but other times it's in the middle of the day for me.</p>
+<h1 id="change-wallpaper"><a class="zola-anchor" href="#change-wallpaper" aria-label="Anchor link for: change-wallpaper">change wallpaper</a></h1>
+<p>First, we start by having a script that will actually do the wallpaper change.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">swww</span><span> img -t any --transition-fps 255 --transition-duration 3 (</span><span style="color: #A9B665;">propose.rs</span><span> wallpaper 70% ~/.local/share/magazine/T)</span></span></code></pre>
+<p>I'm sure you already know what it is for you, assuming that you already set up a wallpaper daemon. <br />
+If you haven't, I strongly believe <code>swww</code> is just directly the best one (for wayland).</p>
+<p>"Wtf is <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/propose.rs">propose.rs</a>" you might ask? Ah! It is proof that <a href="https://axlefublr.github.io/randomization-sucks/">my idea</a> ended up being not that viable, and so I changed my approach. Irrelevant for this blog post though.</p>
+<h1 id="catch-suspend"><a class="zola-anchor" href="#catch-suspend" aria-label="Anchor link for: catch-suspend">catch suspend</a></h1>
+<p>The next step is to make the suspend handler. <br />
+I assumed at first I would be able to simply use systemd's existing mechanisms to make my script run <code>After=</code> suspend.target, but the docs specifically mention how that is not a thing.</p>
+<p>Intead, you put all the scripts you want to run on suspend into <code>/usr/lib/systemd/system-sleep/</code>.</p>
+<p>Two caveats with this! The scripts run twice: before <em>and</em> after suspend. <br />
+To differentiate, they are passed either <code>pre</code> or <code>post</code> as the first argument, among other things you can learn about by reading <code>man systemd-sleep</code>.</p>
+<p>The more annoying to deal with part, is that these scripts are explicitly stated in the docs to not interact with the currently active user graphical session. In simpler words, these scripts should assume that all of your wm, waybar, and significantly <em>wallpaper</em> daemon aren't a thing and won't work, at the time of execution. <br />
+Notably, this is not an issue of running on root level (which it does), that could be solved by the <code>-u</code> flag of <code>sudo</code>; This is simply a timing issue.</p>
+<p>This is why we can't just make <em>this</em> script run the wallpaper changing script — it won't work. <br />
+Instead, we will do it in a very roundabout way.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #EA6962;">if</span><span style="color: #A9B665;"> test</span><span style="color: #B58CC6;"> $</span><span>argv[1] = post</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    touch</span><span> /tmp/cami-just-suspended</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    chown</span><span> axlefublr:axlefublr /tmp/cami-just-suspended</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>When the computer wakes up (<code>post</code>), we will creat a file that is both accessible by root and the user. I <code>chown</code> it for good measure, but I'm not sure it's necessary.</p>
+<p>Next, we create a <em>user</em>-level systemd path unit. A path unit is simply a thingy that watches for filechanges. You could alternatively simply have a script that uses <code>inotifywait</code>, but I find a systemd unit to be more trustworthy.</p>
+<p>Place this file as <code>~/.config/systemd/user/wake.path</code></p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="ini"><span class="giallo-l"><span style="color: #7DAEA3;">[Path]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">PathExists</span><span style="color: #E49641;font-weight: bold;">=</span><span>/tmp/cami-just-suspended</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">[Install]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">WantedBy</span><span style="color: #E49641;font-weight: bold;">=</span><span>paths.target</span></span></code></pre>
+<p>And this file as <code>~/.config/systemd/user/wake.service</code></p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="ini"><span class="giallo-l"><span style="color: #7DAEA3;">[Unit]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">Requisite</span><span style="color: #E49641;font-weight: bold;">=</span><span>graphical-session.target</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">After</span><span style="color: #E49641;font-weight: bold;">=</span><span>graphical-session.target</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">[Service]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">Type</span><span style="color: #E49641;font-weight: bold;">=</span><span>oneshot</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">ExecStart</span><span style="color: #E49641;font-weight: bold;">=</span><span>rm /tmp/cami-just-suspended</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">ExecStart</span><span style="color: #E49641;font-weight: bold;">=</span><span>/home/username/r/dot/scripts/wallpaper-change-script.fish</span></span></code></pre>
+<p>To enable this, you'd run <code>systemctl --user enable --now wake.path</code>. Thanks to the <code>--now</code> flag, it will activate immediately. <br />
+Thanks to the <code>WantedBy</code> in the <code>[Install]</code> section of the path unit configuration, this will autostart on your next boots 👢</p>
+<p>Because I'm not sure how soon the suspend handling scripts come into effect, I'd reboot for good measure. <br />
+But in case you don't need to, test it out!</p>
+<p>Sleep / suspend the computer, then wake it up. The wallpaper should change! :D</p>
+<p>If you set this all up, and <code>systemctl --user status wake.service</code> shows an error saying "wallpaper-change-script.fish wasn't found", it is entirely your fault.¹ /j</p>
+<a href="#ps" id="ps" class="anchorina">
+  <hr></hr>
+</a>
+<p>¹ I'm making fun of the strawman reader that didn't intuit to change <code>/home/username/r/dot/scripts/wallpaper-change-script.fish</code> to the actual location of their wallpaper changing script. <br />
+In the case you forgot to chmod the script (or the suspend handling one), that's far more understandable.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">consider sorting</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;erm&#x2F;" class="preview next">
+			<span class="name">every row modifiers</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>zoxide misbehavior</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;harp&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">harp</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;optimizing-paths&#x2F;" class="preview next">
+			<span class="name">optimizing paths</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">zoxide misbehavior</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-06-08">2025.06.08</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 5</div> -->
+				<p>I just found a very surprising behavior zoxide gives fish users, that might be part of the reason why zoxide always felt so useless to me in the past.</p>
+<p>I noticed that one of my directories spiked up in its weight every so often; consistently it would get to the maximum, 9999, while I for sure didn't zoxide to it nearly that often. <br />
+The reason why this is an issue, is because of how zoxide cleans directories: <br />
+If a directory's weight is too small, <em>compared to the highest directory</em>, the directory may get removed from the zoxide database, being considered unimportant. <br />
+But I don't even need the spiking directory to be zoxided at all! I navigate to it using a different method of mine, that I'm currrently writing another blog post about. <br />
+So having it destroy the other directories, that I <strong>do</strong> heavily want zoxided, is quite problematic.</p>
+<p>I looked through all my config, and all the places where I use the <code>z</code> alias — none of them could've led to me spiking that directory. <br />
+The directory I'm talking about is <a href="https://axlefublr.github.io/magazines/"><code>magazine</code></a> — every time I modify a file in that directory, a fish function gets ran that <em><code>cd</code>s into the directory</em> and makes a commit. <br />
+I made sure that it uses specifically <code>cd</code> rather than <code>z</code> when I made it, because obviously I don't want to spike a directory due to a non-interactive, automated action.</p>
+<p>So I decided to look into what fish code the below line in my config actually executes.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">zoxide</span><span> init fish |</span><span style="color: #EA6962;"> source</span></span></code></pre>
+<p>My assumption was that it gives me the <code>z</code> alias, which increments directories I travel to <em>using it</em>. <br />
+But imagine my terror when I realize that it's not the semantic it actually uses!</p>
+<p><code>zoxide init fish</code> actually installs a hook on the <code>$PWD</code> variable; <br />
+Every time your current working directory (<code>$PWD</code>) changes, that directory is incremented. <br />
+There is nothing about the <code>z</code> alias in specific that increments directories — <em>any</em> method of getting to them does!</p>
+<p>That is in theory nice, but in practice it easily makes various directories spike up unfairly; if you do any sort of automatic / non-interactive scripting, you might be affected by this.</p>
+<p>The simple fix for this issue is to do the following instead:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">if</span><span style="color: #A9B665;"> status</span><span> is-interactive</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">  zoxide</span><span> init fish |</span><span style="color: #EA6962;"> source</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">  alias</span><span> z cd</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>If you are in an interactive shell session, initialize the hook and give me the <code>z</code> alias. If not, make <code>z</code> just act like <code>cd</code>.</p>
+<p>This is pretty good, but leaves a poor taste in my mouth. <br />
+The semantic in my brain is: “If I'm using <code>z</code>, that's because I want to increment the directory. If I don't, I use <code>cd</code>.” <br />
+I very much may want to zoxide increment some directory non-interactively too!</p>
+<p>A simple usecase I can immediately think of, is some script that sets up all active projects I'm working on, and zoxides into all of them so that I can jump to them later more easily. <br />
+If I can come up with a genuinely viable usecase like that on the spot, I'm sure that there will be other situations where I don't even realize I want to zoxide! <br />
+I feel it's much better to just carry the simpler semantic of “<code>z</code> to increment, <code>cd</code> to not”, rather than “<code>z</code> to increment, unless it's not an interactive session, …”.</p>
+<p>Here's what I put into my config, to achieve that:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">zoxide</span><span> init fish |</span><span style="color: #EA6962;"> source</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">function</span><span> __zoxide_hook</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">function</span><span> __zoxide_z</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    set</span><span> -l argc (</span><span style="color: #A9B665;">builtin</span><span> count </span><span style="color: #B58CC6;">$</span><span>argv)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>argc -eq 0</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        __zoxide_cd</span><span style="color: #B58CC6;"> $</span><span>HOME</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else if</span><span style="color: #A9B665;"> test</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv&quot;</span><span> = -</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        __zoxide_cd</span><span> -</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else if</span><span style="color: #A9B665;"> test</span><span style="color: #B58CC6;"> $</span><span>argc -eq 1 -a -d</span><span style="color: #B58CC6;"> $</span><span>argv[1]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        __zoxide_cd</span><span style="color: #B58CC6;"> $</span><span>argv[1]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        command</span><span> zoxide add -- (</span><span style="color: #A9B665;">__zoxide_pwd</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else if</span><span style="color: #A9B665;"> test</span><span style="color: #B58CC6;"> $</span><span>argc -eq 2 -a</span><span style="color: #B58CC6;"> $</span><span>argv[1] = --</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        __zoxide_cd</span><span> -- </span><span style="color: #B58CC6;">$</span><span>argv[2]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        command</span><span> zoxide add -- (</span><span style="color: #A9B665;">__zoxide_pwd</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set</span><span> -l result (</span><span style="color: #A9B665;">command</span><span> zoxide query --exclude (</span><span style="color: #A9B665;">__zoxide_pwd</span><span>) -- </span><span style="color: #B58CC6;">$</span><span>argv)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        and</span><span> __zoxide_cd </span><span style="color: #B58CC6;">$</span><span>result</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        and</span><span> command zoxide add -- (</span><span style="color: #A9B665;">__zoxide_pwd</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Notice how now the <code>| source</code> line runs <em>always</em>, regardless of if I'm in an interactive session or not. <br />
+Then, I disable the <code>$PWD</code> variable hook. <br />
+Doing so makes <code>z</code> practically just act like <code>cd</code>, so to give it back the power of incrementing, I add in <code>command zoxide add -- (__zoxide_pwd)</code> in the branches where incrementing makes sense.</p>
+<p>In the future, zoxide devs might update the <code>__zoxide_z</code> function to make it better in various ways; So if you're reading this blog post in the future, let me explain how I figured out which function to even modify, so that you can <em>recreate it</em>, rather than copy a possibly outdated version directly above.</p>
+<p>First, do <code>type z</code> — this will show you that <code>z</code> is a fish function, that calls <code>__zoxide_z</code> inside of it. <br />
+Now, do <code>funced __zoxide_z</code> to open the function's source in your editor; Copy it to your clipboard so that you can blammo it in your <code>config.fish</code>. <br />
+Add the <code>command zoxide add -- (__zoxide_pwd)</code> to the various branches similar to how I do above.</p>
+<p>To find the function that sets up a hook in the first place, I simply piped <code>zoxide init fish</code> into my pager, and looked through the code. I noticed <code>--on-variable</code>, and the rest is history.</p>
+<p>The reason why we aren't just modifying the functions directly with <code>funced</code> (which you can usually do), is because they're defined dynamically every time you run your shell, rather than being <code>funcsave</code>d and staying as a file. <br />
+So if we were to edit the functions directly, they'd only stay modified for the current session, rather than all future sessions. <br />
+That's why we need to blammo directly into our config.</p>
+<p>Now that things are working correctly, I can finally <em>trust</em> zoxide to work as expected. <br />
+I won't have to worry about initialized directories randomly disappearing, and with <a href="https://axlefublr.github.io/optimizing-paths/">another thing I did</a>, my zoxide is overpowered now.</p>
+<p>🍐🚀</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;harp&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">harp</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;optimizing-paths&#x2F;" class="preview next">
+			<span class="name">optimizing paths</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

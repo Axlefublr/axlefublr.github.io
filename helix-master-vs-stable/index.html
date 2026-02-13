@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>helix master vs stable</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;why-even-helix&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">why even helix?</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;why-i-hate-kitty&#x2F;" class="preview next">
+			<span class="name">why I hate kitty</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">helix master vs stable</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-10-11">2024.10.11</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 2</div> -->
+				<p>When considering switching to helix master, I went through all the commits after stable. <br />
+Here are the new features I discovered.</p>
+<h1 id="pickers"><a class="zola-anchor" href="#pickers" aria-label="Anchor link for: pickers">pickers</a></h1>
+<h2 id="columns"><a class="zola-anchor" href="#columns" aria-label="Anchor link for: columns">columns</a></h2>
+<p>There's a picker refactor: most pickers now have columns, that you can search directly. <br />
+Here's how the bindings picker looks like now:</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./picker.webp" alt="" /></p>
+<h3 id="shorthands"><a class="zola-anchor" href="#shorthands" aria-label="Anchor link for: shorthands">shorthands</a></h3>
+<p>And thanks to columns, it's much nicer to use! <br />
+You can type in <code>%column_name</code> to start searching in that column. <br />
+So you can search by <em>specifically</em> documentation by using <code>%doc</code>:</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./picker-column-search.webp" alt="" /></p>
+<a href="#shorter-hander" id="shorter-hander" class="anchorina">
+  <hr></hr>
+</a>
+<p>Or just <code>%d</code>! The column matcher just needs to be unique, from the start of the column name; you don't have to use the full name.</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./picker-shorter-column-search.webp" alt="" /></p>
+<a href="#dual-wielding" id="dual-wielding" class="anchorina">
+  <hr></hr>
+</a>
+<p>You can combine a normal search with a column search:</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./picker-combination.webp" alt="" /></p>
+<p>And even multiple:</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./picker-combined.webp" alt="" /></p>
+<h1 id="global-search"><a class="zola-anchor" href="#global-search" aria-label="Anchor link for: global-search">global_search</a></h1>
+<p>The <code>global_search</code> action used to prompt you for the search in the commandline area, and then show the results at once. Now it is an interactive picker, and shows results as you type in the regex pattern:</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./global-search.webp" alt="" /></p>
+<a href="#also-column" id="also-column" class="anchorina">
+  <hr></hr>
+</a>
+<p>Also has a column you can additionally filter by:</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./global-search-column.webp" alt="" /></p>
+<h1 id="inline-diagnostics"><a class="zola-anchor" href="#inline-diagnostics" aria-label="Anchor link for: inline-diagnostics">inline diagnostics</a></h1>
+<p>There's now an <a rel="noopener external" target="_blank" href="https://docs.helix-editor.com/master/editor.html#editorinline-diagnostics-section"><code>inline-diagnostics</code></a> option in the <code>[editor]</code> section, that lets you have <a rel="noopener external" target="_blank" href="https://github.com/ErichDonGubler/lsp_lines.nvim">lsp-lines</a>-like diagnostics (without being super buggy, like that nvim plugin is).</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./lsp-lines.webp" alt="" /></p>
+<h1 id="snippets"><a class="zola-anchor" href="#snippets" aria-label="Anchor link for: snippets">“snippets”</a></h1>
+<p>Lsp snippets: when lsps complete extra text (default parameters for example), it now actually appears in the completed suggestion. It used to strangely dissapear. <br />
+This snippet implementation is not full; you still can't go to the previous / next node in the snippet, for example.</p>
+<h1 id="suggestions"><a class="zola-anchor" href="#suggestions" aria-label="Anchor link for: suggestions">suggestions</a></h1>
+<p>Extra information for suggestions now appears at the top / bottom of the screen, rather than being squished to the side of the suggestion box. So generally you get to look at it a bit more normally.</p>
+<p><img src="https://axlefublr.github.io/helix-master-vs-stable/./suggestion-information.webp" alt="" /></p>
+<h1 id="macro-mappings"><a class="zola-anchor" href="#macro-mappings" aria-label="Anchor link for: macro-mappings">macro mappings</a></h1>
+<p>In mappings, you can now use @ to bind to literal keypresses. For example <code>'mw' = '@miw'</code>.</p>
+<h1 id="camel-case-motion"><a class="zola-anchor" href="#camel-case-motion" aria-label="Anchor link for: camel-case-motion">camel case motion</a></h1>
+<p>Subword movement actions. Search for them with <code>sub_word</code> in the keybind picker. I went with using <code>gw</code>, <code>ge</code>, <code>gb</code> (the first two are mapped by default, I moved those default mappings elsewhere).</p>
+<h1 id="various-fixes"><a class="zola-anchor" href="#various-fixes" aria-label="Anchor link for: various-fixes">various fix<del>es</del></a></h1>
+<p>Hardlinks were broken: if you wrote to a hardlink, it wouldn't update the other file. This was fixed in master.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;why-even-helix&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">why even helix?</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;why-i-hate-kitty&#x2F;" class="preview next">
+			<span class="name">why I hate kitty</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

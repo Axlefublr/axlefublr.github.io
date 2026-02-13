@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>why I hate lua</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;columnar-multicursors&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">a neat helix multicursor trick</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<div class="preview empty next">
+		</div>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">why I hate lua</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-07-05">2024.07.05</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 11</div> -->
+				<p>What I value most in a language is <em>functionality</em> — what and how easily the language lets me do things. <br />
+No wonder! That's what programming is kinda for: <em>doing cool things more easily</em>. <br />
+And here's lua, that doesn't even have an abstraction over something as simple as <code>.split()</code>. Ridiculous.</p>
+<a href="#std" id="std" class="anchorina">
+  <hr></hr>
+</a>
+<p>Lua has a very weak standard library. You'll find yourself reimplementing functionality that you'll be flabbergasted isn't there to begin with. <br />
+Sure, some of that functionality might be simple to implement, but it shouldn't be my job. <br />
+Imagine doing the equivalent of implementing the <code>print</code> function in every new project you create. It's disheartening.</p>
+<p>Not only is the standard library weak, but it's also not ergonomic. <br />
+Whenever you want to push a value into an array (more precisely a list / vector), the way that you're used to doing so in basically every language on earth is this: <code>my_array.push(value)</code>.</p>
+<p>Well duh! Right? Right...</p>
+<a href="#tables" id="tables" class="anchorina">
+  <hr></hr>
+</a>
+<p>The way you do that in lua is <code>table.insert(my_table, value)</code>.</p>
+<p>"Oh it sure looks like the expanded version of the method syntax, so you can just do <code>my_table:insert(value)</code> and it'll work surely" — yeah that's what I wished too. <br />
+What is sometimes an implementation detail in some languages, is actually <em>the</em> way you're supposed to call, what should be by all accounts, a <em>method</em>.</p>
+<p>Insert is not a method for any table, which is the obvious thing that you want, no. It's a <em>function</em> that just happens to be in the <code>table</code> module. <br />
+This kind of idea repeats with stuff like <code>math.abs()</code>, but math being stored in <del>the balls</del> a module is a pretty common thing across languages, and not too insulting. <br />
+An <em>action</em> you're doing on an <em>object</em> being a function is <strong>very</strong> insulting.</p>
+<a href="#symbol-soup" id="symbol-soup" class="anchorina">
+  <hr></hr>
+</a>
+<p>You know how you can fix this though? With inscrutable symbol soup!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="lua"><span class="giallo-l"><span style="color: #EA6962;">local</span><span> my_table</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #A9B665;"> setmetatable</span><span>({}, { __index</span><span style="color: #E49641;font-weight: bold;"> =</span><span> table })</span></span></code></pre>
+<p>And now you can do:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="lua"><span class="giallo-l"><span>my_table:</span><span style="color: #A9B665;">insert</span><span>(value)</span></span></code></pre>
+<p>Yipee 🥳 right? <br />
+Yeah fuck no! Why is this bullshit not the default? It is not reasonable at all to insert that symbol soup every time you want to make a table, just to get slightly better syntax. <br />
+The confusion you'll get from (most) people is simply not worth it. <br />
+So I'm stuck between a rock and a hard place.</p>
+<p>You could I guess make this:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="lua"><span class="giallo-l"><span style="color: #EA6962;">local function</span><span style="color: #A9B665;"> get_reasonable_table</span><span>()</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">   return</span><span style="color: #A9B665;"> setmetatable</span><span>({}, { __index</span><span style="color: #E49641;font-weight: bold;"> =</span><span> table })</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>But even with this, this is a bit stupid. <br />
+Remember, we're not doing this to inherit some table in our designed app, we're doing this <em>just</em> to have slightly better syntax. <br />
+So I once again argue that it's not worth it.</p>
+<a href="#local" id="local" class="anchorina">
+  <hr></hr>
+</a>
+<p>Notice how both that variable and function use the <code>local</code> keyword? <br />
+Yeah that's because both of those would otherwise be <em>global</em> by default. Because that's a very good idea for a default /s</p>
+<p>To reiterate: why in living and dying hell are those not <em>local</em> by default? <br />
+And then you'd maybe opt into globality via <code>global</code>?? Autohotkey does it and it's great there! A bunch of other languages make globality more annoying to use, which is overall a good idea hehehe :3</p>
+<p>Or perhaps they use the concept of <code>const</code>, which covers a lot of the cases for wanting globality anyway.</p>
+<p>Additionally confusingly, you need the <code>local</code> keyword even if you're not in a block / function. <br />
+Because without it, the variable won't just be global in the file you're working on, nope — it's going to be global to <em>everywhere</em>. <br />
+So you put the <code>local</code> keyword to make the variable "local to the module". This language is a god's mistake.</p>
+<a href="#casing" id="casing" class="anchorina">
+  <hr></hr>
+</a>
+<p>But we continue on: if a feature exists, makes sense to use it. <br />
+Even <code>goto</code>s have their use, I'm sure. <br />
+(While writing I mentioned <code>goto</code>s as a joke, only to then realize they actually exist in lua... Yes, <code>goto</code>s, but <strong>not</strong> the FUCKING CONTINUE STATEMENT. Yes, really. I'm way ahead of you and I <em>have</em> been crying about it, don't worry.)</p>
+<p>The convention for variables and functions in lua seems to be using <code>snake_case</code>. Alrightie then.</p>
+<p>Another convention, suggested by the lua language server, is to make at least the first letter of global variables uppercase.</p>
+<p>What I think is suggests is <code>SCREAMING_SNAKE_CASE</code>. <br />
+This of course makes a lot of sense for global variables that are meant to be <code>const</code>s. <br />
+("pinky promise <code>const</code>s", because the concept of actual <code>const</code> in lua doesn't exist, and all variables are mutable) <br />
+But not all global variables are meant to be <code>const</code>s, many of them will be global just so that they can be accessed from anywhere conveniently. So we can't just lie and use that upper case, because it <em>will</em> confuse programmers looking at our code, when we modify (after instantiation) what looks like an immutable variable.</p>
+<p>What other choice do we have? <code>PascalCase</code>? No!! That's obscene. The convention is <em>still</em> "variables use underscores to separate subwords", so why would we suddenly change that because of <em>globality</em>? It makes no sense.</p>
+<p>And, I can understand a pascal case function, cause that does appear in some languages (like C#). A pascal case variable is really out of the blue, considering it's not the usual case in lua, or any other language I've worked with.</p>
+<p>So what am I left with? <code>This_stupid_bullshit</code>. To satisfy both conventions, I have to do something as ridiculous as that. I will shoot anyone that argues for this absolute strawman of a casing convention.</p>
+<p>If we bring it back to using <code>SCREAMING_SNAKE_CASE</code> disregarding the <code>const</code>-related confusion, then we'd have to name <em>functions</em> in that case too. Which is a whole another level of cursed.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="lua"><span class="giallo-l"><span style="color: #EA6962;">local</span><span> thingy</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #A9B665;"> YEP_JUST_A_GLOBAL_FUNCTION</span><span>(params)</span></span></code></pre>
+<p>What the fuck.</p>
+<a href="#ignore" id="ignore" class="anchorina">
+  <hr></hr>
+</a>
+<p>You might say "well you could just ignore the suggestion by the language server" — I wholeheartedly reject that notion. <br />
+The lua language server will be used by the overwhelming majority of people that program in lua. <br />
+The majority sets a standard, and a good programmer follows standards (yes, even if they're stupid!). So I can't just ignore it.</p>
+<p>I haven't looked at much lua code aside from that I wrote (cause remember, I fucking despise the language!), but it seems like the convention is to just never use global variables lol. Which is, like, fair.</p>
+<a href="#functions" id="functions" class="anchorina">
+  <hr></hr>
+</a>
+<p>Lua uses the concept of "first level citizen functions". Or however that concept is properly worded. <br />
+Basically, functions are just values that you can assign to variables, and store in tables. <br />
+That kind of behavior is actually pretty cool, and makes sense for the language. The problem I have with them is the syntax.</p>
+<p>Think of basically any language that uses the concept of closures. <br />
+Rust's <code>|x|</code> (stupid but consise), python's <code>lambda</code>, javascript's <code>(x) =&gt; {}</code>. <br />
+All three differentiate functions and closures, fwiw, so they might not be good examples, but my point is that you can make syntax for closures that is nice and consise. <br />
+If you wanted to interpret functions and closures in the same way, using <code>fn</code> / <code>def</code> / <code>fun</code> / etc works just as well.</p>
+<p>Then why in living and dying hell does it <em>have to</em> be <code>function</code>. Bitch, you might as well write an entire poem just to define an anonymous closure in lua by that point. God am I mad at this in specific. <br />
+Because of how <em>neat</em> the concept of "functions are also closures" is in lua, it's very very commonly used. <br />
+And any time you need to pass some closure as an argument, you have to boilerplate it with typing out <code>function</code>. <br />
+Just <code>fun</code>, <code>def</code>, <code>fn</code>, <code>func</code> would all work! I'm sure you might have a distaste for some of them, but you'll probably see at least one to be "alright as a closure starter". So yeah, it genuinely doesn't need to be that long.</p>
+<a href="#newbies" id="newbies" class="anchorina">
+  <hr></hr>
+</a>
+<blockquote>
+<p>"Oh, lua is made to be readable and approachable to newbie programmers!"</p>
+</blockquote>
+<p>That's a good benefit! <br />
+There are for sure some things that make sense to change to make them more approachable to newbies. <br />
+An example of that could be <code>{}</code> vs indentation in python. <br />
+I have genuinely heard <code>{}</code> confusing people, and making it harder for people to read code. <br />
+This is not the case for me anymore, but I do remember the time when I was just starting out, where that definitely <em>was</em> the case. <code>{}</code> were harder to visually parse.</p>
+<p>You <em><strong>cannot</strong></em> make this same argument for <code>function</code> vs <code>func</code>. <br />
+The latter is just as visible as the former, and just as obvious <em>literally</em> as soon as you define your first function in lua. <br />
+Your second function forward, you now have to <em>deal with</em> typing out the entirety of <code>function</code>.</p>
+<a href="#lsp" id="lsp" class="anchorina">
+  <hr></hr>
+</a>
+<blockquote>
+<p>"Oh just autocomplete it"</p>
+</blockquote>
+<p>Yeah no. Most (lua) programmers are on vscode, and that editor will generally not be fast enough to make it worth it to complete <code>function</code>. <br />
+By the time the suggestion window appears and you pick the correct thing (cause also remember, most people don't realize they can fuzzy search their suggestions), you would have already typed in <code>function</code>. <br />
+So the result is you always just typing in <code>function</code> yourself. <code>func</code> would reduce that by <strong>half</strong>, and would be quite ergonomic.</p>
+<a href="#patterns" id="patterns" class="anchorina">
+  <hr></hr>
+</a>
+<p>Actually, forget that "approachable to newbies" point, cause it's obscene in its own sense. Let's talk about lua <em>patterns</em>. Do you know how they work? I sure don't.</p>
+<p>Instead of implementing regex, lua has its own flavor of pattern matching with its <code>gsub</code>s and the like. In those, you have to use lua patterns. <br />
+They <em>sometimes</em> resemble regex, but for some odd reason don't try to fully emulate it. <br />
+And let me also mention that you can't just <code>my_str:contains(literal_string)</code> — you'd have to use <code>gmatch</code> I believe, and that has to use lua patterns, meaning you can't just conveniently raw compare a substring. <br />
+What a travesty.</p>
+<p>The main point behind not implementing regex is that it would double the size of the lua binary. <br />
+I personally couldn't give two shits, but I can see it as an important concern, so I don't have much against that point.</p>
+<p>So, what I'd expect is for lua to match the syntax of regex, but just have a bunch of missing features. <br />
+If that was the case, there wouldn't be a "patterns" section in this rant. <br />
+But no, lua decides to use its own syntax, that you now have to learn, even if you're familiar with regex.</p>
+<p>Why do I then not complain about rust not having regex? <br />
+That's because it has enough features to make it very viable to not use it — you have other ways of achieving the same text parsing objective. And you have the obvious <code>.contains()</code>.</p>
+<a href="#then" id="then" class="anchorina">
+  <hr></hr>
+</a>
+<p>Coming back to syntax: why does <code>then</code> need to exist? <br />
+It's used in <code>if</code> statements for example. Statements that only take a single expression as a condition anyway. <br />
+So it's already as clear as day where that condition ends! Because it's required to end after a single expression! <br />
+And so, everything else should be considered the body of the <code>if</code> statement, and there's no confusion. <br />
+And yet we stil have <code>then</code> for some odd reason. Fish shell very comfortably doesn't!</p>
+<p>I don't like the <code>end</code>-type "bracket keywords" in programming languages, but I can see how it's needed in something like fish shell. <br />
+It does not need to be so in a "proper programming language" which I expected lua to be.</p>
+<a href="#why" id="why" class="anchorina">
+  <hr></hr>
+</a>
+<p>Worst thing about lua is the fact that every goddamn configurable thingy in existence seems to immediately go for this piece of shit language, resulting in both my window manager and text editor to be configured in it. <br />
+Lua is unfortunately my most used programming language, however mad I am at this fact being the truth.</p>
+<p>Other languages that I've seen people dislike are lisp and haskell. <br />
+I haven't tried either of them, maybe I would like them maybe not, but regardless, I retain my possibility of avoiding them if I so desire. Lua is fucking inescapable.</p>
+<blockquote>
+<p>"Oh you might like Fennel then!"</p>
+</blockquote>
+<p>(yes every possible argument made towards me by the reader will start with "Oh")</p>
+<p>Good suggestion! I honestly might. <br />
+But having to use a language to fix another is just another proof of lua being a shit language. Kinda like the javascript vs typescript situation.</p>
+<p>What I use lua for is configuration. If I want <em>functionality</em>, I'll pick fish shell any day over lua. <br />
+So creating a level of abstraction over my configuration-based lua is just an extra complexity that I'll have to <em>deal</em> with. Making it not worth it conceptually. <br />
+This is the reason why I haven't rewritten my neovim config in rust (which you can supposedly do, as it turns out).</p>
+<h1 id="p-s"><a class="zola-anchor" href="#p-s" aria-label="Anchor link for: p-s">P.S.</a></h1>
+<p>Everything I've learnt about lua was against my will, so if I'm wrong on some points in this rant, don't be surprised. <br />
+I'm not interested in giving a language I hate more time than I already do, to learn how to circumvent its annoyances. <br />
+This rant is also against <em>lua</em>, not against <em>lua likers</em>. I believe it's (almost) always better to like something than to not, so if you enjoy the language, you're better off than me!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;columnar-multicursors&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">a neat helix multicursor trick</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<div class="preview empty next">
+		</div>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

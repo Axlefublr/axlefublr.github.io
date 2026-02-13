@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>magazines</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;my-usb-drive-experience&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">my usb drive experience</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;elegant-fish-shell-booleans&#x2F;" class="preview next">
+			<span class="name">elegant fish shell booleans</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">magazines</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-11-03">2024.11.03</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 15</div> -->
+				<p>I came up with a concept that completely revolutionized a <em>lot</em> of my workflow.</p>
+<p>I introduce to you: magazines™!</p>
+<h1 id="the-basics"><a class="zola-anchor" href="#the-basics" aria-label="Anchor link for: the-basics">the basics</a></h1>
+<p>Each magazine is just a normal file that has a one letter file name, from a to z, from A to Z, and from 1 to 9. <br />
+All magazines are located in a single directory called <code>magazines</code>.</p>
+<blockquote>
+<p>The name doesn't really have meaning, I just happened to be obsessed with guns at the time of coming up the concept</p>
+</blockquote>
+<p>I have different <em>actions</em> I can do on any magazine. An "action" is just some shell function that interacts with a file in some way.</p>
+<p>And finally, I have chord mappings that make me pick an action, and then a magazine to act on. <br />
+All the magazines use either a letter or a digit for their filenames, to mimic the hotkeys I use to choose them.</p>
+<h1 id="actions"><a class="zola-anchor" href="#actions" aria-label="Anchor link for: actions">actions</a></h1>
+<p>All action picking hotkeys use <em>left</em> shift + a <em>left</em> side key. This is because when typing, I will always use the right shift for left side keys, so I get to have very accessible hotkeys specifically for magazine actions. <br />
+After I press the action hotkey, I press a letter (or digit) key, to pick the magazine I want to execute the action on.</p>
+<p>This is a pretty simple concept! But it's so flexible <em>specifically</em> because it's so simple.</p>
+<p>Considering that all actions <em>just</em> act on some filepath, let's go over the actions I can do!</p>
+<ol>
+<li>use <code>rofi</code> to type in a line of text, and overwrite a file with that text (<kbd>lshift+alt+s</kbd>)</li>
+<li>1, but append the line rather than overwrite with it (<kbd>lshift+s</kbd>)</li>
+<li>copy the text in a file to my clipboard (<kbd>lshift+c</kbd>)</li>
+<li>truncate the file (remove its contents, but don't delete the actual file) (<kbd>lshift+r</kbd>)</li>
+<li>3 + 4 — this is basically a "cut" action (<kbd>lshift+alt+c</kbd>)</li>
+<li>take the contents of my clipboard, and overwrite a file with them (<kbd>lshift+alt+v</kbd>)</li>
+<li>6, but append the contents rather than overwrite with them (<kbd>lshift+v</kbd>)</li>
+<li>use <code>rofi</code> to pick <em>a line</em> from a file to <em>remove</em> and copy to my clipboard (or, to <em>cut</em> to my clipboard basically) (<kbd>lshift+f</kbd>)</li>
+<li>use <code>rofi</code> to pick <em>a line</em> from a file to copy to my clipboard (like 8, but doesn't remove the line) (<kbd>lshift+alt+f</kbd>)</li>
+<li>open a floating terminal, in which the file is opened in helix, to get the full power of my editor in a fast way (<kbd>lshift+d</kbd>)</li>
+</ol>
+<blockquote>
+<p>Further in the gist I'll refer to actions by their shortened name, with a superscript number next to it, that specifies the index in this list.</p>
+</blockquote>
+<h1 id="autocommitting"><a class="zola-anchor" href="#autocommitting" aria-label="Anchor link for: autocommitting">autocommitting</a></h1>
+<p>All actions that modify a file, also <em>commit</em> it with git — the <code>magazines</code> directory is a git repo. <br />
+This way, I have a <em>very</em> easily traversable history, that doubles as a backup. <br />
+As long as something <em>has been</em> in a magazine, I will be able to restore it if necessary.</p>
+<p>Commits are done automatically by all actions that modify a file; however I can still modify magazines elsehow. <br />
+I have hotkeys in helix to open each magazine in the already existing editor session (different from the 10th action, because I'm not opening a new floating terminal window). <br />
+When editing the magazines like this, it's not an action so can't be a convenient trigger for an autocommit. <br />
+That's why there's an 11th action that <em>just</em> commits a magazine.</p>
+<p>All the leftover changes that <em>still</em> didn't get committed, are collected together into a single commit, daily. <br />
+So at the absolute worst, I have a day old backup for all magazines.</p>
+<h1 id="most-important-magazines"><a class="zola-anchor" href="#most-important-magazines" aria-label="Anchor link for: most-important-magazines">most important magazines</a></h1>
+<p>Let me go through some of my actively used magazines and their purpose, to explain how this system helps me keep track of things in an easy way.</p>
+<h2 id="magazine-r"><a class="zola-anchor" href="#magazine-r" aria-label="Anchor link for: magazine-r">magazine r</a></h2>
+<p>...stores all things I want to read. "read" is used pretty loosely here, as the file contains a bunch of different stuff I basically want to <em>get to</em>, while not necessarily being a "task" that I can <em>do</em>.</p>
+<p>Here's part of what it contains currently:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>!# gh cli (gh-issue-develop)</span></span>
+<span class="giallo-l"><span>!&amp; Hugo</span></span>
+<span class="giallo-l"><span># pandoc</span></span>
+<span class="giallo-l"><span># string-replace</span></span>
+<span class="giallo-l"><span>$ loago-based workflow</span></span>
+<span class="giallo-l"><span>$ magazines</span></span>
+<span class="giallo-l"><span>% how to remove background in krita</span></span>
+<span class="giallo-l"><span>% can you &quot;close all other windows&quot; to close the main window from an overlay window in kitty?</span></span>
+<span class="giallo-l"><span>&amp; qalculate</span></span>
+<span class="giallo-l"><span>&amp; zbarimg</span></span>
+<span class="giallo-l"><span>pcre or whatever regex</span></span>
+<span class="giallo-l"><span>the sliding window technique</span></span>
+<span class="giallo-l"><span>https://matklad.github.io/2021/07/09/inline-in-rust.html</span></span>
+<span class="giallo-l"><span>https://www.howtogeek.com/how-to-see-beautiful-git-project-stats-in-your-terminal/</span></span></code></pre>
+<p>This seems like a hotpot but it's pretty intentional. <br />
+<code>#</code> marks <em>docs</em> that I want to read (with the part I left off on written down in <code>()</code>), <br />
+<code>$</code> is gists / blog posts that I want to write (<code>magazines</code> is this one!!), <br />
+<code>&amp;</code> is for <em>programs</em> that I want to discover, <br />
+<code>%</code> is for questions I want to discover, figure out, or take in.</p>
+<a href="#seemingly-simple" id="seemingly-simple" class="anchorina">
+  <hr></hr>
+</a>
+<p>The two questions I have there seem simple, but they may stay there for a while because they're more loaded questions than they seem. <br />
+I'm sure there's more than a single way to remove the background in krita, with each being useful in a different situation — I'd want to focus on learning this properly. <br />
+Even more the case with <a href="https://axlefublr.github.io/why-i-hate-kitty/">kitty</a> — trying to solve this question might move me to come up with a different window managing concept that I'll then spend three more hours on. <br />
+Never underestimate a question, especially if you're autistic like me.</p>
+<a href="#vimium-c" id="vimium-c" class="anchorina">
+  <hr></hr>
+</a>
+<p>I usually use the append² action for this magazine.</p>
+<p>With <a rel="noopener external" target="_blank" href="https://github.com/gdh1995/vimium-c">vimium c</a>, I can copy links I see on the screen to my clipboard, using my keyboard. <br />
+The various rogue links you see without a section header are usually added by copying a link that way, and using the append clipboard⁷ action.</p>
+<p>Sectioning things is pretty nice, but has an additional benefit that I haven't yet made clear. <br />
+The commit¹¹ action has extra functionality to it: I can pick filepaths that are automatically <em>sorted</em>. <br />
+The section headers intentionally use ascii symbols that go before letters, so that they would appear first in the file after it gets automtically sorted.</p>
+<p>Going in and editing the code for the commit action every time I want to autosort another magazine would go against my principles. <br />
+This is why I use <em>another</em> magazine to solve this!</p>
+<h2 id="magazine-o"><a class="zola-anchor" href="#magazine-o" aria-label="Anchor link for: magazine-o">magazine O</a></h2>
+<p>...contains all the filepaths that I want to automatically sort:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>~/.local/share/magazine/l</span></span>
+<span class="giallo-l"><span>~/.local/share/magazine/r</span></span></code></pre>
+<p>So if I decide to autosort another magazine on commit, I can just add its filepath there! :D</p>
+<p>This autosort behavior explains the reasoning behind <code>!</code> before some section headers: <code>!</code> is the first printable character in ascii, excepting space, with its decimal index being 33. So it's guaranteed to come first. <br />
+I use it for reading tasks that I want to get to <em>first</em>, before any other ones.</p>
+<h2 id="magazine-p"><a class="zola-anchor" href="#magazine-p" aria-label="Anchor link for: magazine-p">magazine P</a></h2>
+<p>...is similar in concept to <code>O</code>: filepaths listed in magazine <code>P</code> are automatically made <em>unique</em>. <br />
+If a magazine path is listed in magazine <code>P</code>, there will never be duplicate lines in the former.</p>
+<p>I could opt to join <code>O</code> and <code>P</code>, but I might want to sort a file without deduplicating lines, and may want to deduplicate lines without sorting (which you can achieve with this monstrosity: <code>awk '!seen[$0]++'</code>), so I keep them separate.</p>
+<a href="#dynamic" id="dynamic" class="anchorina">
+  <hr></hr>
+</a>
+<p>The above examples are magazines that are fairly dynamic and moving, but there's use in magazines that are fairly static, and are made mostly to access the information faster, than necessarily change it often.</p>
+<h2 id="magazine-u"><a class="zola-anchor" href="#magazine-u" aria-label="Anchor link for: magazine-u">magazine u</a></h2>
+<p>...contains a bunch of cool looking special symbols and nerd font symbols, that I may use in the future. Here's a small chunk of it:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>󱞭 󱞯 󱞱 󱞳 󱞵 󱞷 󱞹 󱞻 </span></span>
+<span class="giallo-l"><span>󱞡 󱞣 󱞥 󱞧 󱞩 󱞫 󱞽 </span></span>
+<span class="giallo-l"><span>    󰁕  </span></span>
+<span class="giallo-l"><span>    ⮌ ⮍ ⮎ ⮏  </span></span>
+<span class="giallo-l"><span>← 󰹹  󰒟 </span></span>
+<span class="giallo-l"><span>󰚪 󰘲 󰕍 󰓦  ↪ ➜ </span></span>
+<span class="giallo-l"><span>󰒊 ▶ </span></span></code></pre>
+<p>The only action I may conceivably do with this one, is to edit¹⁰ it. And even then, usually from an already existing helix instance. The benefit is yet still huge, as it's very easy to get to this file to add another cool unicode symbol.</p>
+<h2 id="magazine-o-1"><a class="zola-anchor" href="#magazine-o-1" aria-label="Anchor link for: magazine-o-1">magazine o</a></h2>
+<p>...is the opposite of static — it stores the command output of the last command I ran in my rofi command runner.</p>
+<p>Usually, the output of my rofi command runner is shown in a notification that stays for 3 seconds. That's plenty of time for the vast majority of usecases, but I <em>may</em> want to look at it for longer. Blammo — edit¹⁰ action.</p>
+<p>That's fairly convenient as is already, but the real power lies in the copy³ action. Any time I execute a command, I can <em>choose</em> to copy its output, if I need it. <br />
+So, I don't have to preemtively plan to pipe the output into <code>xclip</code>, and don't have to rerun the command once I realize I want to pipe it into <code>xclip</code>. I <em>just</em> use the copy³ action.</p>
+<a href="#free-power" id="free-power" class="anchorina">
+  <hr></hr>
+</a>
+<p>Another power I get for free, is that I can choose a line to copy⁹ from the command output.</p>
+<p>I didn't consider this as something I'd want to do with command output — it wasn't forethought. <br />
+It just so happened I needed this action for something else (magazine <code>F</code> that stores cool fonts) and now the action is integrated into the <em>magazine framework</em>. <br />
+So with magazine <code>o</code>, and many other ones, I end up having editing flexibility that I didn't plan for that magazine specifically. It's a big part for why this system has been so successful for me.</p>
+<h1 id="special-casing"><a class="zola-anchor" href="#special-casing" aria-label="Anchor link for: special-casing">special-casing</a></h1>
+<p>I create all the hotkeys for all the actions, and all magazines, myself. There are like 900 or so lines of yaml to make them all using xremap. <br />
+Because I don't have some complicated system to make the mappings, nothing is stopping me from making some action for some magazine behave slightly differently, to be more useful for that magazine.</p>
+<h2 id="magazine-l"><a class="zola-anchor" href="#magazine-l" aria-label="Anchor link for: magazine-l">magazine l</a></h2>
+<p>...is my "linker". It contains all the links I want to store in this format:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>!general my youtube channel — https://www.youtube.com/@Axlefublr/streams</span></span>
+<span class="giallo-l"><span>blog reasons I still love fish shell — https://jvns.ca/blog/2024/09/12/reasons-i--still--love-fish/</span></span>
+<span class="giallo-l"><span>doc ankiconnect — https://foosoft.net/projects/anki-connect/</span></span>
+<span class="giallo-l"><span>general phind — https://www.phind.com</span></span>
+<span class="giallo-l"><span>gist why I hate kitty — https://gist.github.com/Axlefublr/260f653c25c34c3ed6147a6638fc6512</span></span>
+<span class="giallo-l"><span>mat gun sounds — https://samplefocus.com/tag/gun</span></span>
+<span class="giallo-l"><span>meme I have done nothing but teleport bread for three days. — https://www.youtube.com/watch?v=NE1-dKc6R_I</span></span>
+<span class="giallo-l"><span>music hatchetsaw, hauntgat, fleshwound — country side massacre — https://www.youtube.com/watch?v=H4Hw-ARuEa4</span></span>
+<span class="giallo-l"><span>plug nvim harp-nvim — https://github.com/Axlefublr/harp-nvim</span></span>
+<span class="giallo-l"><span>proj Axlefublr/helix — https://github.com/Axlefublr/helix</span></span></code></pre>
+<p>First goes a "header": <code>general</code> / <code>blog</code> / <code>music</code> / etc. Then the title of the link. Then a <code>—</code> (long dash, U+2014). Then the actual link.</p>
+<p>I used to use the append² action for this in the past, but found it annoying to have to put in a long dash <em>and</em> paste in the link every time, considering that it's the <em>only</em> thing I'd want to do anyway.</p>
+<p>I created a "subaction" meant to be the append² action replacement, but <em>only</em> for magazine <code>l</code>. The only difference, is that after I type in the input (link title), it appends a <code>—</code> to it and the link (which is in my clipboard), and <em>then</em> adds it into the file.</p>
+<p>That makes it really non-laborious to add in new links! <br />
+As well as showcase how flexible magazines are, considering that I was able to make a custom action for something like this.</p>
+<a href="#reasoning" id="reasoning" class="anchorina">
+  <hr></hr>
+</a>
+<p>Now, there's a reason I want a specific format here to begin with. I don't actually open this file directly that often. Magazine <code>l</code> is used as a "data file".</p>
+<p>All the links are stored in it because I have a global hotkey that <em>parses</em> through them all, lets me search by title, and then either opens the link or copies it to my clipboard.</p>
+<p>So, sometimes magazines <em>are</em> the behavior, other times they're an <em>interface</em> to interact with a data file conveniently, so that it could be used by something else.</p>
+<h2 id="magazine-e"><a class="zola-anchor" href="#magazine-e" aria-label="Anchor link for: magazine-e">magazine e</a></h2>
+<p>'s idea is basically the exact same:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>¡ a1 reversed exclamation</span></span>
+<span class="giallo-l"><span>⁷ 2077 top superscript 7 seven</span></span>
+<span class="giallo-l"><span>↕ 2195 arrow down &amp; up</span></span>
+<span class="giallo-l"><span>🐄 1f404 cow</span></span>
+<span class="giallo-l"><span>🔇 1f507 muted speaker</span></span>
+<span class="giallo-l"><span>🤢 1f922 vomit</span></span></code></pre>
+<p>Easier automatic adder, that takes the symbol from my clipboard, figures out each character's unicode (try <code>printf %x \'🐄</code>), and asks me for a title. Then a hotkey that lets me search by all of that, to copy just the symbol to my clipboard, so I could paste it wherever I need.</p>
+<p>That's about it when it comes to the explanation of the idea! Hope you got motivated to implement something like this, or better yet — something that makes even more sense for <em>you</em>. Right now I'm going to continue explaining a bunch of my other magazines and what I use them for, to maybe help you get ideas.</p>
+<h1 id="etc-etc"><a class="zola-anchor" href="#etc-etc" aria-label="Anchor link for: etc-etc">etc etc</a></h1>
+<p>Out of these magazines: <code>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[];',./{}:"&lt;&gt;?</code>, <br />
+I'm actively using these: <code>acdefijklmopqrsuvwxACDEFHIJKLOPQRSTUVWXYZ134[];:</code>.</p>
+<p>Yes, really, that many! I'm thinking of possibly adding hotkeys with <kbd>alt</kbd> in the future, once I run out of magazines. Then <kbd>ctrl</kbd>, then <kbd>shift+alt</kbd>, then... etc. That would in theory increase those ~900 lines of yaml to be like, three million! Oh well :&gt;</p>
+<p><kbd>a</kbd> stores "all the possible things I can do" — helpful to take a step back, breathe, and calmly decide what next to do, rather than hurrily and anxiously jump around in my mind.</p>
+<p><kbd>c</kbd> stores copypastas I want to be easily accessible. Here's one of them: «when making australia God said "only a spiderful" but then pulled out a comically large spider».</p>
+<p><kbd>d</kbd> diary that gets automatically emptied every day. Because all remaining changes get automatically committed at the end of the day, I have access to all of my past's diaries, without it cluttering up in one ginormous file. I don't really ever read my diaries from that past, that's why.</p>
+<p><kbd>f</kbd> similar to <kbd>a</kbd>, but I store <em>specifically</em> the "next" things I want to do. Here's what it has now:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>ff: !&#39; is ctrl+l, +!&#39; focuses page by probably clicking</span></span>
+<span class="giallo-l"><span>&lt;c&gt;, cda, cdb, cdab, codeblock, code, anki in not subheaders</span></span>
+<span class="giallo-l"><span>qalculate</span></span>
+<span class="giallo-l"><span>life drain anki plugin https://ankiweb.net/shared/info/715575551</span></span>
+<span class="giallo-l"><span>css flex</span></span>
+<span class="giallo-l"><span>blog</span></span>
+<span class="giallo-l"><span>https://ankiweb.net/shared/info/206062158</span></span>
+<span class="giallo-l"><span>anki searching</span></span></code></pre>
+<p>Very helpful with keeping me on track!</p>
+<p><kbd>k</kbd> stores links to youtube videos I want to download, <kbd>K</kbd> to <em>longform</em> videos, <kbd>i</kbd> to asmr videos. I have a script that takes a couple (dynamically settable) links from one of these three files, and starts downloading them, removing them from the magazine.</p>
+<p><kbd>j</kbd> is special-cased to instead be <code>~/prog/dotfiles/project.txt</code>. <code>project.txt</code> is a file that gets automatically created for all of my projects, and I use it to organize thoughts of what I want to do in a given project. <br />
+<kbd>J</kbd> is special-cased to let me <em>choose</em> a <code>project.txt</code> to act on. Reason why <kbd>j</kbd> is made more accessible, is that I <em>really</em> like to configure so I interact with the dotfiles project file the most frequently.</p>
+<p><kbd>m</kbd> stores long-term project ideas that I'll definitely do Eventually™.</p>
+<p><kbd>p</kbd> my proxy's information. I can quickly go in and copy the address, for example.</p>
+<p><kbd>q</kbd> my hardware specs. Even includes the specs of my physical body, lol.</p>
+<p><kbd>v</kbd> important events that I want to be reminded of yearly. I have a script that runs every day to check this file, and tells me stuff like "3 years ago: started programming". Here's the format:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>21.09.01 — started programming</span></span>
+<span class="giallo-l"><span>22.09.24 — started using vim</span></span>
+<span class="giallo-l"><span>23.08.06 — installed EndeavorOS</span></span>
+<span class="giallo-l"><span>24.02.21 — she/they</span></span>
+<span class="giallo-l"><span>24.08.18 — switched to helix</span></span></code></pre>
+<p><kbd>V</kbd> is the same thing with the same format, except it's <em>not</em> checked daily; it's for event dates I want to have access to, but don't care to be reminded of.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>23.07.26 - installed Debian</span></span>
+<span class="giallo-l"><span>24.02.22 - switched to pure neovim</span></span>
+<span class="giallo-l"><span>24.03.11 - 16gb ram</span></span></code></pre>
+<p><kbd>Q</kbd> is also similar to <kbd>v</kbd>, but doesn't specify a year — mostly for storing birthdays and getting reminders of them.</p>
+<p>For reminders of things that will happen once, or monthly, or yearly (mostly payments and meetings), I made a python script that parses <kbd>T</kbd>.</p>
+<p><kbd>w</kbd> is the short-term shopping list, and <kbd>W</kbd> is the long-term shopping list. <br />
+These make more sense once you realize I have a telegram bot that lets me easily interact with magazines from my phone.</p>
+<p><kbd>x</kbd> contains today's "habit tasks". My daily tasks alternate: one side is stored in <kbd>[</kbd> and the other in <kbd>]</kbd>; each of them happens every other day.</p>
+<p>One thing I have in <kbd>[</kbd> is to read through <kbd>D</kbd>, which stores words / mindsets that I want to implement into myself, and so repeat every two days:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>split the scary into &quot;not very&quot;</span></span>
+<span class="giallo-l"><span>laborious</span></span>
+<span class="giallo-l"><span>stellar</span></span>
+<span class="giallo-l"><span>:o</span></span>
+<span class="giallo-l"><span>:O</span></span>
+<span class="giallo-l"><span>・&gt;・</span></span></code></pre>
+<p><kbd>Z</kbd> contains package names I installed with <code>pacman</code> (meaning, from one of the arch repos), <br />
+<kbd>X</kbd> for those installed from the AUR.</p>
+<p>In my system setup script, both of these magazines are used to install all packages I want.</p>
+<p><kbd>C</kbd> stores packages that I want to be deleted the next time I update. This makes more sense to exist once you realize the workflow of filtering⁸ <kbd>Z</kbd> or <kbd>X</kbd>, and then appending the clipboard⁷ to <kbd>C</kbd>.</p>
+<p><kbd>E</kbd> is actually a big ass list of all unicodes for my other, slower but more complete unicode symbol picker.</p>
+<p><kbd>L</kbd> contains commands to always be in my rofi command runner history, <kbd>H</kbd> for the dynamically generated history.</p>
+<p><kbd>R</kbd> repository paths, that should be automatically <code>git push</code>ed daily.</p>
+<p><kbd>U</kbd> a big ass list of words I use for <code>ttyper</code>, to practice touch typing. Which I never do anymore, but still.</p>
+<p><kbd>Y</kbd> my youtube channel subscriptions, because I don't trust google to keep that information.</p>
+<p><kbd>1</kbd> consistently used as "store something short-term".</p>
+<p><kbd>3</kbd> a bunch of things make "notifications" into here, like my various event notifiers, for example.</p>
+<p><kbd>4</kbd> github notifications go here.</p>
+<p><kbd>;</kbd> by the time I finished writing this gist, the <code>$</code> writing tasks from <kbd>r</kbd> moved here.</p>
+<p><kbd>:</kbd> similarly, <code>%</code> "processing" tasks from <kbd>r</kbd>.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;my-usb-drive-experience&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">my usb drive experience</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;elegant-fish-shell-booleans&#x2F;" class="preview next">
+			<span class="name">elegant fish shell booleans</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

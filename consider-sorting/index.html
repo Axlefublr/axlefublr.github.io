@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>consider sorting</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;frizz&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">autocurling</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;on-wake-actions&#x2F;" class="preview next">
+			<span class="name">change wallpaper on wake</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">consider sorting</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-05-01">2025.05.01</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 3</div> -->
+				<p>I'm almost certain you have a problem that you either don't realize, or don't have a good solution for.</p>
+<p>Sometimes in code, you need to place many things in some sort of order. And sometimes, there's no one order that is logically significant. <br />
+An example of this is configuration options.</p>
+<p>There isn't really an "order" to them, within each section: you are setting <em>all</em> of them.</p>
+<p>An even more obvious example I have on hand, is a function holding fish script I have, that I use to organize and back up setup processes for various programs: <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish">look here</a>.</p>
+<p>There too, there isn't some particular order to them. Sure, in the initial setup I'll make fish work, then git, then niri, then probably waybar; but aside from those "blocking" setups, that basically act like dependencies for other setups, there is no obvious order — most things simply behave like a set, rather than an array.</p>
+<p>Something that I started doing some time ago, is explicitly <em>sorting</em> things like this.</p>
+<p>Now, looking through this set is organized; it will always be obvious where a given thing is, and additionally it will always be obvious where to insert a new thing, without making the file more messy.</p>
+<p>I memorized the indexes of the letters of the alphabet using <a href="https://axlefublr.github.io/how-to-anki/">anki</a>, to make this type of manual sorting way easier for me. No need to sing the alphabet song every time. <br />
+But that's just for the manual sorting I do, like in the setup function holder above; usually things that you may consider sorting are single lines, and those you can easily sort with a command or some such, if you use a half decent text editor.</p>
+<p>However even with that functionality, it can still feel a bit too manual to feel worth it, not gonna lie.</p>
+<p>This is why I wrote a neat lil program called <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/partialsort.rs">partialsort.rs</a>!</p>
+<blockquote>
+<p>This isn't exactly a promo, as the program is written as a <a href="https://axlefublr.github.io/rust-scripting/">wks script</a> rather than a normal repo-ed rust program that you could install more easily</p>
+</blockquote>
+<p>The idea of it, is that I can mark sections of files with <code>[[sort on]]</code> and <code>[[sort off]]</code>. When I run the formatter over the file, the lines between these two markers get sorted!</p>
+<!-- [[sort off]] -->
+<p>My <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a> then has an integration that allows you to run a global formatter (that can happen to be partialsort.rs) on write. If you use something like neovim, adding a global formatter should, interestingly, be both more <em>and</em> less painful. <br />
+Another option I used to use, is to run a formatter like that on git commit hook.</p>
+<p>Regardless of how you may simplify the process of sorting things for you, you will soon find out how much cleaner things become. <br />
+Especially for various configuration files, which is my main usecase. After writing the config file for the first time, you are likely to be coming back to it again and again, changing, removing, and adding stuff. <br />
+It gets so much easier and <em>faster</em> to do so, when the items you intend to change are set in an obvious order! :D</p>
+<p>Consider sorting!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;frizz&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">autocurling</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;on-wake-actions&#x2F;" class="preview next">
+			<span class="name">change wallpaper on wake</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

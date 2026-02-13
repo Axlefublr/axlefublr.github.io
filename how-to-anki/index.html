@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>how to anki</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;ov&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">finally, a good pager</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting&#x2F;" class="preview next">
+			<span class="name">rust for... scripting?</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">how to anki</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-01-07">2025.01.07</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 37</div> -->
+				<p>Anki is honestly a very hard to approach program. If you feel like it isn't, you're using it wrong /hj</p>
+<p>In this post, I'm assuming that you already want anki and know <em>why</em> you want anki, so I won't be inspiring you; just sharing what I think is the optimal way to use anki.</p>
+<p>In the next few sections related to settings, here's what you can expect: <br />
+If I don't mention a setting, it's either insignificant or personal choice; you should check it out for yourself regardless. <br />
+It's also possible you're reading this in the future, where a new setting appeared that I don't go over (my anki version is 24.06.3).</p>
+<p>Settings that I strongly <em>recommend</em> a certain value of are going to be marked by ❗ <br />
+Settings that I VERY STRONGLY beg you to set to a certain value will be marked by ‼️</p>
+<p>I'll be expecting you to have already installed anki; the pc version (which desktop os you have shouldn't matter, though).</p>
+<p>An extra resource along with this blog post that I can recommend, is this <a rel="noopener external" target="_blank" href="https://www.youtube.com/watch?v=Eo1HbXEiJxo">youtube video</a>.</p>
+<h1 id="global-settings"><a class="zola-anchor" href="#global-settings" aria-label="Anchor link for: global-settings">Global settings</a></h1>
+<p>Let's go to global settings by pressing <kbd>ctrl+p</kbd>.</p>
+<h2 id="review"><a class="zola-anchor" href="#review" aria-label="Anchor link for: review">Review</a></h2>
+<h3 id="next-day-starts-at"><a class="zola-anchor" href="#next-day-starts-at" aria-label="Anchor link for: next-day-starts-at">Next day starts at</a></h3>
+<p>The rule for the best time is to make sure it's impossible for you to see the next day's cards in the previous day, basically. My default is 5 am.</p>
+<h3 id="learn-ahead-limit"><a class="zola-anchor" href="#learn-ahead-limit" aria-label="Anchor link for: learn-ahead-limit">Learn ahead limit</a></h3>
+<p>0</p>
+<p>This setting is very weird.</p>
+<blockquote>
+<p>TLDR: don't use it, but if you're still interested, continue reading this section</p>
+</blockquote>
+<p>Imagine you have a bunch of reviews (green (mature) cards) left to do in the deck;
+when you press “Again”, you see the card in 20 minutes.</p>
+<p>As you go through your reviews, you might take so long so that you see the “Again” card in the same review session. <br />
+Usually you're supposed to set <a href="https://axlefublr.github.io/how-to-anki/#learning-steps">learning steps</a> to a high enough value where that won't happen.</p>
+<p>So, you go through all of your reviews, and there are 10 more minutes until you see that “Again” card. <br />
+There is <em>nothing</em> left for you to review; you can leave.</p>
+<p>What “Learn ahead limit” lets you do, is cut down those 10 (or however many) minutes down to zero. <br />
+It starts acting once you <em>finished all reviews</em>.</p>
+<p>This is different from the default behavior of learning cards (red ones): those usually can appear whenever in your review session, not just after all other ones are finished.</p>
+<p>“How is this useful?” you may ask; and my answer is <em>exactly</em>. It is somewhat useless in my experience.</p>
+<h3 id="show-remaining-card-count"><a class="zola-anchor" href="#show-remaining-card-count" aria-label="Anchor link for: show-remaining-card-count">Show remaining card count</a></h3>
+<p>Should be set to true</p>
+<p>Because it's helpful to see whether you are currently on a new / learning / mature card.</p>
+<h3 id="show-next-review-time-above-answer-buttons"><a class="zola-anchor" href="#show-next-review-time-above-answer-buttons" aria-label="Anchor link for: show-next-review-time-above-answer-buttons">Show next review time above answer buttons</a></h3>
+<p>I had this set to true for the longest time, but recently I disabled it! <br />
+If you see that pressing “Easy” will make you see the card in 2 years rather than 1.5 years, you will be less likely to actually press it, even if it's the correct decision. Similar case for “Hard”. <br />
+If you never see the time periods, you make answering decisions that are less biased.</p>
+<h3 id="spacebar-or-enter-also-answers-card"><a class="zola-anchor" href="#spacebar-or-enter-also-answers-card" aria-label="Anchor link for: spacebar-or-enter-also-answers-card">Spacebar (or enter) also answers card</a></h3>
+<p>yep.</p>
+<p>Set yourself some answer keys as well. <br />
+Anki is more keyboard-supporting than you'd think!</p>
+<h1 id="a-bit-of-keyboard-navigation"><a class="zola-anchor" href="#a-bit-of-keyboard-navigation" aria-label="Anchor link for: a-bit-of-keyboard-navigation">A bit of keyboard navigation</a></h1>
+<p>We are now done in global settings.</p>
+<p>To discover a bit of the keyboard navigation support anki provides, let's move onto creating and configuring a deck.</p>
+<p>There's a Default deck by ...uhhhhhm... default.. Let's configure that one!</p>
+<p>You could press on the cog with the mouse, but I'll teach you to do that with your keyboard.</p>
+<p>You can press <kbd>/</kbd> to search for a deck to study. <br />
+In this menu, you can press <kbd>ctrl+n</kbd> to create a new one (don't do it yet). <br />
+Currently you only have <code>Default</code> so you could just press <kbd>enter</kbd> immediately to pick it.</p>
+<p>This moves you into the screen of your deck. No clue what it's actually called, I'll be calling it "yipee screen" from now on. Because after you finish your cards, it says “Congratulations!” :3</p>
+<p>In this screen, if you had any reviews to do, you would be able to press <kbd>s</kbd> to start the reviews. But that's for later; you don't have any cards yet.</p>
+<p>If you wanted to go back to the main screen of anki, you can press <kbd>d</kbd>. <br />
+You might be quick to now search for <code>Default</code> using <kbd>/</kbd> again, but there's no need: the <code>Default</code> deck is already selected. <br />
+It's going to be more obvious once you have more decks (if there is even a need), but there's a semantic of "the selected deck" in anki. You can press <kbd>s</kbd> to jump into the yipee screen of your selected deck.</p>
+<p><kbd>s</kbd> then <kbd>d</kbd> then <kbd>s</kbd> then <kbd>d</kbd> then <kbd>s</kbd>...</p>
+<p>Alrightie now from the yipee screen we can press <kbd>o</kbd> to open the <em>deck</em>'s settings.</p>
+<h1 id="deck-settings"><a class="zola-anchor" href="#deck-settings" aria-label="Anchor link for: deck-settings">Deck settings</a></h1>
+<p>I'll warn you immediately: if you press <kbd>Escape</kbd> from this point, it just discards your changes. You specifically need to press “Save” to save your deck's settings.</p>
+<h2 id="daily-limits"><a class="zola-anchor" href="#daily-limits" aria-label="Anchor link for: daily-limits">Daily limits</a></h2>
+<h3 id="new-cards-day"><a class="zola-anchor" href="#new-cards-day" aria-label="Anchor link for: new-cards-day">New cards/day</a></h3>
+<p>You might be quick to set this to a pretty high value. <br />
+You are motivated and excited about anki, you're even reading a blog about it! You might've even watched a whole ass hour long youtube video about it. “Surely I can set it to like 50, right?”</p>
+<p>WRONG. You have no idea just how strongly seemingly small effort compiles. You may be absolutely fine with 50 new cards one day, maybe even a whole week, but you're not using anki for a week's worth of memory, are you? <br />
+Anki is <em>made</em> and <em>designed</em> to be <em>very</em> longform. "Your entire life" type deal. <br />
+If you rush to set your new cards to some big amount, there's a good chance you'll burn out in like a month and maybe skip a day or two, then come back to 500 reviews and fully quit.</p>
+<p>Anki is minmaxed with the assumption that you <em>will</em> <strong>always</strong> be doing your daily reviews. Maximize for <em>that</em> as well. For <em>consistency</em>, <strong>not</strong> burst.
+I consider 30 new cards per day huge, but it super depends on the content and the time and effort you're willing to spend.</p>
+<p>I use anki for:</p>
+<ol>
+<li>morse code</li>
+<li>hiragana</li>
+<li>katakana</li>
+<li>all country flags</li>
+<li>all country locations on a map</li>
+<li>programming languages</li>
+<li>APIs</li>
+<li>hotkeys; global ones and those local to specific programs</li>
+<li>ascii decimal and hex codes</li>
+<li>alphabet indexes (d = 4 for example)</li>
+<li>I shit you not, my credit card information. Don't do this, anki isn't meant to securely store your credit card information, lol.</li>
+</ol>
+<p>I, on average, spend 20 minutes per day on reviews, with ~11 new cards per day. <br />
+This is quite small workload all things considered, but the massive benefit I get is that I'm excited about doing anki every day, and it's practically impossible for me to burn out on it.</p>
+<p>So for the recommendation: you won't really know how many is too many, as it's likely you want to use anki for a different type of information than me, so set it to a reasonable amount (like 10), and feel free to change it as you continue to use anki. <br />
+If you ever notice yourself feel burnt out with anki, <strong>the</strong> thing you should configure is the amount of daily new cards.</p>
+<h3 id="maximum-reviews-day"><a class="zola-anchor" href="#maximum-reviews-day" aria-label="Anchor link for: maximum-reviews-day">Maximum reviews/day</a></h3>
+<p>‼️9999 <br />
+Out of every single setting in anki, this one is my strongest recommendation. Hell, this is not even a recommendation — I <em><strong>beg</strong></em> you to set it to 9999 and never even consider touching it. <br />
+If you ever <em>actually</em> get to 9999 daily reviews, you're fucked because you didn't listen to my advice about new cards per day above; the reason to set <em>this</em> setting to such a high amount is mostly semantic. <br />
+Anki's algorithm is written in such a way where it's most efficient when it's allowed to give you cards at the precise intervals it has calculated. If it's arbitrarily restricted by a cap of reviews, it's simply going to spend more of your time and energy.</p>
+<h2 id="new-cards"><a class="zola-anchor" href="#new-cards" aria-label="Anchor link for: new-cards">New cards</a></h2>
+<h3 id="learning-steps"><a class="zola-anchor" href="#learning-steps" aria-label="Anchor link for: learning-steps">Learning steps</a></h3>
+<p>Because of FSRS (we'll get to it), this should only ever be a single step. <br />
+When you press “Again” on a card, <em>this</em> is the time after which you'll see it.
+I have it set to <code>2h</code>, you may choose <code>30m</code> or whatever else makes the most sense for your content. <br />
+❗Do not set multiple steps, just one.</p>
+<h3 id="insertion-order"><a class="zola-anchor" href="#insertion-order" aria-label="Anchor link for: insertion-order">Insertion order</a></h3>
+<p>Sequential (oldest cards first).</p>
+<h2 id="lapses"><a class="zola-anchor" href="#lapses" aria-label="Anchor link for: lapses">Lapses</a></h2>
+<h3 id="relearning-steps"><a class="zola-anchor" href="#relearning-steps" aria-label="Anchor link for: relearning-steps">Relearning steps</a></h3>
+<p>Same as <a href="https://axlefublr.github.io/how-to-anki/#learning-steps">above</a>, but for mature cards.</p>
+<h3 id="leech-threshold"><a class="zola-anchor" href="#leech-threshold" aria-label="Anchor link for: leech-threshold">Leech threshold</a></h3>
+<p>At least 3, but then it depends. Personally I use 5.</p>
+<p>The concept of leeching is made so that you can notice which cards you keep pressing “Again” on <em>repeatedly</em>.
+So, once you press “Again” on the same card n times in a row, it gets the <code>leech</code> tag.</p>
+<p>This by itself does absolutely nothing: it's up to you to decide what to do with that information.
+It's your wakeup call basically, that "hey! this card is really difficult! try coming up with a mnemonic for it maybe?".</p>
+<p>Once one of my cards becomes a leech, I take some extra time to really burn it into my brain, and press <kbd>ctrl+alt+n</kbd> to reset it back into a new card, so that I can relearn it again, without the ease factor being fucked up.</p>
+<p>With FSRS, it's probably a bad idea to reset it like that, so I don't necessarily recommend it. Just, make sure to pay extra attention to the card.</p>
+<h3 id="leech-action"><a class="zola-anchor" href="#leech-action" aria-label="Anchor link for: leech-action">Leech action</a></h3>
+<p>‼️Tag only. <br />
+I don't get why “Suspend card” is even an option. “If the card is too hard, stop learning it” — ?????????? wtf</p>
+<h2 id="display-order"><a class="zola-anchor" href="#display-order" aria-label="Anchor link for: display-order">Display order</a></h2>
+<p>Here most things <em>can</em> work well; it depends on what you actually want. So for the most part you should click on each option title to read what it means in the built-in docs.</p>
+<h3 id="new-card-gather-order"><a class="zola-anchor" href="#new-card-gather-order" aria-label="Anchor link for: new-card-gather-order">New card gather order</a></h3>
+<p>Say you have overall 100 new cards; cards you have not yet reviewed. You "take in" 10 new cards per day. This setting decides <em>which</em> 10 cards to pick out of the 100.</p>
+<p>The 2 values you should consider is “Ascending position” and “Random cards”. <br />
+The former makes it so you go through new cards in the order that you added them (oldest first). <br />
+The latter just gives you random ones.</p>
+<p>Both are good, I just want to say that “Ascending position” is better than you expect. I personally use it.</p>
+<h3 id="new-card-sort-order"><a class="zola-anchor" href="#new-card-sort-order" aria-label="Anchor link for: new-card-sort-order">New card sort order</a></h3>
+<p>Sorts those 10 new cards you got after gathering them. Unless you've made a bad decision and there are 100 of them, this option doesn't really matter.</p>
+<h3 id="new-review-order"><a class="zola-anchor" href="#new-review-order" aria-label="Anchor link for: new-review-order">New/review order</a></h3>
+<p>When you have both new (blue) and not new (red and green (learning and mature)) cards to review, which to show first.</p>
+<p>“Show before reviews” ensures that you <em>always</em> take in all the new cards first, and then all the reviews. <br />
+I use it, but I don't recommend it — it's a risky choice. It is better to force yourself to go through all reviews first, before new cards (with “Show after reviews”). However, if you are <em>sure</em> you will complete <em>all</em> of your reviews, starting with the new cards is very exciting!</p>
+<p>“Mix with reviews” is quite reasonable. Start with it if you're not sure yet.</p>
+<h3 id="interday-learning-review-order"><a class="zola-anchor" href="#interday-learning-review-order" aria-label="Anchor link for: interday-learning-review-order">Interday learning/review order</a></h3>
+<p>Show before reviews.</p>
+<h3 id="review-sort-order"><a class="zola-anchor" href="#review-sort-order" aria-label="Anchor link for: review-sort-order">Review sort order</a></h3>
+<p>There's quite a lot of options here, here are those that I would recommend:</p>
+<ol>
+<li>Descending difficulty</li>
+<li>Random</li>
+</ol>
+<p>Yep, just two! :3</p>
+<h2 id="burying"><a class="zola-anchor" href="#burying" aria-label="Anchor link for: burying">Burying</a></h2>
+<p>Enable everything.</p>
+<h2 id="fsrs"><a class="zola-anchor" href="#fsrs" aria-label="Anchor link for: fsrs">FSRS</a></h2>
+<p>Now the JUICE of the settings!! Or rather, of anki itself! FSRS!</p>
+<p>This is the cool new algorithm that you should be using! Enable it.</p>
+<h3 id="desired-retention"><a class="zola-anchor" href="#desired-retention" aria-label="Anchor link for: desired-retention">Desired retention</a></h3>
+<p>Don't touch it for now. Come back in at least a month. I am serious.</p>
+<p>If you read the following before having done anki for at least a month, you instantly die: you may increase or even decrease this depending on how strongly (or weakly) you want this deck to be remembered.</p>
+<p>Alright, the 10% of readers who survived, let's continue!</p>
+<p>You should click the “Optimize” button once every ~1-3 months, <em>per</em> deck. Don't forget to save right after, too!</p>
+<p>‼️Do <strong>NOT</strong> press “Reschedule cards on change”. You may be excited to put in some extra work to make sure your cards have the perfect periods, but the tradeoff ends up making things worse.</p>
+<p>There's a good chance you will instantly get a <strong>bunch</strong> of extra reviews at once, which you may not be able to do all at once. So their "perfect periods" won't even be perfect.</p>
+<p>But that's misleading too: you <em>shouldn't</em> do them all at once. Because if one day has a bunch of reviews at once, that will repeat on another day some time later. <br />
+Your reviews that got naturally padded out throughout the days to be balanced, will <em>no longer</em> be balanced. <br />
+So pressing “Reschedule cards on change” puts you between a rock and a hard place, it's simply not worth it.</p>
+<p>It's been more than 2 months after I pressed Reschedule, I'm still eating shit to this day. Don't repeat my mistake.</p>
+<h2 id="advanced"><a class="zola-anchor" href="#advanced" aria-label="Anchor link for: advanced">Advanced</a></h2>
+<h3 id="maximum-interval"><a class="zola-anchor" href="#maximum-interval" aria-label="Anchor link for: maximum-interval">Maximum interval</a></h3>
+<p>‼️DON'T set it to a reasonable value. I have it set to 100 years (36500). <br />
+Trust the anki algorithm.</p>
+<h1 id="deck-meta"><a class="zola-anchor" href="#deck-meta" aria-label="Anchor link for: deck-meta">Deck meta</a></h1>
+<p>We're done configuring the deck!</p>
+<p>You decided to start using anki, most likely, because you already have one or multiple things that you want to learn.</p>
+<p>It is natural now to create a deck per each subject that you want to learn.</p>
+<p>I've been using anki for around two years, and I found that anki decks have actually quite poor UX.</p>
+<p>Let's pick a list of subjects out of those that <em>I</em> personally learn, and split them into decks.</p>
+<ol>
+<li>morse code</li>
+<li>ascii characters' decimal codes (from a space to <code>~</code>, which is from index 32 to index 126)</li>
+<li>all countries on a map</li>
+<li>all country flags</li>
+<li>useful flags of terminal programs</li>
+<li>the standard library of the programming language rust</li>
+</ol>
+<h2 id="deck-splitting"><a class="zola-anchor" href="#deck-splitting" aria-label="Anchor link for: deck-splitting">Deck splitting</a></h2>
+<p>The obvious solution here is to create 6 decks. I only have 2.</p>
+<p>Morse code is around 50 cards, ascii characters is 94, both country flags and map locations are around 250.</p>
+<p>What unites all of them is that they're <em>finite</em>. <br />
+You will eventually go through all of those cards; you won't be adding more.</p>
+<p>After a while, you'll need to review them less and less. The decks of each one of them will become a “dead deck”: a deck with only a few reviews to do, if any, that you <em>still</em> have to check, travel to, open, review, and go back from.</p>
+<p>Anki can take a lot of energy, and if you grow to say, 13 decks (I used to have around that many), you will be spending a lot of extra effort on <em>just</em> moving around. <br />
+A lot of times, you don't <em>just</em> review the mature cards — you'll fail some of them, and have to come back to re-review them. <br />
+That is a lot of travel time!</p>
+<h2 id="decks-as-organisation"><a class="zola-anchor" href="#decks-as-organisation" aria-label="Anchor link for: decks-as-organisation">Decks as organisation</a></h2>
+<p>You may think that this is an okay tradeoff for the <em>organisation</em> that decks provide. <br />
+But actually, decks are shit at organisation. I'll expand on the <em>solution</em> in the <a href="https://axlefublr.github.io/how-to-anki/#note-types">note types</a> section, but for now I'll elaborate on why decks are bad at organisation.</p>
+<p>Morse code and ascii indexes. <br />
+How would you structure the question-&gt;answer in those?</p>
+<p>What I find to be most effective is <em>just</em> the symbol as the question, and <em>just</em> the sequence / number as the answer. <br />
+This way, I don't spend extra energy on parsing useless words like "what is the x character in morse code?", and instead <em>just</em> focus on the question at hand. <br />
+Getting to the <em>core</em>, the <em>meat</em> of the question, without all the extra fluff, that <em>really</em> piles up, believe it or not!</p>
+<p>I'll expand on card creation in <a href="https://axlefublr.github.io/how-to-anki/#card-creation">this upcoming section</a>, but for now let's stop at the idea that cards should be very minimal.</p>
+<a href="#minimal" id="minimal" class="anchorina">
+  <hr></hr>
+</a>
+<p>Great! We put ascii cards into the “Ascii” deck and morse cards into the “Morse” deck.</p>
+<p>As you go through your thirteen billion decks, you <em>will</em> find yourself confused.</p>
+<p>You open your morse code deck to do the measly two reviews, and in the rush of answering cards, seeing <code>x</code>, you answer <code>120</code>, rather than —・・—</p>
+<p>This happens because anki does not display the title of the current deck you're studying. There is no looming <em>context</em> for you to be able to check back with, and so you'll find yourself answering the <em>wrong question</em> a lot of the times. <br />
+You answered correctly, but to the wrong question.</p>
+<p>What do you do in this situation? You eat sand.</p>
+<p>You have to introduce context somehow, to not confuse cards with similarly-sounding questions. <br />
+And this is why the first jump is the "What is x in morse code" shenanigans.</p>
+<p>Decks don't solve organisation, so believe it or not, I'll recommend putting both ascii and morse code into a <em>single</em> deck. We will solve the confusion in the [note types] section.</p>
+<h2 id="when-should-you-deck"><a class="zola-anchor" href="#when-should-you-deck" aria-label="Anchor link for: when-should-you-deck">When should you deck?</a></h2>
+<p>There are only a couple of benefits to creating a new deck. If you don't meet any of them, I don't recommend creating a new deck.</p>
+<h3 id="news-splitting"><a class="zola-anchor" href="#news-splitting" aria-label="Anchor link for: news-splitting">News splitting</a></h3>
+<p>We just added, like, 500 or so new cards. These are long-term — you aren't meant to intake them all at once. So, we need to come up with a scheme to split those new cards per day in a reasonable fashion.</p>
+<p>Say you added morse code first, then ascii indexes, then flags, then map locations.</p>
+<p>Depending on your <a href="https://axlefublr.github.io/how-to-anki/#new-card-gather-order">new card gather order</a>, you may either go through all of them in order, or through all of them randomly.</p>
+<p>If that's exactly what you want, blammo them all into a single deck, unless the next sections on decking positives apply.</p>
+<p>But let's say you want to be learning three categories at once, rather than trying to rush a single category / randomly picking cards from all <em>four</em> categories.</p>
+<p>You feel you have 3 new cards per day in you¹, and you want 1 of them to always be morse, and 2 of them to be random selections from the country flag + map location "pool".</p>
+<blockquote>
+<p>¹ pure example, I don't actually think this is viable for the categories at hand</p>
+</blockquote>
+<p>To express something like this, you <em>need</em> to split into two decks.</p>
+<a href="#two-decks" id="two-decks" class="anchorina">
+  <hr></hr>
+</a>
+<p>If you were okay with just doing the categories in order, with all 3 new cards being for the same category, you wouldn't need two decks! <br />
+The “Reposition” action in the card browser (<kbd>ctrl+shift+s</kbd>) would allow you to put all the categories' cards in the order that you want, even if you <em>created</em> them all in the wrong order¹.</p>
+<blockquote>
+<p>¹ technically speaking you can avoid having to create another deck using the Reposition action by manually positioning each and every card, but this is herculean effort compared to just creating a new deck, and then moving its cards into another deck, once you go through all of the new cards</p>
+</blockquote>
+<p>But in our case, we create a deck for Morse¹ code: it will give you 1 new card per day; <br />
+And a Country¹ deck that will hold country <em>flags</em> and country <em>locations</em>. Its <a href="https://axlefublr.github.io/how-to-anki/#new-card-gather-order">new card gather order</a> setting will be random.</p>
+<p>This way, you guarantee 1 new card of morse per day, and 2 "country-related" cards per day, totalling three. All this without touching the ascii indexes for now — you'll get to them once you fully learn one of the three categories.</p>
+<blockquote>
+<p>¹ names are arbitrary, choose whatever you wish</p>
+</blockquote>
+<h3 id="ordering"><a class="zola-anchor" href="#ordering" aria-label="Anchor link for: ordering">Ordering</a></h3>
+<p>We touched on the <a href="https://axlefublr.github.io/how-to-anki/#new-card-gather-order">new card gather order</a> setting — it's quite an important one!</p>
+<p>For some type of cards, it makes the most sense to learn them in random order. By "fuzzing" them like this, you avoid the issue of one card half-answering the question of the next one.</p>
+<p>For others, where that half-answering issue doesn't arise, it is best to go with sequential. <br />
+If you keep adding cards while being served them randomly, you'll end up having "unlearned spots" — some cards will slip through the cracks of how randomisation inherently works, and you might take too long to get to some crucial information to learn. <br />
+If you learn sequentially, you ensure that you finish a given subject before going onto the next one.</p>
+<h3 id="optimization"><a class="zola-anchor" href="#optimization" aria-label="Anchor link for: optimization">Optimization</a></h3>
+<p>FSRS optimization happens <em>per deck</em>. More precisely, per deck <em>preset</em>.</p>
+<p>It does its magic depending on how you answer the cards in the given deck. I don't know exactly how it works, but the main idea is this: vastly different subjects will be optimized differently.</p>
+<p>Both morse code and ascii indexes are fairly similar categories, that I'd argue are very similarly difficult to <em>memorize</em> and to <em>remember</em>. <br />
+Splitting them up into two decks just for the optimization I don't think is worthwhile — you will likely respond very similarly to both, and so they could just be kept in a single deck, optimized together.</p>
+<p>FSRS optimization makes it so you see the cards at the correcter time periods, to achieve your desired retention rate.</p>
+<p>When the information is similar enough, you'll lose far more time, effort, and motivation by switching a billion decks, than you would <em>gain</em> from slightly correcter periods.</p>
+<p>After switching to FSRS, for <em>four months</em> I didn't even know I could "optimize parameters" in FSRS, much less that I should be doing it monthly. And yet, I was perfectly happy with how anki was working for me. So genuinely don't worry too much about this.</p>
+<p>To be fair, what counts as "similar enough" is very personal, I don't know if a hard rule could be worded to help you decide. So it's not unreasonable to start with making more decks than needed, and later on merging some (if not all) together, once you get a feel for anki.</p>
+<h3 id="that-s-it"><a class="zola-anchor" href="#that-s-it" aria-label="Anchor link for: that-s-it">That's it!</a></h3>
+<p>Not many reasons to make extra decks, as you can see. I hope you can keep these in mind to help you not fall into the "trap" of the supposed deck meta, winning you time, and saving you effort.</p>
+<p>Now to the <em>really</em> fun part &gt;:3c</p>
+<h1 id="note-types"><a class="zola-anchor" href="#note-types" aria-label="Anchor link for: note-types">Note Types</a></h1>
+<p>You know that gif with Tony Stark dramatically hitting a helmet with a hammer? <br />
+This is me with note types.</p>
+<p>I have tried multiple approaches in using them the most effectively, and found one I believe to be perfect.</p>
+<p>Let's start with the basics.</p>
+<h2 id="default-note-types"><a class="zola-anchor" href="#default-note-types" aria-label="Anchor link for: default-note-types">Default note types</a></h2>
+<p>In the main screen, press <kbd>ctrl+shift+n</kbd> to go to the list of default note types.</p>
+<ol>
+<li>Basic</li>
+<li>Basic (and reversed card)</li>
+<li>Basic (optional reversed card)</li>
+<li>Basic (type in the answer)</li>
+<li>Cloze</li>
+<li>Image occlusion</li>
+</ol>
+<p>Some of them are quite a mouthful. I'll refer to them as this:</p>
+<ol>
+<li>Basic</li>
+<li>Double basic</li>
+<li>Basic?</li>
+<li>Type</li>
+<li>Cloze</li>
+<li>Image occlusion</li>
+</ol>
+<p>If you want, you can even rename them!</p>
+<p>Note types are going to be something you'll keep on selecting, so having them be unique and easily typable / searchable is very helpful. <br />
+My “Basic” is just <code>d</code>, and “Cloze” is just <code>h</code>.</p>
+<p>The default note types showcase what anki even <em>allows</em> you to do in the first place, in terms of question-&gt;answer organization.</p>
+<p>A note type is a template, a constructor: you define how one creates <em>cards</em>. <br />
+You review cards created using notes. <br />
+A single note can (in theory) create an infinite amount of cards.</p>
+<h3 id="basic"><a class="zola-anchor" href="#basic" aria-label="Anchor link for: basic">Basic</a></h3>
+<p>Is the most <em>basic</em> note type: it creates a single card.</p>
+<h3 id="double-basic"><a class="zola-anchor" href="#double-basic" aria-label="Anchor link for: double-basic">Double basic</a></h3>
+<p>Is like the above one, but here the magic starts: it creates a card for question-&gt;answer AND for answer-&gt;question.</p>
+<p>It is a note type that creates TWO cards, one for each "direction".</p>
+<h3 id="basic-1"><a class="zola-anchor" href="#basic-1" aria-label="Anchor link for: basic-1">Basic?</a></h3>
+<p>You can probably guess now that you can use “Basic?” to <em>optionally</em> create the answer-&gt;question card, while it doesn't do so by default.</p>
+<h3 id="type"><a class="zola-anchor" href="#type" aria-label="Anchor link for: type">Type</a></h3>
+<p>Lets you type in the answer, rather than just recalling it in your head.</p>
+<h3 id="cloze"><a class="zola-anchor" href="#cloze" aria-label="Anchor link for: cloze">Cloze</a></h3>
+<p>Omits some part, or <em>multiple</em> parts of the question, and you need to mentally <em>fill in</em> that missing part, to answer the question.</p>
+<h3 id="image-occlusion"><a class="zola-anchor" href="#image-occlusion" aria-label="Anchor link for: image-occlusion">Image occlusion</a></h3>
+<p>Hides some part of an <em>image</em>, that you need to mentally <em>flll in</em>. In other words, it's “Cloze”, but for images.</p>
+<h2 id="creating-your-own"><a class="zola-anchor" href="#creating-your-own" aria-label="Anchor link for: creating-your-own">Creating your own</a></h2>
+<p>Defaults are made to be configured away, so let's discover how you can create your <em>own</em> note types.</p>
+<p>In the <kbd>ctrl+shift+n</kbd> screen, click on Basic and then Fields.</p>
+<h3 id="fields"><a class="zola-anchor" href="#fields" aria-label="Anchor link for: fields">Fields</a></h3>
+<p>A field is an inputbox, the text of which is used in some way in the note type. <br />
+Here in Basic, you have 2: Front and Back.</p>
+<p>You can add as many extra fields as you want (at least I don't know of a limit), however they won't <em>do</em> anything by default. We'll get to how to make their text appear in your card later. <br />
+For now, know that you can add multiple fields to a given note (including your own ones we'll create later), and have them appear in the card in different ways.</p>
+<p>Anki supports html: when adding a card, you can press <kbd>ctrl+shift+x</kbd> to toggle the html editor. <br />
+But if you <em>always</em> want to edit a given field as html, here in the Fields view you can set the option below to make the field “Use HTML editor by default”. <br />
+On a non-html field, the <kbd>ctrl+shift+x</kbd> hotkey then toggles on the non-html editor.</p>
+<p>Go back to the previous screen by pressing <kbd>escape</kbd> and then click on “Cards”.</p>
+<h3 id="cards"><a class="zola-anchor" href="#cards" aria-label="Anchor link for: cards">Cards</a></h3>
+<p>This screen has been confusing for a while to me. So if it feels intimidating, don't worry — it <em>is</em>.</p>
+<p>The source of this intimidation for me is a couple of buttons and popups that we'll get to at the end of this section, for now let's explore the more obvious parts.</p>
+<p>Note types are templates that decide how to create cards. Each note type can create as many cards as you want it to. <br />
+Although by default, a note type creates just one card.</p>
+<h4 id="front-template"><a class="zola-anchor" href="#front-template" aria-label="Anchor link for: front-template">Front Template</a></h4>
+<p>On the left side, you can see an edit field, with three radio buttons above. <br />
+Here, you define the html template for the cards to be creates with this note type.</p>
+<p>The main juice that actually makes note types useful at all, is <code>{{Front}}</code>. <br />
+<code>{{Front}}</code> is a template (that I'll be calling a shortcode) that is replaced with the resulting html that you put in a field.</p>
+<p>Notice the name: <code>Front</code>. This is a name of one of the fields of this note type. <br />
+In the previous section, I mentioned that fields aren't used automatically. <br />
+<em>We</em> get to decide where and how they show up, by putting them in explicitly.</p>
+<p>Say we created a field called <code>Extra</code>. We can now add <code>{{Extra}}</code> somewhere in the template for the note type, and the text (resulting html) that we put in this <code>Extra</code> field is going to show up there!</p>
+<h4 id="back-template"><a class="zola-anchor" href="#back-template" aria-label="Anchor link for: back-template">Back Template</a></h4>
+<p>Now, click on the radio button “Back Template”. The html is a bit different now!</p>
+<p>The real semantic of the first and second templates is the following:</p>
+<ol>
+<li>This is how the card looks when I'm presented the question, and haven't yet answered the card.</li>
+<li>This is how the card looks when I answered the question, and pressed space to see the answer.</li>
+</ol>
+<p>By default, the Front side of the card is also included in the Back side, using the special shortcode <code>{{FrontSide}}</code>. <br />
+It takes the entire Front side html, and blammoes it in the Back side template.</p>
+<p>There's nothing stopping you from removing it, though. You can simply remove it from the Back side template, and you won't see the front of the card after pressing space. <br />
+I don't recommend doing so; you would be shooting yourself in the foot for no benefit. <br />
+However I hope that showcases that templating is not that magical! <br />
+How anki shows itself to you is defined clearly, and is changeable by you.</p>
+<h4 id="styling"><a class="zola-anchor" href="#styling" aria-label="Anchor link for: styling">Styling</a></h4>
+<p>Probably more changeable than you expect!</p>
+<p>The third radio button is my favorite one: you get to define the CSS of your note type! <br />
+Yes, you can make it look however you wish!</p>
+<p>I used this to change the fonts used, the colors, and added inline and blockwise codeblocks.</p>
+<p>You might reasonably ask how you can “Inspect Element” anki to figure out how to css it correctly. <br />
+There is some plugin for it, and likely some people in the forums have figured out most things.</p>
+<p>However, I just guessed my way throgh most of it, so I won't give precise advice that I don't have checked. With styling selectors you need, you're on your own.</p>
+<h4 id="card-type"><a class="zola-anchor" href="#card-type" aria-label="Anchor link for: card-type">Card Type</a></h4>
+<p>Let's look at the popup that scared me at first. Well, even now I never touch it (I'll explain why later) <br />
+At the top, you can see “Card Type” with something like <code>1: Card 1: Front -&gt; Back</code> <br />
+Let's process that.</p>
+<p>A note type can create any number of cards. That is what the <code>1:</code> stands for. <br />
+Which one? I have no clue. At least one of them, lol. The other one of them stands for god knows what.</p>
+<p>So, <code>1: Card 1: Front -&gt; Back</code> means: out of potentially many, this is the first card that's created by this note type. In this specific card, the Front side is the question, and the Back side is the answer.</p>
+<p>Inconveniently, the fields are called the same way as another concept, making things less clear.</p>
+<p>Anki has a concept of "front side" and "back side". We glanced over that in the first two radio buttons. <br />
+So here, the front <em>template</em> is used for the front side. The back template is used for the back side. <br />
+As expected.</p>
+<p>However if we looked at “Basic and reverse”, the second card that the note type makes says <code>Back -&gt; Front</code>. <br />
+So, the <em>back</em> template is used for the front side (the question) of the card, and the <em>front</em> template is used for the back side (the answer) of the card.</p>
+<p>That's how that note type achieves the "and reverse" part — it creates two cards — one is front (question) to back (answer), and another is back (question) to front (answer).</p>
+<p>Cool, isn't it? <br />
+However, as I mentioned, I won't be teaching you how to make use of this, because I don't use it.</p>
+<p>For the most part, adding two cards per each note, just to learn the question from both sides, is a waste of effort, in my experience. <br />
+I used to learn languages using anki in the past, and there the reverse thingy <em>was</em> helpful, but for what I use anki right now, it's fairly useless.</p>
+<a href="#note-type-meta" id="note-type-meta" class="anchorina">
+  <hr></hr>
+</a>
+<p>Viola! Now you have the necessary knowledge to learn about the card organizing meta that I've made for myself. I hope you'll like it as much as I do!</p>
+<p>Rather than using a bunch of different decks (as I mentioned, I only have 2), or a bunch of different note types per subject (used to do that, very laborious), <br />
+I only have a couple of note types.</p>
+<p>Each of those note types includes two extra fields: one is called “Header” and the other is called “Subheader”.</p>
+<p>Because the anki browser allows you to search by each field if necessary (<code>header:ruby</code> for example), this works amazingly for card organization.</p>
+<p>If I need to do bulk actions on a bunch of cards of a certain subject, I <em>can</em>!
+Just as easily as I would with the many decks approach, and <em>more</em> easily than with the many note types approach.</p>
+<p>In terms of the note types, I basically only have Basic and Cloze. Except, I split Basic into 4 different note types:</p>
+<ol>
+<li>the normal Basic one</li>
+<li>1 but back side is a codeblock</li>
+<li>1 but front side is a codeblock</li>
+<li>1 but both sides are codeblocks</li>
+</ol>
+<p>I think this is niche? But I use it so much that it made sense to make a shortcut like this for myself, rather than always having to wrap things in a codeblock in the html of the card manually.</p>
+<p>The approach is pretty simple: you come up with an element (I use <code>&lt;cd&gt;&lt;/cd&gt;</code>) and make css for that element to display it as a codeblock. <br />
+The note type then wraps <code>{{Front}}</code> in that element like <code>&lt;cd&gt;{{Front}}&lt;/cd&gt;</code>. Blammo.</p>
+<p>I will link to my html templates and css file, but be warned: I made this specifically for myself so I give no guarantees it will be a good starting point.</p>
+<p><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/anki/card.html">html templates main link</a> <br />
+<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/d21744e691c09e9980fd01b013c0daaf64a2234c/anki/card.html">html templates backup link</a> <br />
+<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/anki/card.css">css main link</a> <br />
+<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/d21744e691c09e9980fd01b013c0daaf64a2234c/anki/card.css">css backup link</a></p>
+<p>As I alluded to prevously, this approach also solves another issue: I am never confused as to what subject I'm currently studying. It's right there at the top! Decks simply don't do this.</p>
+<p>So, I get to blammo all the cards in 1-2 decks, and go through them all at once; I don't have to experience the annoyance of jumping between 15 or so decks.</p>
+<h1 id="card-creation"><a class="zola-anchor" href="#card-creation" aria-label="Anchor link for: card-creation">Card Creation</a></h1>
+<p>First of all, <a rel="noopener external" target="_blank" href="https://www.supermemo.com/en/blog/twenty-rules-of-formulating-knowledge">read this</a>. <br />
+This blog post has massively helped me create better and more efficient cards.</p>
+<p>I won't attempt to tldr it, but here are some things that I ended up implementing into how I make cards.</p>
+<h2 id="why-use-many-word-when-few-word-do-trick"><a class="zola-anchor" href="#why-use-many-word-when-few-word-do-trick" aria-label="Anchor link for: why-use-many-word-when-few-word-do-trick">Why use many word when few word do trick</a></h2>
+<p>"What was the year at which Marie Currie did x?"</p>
+<p>Is very wordy. I'm exagerating in this example, but even still you'll find yourself making cards that use many extra useless words, kinda like the sentence above.</p>
+<p>Ideally, you will be doing anki until you die. That is a long ass time! (Hopefully?) <br />
+So all the time you spend parsing words that don't help you arrive to the <em>core</em> of the question, is time wasted.</p>
+<p>It's not like reading a novel: <em>there</em> reading 20 useless words in a row is fun (allegedly).
+<em>Anki</em> you are doing for an exact benefit. So cutting down on non-core words is actually crucial.</p>
+<p>"Marie Currie did x when"</p>
+<p>That ↑ is all you need. Even the <code>?</code> at the end is bloat. You don't need it.</p>
+<p>Your target should be to minimize the amount of time it takes you to process the question. Sometimes adding an extra word can actually <em>help</em>, because it looks more natural to you that way.</p>
+<p>So, try different approaches for debloating cards, and see what works for you. You will notice just how much faster and easier you can do reviews, because there's much less for your brain to process.</p>
+<p>You can then use this extra energy to do <em>more</em> cards, or to do the same amount of cards in less effort, to spend that effort elsewhere.</p>
+<h2 id="make-use-of-headers"><a class="zola-anchor" href="#make-use-of-headers" aria-label="Anchor link for: make-use-of-headers">Make use of headers</a></h2>
+<p>The note type approach I use helps the previous point.</p>
+<p>"jj revset operator that gives you the intersection of two other revsets"</p>
+<p>becomes:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>jj</span></span>
+<span class="giallo-l"><span>revset</span></span>
+<span class="giallo-l"><span>intersection operator</span></span></code></pre>
+<p>Header <code>jj</code>, subheader <code>revset</code>, and less wordy question. The word <code>operator</code> there I'd remove. <br />
+Headers and subheaders let you encode a part of your question into a section above the question, that you will be able to skip over most of the time.</p>
+<p>If you read the question and you naturally remember that the question is about jj, you won't need to pay attention to the header <em>or</em> subheader.</p>
+<p>At least for me, it's natural to read the question first, and so header + subheader lets you move out a part of the question that otherwise, you would have to read <em>every</em> time. Small optimization that sums up to more than you would expect.</p>
+<h2 id="one-thing-per-thing"><a class="zola-anchor" href="#one-thing-per-thing" aria-label="Anchor link for: one-thing-per-thing">One thing per thing</a></h2>
+<p>Split the question into as many cards as you reasonably can. <br />
+The blog post I linked above goes into good detail on what that entails, please read it.</p>
+<p>If you make a question and a part of it could become a whole another question, then it <em>should</em>.
+It might look kind of ridiculous, but the amount of time you spend is actually pretty big.</p>
+<p>❌ question: "shell -&gt; pueue group -&gt; delete a group, moving all of its tasks to the default group" <br />
+❌ answer: "pueue group remove"</p>
+<p>This question is worded in such a way that you hope you'll remember some extra information in parallel. Memory doesn't work like that, you won't be able to "brush off" information in an effective manner. That part should just become its own question if you want to remember it, and be discarded if you don't.</p>
+<p>✅ question 1: "shell -&gt; pueue group -&gt; delete group" <br />
+✅ answer 1: "pueue group remove"</p>
+<p>✅ question 2: "shell -&gt; pueue group remove -&gt; what happens to the tasks when you delete a group?" <br />
+✅ answer 2: "they get moved to default group"</p>
+<p>If each individual question is really easy to answer, all of them will quickly rank up in their intervals, and not take much of your time. So, prefer more cards to less cards, counter-intuitively.</p>
+<p>If you make one complicated question, you will hit your head against it time and time again, and end up wasting a lot more time overall.</p>
+<p>Similarly, if you expect yourself to give a big, multi-stage answer to a single question, you should also split it into multiple cards.</p>
+<a href="#thanks" id="thanks" class="anchorina">
+  <hr></hr>
+</a>
+<p>Thanks for reading! This took me multiple months to write, lmao. Kinda burnt out on it; you might've noticed towards the end. Hope my experience will be useful to you!</p>
+<h1 id="addendum"><a class="zola-anchor" href="#addendum" aria-label="Anchor link for: addendum">addendum</a></h1>
+<p>I'm writing this on 2025.05.19.</p>
+<p>While most things hold up exactly as before, I'm now using a slightly different approach in terms of taking in new cards. <br />
+Not entirely sure if it ends up being more or less efficient, but the consistency of it is awesome.</p>
+<p>I learn for the love of the game, so there isn't necessarily some deadline up until when I have to learn everything I want to. <br />
+What matters far more to me, is to ensure that I never burn out on anki.</p>
+<p>I found that for my type of cards, I can review 70 every day. I can (and did, before finding this method) in theory do more, but I know that more than 70 will end up burning me out, if prolonged.</p>
+<blockquote>
+<p>This is a type of thing that you get a feel for after a while of using anki, so don't worry if you don't know your number yet.</p>
+</blockquote>
+<p>I found a way to review exactly my limit of cards every day, without fucking up the algorithm too much!</p>
+<p>First, a setting that this entire approach relies on: Deck Options -&gt; Display Order -&gt; New/review order -&gt; Show after reviews. <br />
+Now, when we start doing our reviews for the day, we go through all the red and all the green cards first. <br />
+Say I have 15 reds, and 45 greens. That's 60 total reviews to go through. I got 10 extra in me though! And those 10 extra are for the new cards :D</p>
+<p>So, as I review, I check every now and again:</p>
+<ol>
+<li>how many reviews (not new cards) are left</li>
+<li>how many reviews I've done so far</li>
+</ol>
+<p>After I get through all the reds and all the greens (unless they are already more than 70, I elaborate on this later), I check <code>70 - total_reviews</code> to figure out how many new cards to take in today. <br />
+Your total reviews are shown on the main / home screen, so that's what I'm relying on. I wonder if there's a plugin that would show that info <em>while</em> I'm reviewing! <br />
+For easier math, I set the amount of daily new cards to 100. For reasons I explained in this blog post above, <em>obviously</em> we aren't meant to gulp all that 100. We simply take from that 100 every day, however much we can handle (<code>70 - total_reviews</code>).</p>
+<p>Why this appproach is amazing, is that it's quite dynamic while being consistent in terms of my effort. You have a low amount of reviews? Yipeee you get to get more new cards today! Too many reviews? No big deal, we simply take less / no new cards.</p>
+<p>But what happens if you have more than 70 reviews? This happens to me every time I rotate my sleep schedule, for example. Or say you miss a day for other reasons.</p>
+<p>Generally, it's a bad idea to gulp all the reviews at once, that you got from the previous day that you skipped. <br />
+Sure, the anki algorithm works better this way, but that's only in theory. In practice you are human. <br />
+Additionally, you're creating a fucky effect: if you get a sudden spike of reviews on a given day, this spike will repeat some days later (although it won't be as strong).</p>
+<p>This is why instead of gulping all reviews in a bad situation like this, I tend to instead increase my daily reviews temporarily, until the extra cards are all sorted out. This happens over the course of multiple days, and so the spike repeat is not as big of an issue. <br />
+Deck Options -&gt; Display Order -&gt; Review Sort Order -&gt; Ascending retrievability is quite important to make this as effective as it can be, to not fuck with the anki algorithm as much.</p>
+<p>So! If you take the same strategy, my "up to 70 reviews" approach makes even more sense. In the general case, my reds + greens are less than 70, and I fill the rest with new cards. So when shit hits the fan, what ends up happening is that reds + greens fill up the entire 70, and I simply don't take new cards for a couple of days. So, this approach has built in overflow protection! Although it's not like you should want to use it :p <br />
+To add, when I get an overflow, I increase my cap from 70 to 80, until it's sorted. I consider a shitfan sorted, when to get 70 reviews, I'd have to take new cards. At <em>that</em> point I go back to the 70 cap, and take as many new cards as fit into the 70 cap, rather than the otherwise increased 80.</p>
+<p>In the case where I get more than 70 reds + greens, but there <em>isn't</em> an overflow from me skipping a day, the same rules apply, except I don't touch the cap. So, I basically allow the remaining reds + greens go to the next day, and let them get sorted out automatically via me taking in less new cards. Quite dynamic!</p>
+<p>Aside from the overflow protection, what I love most about this approach, is that I never get "unlucky". <br />
+I never get too many reviews on a day where I'm exhausted. <br />
+I never get too little reviews on a day where I'm extra energetic. <br />
+It's always the same exact number of reviews :D</p>
+<p>And what's fun about this, is that it lets you more clearly tell what your cap is. If you do exactly 70 (or your other number) reviews <em>every single day</em>, you will realize sooner, whether it's too much or too little. <br />
+My cap used to be 65, but over time I noticed that I wanted to do more, and so I increased my cap to 70. I want to increase it again, but I'm intentionally waiting for a while to make sure that would be the correct move. <br />
+Don't rush when changing your cap, and change it by small amounts.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;ov&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">finally, a good pager</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting&#x2F;" class="preview next">
+			<span class="name">rust for... scripting?</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>randomization sucks</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;floorp&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">bye bye firefox</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;journey-of-noise&#x2F;" class="preview next">
+			<span class="name">the journey of noise</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">randomization sucks</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-03-25">2025.03.25</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 6</div> -->
+				<p>You might instantly think that I'm going to be talking about how there's almost no <em>real</em> randomness in computers, and instead mostly pseudo randomization. <br />
+Interestingly, I have the exact opposite issue: randomization feels <em>too</em> random!</p>
+<p>Say you want to pick 5 random numbers in a range of 1 to 10. <br />
+A fairly human sequence is something like this: [7, 5, 1, 8, 3] <br />
+I simply put in random numbers in the range as they came to my head. Yet look how balanced they are! And no duplicates, too!</p>
+<p>If you're tasked with picking random numbers like this, you're unlikely to choose duplicates. It simply feels unnatural to do. <br />
+A <em>computer</em>, however, will have not mental blocks like that. You (unless trolling) are unable to produce the following set: [7, 7, 7, 7, 7]. <br />
+Computers <em>can</em> (although it is very unlikely).</p>
+<h1 id="perceived-randomization"><a class="zola-anchor" href="#perceived-randomization" aria-label="Anchor link for: perceived-randomization">perceived randomization</a></h1>
+<p><img src="https://axlefublr.github.io/randomization-sucks/./random-points.webp" alt="" /></p>
+<p>If tasked to distribute points on an area randomly, a human will probably start doing the 3rd option, think "wait I'm being too predictable" and switch to the second option. While in reality, true randomness will look more like the 1st option.</p>
+<p>We expect randomness to behave in a spread out way, but that's not how it actually works! <br />
+And it's the reason why normal randomness tends to feel kinda <em>incorrect</em>.</p>
+<h1 id="shuffle"><a class="zola-anchor" href="#shuffle" aria-label="Anchor link for: shuffle">shuffle</a></h1>
+<p>Biggest example of randomization feeling bad is the shuffle button in your music app. <br />
+It will often feel like it has a preference for some songs, and never plays some others.</p>
+<p>You start to shuffle some playlist with 100 songs and listen to 20 of them. Then you switch to listen to something else, and come back to the playlist, reshuffling it. <br />
+You have now broken the shuffle, somewhat. Previously, in a singular shuffle, the music app wouldn't repeat the same songs until you've listened to them all. <br />
+But because you <em>re</em>shuffled, it picks out of <em>all</em> 100 songs again, and because of true randomization that I pointed out in the above section, it very much might pick a song you listened like 5 minutes ago, rather than picking a song you haven't heard in a while, which would "feel" more random to you.</p>
+<p>I have around 5000 liked tracks, so this issue becomes very noticeable at scale. <br />
+This is why I created 50 playlists!</p>
+<p>Say I added 10 more tracks to liked. <br />
+The first one will go to playlist 1, the second one to playlist 10, 3 -&gt; 19, 4 -&gt; 28, 5 -&gt; 37, 6 -&gt; 46, 7 -&gt; 5, 8 -&gt; 14, 9 -&gt; 23, 10 -&gt; 32.</p>
+<p>If I split 5000 tracks into <em>50</em> playlists like this, each playlist will have around 100 tracks, and the reshuffling issue ends up being wayyyyy smaller. <br />
+Also I increment the next playlist by 9 rather than 1, so that none of the playlists have a "theme", or are discernable from one another, and feel correctly random.</p>
+<h1 id="the-point"><a class="zola-anchor" href="#the-point" aria-label="Anchor link for: the-point">the point</a></h1>
+<p>Anyway, this is not what I actually started this blog post for, lol.</p>
+<p>I got a recent obsession about wallpapers, as I made it so a random wallpaper would be chosen every day. <br />
+As you'd expect, some wallpapers feel like they're picked all the time, while some others I never see.</p>
+<p>So I thought: "what if I <strong>ensured</strong> this could not happen?".</p>
+<p>My idea is the following: <br />
+I'll have a cache that remembers how many times each individual option has been picked before. <br />
+Before picking out of the options, we filter out all the options whose "count" is bigger than the minimum count of all the items.</p>
+<p>Let's start with an example. We have four options: apple, banana, orange, tomato. All of them start with a count of 0, because none of them were picked yet. <br />
+We begin the randomization process, and banana was randomly picked. Its count is now 1. <br />
+We randomize again. We go through all the options and check the counts. We realize that the lowest count any option has is 0 (as every other option hasn't been picked yet), but banana has a count of 1. We filter out banana, and only pick out of apple, orange, tomato.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple - 0</span></span>
+<span class="giallo-l"><span>banana - 0</span></span>
+<span class="giallo-l"><span>orange - 0</span></span>
+<span class="giallo-l"><span>tomato - 0</span></span></code></pre>
+<p>lowest: 0. picking out of:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple</span></span>
+<span class="giallo-l"><span>banana</span></span>
+<span class="giallo-l"><span>orange</span></span>
+<span class="giallo-l"><span>tomato</span></span></code></pre>
+<p>banana. next iteration.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple - 0</span></span>
+<span class="giallo-l"><span>banana - 1</span></span>
+<span class="giallo-l"><span>orange - 0</span></span>
+<span class="giallo-l"><span>tomato - 0</span></span></code></pre>
+<p>lowest: 0. picking out of:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple</span></span>
+<span class="giallo-l"><span>orange</span></span>
+<span class="giallo-l"><span>tomato</span></span></code></pre>
+<p>apple. next iteration.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple - 1</span></span>
+<span class="giallo-l"><span>banana - 1</span></span>
+<span class="giallo-l"><span>orange - 0</span></span>
+<span class="giallo-l"><span>tomato - 0</span></span></code></pre>
+<p>lowest: 0. picking out of:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>orange</span></span>
+<span class="giallo-l"><span>tomato</span></span></code></pre>
+<p>orange. next iteration.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple - 1</span></span>
+<span class="giallo-l"><span>banana - 1</span></span>
+<span class="giallo-l"><span>orange - 1</span></span>
+<span class="giallo-l"><span>tomato - 0</span></span></code></pre>
+<p>lowest: 0. picking out of:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>tomato</span></span></code></pre>
+<p>tomato. next iteration.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple - 1</span></span>
+<span class="giallo-l"><span>banana - 1</span></span>
+<span class="giallo-l"><span>orange - 1</span></span>
+<span class="giallo-l"><span>tomato - 1</span></span></code></pre>
+<p>lowest: 1. picking out of:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple</span></span>
+<span class="giallo-l"><span>banana</span></span>
+<span class="giallo-l"><span>orange</span></span>
+<span class="giallo-l"><span>tomato</span></span></code></pre>
+<p>orange. next iteration.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple - 1</span></span>
+<span class="giallo-l"><span>banana - 1</span></span>
+<span class="giallo-l"><span>orange - 2</span></span>
+<span class="giallo-l"><span>tomato - 1</span></span></code></pre>
+<p>lowest: 1. picking out of:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple</span></span>
+<span class="giallo-l"><span>banana</span></span>
+<span class="giallo-l"><span>tomato</span></span></code></pre>
+<p>...etc etc</p>
+<h1 id="next-visual-section-of-the-blog-post"><a class="zola-anchor" href="#next-visual-section-of-the-blog-post" aria-label="Anchor link for: next-visual-section-of-the-blog-post">next visual section of the blog post</a></h1>
+<p>This works so well! Despite being randomization, it <strong>guarantees</strong> that you will never see a given option more than once in a cycle. <br />
+If you think about it for a bit though, you will notice that the following is possible for the algorithm to give us: [apple, banana, orange, tomato, tomato, orange, banana, apple] (we made 8 iterations, 2 full cycles) <br />
+Isn't it kinda annoying? Despite the guarantee within <em>a</em> cycle, nobody is stopping the algorithm from making some items very close or very far from each other between <em>two</em> cycles. <br />
+So in effect, it can end up being worse, right?</p>
+<p>Let's compare this to the more obvious approach: caching the last n items. <br />
+As you randomly pick items, you "write them down". When you pick the next item, if it's in the n recent items, you mark it as invalid and try to pick again. <br />
+Basically, you won't see something if you saw it just recently.</p>
+<p>However, what this method lacks, is guarantees about the <em>other</em> items.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple</span></span>
+<span class="giallo-l"><span>banana</span></span>
+<span class="giallo-l"><span>orange</span></span>
+<span class="giallo-l"><span>tomato</span></span>
+<span class="giallo-l"><span>fresh</span></span>
+<span class="giallo-l"><span>blues</span></span>
+<span class="giallo-l"><span>sheriff</span></span>
+<span class="giallo-l"><span>harmful</span></span>
+<span class="giallo-l"><span>heating</span></span>
+<span class="giallo-l"><span>announces</span></span></code></pre>
+<p>Say you check the last 2 items. It is practically impossible, in terms of probability, but there are no <em>guarantees</em> that "harmful", "sheriff", and "heating" won't get picked over and over again, but never "apple" for example. <br />
+What is just an unlucky coincidence will feel like a preference to your human brain, and hence will feel like "worse" randomization.</p>
+<p>Even though my algorithm might show me the same thing twice in a row, it <strong>guarantees</strong> that afterwards, I won't see it for a while, while <em>also</em> guaranteeing I will see all the other wallpapers, with <strong>no</strong> off-chance "preference" for any of them.</p>
+<p>When I see a wallpaper I saw just recently, I no longer worry: I know that after this one, I'll get to enjoy my entire collection, and none will be forgotten. <br />
+This made me take picking wallpapers more seriously, actually! There is no way I just happen to not see a given wallpaper for a while due to random chance, so I filter out which wallpapers I actually want to use more aggressively.</p>
+<p>Here is the <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/suggest.rs">source code</a> for the program that I wrote for this. It is very much a "for myself" thing so I don't intend to publish it in a convenient way; this blog post more so exists to give you ideas to approach randomization differently, and make it work better for yourself.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;floorp&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">bye bye firefox</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;journey-of-noise&#x2F;" class="preview next">
+			<span class="name">the journey of noise</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

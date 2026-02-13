@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>rust for... scripting? pt. 2</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<div class="preview empty previous"></div>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;kanata-layers&#x2F;" class="preview next">
+			<span class="name">erotic meta feet</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">rust for... scripting? pt. 2</div>
+				</a>
+				<div class="date">
+					<time datetime="2026-02-13">2026.02.13</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 9</div> -->
+				<p>In my <a href="https://axlefublr.github.io/rust-scripting/">previous blog post</a>, I arrived at a rust “scripting” system that I was quite satisfied with :D
+But since then, I took upon a journey to learn nushell, and therefore was using it for a lot of my new needs.
+For some of them, nushell isn't even the most appropriate tool, but finding reasons to use the language so that I could <em>learn</em> it better is a technique I make use of all the time.</p>
+<p>One day, I realize I want to edit a rust “script” that I already have.
+Wait... how do I do this again?
+There's a workspace directory, that is symlinked to one of the directories in the cache directory, glued by a bunch of harps. Right...</p>
+<p>When I zoom out, I realize that the system that I have created is a bit overly complicated.
+Coming back to using it again, it isn't immediately <em>obvious</em> what I'm supposed to do to edit existing work, and amn't quite sure how I'm supposed to start new work.
+Initially, I made the system to <em>ease in</em> the barrier of entry towards making a new rust program.
+I succeeded in doing so somewhat, but there is still a bit of a barrier.</p>
+<p>I can design this to be simpler, surely. And thanks to the suggestion of my friend <a rel="noopener external" target="_blank" href="https://github.com/titaniumtraveler">remrevo</a>, turns out I make it <em>better</em> too.</p>
+<p>The core <em>want</em> that I want to address is that creating a new “script” contains everything it needs in a single file.
+More or less.
+Then, I want to <em>store</em> all of those scripts more or less in the same place, so that they are pleasant and easy to manage.
+And, I want to <em>name</em> the scripts like I would be naming <strong>scripts</strong>, rather than how I would be naming projects.
+Finally, the resulting binary should have the <code>.rs</code> extension in its name, so that rust “scripts” are easily differentiated from “normal” binaries, helping me name them neglectfully.</p>
+<p>Putting a <code>consume.rs</code> binary into <code>$PATH</code> is free — almost no chance something else I'll be using in the future will collide with it.
+Putting a <code>consume</code> binary into <code>$PATH</code> is a lot more questionable.
+Pretty dang common word!
+I'd need to take a real think before choosing such a name, and I don't want to think!</p>
+<p>Now, I keep using the word “script” but at this point it's lost most of its meaning.
+I've been fine with having a compile step for a while.
+I'm okay with having files around it to make it work, but I really don't wanna create a whole ass another directory for a new “script”.
+And I'm not actually running <em>the file</em>, I'm running the binary that just so happens to be named the same as its source code.</p>
+<p>So I say “script”, but I mean “an easily creatable rust binary”.
+Doesn't quite roll off the tongue as easily though, so I'm going to keep using the word script.</p>
+<p>Rust provides me kinda <strong>exactly</strong> what I want, turns out.
+In a rust project, you create a <code>src/main.rs</code>, and that is the entry point to your binary program.
+You may then also (or instead) create a <code>src/lib.rs</code>, and that's the entry point to the <em>library</em> side of your program.
+You can have both at the same time, or only one of them.</p>
+<p>But you can create another special thingymabop: <code>src/bin/</code>.
+You can create rust files in that directory, and each individual file is its <strong>own binary entry point</strong>, like <code>src/main.rs</code> is.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>src</span></span>
+<span class="giallo-l"><span>   bin</span></span>
+<span class="giallo-l"><span>      consume.rs</span></span>
+<span class="giallo-l"><span>      zat.rs</span></span>
+<span class="giallo-l"><span>Cargo.toml</span></span></code></pre>
+<p>This turns out to be much more fantastic than the system I would've designed would be.
+In a <em>normal</em> project, you just have one binary, and it's automatically named the same as the project is called.
+<em>Some</em> projects, though, can produce multiple binaries.</p>
+<p>Yazi produces <code>yazi</code> and <code>ya</code>, nushell produces <code>nu</code> and a bunch more other binaries for plugins.
+In those projects, the “entry points” are defined manually in <code>Cargo.toml</code>, but with <code>srs/bin/</code> we don't need to bother doing that!
+A file with an <code>.rs</code> extension existing in <code>src/bin/</code> makes cargo automatically register it as a binary entry point.</p>
+<p><strong>So</strong>, to run or compile a “script”, we refer to it with the <code>--bin</code> flag.
+If I want to <code>cargo run</code> the <code>consume.rs</code> script, I do <code>cargo run --bin consume</code>.
+Pretty straightforward!</p>
+<p>To make this ergonomic to use, I can put <code>:sh cargo run --bin %(buffer_stem)</code> into a <a href="https://axlefublr.github.io/harp/">command harp</a> in my helix<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+.
+With it, I can express “run the script I am currently looking at” (in my editor), on a singular hotkey that I can put into my muscle memory.</p>
+<p>Then to “release” a script, I first do <code>cargo build --release --bin %(buffer_stem)</code>, and then <code>cp</code> over the resulting binary into the directory where I hold my wks binaries, appending the <code>.rs</code> extension at the end.
+Pretty simple also.
+Especially when compared to my previous wks system!</p>
+<p>There, to edit an existing script I would need to import it from a file into the “workspace” directory and use a fancy exporting script so that the compilation is targeted from the cache.
+If I wanted to create a <em>new</em> script, I would need to first check if I haven't forgotten to export the changes in the workspace directory and then use the once again fancy script for bringing in a blank slate, and symlinking everything into place. <br />
+Wanted to make an ad-hoc binary for <del>a laugh</del> testing? I'd need to point it to a path where the source + Cargo.toml would be exported into, even when I don't care to actually <em>store</em> the testing source code long-term. <br />
+It was a mess!</p>
+<p>In the new system, I <em>just</em> create a new <code>.rs</code> file in <code>src/bin/</code> and I'm done.</p>
+<a href="#cargotoml" id="cargotoml" class="anchorina">
+  <hr></hr>
+</a>
+<p>Next thing that you might see in the file structure, is that all the binaries <em>share</em> a singular <code>Cargo.toml</code>.
+This is fantastic!
+Once I <code>cargo add</code> some dependency, <em>all</em> of my binaries get access to it.
+The same version is used for all of them, and crucially the same <em>compile artifacts</em> are used across all of them.
+So once I compile <code>clap</code> once, I won't need to wait for it to compile for my next binary that also uses clap.
+This is also neat for my storage space, as rust compile artifacts like to balloon quite a bit!</p>
+<p>The binaries also share a single <em>library</em> entry point.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>src</span></span>
+<span class="giallo-l"><span>   lib.rs</span></span>
+<span class="giallo-l"><span>   bin</span></span>
+<span class="giallo-l"><span>      consume.rs</span></span>
+<span class="giallo-l"><span>      zat.rs</span></span>
+<span class="giallo-l"><span>Cargo.toml</span></span></code></pre>
+<p>This in particular unlocks some incredible power!
+I can write abstractions and helpers in <code>lib.rs</code>, that I then continue on to use across a bunch of different binaries.
+Where at first, creating some sort of binary might be a pain, after a bunch of iteration I'll have made the experience so nice for myself that I might then reach for rust out of <em>desire</em>, not only out of performance needs.</p>
+<p>In the old wks system, the default template for a new rust script contained a long paragraph of <code>use</code>s, for structs and traits that I'm very likely to use in a script.
+Having to import only what I need gets annoying quickly if I keep on needing the same things, after all.</p>
+<p>But now, I can compact them all into a single</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="rust"><span class="giallo-l"><span style="color: #EA6962;">use</span><span style="color: #78BF84;"> wks</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">prelude</span><span style="color: #E49641;font-weight: bold;">::*</span><span>;</span></span></code></pre>
+<p>To do this, I create a new module in <code>lib.rs</code> called <code>prelude</code></p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="rust"><span class="giallo-l"><span style="color: #EA6962;">pub mod</span><span style="color: #78BF84;"> prelude</span><span>;</span></span></code></pre>
+<p>I create <code>prelude.rs</code></p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>src</span></span>
+<span class="giallo-l"><span>   lib.rs</span></span>
+<span class="giallo-l"><span>   prelude.rs</span></span>
+<span class="giallo-l"><span>   bin</span></span>
+<span class="giallo-l"><span>      consume.rs</span></span>
+<span class="giallo-l"><span>      zat.rs</span></span>
+<span class="giallo-l"><span>Cargo.toml</span></span></code></pre>
+<p>And go ham, <code>pub use</code>ing all the imports that I feel like I need most of the time:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="rust"><span class="giallo-l"><span style="color: #B58CC6;">#![allow(unused_imports)]</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> anyhow</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Context</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> anyhow</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Result</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> anyhow</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">bail</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> anyhow</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">ensure</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> clap</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Parser</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">borrow</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Cow</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">collections</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">HashMap</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">collections</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">HashSet</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">env</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">fmt</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">fs</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">fs</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">File</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">fs</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">OpenOptions</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">io</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">io</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">BufRead</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">io</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Read</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">io</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Seek</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">io</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Write</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">ops</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Not</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">path</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">Path</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">path</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">PathBuf</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">str</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">FromStr</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">pub use</span><span style="color: #78BF84;"> std</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">sync</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #7DAEA3;">LazyLock</span><span>;</span></span></code></pre>
+<p>And now all of those modules, structs and traits are all in scope immediately, in all of my scripts.</p>
+<a href="#alias" id="alias" class="anchorina">
+  <hr></hr>
+</a>
+<p>Kind of by habit I still made myself a nice alias to make reaching existing and creating new scripts more ergonomic, but it's not even that needed honestly.
+I have this simple template file:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="rust"><span class="giallo-l"><span style="color: #B58CC6;">#![allow(unused_imports)]</span></span>
+<span class="giallo-l"><span style="color: #B58CC6;">#![allow(unused_variables)]</span></span>
+<span class="giallo-l"><span style="color: #B58CC6;">#![allow(dead_code)]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #EA6962;">use</span><span style="color: #78BF84;"> wks</span><span style="color: #E49641;font-weight: bold;">::</span><span style="color: #78BF84;">prelude</span><span style="color: #E49641;font-weight: bold;">::*</span><span>;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #EA6962;">fn</span><span style="color: #A9B665;"> main</span><span>()</span><span style="color: #E49641;font-weight: bold;"> -&gt;</span><span style="color: #7DAEA3;"> Result</span><span>&lt;()&gt; {</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">    println!</span><span>(</span><span style="color: #D3AD5C;">&quot;{}&quot;</span><span>);</span></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">    Ok</span><span>(())</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>That I store in the repo. I then make a fish alias <code>wks</code>:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> wks</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    set</span><span> -l prevdir </span><span style="color: #B58CC6;">$</span><span>PWD</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #D3AD5C;">&quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv[1]&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span> ~/fes/wks</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        rsync</span><span> ~/fes/wks/template.rs ~/fes/wks/src/bin/</span><span style="color: #D3AD5C;">&quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv[1]&quot;</span><span>.rs</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        helix</span><span> ~/fes/wks/src/bin/</span><span style="color: #D3AD5C;">&quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv[1]&quot;</span><span>.rs</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        return</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~/fes/wks/src/bin</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    set</span><span> -l picked (</span><span style="color: #A9B665;">fzf</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    test</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">picked&quot;</span><span> ||</span><span style="color: #EA6962;"> begin</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>prevdir</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        return</span><span> 1</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~/fes/wks</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    helix</span><span> ~/fes/wks/src/bin/</span><span style="color: #B58CC6;">$</span><span>picked</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>With no arguments provided, it opens <code>fzf</code> for me to pick an existing script to edit, and then opens it in helix from the root of the <code>wks</code> project.
+If I <em>do</em> provide an argument, that is the name of the script that I want to create (without the <code>.rs</code> extension) by copying over the template file.</p>
+<p>I intentionally don't safeguard myself from overriding an existing script this way!
+I have a <code>test.rs</code> script that I gitignore.
+It's meant for various ad-hoc checks and tests.
+Any time I want to start testing something from a clean slate, I <em>just</em> <code>wks test</code> and I'm there!
+Whatever the test script used to be before then is wiped clean, and I can immediately get to work.</p>
+<p>Recently realized how nice this is in practice.
+I was working on a new helix feature as usual, and for some reason <code>the.get(1..)</code> was returning me <code>None</code>, despite <code>the</code> being at least two characters long (in fact more).
+I do a simple <code>wks test</code> and check out the test case in a “pure” environment, unlike helix, and was able to figure out the core of the issue<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+ really quickly :D
+It was such a pleasant workflow!</p>
+<p>The <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/wks">repo that holds wks</a> is public!
+Check it out, and maybe make use of the idea for your own nice collection of itty bitty rust “scripts”.</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ “My” is very significant there, <code>buffer_stem</code> is a custom command expansion in <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">my helix fork</a>. Normally you would need to use <code>%(file_path_absolute)</code>, converting it into its basename without the extension in one way or another.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ The first character was <code>€</code>, a multibyte character. <code>get</code> on a <code>&amp;str</code> returns <code>None</code> if you try to index inside of a multibyte character.
+To work around this, I used <code>the.char_indices().nth(1)</code> to get the index of the second character, and then used that value in the afforementioned <code>get</code>.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<div class="preview empty previous"></div>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;kanata-layers&#x2F;" class="preview next">
+			<span class="name">erotic meta feet</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

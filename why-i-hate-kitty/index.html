@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>why I hate kitty</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;helix-master-vs-stable&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">helix master vs stable</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;columnar-multicursors&#x2F;" class="preview next">
+			<span class="name">a neat helix multicursor trick</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">why I hate kitty</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-09-13">2024.09.13</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 14</div> -->
+				<p>I say "god I hate kitty" a lot, but I usually can't think of examples for <em>why</em> on the spot. <br />
+I just encountered yet another "god I hate" about kitty, so I'm gonna write it down while it's hot to transfer why I hate this terminal emulator so much.</p>
+<a href="#desire" id="desire" class="anchorina">
+  <hr></hr>
+</a>
+<p>I wanted a certain feature: in the tab bar, usually I want tabs to just have their number displayed, and nothing else. But optionally, I should be able to add a title to an individual tab.</p>
+<p>You might reasonably think "oh that sure sounds like a job for a plugin" and in any other app, something this specific would require a plugin, yes. <br />
+Kitty, however, picks to be between a rock and a hard place.</p>
+<a href="#tab-title-template" id="tab-title-template" class="anchorina">
+  <hr></hr>
+</a>
+<p>Usually when configuring things, ideas come to mind because I already have a very vague idea of how to do it / assume it's doable. <br />
+It was the case here too: there's an option called <code>tab_title_template</code> that lets you define the text displayed in each individual tab in the tab bar.</p>
+<p>Aside from feeling a bit wonky (<a rel="noopener external" target="_blank" href="https://sw.kovidgoyal.net/kitty/conf/index.html#opt-kitty.tab_title_template">have a look</a>), I actually quite like it because it's pretty flexible for a config-based terminal emulator (rather than one that uses a programming language directly, like wezterm).</p>
+<p>So I put in the title there and went on to configure.</p>
+<a href="#fish" id="fish" class="anchorina">
+  <hr></hr>
+</a>
+<p>A lot of terminal applications change the shell title (or window title you would usually call it?), so once I configured them to not, I was able to get to <code>fish_title</code>.</p>
+<p><code>fish_title</code> is fish shell's mechanism for setting the shell title, and it's really cool!
+You can use arbitrary fish shell logic to print the exact title that you want. <br />
+I used to use it a long time ago, but found the concept of changing shell title more distracting than useful, so I removed it.</p>
+<p>I came back to it now to try to make it more useful: usually the title would be some reasonable default I define in <code>fish_title</code>, but I could also override it to be something else instead. <br />
+I used an arbitrary variable called <code>title</code> that I could set to do that overriding, all in my shell.</p>
+<p>That sounds like a finished job, doesn't it? But here comes in kitty, trying to be useful in the most annoying way.</p>
+<a href="#title-reporting" id="title-reporting" class="anchorina">
+  <hr></hr>
+</a>
+<p><code>fish_title</code> runs before and after making your shell prompt, and there <em>can</em> be times where fish doesn't report its title, or sets it to a blank string, before setting it again.</p>
+<p>In actual usage what ended up happening, is sometimes my kitty tab title changed to <code>fish</code> for a flash, and then got back to the title defined in <code>fish_title</code>. <br />
+So I thought "huh, maybe fish is reporting some <code>fish -c</code> action and so is setting the title to that?" — my logic for making the title was pretty solid, but I assumed it allowed something like that to happen. <br />
+My solution for this was to stop trying to make the title useful, and disable it completely. I set <code>fish_title</code> to be a blank function the echoes nothing.</p>
+<p>Imagine my horror when after doing so, I still see <code>fish</code>. <br />
+??? wtf the title is supposed to be blank now? <br />
+And <em>now</em> I realize that fish was doing its work perfectly fine, and there was no issue there to begin with — it was <em>kitty</em>'s default messing things up.</p>
+<a href="#kitty-default" id="kitty-default" class="anchorina">
+  <hr></hr>
+</a>
+<p>So <em>turns out</em> (I don't think it's documented, at least I wasn't able to come across this in the documentation) in kitty, if your shell hasn't got the shell title set, it will default to whatever the current app running is. <br />
+That <code>fish</code> was kitty saying "hey! you're running fish!" because I was just looking at my shell.</p>
+<p>I have some kitty mappings that open programs directly in overlay windows (which are REALLY cool btw), and once I opened <code>yazi</code> like that, I saw <code>yazi</code> in the window title.</p>
+<p>Eureka! 🥳</p>
+<p>You know what this means now? The fish shell titling mechanism is effectively useless, because kitty will interrupt and set a default intermittently with fish, so the tab title will jump jarringly and is therefore not worth using.</p>
+<a href="#set-tab-title" id="set-tab-title" class="anchorina">
+  <hr></hr>
+</a>
+<p>I set the <code>shell_integration</code> kitty option to <code>no-title</code>. <br />
+While we disabled <code>fish_title</code>, some programs can still set the shell title themselves, and that option ensures that it's ignored. Now only kitty has the capability to set its own tab titles.</p>
+<p>Now practically every tab has <code>fish</code> in its title, that sometimes turns into <code>yazi</code> / <code>lazygit</code>. The latter is kinda cool, but having <code>fish</code> in every title is pretty jarringly useless.</p>
+<p>The other piece of the puzzle, <code>set_tab_title</code>, is a kitty action you can map to, that will let you interactively change the tab title. <br />
+With it, I have a solution: I could rename every tab I use to make more sense, rather than being just <code>fish</code>. <br />
+But also, that's pretty unreasonable to ask of myself — I create and close tabs all the time, very quickly, and in reality I'll just end up seeing a lot of 🐟es in my tab titles, and <em>sometimes</em> see my <em>actual</em> titles. <br />
+All that plus I'll feel more pressured to title tabs that I don't actually care to have titles.</p>
+<p>Between a rock and a hard place.</p>
+<a href="#disable" id="disable" class="anchorina">
+  <hr></hr>
+</a>
+<p>A VERY obvious solution that you might've just thought about is to just disable this default kitty functionality that sets the titles to begin with. Very reasonable! I thought about it too, but you can't disable it, as far as I'm aware 💀</p>
+<p>You might now think "well surely that's a bug! you should open an issue about this" which is once again reasonable, but I already got burned on that with kitty.</p>
+<a href="#infamous-dev" id="infamous-dev" class="anchorina">
+  <hr></hr>
+</a>
+<p>Kitty is infamous, first and foremost, for its unbearable dev. He instantly closes issues (which in itself is not an issue (lol)), rudely disregarding often times <em>reasonable</em> concerns.</p>
+<p>My story: <br />
+You can set the shape of the cursor in kitty with the <code>cursor_shape</code> option. It can be one of <code>block</code>, <code>beam</code>, <code>underline</code>. <br />
+There is also a <code>cursor_shape_unfocused</code> option. Does the same thing, but for when kitty is not in focus. <em>Except</em>, it can <em>also</em> be <code>hollow</code>.</p>
+<p>Yes, you cannot set <code>cursor_shape</code> to <code>hollow</code>, but can set it for <code>cursor_shape_unfocused</code>!</p>
+<p>That seemed like an obvious misstep but I've been taught by others that sometimes even "obvious" things should be reported in issues and worked on in PRs, so I created a PR adding <code>hollow</code> to <code>cursor_shape</code>.</p>
+<p>...Instantly rejected with something along the lines of "this is stupid, the <code>hollow</code> shape shows that kitty is unfocused". <br />
+This is awful on multiple levels.</p>
+<a href="#the-user-knows-better" id="the-user-knows-better" class="anchorina">
+  <hr></hr>
+</a>
+<p>Sure, <code>cursor_shape</code> being <code>hollow</code> by default would be stupid, but there <em>should</em> be an option to set it, because it's up to the <em>USER</em> to decide that for themselves. <br />
+You <strong>never</strong> fully know the usecase of each user, and should allow them to be "stupid" if that's what they actually want. <br />
+The argument also doesn't hold up because you can set set both <code>cursor_shape</code> and <code>cursor_shape_unfocused</code> to block and continue to "not know if kitty is focused or not", so why should you be unable to set them both to <code>hollow</code>??</p>
+<p>If your window manager and kitty window borders already make things clear, it's not unreasonable to not care about the cursor shape, especially considering that the hollow cursor looks really cool! <br />
+I would 30% understand if I opened an <em>issue</em>, but I opened a <em>PR</em> that just adds that, so all you have to do is press accept and blammo! The change is literally two lines, one of which is the docs, so even the maintenance argument doesn't hold weight here.</p>
+<p>This same exact feature request I opened as an <em>issue</em> in ghostty, the dev said "huh I don't see why not" and implemented it a couple of days later. Night and day.</p>
+<p>If this was my <em>only</em> interaction with the kitty dev, I would give him the benefit of the doubt (although would still be annoyed), but all I hear about the kitty dev from people is mostly stories like mine.</p>
+<a href="#that is why" id="that is why" class="anchorina">
+  <hr></hr>
+</a>
+<p>Coming back to shell titles: this is why it's not worth the effort to open an issue to make the default kitty titling behavior disableable.</p>
+<p>I could potentially change it in source code and compile my own kitty, but I have no clue how to compile kitty — it feels like a big mishmash of everything that I really wouldn't want to work with, even though I <em>do</em> keep a <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>.</p>
+<a href="#session" id="session" class="anchorina">
+  <hr></hr>
+</a>
+<p>Next I came across <a rel="noopener external" target="_blank" href="https://sw.kovidgoyal.net/kitty/overview/#sessions">session files</a>. <br />
+"Surely the bee's knees" I thought — they allow you to specify a bunch of kitty commands to execute on startup. <br />
+Buuuut on startup of the <em>instance</em>, so they won't control each individual window / tab, which is what I would need. <br />
+Even calling <code>set_tab_title</code> in the session file didn't do anything for even the first window (which I don't exactly get).</p>
+<a href="#watchers" id="watchers" class="anchorina">
+  <hr></hr>
+</a>
+<p>The final possibility is "watchers". Python scripts that listen on kitty events and execute kitty code on them. That's what I'm guessing they are anyway, because I dismissed them instantly out of this thought process: <br />
+Oppositely from session files, the watcher would run on... when exactly? Let's say I'm lucky and there's a "title changed" event. <br />
+Will that event run on <em>startup</em>? This is only based on my overall experience using kitty, but I assumed it would for some reason <em>not</em>, specialcasing when you first launch kitty, and working normally all the following windows. <br />
+I have no reason to think this except kitty being similarly horrible to me like 20 other times, so this isn't really a "point". <br />
+For all I know, watchers might be the bee's knees but at this point I was tired and making a python script to work around yet another "nice" kitty behavior didn't seem worth it.</p>
+<a href="#giving-up" id="giving-up" class="anchorina">
+  <hr></hr>
+</a>
+<p>So I give up. I get hyperfocused on things like this often and that can put me in a spiral. I went and did some house chores, until I got another idea...</p>
+<p>In <code>tab_title_template</code>, this is offhandedly mentioned:</p>
+<blockquote>
+<p>Note that formatting is done by Python’s string formatting machinery</p>
+</blockquote>
+<p>I mostly diregarded this because what in the living and dying hell is "string formatting machinery".
+The limits of how it actually works are not well defined in the docs, so that's why I went on to try other options that <em>felt</em> viable, before coming to this one.</p>
+<a href="#possibility" id="possibility" class="anchorina">
+  <hr></hr>
+</a>
+<p>In the docs, we get this example: <code>{layout_name[:2].upper()}</code> <br />
+I realize that I can at least slice strings and call methods on them. <br />
+This by itself is not strong enough for what I'm trying to do, so I decided to take a gamble: what if "string formatting machinery" is actually "python expression"?</p>
+<p>To reiterate the behavior that I want: usually the tab titles are <code>1</code>, where 1 is the amount of windows on that tab. I should also use my mapping for <code>set_tab_title</code> to append some text to it like <code>1 asdf</code>.</p>
+<p>So I need to somehow filter <em>all</em> titles that kitty might automatically set (i.e. any possible name for a program). I also need to handle the space after the number and before the title, and the rightmost space, to keep to correct padding.</p>
+<a href="#viola" id="viola" class="anchorina">
+  <hr></hr>
+</a>
+<p>Behold: yet another kitty wack solution that does what I want, through a hack:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>&quot; {fmt.fg.pink}{bell_symbol}{activity_symbol}{fmt.fg.tab}{num_windows}{title[0] == &#39; &#39; and title or &#39;&#39;} &quot;</span></span></code></pre>
+<p>or, simplified,</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>&quot; {num_windows}{title[0] == &#39; &#39; and title or &#39;&#39;} &quot;</span></span></code></pre>
+<p>It turned out that "python string formatting machinery" <em>does</em> just mean "python expression". Amazing docs as always kitty, very clear /s <br />
+Using a python expression, I can use a ternary (the <code>and or</code> there) to filter out titles set by kitty.</p>
+<p>I'm hoping and coping that no title set by kitty will start with a space (I would still be only slightly surprised, though, it's kitty after all), <br />
+and because I need a space between the number and the title, <br />
+if I always start my tab titles with a space, I get to solve two issues in one approach!</p>
+<p><img src="https://axlefublr.github.io/why-i-hate-kitty/./kitty-tab-title.webp" alt="" /></p>
+<ol>
+<li>Press my <code>set_tab_title</code> hotkey</li>
+<li>Type in <code> gist</code> (with a space before)</li>
+<li>Bob becomes the brother of your parent</li>
+</ol>
+<a href="#overcooked" id="overcooked" class="anchorina">
+  <hr></hr>
+</a>
+<p>So while I have my desired behavior, I'm obviously unhappy about it. It's a hack as clear as day.</p>
+<p>The real issue with kitty that makes me so mad at it, is that it shines gold coins at you all over the place, suggesting that making some feature you assume is obvious is going to be easy. <br />
+It shows you multiple different approaches through its functionality, and so you think "with so many options, surely this is trivial".</p>
+<p>And yet, time and time again, I come across poorly worded / explained documentation, strange "useful" default behavior I have to work around, a very unhelpful dev that I can simply ignore trying to contact for better behavior, a messy project structure where it's not viable (at least for me) to keep a personal fork, a billion features, all of which are somehow <em>just</em> not enough for the functionality I want, but enough to make me excited to try implementing it, and an autistic brain that makes me want to configure my tools in ways that <em>apparently</em> no one else has wanted. Somehow.</p>
+<p>Sounds awful, doesn't it? <br />
+If you were as into configuring your terminal, I'm sure you would hate kitty too.</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">conclusion</a></h1>
+<p>All of these are reasons for why I use kitty but can't recommend it. I <em>can</em> easily recommend alacritty, though.</p>
+<p>Alacritty can't do shit but doesn't claim it can, so you have to just deal with it. Helix can't do shit and doesn't claim you can, so you have to just deal with it (you can draw the same connection between neovim and helix as I am drawing with kitty and alacritty).</p>
+<p>I hope that draws a clear enough picture for my hatred towards this feline terminal emulator 🐈. I gave two examples here but you should subconsciously multiply them by at least 7. <br />
+This is not my first or last kitty configuring adventure that goes in me hating it more, this is just the first time I caught it and decided to write it down.</p>
+<h2 id="why-kitty-then"><a class="zola-anchor" href="#why-kitty-then" aria-label="Anchor link for: why-kitty-then">why kitty then?</a></h2>
+<p>The worst part about all of this is that I now have yet another cool and useful feature that is either hard or impossible to recreate in another terminal emulator, so I'm bound to use a terminal I despise.</p>
+<p>Kitty has better looking and faster rendering than anything else (except <em>maybe</em> ghostty, although ime ghostty was slower, and I was <em>trying</em> to like ghostty so I doubt it was bias). <br />
+It slightly boldens fonts which is REALLY weird for it to do but now I really love it and can't live without. <br />
+It doesn't make ANY gui-like elements, which I hate especially in terminals: even the tab bar looks like it's from a tui application. <br />
+The remote window manipulation is super powerful, and I make a lot of use from windows, tabs, layouts, overlays (omg the overlays 😩) (yet another painful config adventure). <br />
+Kitty can work as a "server" for kitty, letting you create new os windows practically instantly (ghostty can do this too but in a different way and slower) (this adventure was especially painful). <br />
+The binding system is really powerful and lets me use chord mappings.</p>
+<p>The supposed "new best terminal" ghostty has some of these features, but they often times are not as good, or just equal; some things are missing or work worse so I don't feel encouraged to switch off kitty, and I am...</p>
+<blockquote>
+<p>between a rock and a hard place</p>
+</blockquote>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;helix-master-vs-stable&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">helix master vs stable</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;columnar-multicursors&#x2F;" class="preview next">
+			<span class="name">a neat helix multicursor trick</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>fish shell 4.0.0</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;uri-list&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">stop picking on files</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;ov&#x2F;" class="preview next">
+			<span class="name">finally, a good pager</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">fish shell 4.0.0</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-01-25">2025.01.25</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 4</div> -->
+				<p>New fish shell major version is coming out! <br />
+I want to share with you all the changes that caught my attention. <br />
+Incidentally, this blog is my excuse to <em>read</em> the <a rel="noopener external" target="_blank" href="https://fishshell.com/docs/4.0b1/relnotes.html">release notes</a> to begin with c:</p>
+<p>First of all, fish shell got rewritten from c++ to rust. This is big because it reduces the barrier of entry for contribution and probably makes fish faster.</p>
+<p><code>fish_should_add_to_history</code> function lets you decide which commands to add to history or not.</p>
+<p><code>--command</code> flag for <code>abbr</code> allows you to make command-specific abbreviations. Basically, you get to make subcommand aliases but with the power of your <em>shell</em>, not having to rely on the program to support aliasing.</p>
+<p>Take a look at this:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">if</span><span style="color: #A9B665;"> test</span><span> -n</span><span style="color: #B58CC6;"> $</span><span>variable</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">  echo</span><span> success</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Previously, if <code>variable</code> is <em>unset</em> (rather than an empty string), fish would error out — <code>test -n</code> expects an argument after. <br />
+It's the reason why it's good practice to surround the variable with <code>"</code> like <code>"$variable"</code>, so that it resolves to a single argument even if the variable is unset.</p>
+<p>Now <code>test -n</code> and <code>test -z</code> <em>don't</em> require an argument after, so passing an unset variable is now valid. <br />
+Interestingly, only those two options. All the other options work as they did before.</p>
+<p>This feature is not enabled by default, you'd enable it with <code>set -Ua fish_features test-require-arg</code>.</p>
+<p><code>bind</code> recognizes more modifier combinations and differentiates more keys, for example it can tell apart <kbd>Tab</kbd> and <kbd>ctrl+i</kbd>.</p>
+<p>Also, a more convenient syntax for specifying the key like <kbd>ctrl-x</kbd> is now available. <br />
+Previously you had to use <code>bind -k</code> for that, now you don't have to.</p>
+<p>Omg, I literally needed this so bad: <code>history append</code> lets you append a command to fish history, without executing it.</p>
+<p><code>&lt;?/path/to/file</code> tries reading the file as input; if reading fails for any reason, outputs from <code>/dev/null</code> (which should be an empty string). <br />
+Basically, a way to say "read this file if you can, but don't fail if you can't".</p>
+<p>New <code>path basename -E</code> is like doing <code>path change-extension '' (path basename /path/to/file.txt)</code> — <code>/path/to/file.txt</code> gets turned into <code>file</code>.</p>
+<p>Math <code>--scale-mode</code> now allows you to choose how the output value's decimal points are handled. <code>truncate</code> / <code>round</code> / <code>floor</code> / <code>ceiling</code>.</p>
+<p>Abbreviations can now expand after <code>command</code>. As in, <code>command ls</code> will expand similar to how <em>just</em> <code>ls</code> would. <br />
+They now also do after <code>;</code> and <code>|</code>. But if you put a <code>|</code> right after a command without a space in between, you're a freak.</p>
+<p><code>funcsave</code>ing a function indents the body.</p>
+<p>If there is no second job, <code>fg %2</code> won't activate the latest one, and will instead fail.</p>
+<p>Depending on your terminal, now <kbd>shift+enter</kbd> will insert a newline rather than execute the command, and <kbd>ctrl+backspace</kbd> &amp; <kbd>ctrl+delete</kbd> works.</p>
+<p>In vim mode, the cursor will no longer be beyond the end of the line. I kinda got used to my cursor being 2 character after the end of the line at this point, lol.</p>
+<p>Also, <code>%</code> motion, as well as functions to <code>f</code>/<code>t</code> to the matching bracket.</p>
+<p>Options can now be fuzzy completed!! So, <code>--fbr</code> -&gt; <code>--foobar</code> will happen, if there's no better match.</p>
+<p>When you complete something that has characters that need to be escaped, previously each character would be <em>escaped</em>. Now the completed token uses <em>quotes</em>. <br />
+Say you are completing a directory named <code>my directory</code>. <br />
+Previously, it would turn into <code>my\ directory</code>, now it will turn into <code>'my directory'</code>.</p>
+<a href="#done" id="done" class="anchorina">
+  <hr></hr>
+</a>
+<p>I opened the release notes, saw the ridiculously small scrollbar, and got terrified like "HOW HUGE IS THIS UPDATE??", but turns out the page is so long because it contains <em>all</em> the release notes.</p>
+<p>So yeah, everything listed above are the neat changes that I found the most significant for myself. Keep in mind though, I might've skipped some that aren't important to me but might be important for you!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;uri-list&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">stop picking on files</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;ov&#x2F;" class="preview next">
+			<span class="name">finally, a good pager</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>
