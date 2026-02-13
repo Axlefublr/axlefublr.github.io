@@ -14,7 +14,8 @@
 				"keyword.operator.redirect.target",
 				"string.unquoted.argument.shell",
 				"constant.other.option",
-				"keyword.operator.access.dot"
+				"keyword.operator.access.dot",
+				"punctuation.semi"
 			],
 			"settings": {
 				"fontStyle": "normal",
@@ -39,7 +40,8 @@
 				"keyword.local",
 				"keyword.global",
 				"keyword.other",
-				"storage.type.attribute"
+				"storage.type.attribute",
+				"storage.type"
 			],
 			"settings": {
 				"foreground": "#ea6962"
@@ -48,6 +50,7 @@
 		{
 			"scope": [
 				"keyword.operator",
+				"keyword.operator.pipe",
 				"keyword.control.nushell",
 				"punctuation.separator.key-value"
 			],
@@ -99,7 +102,8 @@
 			"scope": [
 				"constant.language",
 				"punctuation.definition.variable",
-				"constant.other.caps"
+				"constant.other.caps",
+				"meta.attribute"
 			],
 			"settings": {
 				"foreground": "#b58cc6"
@@ -108,7 +112,10 @@
 		{
 			"scope": [
 				"entity.other.attribute",
-				"keyword.other.definition.ini"
+				"keyword.other.definition.ini",
+				"meta.use.rust",
+				"entity.name.module",
+				"entity.name.function.macro"
 			],
 			"settings": {
 				"foreground": "#78bf84"
