@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>wayland screen recording</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;journey-of-noise&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">the journey of noise</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;uri-list&#x2F;" class="preview next">
+			<span class="name">stop picking on files</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">wayland screen recording</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-02-16">2025.02.16</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 7</div> -->
+				<p>I recently switched to wayland, and now my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/2567bb72827619c45a4d2e554148195be6c94b74/scripts/screen-record.fish">ffmpeg screen recording script</a> no longer works, as it depends on x11. <br />
+To my surprise, screen recording on wayland is <em>easier</em>!</p>
+<p>Thanks to <a rel="noopener external" target="_blank" href="https://github.com/ammen99/wf-recorder">wf-recorder</a>, this is all you need:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">wf-recorder</span><span> -Dyf ~/output.mkv</span></span></code></pre>
+<p><code>-y</code> skips the confirmation check to overwrite the file, <code>-D</code> only grabs more frames if anything changed on the screen, in theory reducing filesize. <br />
+Pass <code>-a</code> if you wanna record audio. There are also other useful flags: one of them lets you pick a section of the screen to record, using <code>slurp</code>.</p>
+<p>Now all you need to do to record a video, is run that command, and press <code>ctrl+c</code> on it once you finish recording. <br />
+Through some magic I'll explain later, I have it on a hotkey as a toggle.</p>
+<p>However! <br />
+The #1 place I'll be sending screen recordings to is <em>discord</em>, which has a 10mb size limit without a subscription.</p>
+<p>This is why I compress the video after, with ffmpeg:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">wf-recorder</span><span> -Dyf ~/i/s/original.mkv</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">ffmpeg</span><span> -y -i ~/i/s/original.mkv \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -an</span><span> \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -c</span><span>:v libx264 -preset medium -crf 21 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -movflags</span><span> +faststart \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -b</span><span>:v 3M -maxrate 4.5M -bufsize 6M \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -vf</span><span> scale=-1:1080 \</span></span>
+<span class="giallo-l"><span>    ~/iwm/sco/compressed.mp4</span></span></code></pre>
+<p>This greatly reduces the size, while not being that huge of a difference in quality. Take a look!</p>
+<p>Original, at 19mb:</p>
+<video controls>
+  <source src="original.mp4" type="video/mp4">
+</video>
+<p>Compressed, at 2.5mb:</p>
+<video controls>
+  <source src="compressed.mp4" type="video/mp4">
+</video>
+<p>You probably <em>can</em> tell a difference between the two, but I wouldn't say that it's staggering. The <em>size</em> difference <strong>is</strong> staggering, though! <br />
+The compressed version, in this case, is 8 times smaller! Much easier to fit into the tight limits of discord.</p>
+<p>Thanks to how I wrote it, the original file is kept too! <br />
+So if I'm not restricted by size, I can choose to send the original. <br />
+The recording is also automatically <a href="https://axlefublr.github.io/uri-list/">copyl</a>ed, letting me immediately <kbd>ctrl+v</kbd> it wherever I want! :3</p>
+<a href="#toggle" id="toggle" class="anchorina">
+  <hr></hr>
+</a>
+<p>Let's now get into how I made this into a toggle!</p>
+<p>The fact that you can gracefully stop the recording with <kbd>ctrl+c</kbd> isn't just some hardcoded hotkey — <kbd>ctrl+c</kbd> actually sends the SIGINT signal to the running process, and it's <em>that</em> that <code>wf-recorder</code> is actually listening for.</p>
+<p>Meaning, we can gracefully finish the current recording using:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">kill</span><span> -s INT wf-recorder</span></span></code></pre>
+<p>This assumes that you only have one <code>wf-recorder</code> instance running at a time, which I feel is a pretty safe assumption.</p>
+<p>So I made myself this fish function, that I put on a hotkey in my <a href="https://axlefublr.github.io/erm/">kanata config</a>:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> toggle_screen_record</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test -f /tmp/mine/recordilock</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        kill</span><span> -s INT wf-recorder</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        screen-record.fish</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>And then the screen-record.fish script is:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">touch</span><span> /tmp/mine/recordilock</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">wf-recorder</span><span> -Dyf ~/iwm/sco/original.mp4</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">ffmpeg</span><span> -y -i ~/iwm/sco/original.mp4 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -an</span><span> \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -c</span><span>:v libx264 -preset medium -crf 21 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -movflags</span><span> +faststart \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -b</span><span>:v 3M -maxrate 4.5M -bufsize 6M \</span></span>
+<span class="giallo-l"><span>    ~/iwm/sco/compressed.mp4</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">rm</span><span> -f /tmp/mine/recordilock</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">sl.fish</span><span> ~/iwm/sco/compressed.mp4</span></span></code></pre>
+<p>So, to go over the whole process, from a neutral state: <br />
+I want to start a recording, so I press my hotkey. <br />
+The <code>/tmp/mine/recordilock</code> lockfile doesn't exist, so we go into the second branch, starting the screen-record.fish script. <br />
+The lockfile is created — the next time we press the hotkey, we'll go into the first branch instead of the second one. <br />
+We start recording, and waiting for SIGINT to be sent to <code>wf-recorder</code>.</p>
+<p>I finish my recording, so I press the same hotkey again to complete it. <br />
+This time, since the <code>/tmp/mine/recordilock</code> file exists, we go into the first branch — it sends the SIGINT signal that <code>wf-recorder</code> is waiting for.</p>
+<p>Now that the <code>wf-recorder</code> process is finished (which takes some time), the initial script can continue execution. <br />
+It does the compressing with ffmpeg, then deletes the lockfile. We could, if we wanted to, immediately start a new recording now. <br />
+The <code>copyl</code> that is now called <code>sl.fish</code> because I'm returning half a year after initially writing this blog post<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+ copies the uri link to the recording into my clipboard, letting me easily paste it into anywhere.</p>
+<p>This is a lot better!
+Than dedicating a terminal window for the recording script, and then manually pressing <kbd>ctrl+c</kbd> on it to finish it. <br />
+Doing so is not too bad all things considered, but is a bit too close to the <del>IBS</del> OBS workflow.</p>
+<p>So now we <em>don't</em> see when the recording starts and ends 🥳... Wait, what? <br />
+Right! Let's integrate this recording toggle into waybar, so it's actually clear to us when we're recording, when we're compressing, and when we're done.</p>
+<h1 id="waybar"><a class="zola-anchor" href="#waybar" aria-label="Anchor link for: waybar">waybar</a></h1>
+<p>Are you familiar with named pipes? No? <br />
+They're really convenient for making waybar widgets the text of which you need to modify externally. <br />
+I'm not gonna explain them in depth, but the relevant manpages are the following: <code>mkfifo.1</code>, <code>fifo.7</code>.</p>
+<p>Crucially, FIFOs don't operate via writes to disk, despite having filepaths, and are instead in-memory. <br />
+That makes them quite a bit faster and a lesser hog of our system resources!</p>
+<p>If we use a normal file, we need (should?) to create some sort of logic to intermittently clear up old data in the file. <br />
+Or I guess would could blammo it into <code>/tmp</code> and hope that we will always be rebooting before the bloat ever becomes a problem. <br />
+FIFOs avoid this issue with the semantic that the data is read-once — one side is expected to continuously consume the content, and once it has read something, the data is no longer stored in the fifo. <br />
+There can be multiple writers, though — so you don't need to create some convoluted writer service or anything 😌</p>
+<p>Let's create the fifa with ↓</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/waybar-screen-record</span></span></code></pre>
+<p>Conveniently, once you create a fifo, it stays forever — it's not some temporary file you have to set up on every boot or anything. <br />
+You can of course later delete it like a normal file.</p>
+<p>Now we create a custom module in waybar ↓</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="json"><span class="giallo-l"><span style="color: #D3AD5C;">&quot;custom/screen-record&quot;</span><span>: {</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">  &quot;exec&quot;</span><span>:</span><span style="color: #D3AD5C;"> &quot;/home/axlefublr/fes/dot/waybar/screen-record.fish&quot;</span><span>,</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">  &quot;format&quot;</span><span>:</span><span style="color: #D3AD5C;"> &quot;{}&quot;</span><span>,</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">  &quot;hide-empty-text&quot;</span><span>:</span><span style="color: #B58CC6;"> true</span></span>
+<span class="giallo-l"><span>},</span></span></code></pre>
+<p>We're using the output of a script as the text of our module/widget. <br />
+Every new line that is outputted by the script, <em>replaces</em> the text of the widget; a new <em>blank</em> line resets it.</p>
+<p>The script is just:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/waybar-screen-record</span></span></code></pre>
+<p>Now all we have to do to update the widget, is to <em>somehow</em> write a line into the <code>~/.local/share/mine/waybar-screen-record</code> “file”. <br />
+It's actually not a file 🤓☝️ <br />
+And yet, we interact with it exactly how we interact with other files: a simple ↓</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">echo</span><span> something </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span></code></pre>
+<p>Will make our widget display “something”. And ↓</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">echo</span><span style="color: #E49641;font-weight: bold;"> &gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span></code></pre>
+<p>Will clear it.</p>
+<p>Now let's come back to the toggle function and recording script, to make them interact with our new waybar module :3</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> toggle_screen_record</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test -f /tmp/mine/recordilock</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span> killing </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        kill</span><span> -s INT wf-recorder</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span> starting </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        screen-record.fish</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>In the toggle function, we report sending the kill signal / starting the recording script. <br />
+By all accounts, the next step after that happens so fast that we are probably never going to see <code>killing</code> / <code>starting</code> in our waybar module, but if anything ever holds up suspiciously long, this can be helpful for debugging.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">touch</span><span> /tmp/mine/recordilock</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">echo</span><span> recording </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">wf-recorder</span><span> -Dyf ~/iwm/sco/original.mp4</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">echo</span><span> compressing </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">ffmpeg</span><span> -y -i ~/iwm/sco/original.mp4 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -an</span><span> \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -c</span><span>:v libx264 -preset medium -crf 21 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -movflags</span><span> +faststart \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    -b</span><span>:v 3M -maxrate 4.5M -bufsize 6M \</span></span>
+<span class="giallo-l"><span>    ~/iwm/sco/compressed.mp4</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">rm</span><span> -f /tmp/mine/recordilock</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">echo</span><span> copying </span><span style="color: #E49641;font-weight: bold;">&gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">sl.fish</span><span> ~/iwm/sco/compressed.mp4</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">echo</span><span style="color: #E49641;font-weight: bold;"> &gt;</span><span>~/.local/share/mine/waybar-screen-record</span></span></code></pre>
+<p>Now it's clear what's currently happening, if anything! <br />
+After you press the hotkey the second time, you can quickly confirm that the recording did indeed complete, and is now compressing. <br />
+Once it's in the compressing stage, you basically wait for the waybar module to become empty again — <em>that's</em> the marker that it <code>copyl</code>ed, and is now pasteable 🚀</p>
+<video controls>
+  <source src="recording.mp4" type="video/mp4">
+</video>
+<p>I can't exactly show you all the steps, but here's my waybar saying “recording”, lol!</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ This whole section of me explaining how to make a toggle hotkey for this is new! <br />
+Writing this on 2025.08.04 <br />
+You see, previously (as can be seen in the example recordings above) I had a wack solution that used kitty's <code>send-signal</code> capabilities, that was too hyperspecific to share.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;journey-of-noise&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">the journey of noise</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;uri-list&#x2F;" class="preview next">
+			<span class="name">stop picking on files</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

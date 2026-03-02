@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>best find &amp; replace tool I found</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;safety-razor&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">safety razors slap</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consistentc&#x2F;" class="preview next">
+			<span class="name">helix is ridiculously consistent</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">best find &amp; replace tool I found</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-12-23">2024.12.23</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 3</div> -->
+				<p>I used to do magic with the quickfix list back in neovim, that gave me a pretty good find &amp; replace experience.</p>
+<p>However as you may know, I switched to helix. It can be very barebones at times, compared to the shenanigans I wrote for myself in neovim. <br />
+My find and replace now is mostly just the “find” part — I use helix's searcher, and then visit each place individually to modify it how I want. It's as laborious as it sounds.</p>
+<p>"About time to change this" I decided, and went to look for an interactive find &amp; replace tool.</p>
+<p>First thing I found is <a rel="noopener external" target="_blank" href="https://github.com/yassinebridi/serpl"><code>serpl</code></a> <br />
+It was quite precisely what I wanted! <br />
+However, I quickly noticed <a rel="noopener external" target="_blank" href="https://github.com/yassinebridi/serpl/issues/39">a bug</a> that literally disintegrated the UI over time. Non-0 chance I could fix it in my fork like I tend to do (apparently), but I'm not in love with the software enough to bother.</p>
+<p>For what it's worth, it would be strange for a bug as big as this to exist for everyone. <br />
+If you're interested in a TUI find &amp; replace tool, serpl might still be for you! <br />
+Maybe the stars align and the bug doesn't happen for you ✨</p>
+<p>Conveniently though, serpl mentions another similar tool at the end of the readme. Honestly it's almost too nice, because it is just directly better for the most part! (if we exclude the bug I experienced)</p>
+<p>The awkward name of this tool is <a rel="noopener external" target="_blank" href="https://github.com/acheronfail/repgrep"><code>repgrep</code></a>. Nope, I didn't misspell <a rel="noopener external" target="_blank" href="https://github.com/BurntSushi/ripgrep"><code>ripgrep</code></a>!</p>
+<p>Seems like the idea for the name is “ripgrep, but r<em><strong>e</strong></em>place”.</p>
+<p>Similarly to ripgrep, the binary you will be using is not that wordy: <code>rgr</code>. Once again, the semantic of “rg, but <em><strong>r</strong></em>eplace”.</p>
+<p>The beauty of repgrep for me, is that it <em>just</em> uses ripgrep under the hood. <br />
+Because of this, you won't need to learn any new arguments / flags to use repgrep — it <em>just</em> passes along the arguments to <code>rg</code>! <br />
+So if you know <code>rg</code> flags, you automatically know <code>rgr</code> flags :D</p>
+<p>You start repgrep by specifying the arguments to ripgrep, mainly the search pattern:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">rgr</span><span> maximi</span></span></code></pre>
+<p>And find yourself in the TUI:</p>
+<p><img src="https://axlefublr.github.io/repgrep/./maximi.webp" alt="" /></p>
+<p>It's as natural as it looks, so I won't spend time explaining all the hotkeys. You can look at them by pressing <kbd>?</kbd>.</p>
+<p><img src="https://axlefublr.github.io/repgrep/./help.webp" alt="" /></p>
+<p>Let's have a look at replace mode, that you get to by pressing <kbd>Enter</kbd> or <kbd>r</kbd>.</p>
+<p><img src="https://axlefublr.github.io/repgrep/./replace.webp" alt="" /></p>
+<p>The interesting part of the design decisions, is that while entering your pattern, <kbd>Enter</kbd> doesn't confirm! <br />
+Instead, it inserts a newline:</p>
+<p><img src="https://axlefublr.github.io/repgrep/./enter.webp" alt="" /></p>
+<p>You accept by pressing the awkward hotkey <kbd>ctrl+s</kbd>.</p>
+<p>Strange decision, but I respect the thinking behind it. Letting the user insert newlines just like that is pretty helpful, considering that neither <code>\n</code> nor <code>\r</code> work.</p>
+<p>However still, accepting happens way more frequently than inserting a newline. Unfortunately, there is no configuration, so I couldn't change it in a normal way.</p>
+<p>I maintain a helix fork already, what's one more? Especially not scary considering how long ago the most recent commit was. So, I forked repgrep to change the behavior of enter. <br />
+Now <kbd>enter</kbd> accepts, <kbd>alt+enter</kbd> inserts a newline.</p>
+<p>And that's how I finally have a nice find &amp; replace tool!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;safety-razor&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">safety razors slap</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consistentc&#x2F;" class="preview next">
+			<span class="name">helix is ridiculously consistent</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

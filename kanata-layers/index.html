@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>erotic meta feet</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting-pt-2&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">rust for... scripting? pt. 2</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;smooth-scrolling&#x2F;" class="preview next">
+			<span class="name">smooth scrolling</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">erotic meta feet</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-11-11">2025.11.11</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 15</div> -->
+				<p>I just figured out a longterm annoyance I've been having with how kanata does layers, and I want to share my findings with you.</p>
+<p>Sequences of key presses and releases are really hard to mentally parse when in word form, so I will establish a syntax for expressing those. <br />
+<kbd>e↓f</kbd> — hold down <kbd>e</kbd>, and while still holding it down, press and release (i.e. tap) <kbd>f</kbd>. <br />
+<kbd>e↓f↓j</kbd> — hold down <kbd>e</kbd>, and while still holding it down, also hold down <kbd>f</kbd>, and while still holding <em>both</em> <kbd>e</kbd> and <kbd>f</kbd> down, press and release (tap) <kbd>j</kbd>. <br />
+<kbd>e↓[jk]</kbd> — while holding down <kbd>e</kbd>, individually tap <kbd>j</kbd> or <kbd>k</kbd>; maybe repeatedly. <br />
+<kbd>e↓f↓w↓[jk]f↑[jk]</kbd> — one after the other, start holding down <kbd>e</kbd>, <kbd>f</kbd>, <kbd>w</kbd>. While holding them all, tap <kbd>j</kbd> or <kbd>k</kbd> however many times. Then, release <kbd>f</kbd> but not the other two held keys. While continuing to hold <kbd>e</kbd> and <kbd>w</kbd>, tap <kbd>j</kbd> or <kbd>k</kbd> however many times. <br />
+<kbd>efw↓[jk]</kbd> I hold down <kbd>e</kbd>, <kbd>f</kbd> and <kbd>w</kbd> in <em>unspecified order</em> and tap <kbd>j</kbd> or <kbd>k</kbd>. So this might be one of: <kbd>e↓f↓w↓[jk]</kbd>, <kbd>e↓w↓f↓[jk]</kbd>, <kbd>f↓e↓w↓[jk]</kbd>, <kbd>f↓w↓e↓[jk]</kbd>, <kbd>w↓e↓f↓[jk]</kbd>, <kbd>w↓f↓e↓[jk]</kbd>. <br />
+This notation implies that the order of the presses shouldn't matter.</p>
+<h1 id="our-setup"><a class="zola-anchor" href="#our-setup" aria-label="Anchor link for: our-setup">our setup</a></h1>
+<p>I'm going to create an example config to explain things with. <br />
+We will have three layers: meta, erotic, feet. <br />
+You enter the “meta” layer with <kbd>w↓</kbd>, the “erotic” layer with <kbd>e↓</kbd>, and the “feet” layer with <kbd>f↓</kbd>. <br />
+I name them funnily so that their absurdity can help you make them apart more easily 😌 <br />
+“Ah yes we have layer a b and c” would get confusing quick imo.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (default)</span></span>
+<span class="giallo-l"><span>   w (layer-while-held meta)</span></span>
+<span class="giallo-l"><span>   e (layer-while-held erotic)</span></span>
+<span class="giallo-l"><span>   f (layer-while-held feet)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta))</span></span>
+<span class="giallo-l"><span>(deflayermap (erotic))</span></span>
+<span class="giallo-l"><span>(deflayermap (feet))</span></span></code></pre>
+<p>The meta layer is actually for the meta modifier. You might also know it as super, or the windows key. <br />
+Erotic is the custom layer that has hotkeys for the browser: it makes <kbd>j</kbd> and <kbd>k</kbd> (<kbd>e↓[jk]</kbd>) select the above/below tab, to do further actions on. <br />
+Feet is the “navigation” layer, remapping <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd> to the arrow keys (<kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>).</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (default)</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta))</span></span>
+<span class="giallo-l"><span>   e (layer-while-held erotic)</span></span>
+<span class="giallo-l"><span>   f (layer-while-held feet)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta))</span></span>
+<span class="giallo-l"><span>(deflayermap (erotic)</span></span>
+<span class="giallo-l"><span>   j (select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"><span>(deflayermap (feet)</span></span>
+<span class="giallo-l"><span>   h left</span></span>
+<span class="giallo-l"><span>   j down</span></span>
+<span class="giallo-l"><span>   k up</span></span>
+<span class="giallo-l"><span>   l right</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>The meta layer itself doesn't need to have any mappings yet — we use it as just the meta modifier for now. <br />
+But for that to work, we use <code>multi</code> to <em>also</em> send the meta key down press, as long as we keep holding <kbd>w</kbd>.<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+</p>
+<p>Erotic and feet don't refer to a real modifier though: they are custom layers, not inherently made to mean anything, and are given purpose by us. <br />
+In erotic, I use <code>select-next-tab</code> and <code>select-prev-tab</code> as abstractions for however the fuck I actually do that; the <em>real</em> right side action is unimportant here, and would make things confusing for no benefit :p</p>
+<h1 id="wonderful"><a class="zola-anchor" href="#wonderful" aria-label="Anchor link for: wonderful">wonderful</a></h1>
+<p>, now we can <kbd>f↓[hjkl]</kbd> to get arrow keys, <kbd>e↓[jk]</kbd> to select tabs in the browser, and <kbd>w↓[???]</kbd> to use my compositor (window manager / DE / etc) actions. <br />
+But I start running out of convenient to press hotkeys on just <kbd>w↓</kbd> for my compositor; I now want to make <kbd>wf↓</kbd> hold some of the more “complex” compositor actions.</p>
+<p>In niri (the compositor), I make hotkeys on <kbd>meta+left</kbd>, <kbd>meta+down</kbd>, <kbd>meta+up</kbd>, <kbd>meta+right</kbd>. <br />
+The idea here is that when I combine the meta and feet layer, I should effectively get meta+arrow keys, so I can make mappings on those on the compositor side, and it'll work!</p>
+<p>But now, we are seemingly in <em>both</em> the layer meta and the layer feet. <br />
+That's not exactly true!</p>
+<p>In kanata, only one layer is your “current” one.
+<em>But</em>, kanata remembers the previous layer that you <em>were</em> in.</p>
+<p><kbd>w↓</kbd> moves you into the meta layer. It is now your current one. <br />
+You start holding <kbd>f</kbd>; the meta layer doesn't have a mapping for <kbd>f</kbd>, so the <em>previous</em> layer is looked up for a mapping.  <br />
+Our previous layer is “default”, which indeed has a mapping for <kbd>f</kbd> — it moves us into the feet layer. <br />
+Where now, this is our sequence of layers: default → meta → feet</p>
+<p>In our meta+arrow hotkeys, we rely on the meta layer to hold the meta modifier for us, and on the feet layer to translate <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd> into arrow keys. <br />
+This only works well because the meta layer <em>doesn't</em> have any mappings on <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd>.
+Let's look at the behavior if it <em>did</em> have them.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (meta)</span></span>
+<span class="giallo-l"><span>   h (cmd fish -c &quot;notify-send nuh-uh&quot;)</span></span>
+<span class="giallo-l"><span>   j (cmd fish -c &quot;notify-send nuh-uh&quot;)</span></span>
+<span class="giallo-l"><span>   k (cmd fish -c &quot;notify-send nuh-uh&quot;)</span></span>
+<span class="giallo-l"><span>   l (cmd fish -c &quot;notify-send nuh-uh&quot;)</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>Now when I <kbd>w↓f↓[hjkl]</kbd>, I can do the more special compositor actions as expected. <br />
+But if I do <kbd>f↓w↓[hjkl]</kbd> (notice the different order), all I get is a nuh-uh!</p>
+<p>This shows that in kanata, <em>the order matters</em>. <br />
+We are <em>kinda</em> in meta and feet at the same time, but each layer has its own precedence, and this changes depending on which we started holding down first.</p>
+<p>Of course I'm not going to have hotkeys specifically to “nuh-uh” me, so here there's conveniently no issue. <br />
+It starts to <em>actually</em> come into play once you want this kind of composite layer with <em>two</em>, rather than one fake layer. <br />
+Before, we relied on the meta <em>modifier</em> — the actual hotkeys were set in niri, not kanata. <br />
+And so, only one fake / custom layer was actually in use — feet. <br />
+Right now, we'll make hotkeys directly in kanata, expecting <kbd>ef↓</kbd> — two custom layers together, erotic + feet.</p>
+<p><kbd>e↓[jk]</kbd> selects the next / previous tab. <br />
+Let's make <kbd>ef↓[jk]</kbd> <em>extend</em> that selection.</p>
+<video controls>
+  <source src="select-extend.mp4" type="video/mp4">
+</video>
+<p>...Where do we put those hotkeys at, though? <br />
+Erotic doesn't hold some actual modifier for us, and neither do feet. <br />
+To put our new hotkeys, we <strong>have to</strong> make a composite layer!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (erotic-feet)</span></span>
+<span class="giallo-l"><span>   j (extend-select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (extend-select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<blockquote>
+<p>You can actually name this layer whatever you want! <br />
+I just choose to name it <code>erotic-feet</code> because it makes it clear which other two layers it's combining.</p>
+</blockquote>
+<p>Currently though, we can never <em>get</em> to this layer. <br />
+<kbd>e↓f↓</kbd> results in default → erotic → feet <br />
+<kbd>f↓e↓</kbd> results in default → feet → erotic <br />
+Once again, kanata is <em>sequential</em>, <strong>not</strong> combinatory, so we need to explicitly put ourselves into erotic feet somehow.</p>
+<blockquote>
+<p>For clarity: we are relying on the hotkeys set in the default layer, to move us into erotic or feet.
+Erotic doesn't have a mapping to enter feet — but the default layer does, and so it's used as a fallback. <br />
+The opposite is also true: feet don't have a mapping to enter erotic — default layer does. <br />
+But the default layer, naturally, doesn't move us into erotic feet.</p>
+</blockquote>
+<p>To do this, you'll supposed to put the “entering” hotkeys into both of the layers that you want to combine.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (erotic)</span></span>
+<span class="giallo-l"><span>   f (layer-while-held erotic-feet)</span></span>
+<span class="giallo-l"><span>   j (select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"><span>(deflayermap (feet)</span></span>
+<span class="giallo-l"><span>   e (layer-while-held erotic-feet)</span></span>
+<span class="giallo-l"><span>   h left</span></span>
+<span class="giallo-l"><span>   j down</span></span>
+<span class="giallo-l"><span>   k up</span></span>
+<span class="giallo-l"><span>   l right</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>If we <kbd>e↓</kbd> then <kbd>f↓</kbd>, we get into erotic feet. <br />
+If we <kbd>f↓</kbd> then <kbd>e↓</kbd>, we get into erotic feet also.</p>
+<p>It is crucial that we put the enterer in <em>both</em> layers — if we didn't have the <kbd>e</kbd> hotkey in the feet layer, that would mean that <kbd>e↓f↓</kbd> would work, but <kbd>f↓e↓</kbd> <em><strong>wouldn't</strong></em>. <br />
+What we are trying to express is “while I'm holding both keys”, rather than “if I start holding down these keys in this specific sequence”.
+So we need the enterer in both, to make sure it <em>doesn't</em> matter what order you start pressing <kbd>e</kbd> and <kbd>f</kbd> in.</p>
+<h1 id="whoops-no-feet"><a class="zola-anchor" href="#whoops-no-feet" aria-label="Anchor link for: whoops-no-feet">whoops no feet</a></h1>
+<p>Remember the compositor meta+arrow keys remaps? <br />
+We were relying on kanata's sequential layer fallback system, to actually get the arrow keys.</p>
+<p><kbd>w↓f↓</kbd> results in default → meta → feet; feet is the current layer, so of course we get our arrow key mappings. <br />
+<kbd>f↓w↓</kbd> results in default → feet → meta; the current layer, meta, <em>doesn't</em> have the arrow key mappings, but the previous layer (feet) does. So we fall back on it.</p>
+<p>Crucially, this only works because we <em>have</em> visited feet. <br />
+But have a look at how we get to erotic feet.</p>
+<p><kbd>e↓f↓</kbd> results in default → erotic → erotic-feet <br />
+<kbd>f↓e↓</kbd> results in default → feet → erotic-feet</p>
+<p>With <kbd>e↓f↓</kbd>, we <em>never</em> visit feet — we directly jump to erotic feet. <br />
+With <kbd>f↓e↓</kbd>, we <em>never</em> visit erotic — we directly jump to erotic feet.</p>
+<p>So if we ever happen to rely on the arrow keys hotkeys existing while in the erotic feet layer, it now again matters how we got there: <kbd>f↓e↓</kbd> will work, but <kbd>e↓f↓</kbd> will not. <br />
+That's because <kbd>f↓e↓</kbd> includes feet in its layer sequence, but <kbd>e↓f↓</kbd> doesn't — so it can't rely on the fallback. <br />
+Once again, we want the order to <strong>not</strong> matter.</p>
+<p>We might not <em>need</em> the arrow keys mappings in erotic feet specifically, but it's good practice to simplify things for the future you, and to always have <em>all</em> the children of a composite layer visited — that way, you build mental consistency you can always rely on. <br />
+Yesterday, I realized that you <strong>can</strong> <code>layer-while-held</code> multiple layers at the same time, which fixes the issue completely :D <br />
+Let's look at our entire config again, now with the fixes.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (default)</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta))</span></span>
+<span class="giallo-l"><span>   e (layer-while-held erotic)</span></span>
+<span class="giallo-l"><span>   f (layer-while-held feet)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta))</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic)</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held erotic-feet))</span></span>
+<span class="giallo-l"><span>   j (select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (feet)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-feet))</span></span>
+<span class="giallo-l"><span>   h left</span></span>
+<span class="giallo-l"><span>   j down</span></span>
+<span class="giallo-l"><span>   k up</span></span>
+<span class="giallo-l"><span>   l right</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-feet)</span></span>
+<span class="giallo-l"><span>   j (extend-select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (extend-select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>Switching to a composite layer now <em>also</em> holds for us the requisite layer that we expect to be held. <br />
+<kbd>f↓e↓</kbd>: default → feet → erotic → erotic-feet <br />
+<kbd>e↓f↓</kbd>: default → erotic → feet → erotic-feet</p>
+<p><em>Now</em> if we relied on the arrow keys in erotic feet for whatever reason, that would work whether we got to erotic feet with <kbd>e↓f↓</kbd> <em>or</em> <kbd>f↓e↓</kbd>, because we visit the other layer “on the way”. <br />
+Notably, the <kbd>j</kbd>/<kbd>k</kbd> to ↓/↑ remaps of feet won't work because our current layer (erotic feet) remaps them. <br />
+Feet is the <em>fallback</em>, not the override.</p>
+<h1 id="let-s-scale-this"><a class="zola-anchor" href="#let-s-scale-this" aria-label="Anchor link for: let-s-scale-this">let's scale this</a></h1>
+<p>Awesome! Now that it doesn't matter what order I press my modifiers, I want to expand this idea by making more hotkeys for the browser. <br />
+You saw in the screen recording, that I currently can <em>select</em> tabs — after I do so, as a separate action, I can <strong>activate</strong> that tab. <br />
+Would be nice to <em>also</em> be able to switch to the previous / next tab directly, without the activation step.
+And I want to be able to <em>move</em> my selected tabs, also.</p>
+<p>So in total, I want: <br />
+<kbd>e↓[jk]</kbd> to select a tab <br />
+<kbd>ef↓[jk]</kbd> to extend the current selection <br />
+<kbd>wef↓[jk]</kbd> to move selected tabs <br />
+<kbd>we↓[jk]</kbd> to <em>switch</em> to the previous / next tab<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+.</p>
+<video controls>
+  <source src="move-switch.mp4" type="video/mp4">
+</video>
+<p>Here is our new config, with all the added enterers and combining layers that we need.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (default)</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta))</span></span>
+<span class="giallo-l"><span>   e (layer-while-held erotic)</span></span>
+<span class="giallo-l"><span>   f (layer-while-held feet)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-meta))</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held meta-feet))</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic)</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held erotic-feet))</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (layer-while-held erotic-meta))</span></span>
+<span class="giallo-l"><span>   j (select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (feet)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-feet))</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (layer-while-held meta-feet))</span></span>
+<span class="giallo-l"><span>   h left</span></span>
+<span class="giallo-l"><span>   j down</span></span>
+<span class="giallo-l"><span>   k up</span></span>
+<span class="giallo-l"><span>   l right</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta-feet)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-meta) (layer-while-held erotic-feet) (layer-while-held erotic-meta-feet))</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-meta)</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held erotic-feet) (layer-while-held meta-feet) (layer-while-held erotic-meta-feet))</span></span>
+<span class="giallo-l"><span>   j (switch-next-tab)</span></span>
+<span class="giallo-l"><span>   k (switch-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-feet)</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (layer-while-held meta-feet) (layer-while-held erotic-meta) (layer-while-held erotic-meta-feet))</span></span>
+<span class="giallo-l"><span>   j (extend-select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (extend-select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-meta-feet)</span></span>
+<span class="giallo-l"><span>   j (move-tabs-next)</span></span>
+<span class="giallo-l"><span>   k (move-tabs-prev)</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>You can see how this scales to be quite unreadable, lol :D</p>
+<p>The idea here, though, is that every layer has enough enterers for us to be able to get to the final erotic meta feet layer, <em>regardless</em> of the order. <br />
+Also, we visit all the other layers that are logically pressed, on the way — so that we can reduce possible head pain in the future.</p>
+<p>This works! But with a caveat... A caveat that actually made me sure this blog post needs to exist.</p>
+<p>First, I need to select the initial tab, from which I'll then extend my selection: <kbd>e↓[jk]</kbd>. <br />
+After that, I start holding <kbd>f</kbd> to extend: <kbd>f↓[jk]</kbd>. <br />
+I have selected the tabs that I want to move, so now I also start holding down <kbd>w</kbd>: <kbd>w↓[jk]</kbd>. <br />
+Wonderful. I have moved my tabs. <br />
+Now onto a separate action — I want to <em>switch</em> to the next tab: I release <kbd>f</kbd>, and now only hold <kbd>e</kbd> and <kbd>w</kbd>: <kbd>f↑[jk]</kbd>. <br />
+Full syntax: <kbd>e↓[jk]f↓[jk]w↓[jk]f↑[jk]</kbd> (try following along on your keyboard, to grasp the sequence a bit better)</p>
+<p>Selecting, extending, and moving works.
+But when I release <kbd>f</kbd>, instead of me now switching tabs, I <em>still</em> <strong>move</strong> them! Why is that?</p>
+<p>It's another instance of how kanata's sequential layer system can end up being annoying. <br />
+<code>layer-while-held</code> means “on press, add this layer on top of the stack. on release, remove that layer from the stack”. <br />
+We move through the layers in this sequence: default → erotic → erotic-feet → erotic-meta-feet (I'm omitting the “on the way” layers because they don't matter here, but they are indeed there). <br />
+Erotic makes us a promise: “When you press <kbd>f</kbd>, I will add erotic feet on top of the stack. When you release <kbd>f</kbd>, I will remove erotic feet from the stack.”</p>
+<p>That promise (as far as I understand) <em>is</em> actually held.
+But a <em>different</em> promise takes priority. <br />
+Because <em>erotic feet</em> tells us: “When you press <kbd>w</kbd>, I will add erotic meta feet on top of the stack. When you release <kbd>w</kbd>, I will remove erotic meta feet from the stack.” <br />
+So when we release <kbd>f</kbd>, erotic feet is removed from the stack as promised. But that doesn't do much because we are not in erotic feet anymore: we are in erotic <em>meta</em> feet. <br />
+Since we <em>are</em> still holding <kbd>w</kbd>, the promise of having erotic meta feet in the stack is still held up, by erotic feet.</p>
+<p>Our <em>idea</em> with erotic meta feet, is that <strong>all</strong> of <kbd>w</kbd>, <kbd>f</kbd>, <kbd>e</kbd> need to be held at the same time. <br />
+If one of them <em>isn't</em> currently being held, we need to leave the layer(s!) that require that key to be held.</p>
+<p><em>Kanata</em>'s idea is to keep the layer in the stack, as long as <em>the specific key that entered it</em>, is still being held.</p>
+<h1 id="virtual-keys"><a class="zola-anchor" href="#virtual-keys" aria-label="Anchor link for: virtual-keys">virtual keys</a></h1>
+<p>Turns out, there's a solution! <br />
+What we want, is to make releasing an enterer key leave not only the <em>specific</em> layer that it enters, but <em>any</em> (and all) layers that logically expect that key to be held.</p>
+<p>For this, we can put the <code>on-release</code> action at the end of every enterer's <code>multi</code>. <br />
+<code>on-release</code> is one of the actions that require us to pass a <a rel="noopener external" target="_blank" href="https://github.com/jtroo/kanata/blob/main/docs/config.adoc#virtual-keys">virtual key</a> — they are like aliases that can individually respond to a press / release, rather than being a compulsory press+release combo (as far as I understand them). <br />
+So we will make a couple of virtual keys, that explicitly release <em>all</em> layers that necessarily include some sublayer. <br />
+For the record, we do not care about the press / release functionality of virtual keys here, we are just required to use them because we need the <code>on-release</code> action.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(defvirtualkeys</span></span>
+<span class="giallo-l"><span>	any-feet   (multi (release-layer feet)   (release-layer erotic-feet) (release-layer meta-feet)   (release-layer erotic-meta-feet))</span></span>
+<span class="giallo-l"><span>	any-erotic (multi (release-layer erotic) (release-layer erotic-meta) (release-layer erotic-feet) (release-layer erotic-meta-feet))</span></span>
+<span class="giallo-l"><span>	any-meta   (multi (release-layer meta)   (release-layer meta-feet)   (release-layer erotic-meta) (release-layer erotic-meta-feet))</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>We can “call” (tap) one of these virtual keys, to explicitly release any (and all) layers that contain a given sublayer. <br />
+Let's add the <code>on-release</code> action to the enterers, in the rest of our configuration.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (default)</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (on-release tap-vkey any-meta))</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (on-release tap-vkey any-erotic))</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (on-release tap-vkey any-feet))</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-meta) (on-release tap-vkey any-erotic))</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held meta-feet) (on-release tap-vkey any-feet))</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic)</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held erotic-feet) (on-release tap-vkey any-feet))</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (layer-while-held erotic-meta) (on-release tap-vkey any-meta))</span></span>
+<span class="giallo-l"><span>   j (select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (feet)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-feet) (on-release tap-vkey any-erotic))</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (layer-while-held meta-feet) (on-release tap-vkey any-meta))</span></span>
+<span class="giallo-l"><span>   h left</span></span>
+<span class="giallo-l"><span>   j down</span></span>
+<span class="giallo-l"><span>   k up</span></span>
+<span class="giallo-l"><span>   l right</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (meta-feet)</span></span>
+<span class="giallo-l"><span>   e (multi (layer-while-held erotic) (layer-while-held erotic-meta) (layer-while-held erotic-feet) (layer-while-held erotic-meta-feet) (on-release tap-vkey any-erotic))</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-meta)</span></span>
+<span class="giallo-l"><span>   f (multi (layer-while-held feet) (layer-while-held erotic-feet) (layer-while-held meta-feet) (layer-while-held erotic-meta-feet) (on-release tap-vkey any-feet))</span></span>
+<span class="giallo-l"><span>   j (switch-next-tab)</span></span>
+<span class="giallo-l"><span>   k (switch-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-feet)</span></span>
+<span class="giallo-l"><span>   w (multi lmet (layer-while-held meta) (layer-while-held meta-feet) (layer-while-held erotic-meta) (layer-while-held erotic-meta-feet) (on-release tap-vkey any-meta))</span></span>
+<span class="giallo-l"><span>   j (extend-select-next-tab)</span></span>
+<span class="giallo-l"><span>   k (extend-select-prev-tab)</span></span>
+<span class="giallo-l"><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>(deflayermap (erotic-meta-feet)</span></span>
+<span class="giallo-l"><span>   j (move-tabs-next)</span></span>
+<span class="giallo-l"><span>   k (move-tabs-prev)</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>Now, the release of an enterer key not only leaves the exact layer that it enters, but <em>all</em> layers that we may enter after the fact. <br />
+Finally, with this laborious ass configuration, everything works exactly how we want!</p>
+<p>I select the initial tab, then extend selection, then move the selected tabs; I then release <kbd>f</kbd> and FINALLY, I <em>switch tab</em> as I expect, rather than continuing to move.</p>
+<h1 id="the-power"><a class="zola-anchor" href="#the-power" aria-label="Anchor link for: the-power">the power!</a></h1>
+<p>The erotic layer, which is actually called “hack” in my configuration, has for a long time felt iffy to me: when I combined it with other layers to do more “complex” actions in my browser, some of the combinations were not understood by kanata, based on rules I wasn't sure existed. <br />
+Now that I actually looked into it deeper, and <strong>solved it</strong>, it feels incredible to finally combine layers naturally, and not have to release all of them to switch to a different combination — I can just use these custom layers like I would be using normal modifiers.</p>
+<p>You might not yet have a need to make composite layers like this, but hopefully you now know <em>how to</em>. <br />
+If in the future you get a cool idea for a layer that might need composite layers, you can go “this is gonna be a bit annoying but doable” rather than possibly give up on the idea because it “doesn't work”.</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ We don't actually need the meta layer at all currently; omitting it entirely and making <kbd>w</kbd> be <em>just</em> <code>lmet</code> on the right side would suffice. But we're going to need this layer for later.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ More specifically, this will skip over unloaded tabs.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting-pt-2&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">rust for... scripting? pt. 2</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;smooth-scrolling&#x2F;" class="preview next">
+			<span class="name">smooth scrolling</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>nirism</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<div class="preview empty previous"></div>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting-pt-2&#x2F;" class="preview next">
+			<span class="name">rust for... scripting? pt. 2</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">nirism</div>
+				</a>
+				<div class="date">
+					<time datetime="2026-03-02">2026.03.02</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 18</div> -->
+				<p>I've been using niri for a bit over a year now, and yet still I have a soft cap of windows I'm able to open before I'm completely lost.
+Almost assuredly a skill issue on my part — I know people who have around a HUNDRED windows open at a single time, so there must be some way for me to gain the power too, right?</p>
+<p>Recently I made some pushes on configuring my workflow to allow me to manage more windows, easier.</p>
+<h1 id="overview"><a class="zola-anchor" href="#overview" aria-label="Anchor link for: overview">overview</a></h1>
+<p>When the overview first came out, I was excited about it but towards my <strong>friends</strong>, not towards myself.
+It didn't sound useful to <em>me</em>.
+I added a hotkey for it sure, but then continued to basically never use it.
+What's the issue then?</p>
+<p>Part of it is effort.
+I open the overview and sure, I see some windows around the current one, but not <em>that</em> many.
+It helps me find myself a bit, but with the limited value it provided it was hard to mentally argue with myself to press the separate hotkey for it.</p>
+<p>You can, however, change the <em>zoom</em> level of the overview, to be able to fit more windows at once.
+I thought at first that it's not that good of an idea because then there's less <em>detail</em> for me to use to discern windows, but no!
+Especially thanks to another thing I'll talk about later in this blog post, reducing the zoom level has made the overview <strong>much</strong> more useful to me.</p>
+<p>I configured the zoom to fit ~2.5 workspaces both above and below.
+In effect, now when I open the overview, I can see almost <em>all</em> of my opened windows!
+Finally, the overview is doing its job — being an <em>overview</em>.</p>
+<p><img src="https://axlefublr.github.io/nirism/./overview.webp" alt="" /></p>
+<p>In contrast, the default zoom level looks ridiculous, in how much less useful it is.
+But there's reason for it being that way — you see, all of your window-managing hotkeys <strong>do</strong> work in the overview as well.
+You can close, consume, expel, move windows, workspaces, and more.
+Normally that can get a bit confusing, especially if you try moving workspaces (no animation for that) — but if you do it from the <em>overview</em>, suddenly things are a lot easier to visually track, because you have a bigger surrounding context.
+Then with most people only using 1-3 workspaces, you don't need to zoom out that much to get the benefit, so I'm guessing that's why the default zoom is so close.</p>
+<p>For me though? Zooming it <em>out</em> was the solution.</p>
+<p>Secondly, the hotkey I chose for it at first was kind of eh.
+There's an idea I like to talk about in Hotkey™ Theory™ — “sequentiality”.
+The hotkey should be pleasant and ergonomic not just in a vacuum — when thinking of the hotkeys you create, you should also consider what <em>other</em> hotkeys may come before and after it.</p>
+<p>With the overview, right after opening it I might move ←↓↑→, to different windows and workspaces.
+With moving bound on <kbd>Meta+hjkl</kbd>, and the overview being bound on <kbd>Meta+o</kbd>, the sequentiality is poor.
+I can't <em>quite</em> move to the window on the right, right after opening the overview — I must move my finger from <kbd>o</kbd> to <kbd>l</kbd> first.
+There are much poorer sequentialities out there so this comparatively is not a big deal, but it was still contributing to my “eh”ness about the overview.</p>
+<p>I rebound it on <kbd>Meta+Space</kbd>, and now <em>that</em> feels a lot better.
+Normally I dislike using <kbd>Space</kbd> in hotkeys because of how <em>massive</em> it feels to press, but for the overview that actually works in its favor.
+It already <em>feels</em> like a “large” action, so pressing a “large” key to get access to it makes sense to my fingers.
+And then of course the better sequentiality.
+Right after pressing <kbd>Meta+Space</kbd>, I can without moving any of my fingers, move ←↓↑→ to windows and workspaces, at max comfort!</p>
+<p>After doing these two changes, I actually started seeing myself use the overview a lot more.
+Really nice tool for “finding yourself” so to speak.</p>
+<h1 id="workspaces"><a class="zola-anchor" href="#workspaces" aria-label="Anchor link for: workspaces">workspaces</a></h1>
+<p>The next part that makes it easy to get lost, is how many windows I may open on a single workspace.
+I start some sort of workflow; let's say I'm working on my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/gruvbox-material-gtk-theme">gtk theme</a> (probably soon discontinued).
+I'll wanna open <code>gtk3-widget-factory</code>, then maybe another gtk window where I'm testing something specific I can't find in <code>gtk3-widget-factory</code>, a terminal for <code>pastel</code>, a terminal where I wanted to run some one command and forgot about, a window where I'm checking the docs on <code>waybar</code>, “whoops I want to check what chores I need to do today”, and so on and so forth.</p>
+<p>A given workflow may create a bunch of windows.
+A couple of them are valid, but some other ones are in the way.
+The “some one command” terminal needed to exist for a second, but afterwards it remains to be clutter.
+If I realize I want to run another some one command, by that point I might've forgotten that I already have a terminal for that, and so I'll likely open another one.
+This specific usecase I'll talk about in a later section, but what is very of interest for now is the doc window on waybar and chore tracker.</p>
+<p>It would be pretty nice to have auxillary windows like that to all be in the same spot, rather than riddling the workspace where I'm working on a given thing.</p>
+<p>In niri, when a window spawns, it spawns on the current workspace.
+You can make a window rule to make it open on a <em>different</em> workspace, as long as that workspace is <strong>named</strong>.
+And so, I create 5 workspaces, all named: one, two, three, four, five.
+Pretty much just so that I could use them in window rules.</p>
+<p>I considered at first to then make hotkeys that activate a specific workspace, but soon gagging from the memories of awesome wm, I realized I quite dislike it.
+A real nice thing about niri is its dynamicness; I want to retain that part and play into it, so my main form of navigation remains directional.</p>
+<p>One change that I <em>did</em> add though, to aid moving across now more workspaces, are hotkeys to go to the first / last workspace, and hotkeys to go to the first / last column.
+The latter ones I already noticed myself wanting many times in the past, but the workspace ones are a bit more questionable in terms of usefulness.</p>
+<p>So, my named workspace layout is as such:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>three</span></span>
+<span class="giallo-l"><span>two</span></span>
+<span class="giallo-l"><span>one</span></span>
+<span class="giallo-l"><span>four</span></span>
+<span class="giallo-l"><span>five</span></span></code></pre>
+<p>Workspace one is the middle one, the “first” (top) one is three, the last (bottom) one is five.
+I still can create more workspaces if I need them — I simply create a window on the automatically created workspace beyond <code>three</code> or <code>five</code>.
+Playing along niri's dynamicness.</p>
+<p>Workspace three will now hold a bunch of my “status” windows so to speak.
+Currently on it I have open my chore tracker, calendar, a reminder thingy, a bluetooth tui, and a helix where I'm calculating my earnings.
+All except the last one I window rule to <em>always</em> open on that workspace, so now when I suddenly decide to check what chores I have to do today while working on some project, that window will not get created in the midst of a bunch of other stuff, but instead get moved onto the workspace <em>specifically</em> for status windows, helping me stay more organized.</p>
+<p>Similarly, documentation windows<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+ I window rule to always appear on workspace five.
+Way easier to keep track of, not get lost in, and eventually clean up.</p>
+<a href="#startup" id="startup" class="anchorina">
+  <hr></hr>
+</a>
+<p>What named workspaces also allow me to do, is create more windows on startup.
+Previously I wouldn't want to do that, because a bunch of the windows would be created on the main workspace, when I prefer to keep them on some other one.
+But now I can actually express it!</p>
+<p>On login, the reminder thingy, chore tracker, calendar is created onto workspace three.
+Yazi opened in the anime directory and anki on workspace four.
+Yet on the main workspace, workspace one, I still start out with my terminal window and the browser.
+Less things to have to create manually! Pretty nice.</p>
+<h1 id="togglies"><a class="zola-anchor" href="#togglies" aria-label="Anchor link for: togglies">togglies</a></h1>
+<p>Windows are automatically grouped together now thanks to named workspaces, but the issue of duplicates remain.
+The chore tracker is started on login, but I also have a hotkey to open it.
+It's plain easier to press that hotkey than to navigate to the existing window, and afterwards I may forget to close the new one, resulting in a duplicate that will help me get lost.</p>
+<p>I have quite a bunch of hotkeys that create some window, actually.
+And so, I decided to make their behavior a bit smarter.</p>
+<ol>
+<li>If the window doesn't already exist, it's created</li>
+<li>If it does exist but isn't focused, it's focused</li>
+<li>If it <strong>is</strong> focused, the most recent window is focused instead.</li>
+</ol>
+<p>I expressed this via a fish + nu script:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">set</span><span> -l wheres</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">for</span><span> arg </span><span style="color: #EA6962;">in</span><span style="color: #B58CC6;"> $</span><span>argv[..-2]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    set</span><span> -a wheres </span><span style="color: #D3AD5C;">&quot;| where </span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">arg&quot;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">nu</span><span> --no-std-lib -nc</span><span style="color: #D3AD5C;"> &quot;</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    let found = niri msg -j windows</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    | from json</span></span>
+<span class="giallo-l"><span style="color: #B58CC6;">    $</span><span style="color: #D3AD5C;">wheres</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    if (</span><span style="color: #928374;">\$</span><span style="color: #D3AD5C;">found | is-not-empty) {</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    	if (</span><span style="color: #928374;">\$</span><span style="color: #D3AD5C;">found | any { get is_focused }) {</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    		niri msg action focus-window-previous</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    	} else {</span></span>
+<span class="giallo-l"><span style="color: #928374;">    		\$</span><span style="color: #D3AD5C;">found | first | each { niri msg action focus-window --id (</span><span style="color: #928374;">\$</span><span style="color: #D3AD5C;">in | get id) }</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    	}</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    } else {</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">        niri msg action spawn -- </span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv[-1]</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">    }</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">&quot;</span></span></code></pre>
+<p>How to convert it to bash + jq is left as an exercise to the reader.</p>
+<p>The full command to give the chore tracker toggly behavior, for example, looks like this:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">find-or-make.fish</span><span style="color: #D3AD5C;"> &quot;app_id starts-with foot&quot; &quot;title == loago-tracker&quot; &quot;footclient -NT loago-tracker fish -c loago_tracker&quot;</span></span></code></pre>
+<p>First, an array of nushell <code>where</code> checks to identify the exact window.
+And as the last argument, the command to use to create a new window.</p>
+<p>Now whenever I want to check my chores, I press <kbd>h↓s</kbd> once to take a looksie, then press <kbd>h↓s</kbd> again to go back to what I was doing.
+No new window is created if the tracker already exists, no mess is created for me to get lost in.</p>
+<p>I used to have this kind of workflow back on <em>windows</em> with autohotkey actually.
+Not sure why I haven't replicated it in so long, I remember absolutely loving it.
+I get to love it again 😌</p>
+<p>A lot of my windows I can now target directly.
+Most windows on workspace three, for instance.
+Which makes me realize that there are only a few windows on that workspace that I'd want to focus via normal means.
+So if I put all of the “other” (without a direct hotkey) windows at the start/end of the workspace, I can use my hotkey to go to the first workspace followed by a hotkey to go to the first/last column, and that way I can quickly jump to the “other” windows that are otherwise maybe annoying to reach.
+The windows in the <em>middle</em> are then ones that I have direct hotkeys for, so them being more difficult to reach, compared to the first/last windows, is not a big deal.</p>
+<p>The first/last column and workspace hotkeys I all have on <kbd>we↓</kbd>, so the sequentiality of going to the first workspace and then moving to the start of it is <em>fantastic</em>.</p>
+<p>Some windows prefer to be closed rather than stay open, though.
+<a rel="noopener external" target="_blank" href="https://github.com/pythops/bluetui">bluetui</a>, the bluetooth tui I'm using, likes to get fucked up if left unsupervised, for some reason.
+So instead of just toggling away from it, I'd want to close it.</p>
+<p>So this ↓</p>
+<blockquote>
+<ol start="3">
+<li>If it <strong>is</strong> focused, the most recent window is focused instead.</li>
+</ol>
+</blockquote>
+<p>I want to also close the window afterwards.
+This idea is still in the process though, I'll either add some flag to the <code>find-or-make.fish</code> script above, or I'll make a separate hotkey to express the concept of “switch to the most recent window, close the window you just switched away from”. <br />
+“Doesn't this already happen when you close a window?” you might rightfully ask — not <em>quite</em>!
+The most recent window <em>on that workspace</em> is activated, rather than the global most recent window.
+Reasonable behavior, mind you, but keeping recency correct has recently become significant for me, which we'll talk about later.</p>
+<p>The biggest usecase for <code>find-or-make.fish</code> is a toggle <em>terminal</em>. <br />
+All those one-off commands I might run and come back from?
+I can now press <kbd>Meta+Enter</kbd> to activate my permanent-staying toggly terminal, then press <kbd>Meta+Enter</kbd> again to come back to where I was.</p>
+<p>In the past, I had a hotkey that created a <em>floating</em> terminal, for a similar usecase to this.
+It resolved the need somewhat, but had some downsides.
+Due to it being floating, I kinda need to “handle” it immediately — if I don't close it after I run my command, it'll be annoyingly in the way.
+That's part of the intention yes, but there are some cases where the command I run takes some time to complete, and I don't care to <em>wait</em> for it to complete — I just want to make sure I start it.
+Other times, the output of the command is unbearable to view in the <em>small</em> floating window.
+Making the floating window <strong>big</strong> instead makes it kind of confusing to work with.</p>
+<p>So a normal ass terminal I toggle into is a much better approach I think 😼
+As a side benefit, I get to <em>keep</em> old output, for me to possibly look at multiple times, rather than discarding it every time by closing the window.</p>
+<h1 id="alt-tab"><a class="zola-anchor" href="#alt-tab" aria-label="Anchor link for: alt-tab">alt tab</a></h1>
+<p>Is another niri feature I was excited for, but for my <em>friends</em> — not myself.
+But also, I was <em>surprised</em> that it became part of niri upstream.
+In niri, to get to windows you almost always necessarily focus multiple windows on the way, so alt-tab functionality sounds so off, right?
+The small but ridiculously important caveat here is <em>debounce</em> — a window is not added into the most recently used list if you've spent less then x milliseconds focusing on it.
+You can configure the x of course.</p>
+<p>But the thing is, I don't really think about my windows in terms of recency, I think about them in terms of geography.
+<em>Where</em> they are, rather than what was the window I was just using.</p>
+<p>Another skill issue of mine, I bet!
+Just like many other things I trained my brain to be able to do, <a href="https://axlefublr.github.io/erm/">home row mods</a> being the wackiest one, I can probably train my brain to think in the recency plane as well :3</p>
+<p>I've tried using the feature once before in the past to no avail, but this time is a bit of a changed circumstance — now that I always have <em>5</em> workspaces (or more!), to move through, using the recency plane to switch between them quickly becomes a lot more juicy.</p>
+<p>Imagine I'm on the second workspace, open the docs for something, and want to move back.
+Currently I'd need to move to the above workspace <em>thrice</em>, or go to the first one and move down once.
+Neither are particularly pleasant!</p>
+<p>But with alt tab, I can jump back in one fell swoop, with a nicer <em>semantic</em> to boot — what I want to express, after all, is “bring me back where I just was”.
+When I realized that <em>that's</em> what I mean, I was sure my brain would adjust to the recency plane pretty well.</p>
+<p>But there's some more configuring work to do on alt tab before I find it truly viable.
+As I started using it, I very quickly noticed that it's hard to <em>anticipate</em> the next window in it.
+When you select the window on the right of your screen, you only see a small sliver of what the next window is.
+Basically never enough to be able to tell ahead of time how many “next window please”s it's going to take to get to the window that you want.
+To see what the next window is, I need to “next window please”.
+Then if I went too far, I need to manually go back 🙄</p>
+<p>I realize that what I want is for the selected window to always be <em>centered</em> in the alt tab ui.
+And that's exactly what I did!</p>
+<video controls>
+  <source src="centered-mru.mp4" type="video/mp4">
+</video>
+<p>You can find the patch in my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/niri">niri fork</a> or in <a rel="noopener external" target="_blank" href="https://discord.com/channels/1387519366651842574/1476954416753147986">this thread</a> on the <a rel="noopener external" target="_blank" href="https://discord.gg/dxEHRDCcEC">niri discord server</a>.</p>
+<p>Now as I go through windows in the ui, my brain can preprosses how many more times I need to press my hotkey, as I can see a lot more windows ahead of time.
+As opposed to pressing the hotkey, going “nope, not that one”, and pressing it again — which is an annoyingly start-stoppy workflow.</p>
+<p>Notably, I reduce the zoom level here too, to be able to see more windows at once.
+Here, losing the detail by zooming <em>out</em> matters reasonably more than in the overview.
+To make the tradeoff worth it, I have some tips and tricks I'll talk about in the next section.</p>
+<p>Another feature alt tab has to try to be less annoying, is that the ui only appears after x milliseconds.
+Reasonable once again, but what I found is that I'm not <em>that</em> annoyed about the ui popping up every time.
+Yet it appearing <em>immediately</em> is actually really useful because I can start the brain preprocessing step earlier, helping me navigate in the recency plane better ✈️ <br />
+Rather than it being <em>only</em> a switcher, it suddenly becomes another form of overview — but instead of geographical, it's based on recency.</p>
+<p>I'm still human though, so for the cases where I switch between only two windows over and over again, I gave myself a separate hotkey that does just that, using the <code>focus-window-previous</code> action that doesn't even use the alt tab functionality (and hence ui).
+This also means that it doesn't have the crucial debounce, but should be worth it still.</p>
+<h1 id="makeup"><a class="zola-anchor" href="#makeup" aria-label="Anchor link for: makeup">makeup</a></h1>
+<p>When all of your windows are the same size, they become hard to distinguish.
+Especially when (almost) all of your windows are just terminals: text just looks like text a lot of the time.</p>
+<p>But if they are of different <em>sizes</em>, they are a lot more immediately distinguishable, in alt tab, overview, and even just as you scroll through the windows naturally.
+Sometimes that even results in you fitting more windows at once, as a side benefit.</p>
+<p>I have hotkeys that change a window's bigness by 5%, and for a while I underused them for reasons I didn't quite get.
+I use <a href="https://axlefublr.github.io/erm/">home row mods</a>, and so to effectively hold some key, I need to tap it and <em>then</em> hold it.
+Normally not a big deal, but for incremental hotkeys like 5% bigness changes, you <em>really</em> want to be able to hold them immediately.
+With a low repeat-delay and high repeat-rate, suddenly that turns into a fantastic experience.</p>
+<p>I rebound them on keys that <em>do</em> immediately get the hold behavior, rather than being tapholdies, and now I can ergonomically <em>whoosh</em> windows to my prefered size, followed by a few small correcting resizes.
+Wonderful.</p>
+<p>Especially (more realistically, <em>mostly</em>) for terminal output, I might run some command and wanna store it for later.
+I run the command, resize the terminal to only as much space as it needs (maybe making it <em>bigger</em> instead, actually!), then maybe throw it on workspace five, to get to later.</p>
+<p>There are a lot of windows that I want to <em>always</em> have the same size, though.
+The reminder, chore tracker, yazi for anime, etc etc.
+So! I can create window rules for those windows, sizing them some size automatically.</p>
+<p>On the path of doing that, I also need to <em>name</em> those windows something specific, so that making window rules for them is straightforward.
+But the incidental benefit I get from it is that now a lot of my windows are named more <em>usefully</em>.
+When I see them in alt tab, not only does their size help me preprocess them, but also the window title I see makes things a little easier.</p>
+<p>Taking care of your sizes and titles is the big reason why zooming out even the alt tab ui, I found to be a worthy tradeoff.</p>
+<a href="#henceforth" id="henceforth" class="anchorina">
+  <hr></hr>
+</a>
+<p>With all of these changes, I'm starting to get more comfortable managing <em>more</em> windows at once, and don't feel as forced to close windows immediately.
+Still trying things out, but I think this has been an awesome push to make use of moar power that niri has :3</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ I have hotkeys that open <code>man …</code> / <code>… --help</code> / <code>nu -c '… --help'</code> in a new window, either through helix or <a rel="noopener external" target="_blank" href="https://axlefublr.github.io/ov/">ov</a>.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<div class="preview empty previous"></div>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting-pt-2&#x2F;" class="preview next">
+			<span class="name">rust for... scripting? pt. 2</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>autocurling</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;optimizing-paths&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">optimizing paths</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview next">
+			<span class="name">consider sorting</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">autocurling</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-05-13">2025.05.13</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 4</div> -->
+				<p>Often times, various programs don't provide you a way to look at the default config file locally, but do provide one in the github repo. <br />
+Having to 1. need internet and 2. use my browser to get to some default config is quite meh. The documentation being the readme falls into a similar issue. <br />
+Cloning the repo so that you have it locally is overkill, too.</p>
+<p>Let me explain the idea of how I solve this problem.</p>
+<p>You can <code>curl</code> files directly from github<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+ by converting a normal link to a file into its raw version:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>https://github.com/Axlefublr/dotfiles/blob/main/kanata/kanata.kbd</span></span></code></pre>
+<p>…Turns into…</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>https://raw.githubusercontent.com/Axlefublr/dotfiles/refs/heads/main/kanata/kanata.kbd</span></span></code></pre>
+<p>So, you replace <code>github.com</code> with <code>raw.githubusercontent.com</code>, and replace <code>blob</code> with <code>refs/heads</code>. <br />
+I wrote a fish function that takes the link from stdin, and converts it for me:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> lh</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    read</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> string</span><span> replace </span><span style="color: #D3AD5C;">&#39;github.com&#39; &#39;raw.githubusercontent.com&#39;</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> string</span><span> replace blob refs/heads</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Which is useful because in helix, I can pipe my current selection(s) into a shell command, and replace them with the output, letting me transform github links I copied pretty painlessly!</p>
+<p>So, once we get the raw link, we can <code>curl &lt;the-link-here&gt; -o output-file</code> to grab a remote github file into a local one. <br />
+This is pretty awesome! But just grabbing the file once is not enough — it can become outdated.</p>
+<p>My idea is to store all the links I want to keep locally, so that they can be updated daily automatically. <br />
+Using a <a href="https://axlefublr.github.io/magazines/">magazine</a> is awesome for this usecase, as it's both easily accessible and modifiable — adding new links isn't going to be bothersome.</p>
+<p>My magazine C now contains this:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>defconf/waybar.jsonc https://raw.githubusercontent.com/Alexays/Waybar/refs/heads/master/resources/config.jsonc</span></span>
+<span class="giallo-l"><span>defconf/niri.kdl https://raw.githubusercontent.com/YaLTeR/niri/refs/heads/main/resources/default-config.kdl</span></span>
+<span class="giallo-l"><span>defconf/dunst.ini https://raw.githubusercontent.com/dunst-project/dunst/refs/heads/master/dunstrc</span></span>
+<span class="giallo-l"><span>defconf/ov.yaml https://raw.githubusercontent.com/noborus/ov/refs/heads/master/ov.yaml</span></span>
+<span class="giallo-l"><span>source/systemd-exponential-restart.c https://raw.githubusercontent.com/systemd/systemd/refs/heads/main/src/core/service.c</span></span></code></pre>
+<p>First, I specify a path to where the file should be downloaded; then the actual link. <br />
+The path is relative to <code>~/.local/share/frizz</code> — a directory I created specifically for files that will be downloaded like this. <br />
+I then have a fish abbreviation (similar to an alias) that <code>cd</code>s me to that directory and does <code>helix .</code> — I can quickly open a new terminal and instantly fuzzy search through my downloaded files this way.<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> frizz</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    for</span><span> curlie </span><span style="color: #EA6962;">in</span><span> (</span><span style="color: #A9B665;">tac</span><span> ~/.local/share/magazine/C)</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set</span><span> -l bits (</span><span style="color: #A9B665;">string</span><span> split </span><span style="color: #D3AD5C;">&#39; &#39;</span><span style="color: #B58CC6;"> $</span><span>curlie)</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        curl</span><span style="color: #B58CC6;"> $</span><span>bits[2] --create-dirs -o ~/.local/share/frizz/</span><span style="color: #D3AD5C;">&quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">bits[1]&quot;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    notify-send</span><span> frizz</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>This is the function that actually does the downloading, by reading the magazine in <em>reverse order</em>. <br />
+The reason to download specifically in reverse order, is that aside from being executed daily, this function is also executed every time magazine C <em>changes</em>.</p>
+<p>I add some new link to magazine C, and that new link gets download priority, letting me start doing things with the file quicker, while all the other links are also redownloaded just to be safe.</p>
+<p>You can achieve this functionality just by using <code>inotifywait</code> directly, but I find a systemd path unit to feel safer / more stable. <br />
+Put the following in <code>~/.config/systemd/user/frizz.path</code>:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="ini"><span class="giallo-l"><span style="color: #7DAEA3;">[Path]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">PathModified</span><span style="color: #E49641;font-weight: bold;">=</span><span>%h/.local/share/magazine/C</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">[Install]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">WantedBy</span><span style="color: #E49641;font-weight: bold;">=</span><span>paths.target</span></span></code></pre>
+<p>And this in <code>~/.config/systemd/user/frizz.service</code>:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="ini"><span class="giallo-l"><span style="color: #7DAEA3;">[Unit]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">StartLimitBurst</span><span style="color: #E49641;font-weight: bold;">=</span><span>0</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">StartLimitIntervalSec</span><span style="color: #E49641;font-weight: bold;">=</span><span>0</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">[Service]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">Type</span><span style="color: #E49641;font-weight: bold;">=</span><span>oneshot</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">ExecStart</span><span style="color: #E49641;font-weight: bold;">=</span><span>env fish -c frizz</span></span></code></pre>
+<p>Then execute <code>systemctl --user enable --now frizz.path</code>, and you should be good to go.</p>
+<a href="#done" id="done" class="anchorina">
+  <hr></hr>
+</a>
+<p>What I like the most about my approach, is that rather than hyperfocusing on raw github links, it simply wants a "link that will be <code>curl</code>ed". What exactly you get from it as a result is a completely different question — basically it's quite satisfyingly flexible. <br />
+Think of the many programs you've seen whose installer is some form of <code>curl link | sh</code>. You could now instead add that link to magazine C and soon open it in your editor, to confirm the safety of; <em>Then</em> you can manually execute it. As a bonus, you get to autoupdate that installation script, if that's for some reason something you want to do. <br />
+You can curl straight up files this way, too. If there's some place that you can curl to download some file (that may update over time), that's another usecase for frizz. <br />
+Truthfully I don't know the extent of this idea, but it sure feels quite powerful!</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ As well as other git remotes I'm sure, I just don't know how.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ This was truthful at the time I wrote it, but at this point it's a lie :p <br />
+Now I use a harp<a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+ to get to the frizz data directory, and I have an abbreviation <code>e.</code> that resolves to <code>helix .</code>, which is somewhat hilariously significantly nicer than having to <code>e .</code>, which was the case before. Crazy how much of a difference really small things can make! (that's what she said)</p>
+<p><a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ A "mostly travelling"-related concept I came up with and have been dragging along through programs I use a lot. The actual program behind this is <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/harp">here</a>, but for an actual introduction about what harps can <em>do</em> for you, read the harp section in my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>. (TLDR is that you can interactively but permanently alias files and directories, for fastest access time)</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;optimizing-paths&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">optimizing paths</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;consider-sorting&#x2F;" class="preview next">
+			<span class="name">consider sorting</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>
