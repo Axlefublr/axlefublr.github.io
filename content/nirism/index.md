@@ -4,7 +4,7 @@ date = '2026-03-02'
 +++
 
 I've been using niri for a bit over a year now, and yet still I have a soft cap of windows I'm able to open before I'm completely lost.
-Almost assuredly a skill issue on my part — I know people how have around a HUNDRED windows open at a single time, so there must be some way for me to gain the power too, right?
+Almost assuredly a skill issue on my part — I know people who have around a HUNDRED windows open at a single time, so there must be some way for me to gain the power too, right?
 
 Recently I made some pushes on configuring my workflow to allow me to manage more windows, easier.
 
