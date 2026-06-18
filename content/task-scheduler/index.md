@@ -1,7 +1,6 @@
 +++
 title = 'task scheduler'
-date = '2026-03-09'
-draft = true
+date = '2026-06-18'
 +++
 
 I've been using this neat task scheduling program called [pueue](https://github.com/nukesor/pueue) for a while.
@@ -379,9 +378,172 @@ I need *another* system.
 
 # three months
 
-❗almost pathetically simple
-❗I do 🚀 instead of ❌/✅ because we are losing this information. that's unfortunate but I'll be jumping to the window that finished anyway, so I'll see the result soon enough. especially considering that the window title will have gained a ❌ at the end if it failed
-❗getting notifications while focusing a normal terminal would suck too bad, but getting them while looking at the receiver is totally fine, so I do this workaround to not double notif yet also see the result
+...ago, is when I started implementing this system, and writing this blog post.
+The second system that I developed at the time felt *fairly* good, but I wasn't backflipping over it.
+So finishing both the system and the blog post got kind of shelved.
+
+Until a few days ago.
+
+Niri's alt-tab / mru functionality has one downside that I think is the biggest for why I (still 😭) underuse(d :o) it. \
+It shows you ***all*** the windows... What?
+
+Well you see, I have direct hotkeys to reach almost *all* of the windows I have open at most times; so when I use alt tab to get to some window of interest, I also need to mentally filter through windows that I wouldn't be getting to with alt-tab to begin with. \
+I thought “what if I could filter out some windows from alt-tab?”
+
+And so I did! Not in a particularly sharable way, though{{fn(i=4)}}. I straight up hardcode the windows I never want to see, in a new mru scope called “Custom” — so now I have a hotkey that lets me alt-tab *only* through the windows of interest, ignoring all those I can get to directly.
+
+Proud of my accomplishment, I thought to implement another scope for sheer fun.
+One of the first ideas that came to mind was an Urgent scope{{fn(i=5)}} — that would contain only the windows that are currently urgent/require attention.
+You might be familiar with the concept back on windows, where windows yelled at you covered in orange from the taskbar.
+
+Normally an *annoying*, rather than useful feature; but a 💡 suddenly shone.
+I can make terminals urgent **intentionally**.
+
+The core problem I'm trying to design to fix, are long-running commands.
+Something that I set to execute, and it maybe takes so long that I forget about it altogether.
+Or worse: something that I keep checking way too often for my own sanity. Nibble 2 /ref \
+I want to be *notified* of the execution finishing, and I also want to make it easy to *travel* to the window, whose command just finished.
+
+The Urgency scope helps me solve the latter question: if a long running command makes its terminal urgent after finishing, the window will appear in alt tab, and I can __without thinking__ (very crucial) jump to it, with a simple press of a hotkey.
+
+# complications
+
+Solving the former question, though, is a bit more complicated.
+Obviously, to be notified, I send a notification.
+But I don't want to see a notification on *every* command I execute in my terminal, right?
+If I already have the terminal in focus, it's pretty obvious when a command finishes.
+
+So I need to differentiate a focused vs unfocused terminal somehow.
+Fish shell has events for that :D `fish_focus_in` and `fish_focus_out` \
+Yay right? Not quite... They just don't work for me for some reason?
+
+Two functions, each one catching one of the events and doing a `notify-send` for testing did *nothing*, despite indeed loading in my configuration.
+I even tried explicitly binding the escape sequence that is supposed to happen on focus in/out, to doing that `notify-send`, but that didn't work either.
+It looks like foot doesn't send these events *to* fish shell? Very unfortunate.
+
+# the sorrow /ref
+
+The bell character is pretty cool.
+Historically it was used as a sort of notification, and modern terminals allow you to configure *what* actually happens when a bell character is printed.
+Crucially, it will make the window *urgent*, often even by default!
+
+And in foot (as well as any other terminal worth using), you can configure the bell character to produce a notification as well.
+The main difference being that the notification is **only** made if the window is **not** focused.
+
+It's kind of disappointing, actually. I rely on foot to do basically all the behavior for me...
+The fish events working would make my solution a lot more satisfying.
+
+In ~/.config/foot/foot.ini:
+```ini
+[bell]
+urgent=yes
+notify=yes
+
+[desktop-notifications]
+command=notify-send -- '🚀 ${window-title}'
+```
+
+Something we lose out on here, is ability to tell *how* the command finished — with a success or a failure.
+If I knew the focused status of the window from within *fish* logic, I could send a notification with ✅ on success, and with a ❌ on failure.
+But what I'm forced to do instead, is just print the bell character every time a command finishes; that bell character is then “caught” by foot, and a notification is sent.
+
+You could add a `printf \a` into your `fish_prompt`, but I do it slightly fancier and add a hook into my config.fish:
+```fish
+function on_fish_postexec --on-event fish_postexec
+    bell
+end
+```
+
+I then do something similar for nushell:
+```nu
+$env.config.hooks.pre_prompt = [ { printf \a } ]
+```
+
+Now *both* shells notify me when they finish running a command, *only* if their controlling terminal window is **not** in focus, *and* I don't need to execute the command in any sort of special way — I *just* press <kbd>Enter</kbd> like usual and get a notification at the end :D
+
+There's some silver lining in just using a normal ass foot feature, though.
+`${window-title}` is a cool idea!
+
+The format I was going to do, is `❌ $cwd` / `✅ $cwd`, where `$cwd` is the basename of the current working directory of the command that finished.
+But showing the *window title* is slightly better!
+
+The window title my terminals give themselves are *already* the basename of the current working directory, unless ☝️ I gave that terminal some sort of static window title.
+For instance, I have a permanently staying terminal titled `toggleterm`, that is named that way so that my hotkey to toggle it works.
+And so, seeing a `🚀 toggleterm` is a lot more useful than seeing `🚀 ~`
+
+This adventure made me more intentional about titling, altogether.
+Previously, all non-statically named terminals were just called `foot`.
+But to make the Custom and Urgent mru scopes more useful, showing the basename of the working directory via the title became a lot more significant.
+
+Something helpful, as well, is that if a command *fails*, its title is now not just `niri`, but `niri ❌`.
+So the issue of `🚀` being too vague is kind of healed by this.
+
+I start a command, and go away.
+After some time, it fails, and I get a notification saying `🚀 niri`.
+I press <kbd>meta+r</kbd> to open the urgent window picker, and see the actual window title is `niri ❌`.
+That means that I definitely should go check out what went wrong, and maybe try again.
+But if all I wanted to do is to execute the command and then close the terminal (if it succeeded), here I would be able to do so, right from the mru ui, *without* needing to first actually *go* to the window — a lack of a `❌` in its title would mean that it finished successfully, and can be closed safely.
+
+# finishing touches
+
+Pretty goated workflow, isn't it?
+I can spawn as many terminals with long-running commands as I want, and then jump to all the finished ones (or not even; just close them) very easily and **mindlessly**.
+A solution you don't have to think about is often the best solution.
+
+One small caveat though. As is, the receiver we talked about in the first section **isn't** made urgent.
+I do have a separate hotkey to go to it specifically, but I love the idea of instinctively pressing <kbd>meta+r</kbd>, whenever “something finishes”, rather than having to mentally separate the receiver from other finishing terminals.
+
+```fish
+#!/usr/bin/env fish
+
+mkfifo ~/.local/share/mine/task-scheduler 2>/dev/null
+set -l this_window_id (nu --no-std-lib -n -c 'niri msg -j windows | from json | where app_id starts-with foot | where title == "receiver" | get id | first')
+tail -f ~/.local/share/mine/task-scheduler | while read -z first
+    and read -z second
+    if test $first != ~
+        set_color -o b58cc6
+        string replace -r "^$HOME" '~' $first
+        cd $first
+    end
+    while true
+        set_color -o e491b2
+        echo $second
+        set_color normal
+        set -l first_word (string split ' ' $second)[1]
+        fish -c $second </dev/tty
+        if test $status -eq 0
+            set_color -o a9b665
+            echo success
+            set_color normal
+            notify-send "✅ $first_word"
+            echo
+            break
+        end
+        set_color -o ea6962
+        notify-send "❌ $first_word"
+        niri msg action set-window-urgent --id $this_window_id
+        confirm.rs failure '[r]estart' '[e]dit' '[k]ancel' | read -l response
+        set_color normal
+        echo
+        if test $response = k
+            break
+        else if test $response = e
+            set second (echo $second | vipe --suffix fish)
+        end
+    end
+    cd ~
+end
+```
+
+Normally, just doing `bell`{{fn(i=6)}} would do the job, but in this case it would do a bit *too* much job.
+We already make notifications, and they also come with success/failure differentiation.
+`bell`ing would not only make the window urgent, but send *another*, now useless notification.
+So I just make the window urgent manually 🤷‍♀️
+
+I thought about removing the distinction here altogether, just so I could do a basic `bell`, but in terms of the *receiver*, it's way too important to be able to ignore successes.
+Say I schedule 5 baalorlord vods to get downloaded — I don't want to feel pressured to keep checking after *each* of those finishes downloading.
+
+Which is unlike non-receiver command finishes — an offshoot command I may execute from a normal terminal I probably *do* want to come back to / handle as soon as it finishes, regardless of status.
 
 # footnotes
 
@@ -390,3 +552,9 @@ I need *another* system.
 {{hn(i=2)}} [Backup link](https://github.com/Axlefublr/wks/blob/f64cf837ee456626bcaa8d2c185b6939f5c15b5d/src/bin/confirm.rs)
 
 {{hn(i=3)}} `moreutils` package on arch.
+
+{{hn(i=4)}} It's available in my [niri fork](https://github.com/Axlefublr/niri), take a look if you're interested.
+
+{{hn(i=5)}} *This* is more shareable though! [It's available as a pr](https://github.com/niri-wm/niri/pull/4208)
+
+{{hn(i=6)}} I never made this clear, but `bell` is my fish alias for `printf \a`. Slightly cleaner semantics.
