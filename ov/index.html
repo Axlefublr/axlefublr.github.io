@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>finally, a good pager</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;new-fish-shell&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">fish shell 4.0.0</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;how-to-anki&#x2F;" class="preview next">
+			<span class="name">how to anki</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">finally, a good pager</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-01-11">2025.01.11</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 7</div> -->
+				<p>Some time ago, I tried looking for a pager, and found... nothing?
+How are we content with <code>less</code>?</p>
+<p><a rel="noopener external" target="_blank" href="https://github.com/sharkdp/bat"><code>bat</code></a> comes up a lot, but it still uses less under the hood as far as I know.</p>
+<p>It gives you syntax highlighting, which is nice, but that's the last nice thing about bat that I encountered.</p>
+<p>That syntax highlighting? Automatically uses a custom theme, instead of trying to use your terminal theme.
+Blammoes a big ass header for the filepath that you opened, and takes up like 4 columns for the line numbers.</p>
+<p>"You can change that though" is not really a point: if a program has defaults like these, it's clear it's not doing what I want from a pager.</p>
+<p>I want more <em>functional</em> bells and whistles, rather than visual ones.</p>
+<p>And today, I finally came across a pager that satisfies me.</p>
+<h1 id="ov"><a class="zola-anchor" href="#ov" aria-label="Anchor link for: ov">ov</a></h1>
+<p><a rel="noopener external" target="_blank" href="https://github.com/noborus/ov"><code>ov</code></a> is my new favorite puppy.</p>
+<p>It introduces a few cool concepts that make it <em>sometimes</em> better than your editor! (For viewing files)</p>
+<h2 id="headers"><a class="zola-anchor" href="#headers" aria-label="Anchor link for: headers">headers</a></h2>
+<p>Headers are basically "sticky lines", that are fixed at the top and shown always, as you scroll through.</p>
+<p>Very useful for programs with columnar output that display the column names at the top, for example!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">lsblk</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> ov</span><span> --column-width --column-rainbow -H 1</span></span></code></pre>
+<p><img src="https://axlefublr.github.io/ov/./lsblk.webp" alt="" /></p>
+<p>Well, if you have enough output from <code>lsblk</code> to fill more than a screen, I think you're cooked 💀. But you get the idea: <code>-H n</code> to set <code>n</code> first lines to always display at the top.</p>
+<h2 id="columns"><a class="zola-anchor" href="#columns" aria-label="Anchor link for: columns">columns</a></h2>
+<p>In the above screenshot, each column in the output of <code>lsblk</code> is colored thanks to the <code>--column-rainbow</code> flag.</p>
+<p><code>ov</code> has the concept of columns quite engrained into its functionality. <br />
+You can decide how to split into columns based on width or a delimiter character (/ regex). <br />
+Even nicer than that, you can align input into columns even if it is not aligned in the source.</p>
+<p>Say I have this file:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>apple orange potato</span></span>
+<span class="giallo-l"><span>hi hello why</span></span>
+<span class="giallo-l"><span>I hate kitty</span></span></code></pre>
+<p>As you can see, it has three columns, but they aren't aligned. Let's use the <code>--align</code> flag to fix that!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">ov</span><span> --column-delimiter</span><span style="color: #D3AD5C;"> &#39; &#39;</span><span> --align --column-mode file.txt</span></span></code></pre>
+<p><img src="https://axlefublr.github.io/ov/./now-aligned.webp" alt="" /></p>
+<p>However, here's an interesting behavior:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">ov</span><span> --column-delimiter</span><span style="color: #D3AD5C;"> &#39; &#39;</span><span> --align --column-mode --column-rainbow file.txt</span></span></code></pre>
+<p><img src="https://axlefublr.github.io/ov/./fucked-rainbow.webp" alt="" /></p>
+<p>It seems that if your delimiter (a space) is the same as the aligning character (a space), <code>--column-rainbow</code> doesn't work how you'd expect. Oh well.</p>
+<h2 id="sections"><a class="zola-anchor" href="#sections" aria-label="Anchor link for: sections">sections</a></h2>
+<p>Sections are what excites me most about <code>ov</code>.</p>
+<p>Basically, you can specify a regex that defines where to split the input / file at; you can then press <kbd>^</kbd> / <kbd>Space</kbd> to navigate to the previous / next section.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">ov</span><span> jj.toml --section-delimiter</span><span style="color: #D3AD5C;"> &#39;^\[&#39;</span></span></code></pre>
+<p><img src="https://axlefublr.github.io/ov/./sections.webp" alt="" /></p>
+<p>So using sections, you have a nice semantic way to jump between important parts of a file! <br />
+An example of where that is going to be most useful to you, is for <em>diffs</em>. <br />
+You simply define something like <code>^diff</code> and blammo, you can jump across the diffs of multiple files in a very easy way.</p>
+<p>About that "very easy way" though. <br />
+Yes, it's genuinely <kbd>^</kbd> and <kbd>Space</kbd> by default.</p>
+<p>Unfortunately, ov has a habit of having ass / unexpected default mappings. <br />
+For example, <kbd>j</kbd> and <kbd>k</kbd> don't work. Yes really!</p>
+<p>And that default section header color is quite not readable; I don't see what white you need to use for it to be readable.</p>
+<p>However, a <em>good</em> habit that ov has, is that you can configure everything! <br />
+You can configure the colors that it uses (for example, the <code>--column-rainbow</code> colors are those that I set myself), and the hotkeys. So, I'll definitely spend some time reworking like, <em>all</em> of them, lol.</p>
+<p>However, if you like <code>less</code> mappings (or just can't bother), you can copy a config they suggest in the readme, that mimics <code>less</code> mappings closer.</p>
+<h2 id="filtering"><a class="zola-anchor" href="#filtering" aria-label="Anchor link for: filtering">filtering</a></h2>
+<p>As you would expect, you can search with <kbd>/</kbd> and <kbd>?</kbd>. But that's a given and not very interesting.</p>
+<p>What I find to be more interesting, is <em>filtering</em>.</p>
+<p>Using the <code>--filter</code> flag, you can make <code>ov</code> display <em>only</em> the lines that match a pattern; <br />
+with <code>--non-match-filter</code> — display <em>only</em> the lines that <strong>don't</strong> match a pattern.</p>
+<p>Essentially, you get <code>rg</code> for free!</p>
+<p>Why not use <code>rg</code> directly you may ask? Because you can also filter <em>interactively</em>.</p>
+<p>Although the default mappings are strange as hell, there is a default mapping for basically every flag!</p>
+<p>Setting column mode, column mode by width, rainbow, delimiter, filtering and opposite filtering, searching (can be done with a flag btw), headers, sections, section headers, ...</p>
+<p>Basically, in <code>ov</code>, if you can do something with a flag, you can generally also do it with a mapping. And vice versa. Very nice design!</p>
+<h2 id="output-on-exit"><a class="zola-anchor" href="#output-on-exit" aria-label="Anchor link for: output-on-exit">output on exit</a></h2>
+<p>With something like <code>less</code>, you view some output in a pager, and then never see it again ✨</p>
+<p>To look at the output again, you need to re-execute the command that you piped into less.</p>
+<p><code>ov -X</code> will do something really neat: show the output in the pager, but <em>also</em> print it to stdout. <br />
+So once you close <code>ov</code>, the output you were paging will get printed, letting you look at it while continuing to execute other commands.</p>
+<p>You don't need to always <code>-X</code> though: use the <code>IsWriteOriginal</code> config option to set it to true, if you want. <br />
+And you guessed it! You can <em>also</em> do this with a hotkey (<kbd>shift+q</kbd>)! Yes, really!</p>
+<h2 id="don-t-even-page"><a class="zola-anchor" href="#don-t-even-page" aria-label="Anchor link for: don-t-even-page">don't even page</a></h2>
+<p>Similar to <code>less</code>, you can use the <code>-F</code> flag to not even open <code>ov</code> if the entire output fits on the screen. <br />
+<code>QuitSmall</code> is the config option to set if it's the behavior you always want.</p>
+<h2 id="tailing"><a class="zola-anchor" href="#tailing" aria-label="Anchor link for: tailing">tailing</a></h2>
+<p>You can use the <code>-f</code> flag to follow a file, similar to <code>tail -f</code>.</p>
+<p>When it gets interesting, is that you can follow <em>multiple files at once</em> using the <code>-A</code> flag.</p>
+<p>Rather than creating panes for each file (which I'd find annoying), it continuously switches to the file that got updated the most recently. <br />
+So for example, you decide to <code>ov -A</code> 3 log files; new line appears in log 3 -&gt; you get switched to look at it immediately.
+Then, log 1 gets a new line -&gt; you get switched to log 1 now.</p>
+<p>Honestly a very neat solution that I like quite a lot. <br />
+But if you don't, just keep using the <code>-f</code> flag and use <kbd>[</kbd> / <kbd>]</kbd> to switch between the multiple files.</p>
+<p>The behavior of <code>-A</code> is so exciting to me: I <em>finally</em> have a good way to track log files :D <br />
+I just specify a bunch of log files, and then can look at them <em>all</em> in realtime.</p>
+<p>Better yet, <code>ov</code> supports suspending, so this works well in my <a href="https://axlefublr.github.io/suspend/">suspend-based workflow</a>.</p>
+<h2 id="word-coloring"><a class="zola-anchor" href="#word-coloring" aria-label="Anchor link for: word-coloring">word coloring</a></h2>
+<p>Especially in logs, it is common that coloring some words like <code>ERROR</code> and such is very helpful.</p>
+<p>Use the <code>-M</code> option to specify a <code>,</code> delimited list of regex expressions that define what to color differently.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">pueue</span><span> status </span><span style="color: #E49641;font-weight: bold;">|</span><span style="color: #A9B665;"> ov</span><span> --wrap=false -M</span><span style="color: #D3AD5C;"> &#39;Killed,Running,Queued,Success&#39;</span></span></code></pre>
+<p><img src="https://axlefublr.github.io/ov/./pueue.webp" alt="" /></p>
+<p>You also can use the <code>-e</code> option to execute the command <em>from</em> ov.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">ov</span><span> --wrap=false -M</span><span style="color: #D3AD5C;"> &#39;Killed,Running,Queued,Success&#39;</span><span> -e pueue</span></span></code></pre>
+<p>This way, you <em>retain</em> the colors that your command produces, and maybe add some more with <code>-M</code>.</p>
+<p>Alternatively, you can use <code>unbuffer</code> to trick the program into thinking it's writing to a terminal, to retain its colors.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">unbuffer</span><span> pueue </span><span style="color: #E49641;font-weight: bold;">|</span><span style="color: #A9B665;"> ov</span><span> --wrap=false -M</span><span style="color: #D3AD5C;"> &#39;Killed,Running,Queued,Success&#39;</span></span></code></pre>
+<p>"Oh I sure do wonder where to install this useful-sounding program" — no clue, sorry. It's <em>somewhere</em>.</p>
+<h1 id="check-it-out"><a class="zola-anchor" href="#check-it-out" aria-label="Anchor link for: check-it-out">check it out!</a></h1>
+<p>My goal isn't to teach you the entirety of <code>ov</code>, but to <em>sell you</em> on it. <br />
+Go check out <a rel="noopener external" target="_blank" href="https://github.com/noborus/ov">the project's readme</a> to learn about it more deeply!</p>
+<p>I love how it's written: generally I get super overwhelmed when discovering a program of a certain bigness, but ov's readme is structured in a pretty nice way where I was able to learn it effectively!</p>
+<h1 id="p-s"><a class="zola-anchor" href="#p-s" aria-label="Anchor link for: p-s">P.S.</a></h1>
+<p>ov has an interesting bug I experienced: <em>sometimes</em>, for <em>some</em> of my configured hotkeys (it's random, and doesn't apply to all of them at once), they stop getting recognized and get defaulted back to ov's defaults.</p>
+<p>So, for example, I set <kbd>j</kbd> to go a line down; it sometimes happens that pressing <kbd>j</kbd> will go back to its default function, despite me disabling that in my configuration.</p>
+<p>So if you're experiencing the same bug as me, build <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/ov">my fork of ov</a> from source. <br />
+All I do in it, is remove <em>all</em> default mappings, so that <em>your</em> configured mappings are guaranteed to work.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;new-fish-shell&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">fish shell 4.0.0</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;how-to-anki&#x2F;" class="preview next">
+			<span class="name">how to anki</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

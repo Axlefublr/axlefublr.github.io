@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>rust for... scripting?</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;how-to-anki&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">how to anki</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;stray-from-defaults&#x2F;" class="preview next">
+			<span class="name">stray from defaults</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">rust for... scripting?</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-01-04">2025.01.04</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 12</div> -->
+				<p>If the title of this blog post is a genuine question you have, and you want to just skip to the most reasonable solution: <spoiler>use cargo-script</spoiler></p>
+<h1 id="why"><a class="zola-anchor" href="#why" aria-label="Anchor link for: why">why</a></h1>
+<p>I recently realized that the two languages I like using, fish shell and rust, are ridiculously far apart. <br />
+I wanted to find myself a language I could use for scripting that is non-viable to do in fish shell, but too annoying in rust.</p>
+<p>Turns out, there are not really any languages that fit all of my criteria!</p>
+<p>Python, Ruby, Crystal, Ocaml, Nim, Julia, Go, Nushell — these are the languages I tried, or considered going for.</p>
+<p>I actually wrote the majority of the blog post on my adventure looking for a good programming language, but found what I wrote kinda boring and soulless, so I won't get into why each of those languages didn't fit me. <br />
+Once I'm "over" something, it becomes incredibly boring for me to talk about it, and so I missed the train of writing a blog post on that, lol.</p>
+<p>The TLDR is that I came back to rust, reinvigorated to use it more!</p>
+<h1 id="on-rust"><a class="zola-anchor" href="#on-rust" aria-label="Anchor link for: on-rust">on rust</a></h1>
+<p>Rust has always felt really <em>solid</em> to me. But like a cock, it is sometimes too hard to work with.</p>
+<p>After trying out so many other programming languages, and spending the most time and effort on Ruby, I re-started to appreciate that solidity of rust, and changed my approach to the language a bit.</p>
+<p>Inlay hints turned out to be visual clutter I came to accept. Removing them by default, and only toggling them when I <em>need</em> them, has helped immensely to look at rust more <em>calmly</em>.</p>
+<p>Diagnostics in rust are very helpful, but sometimes overwhelming. Similarly, once I see a bit too many diagnostics, I disable them. Once I need the extra advice, I enable them back.</p>
+<p>I was constantly <em>fighting</em> rust, getting annoyed at how I'm meant to do seemingly simple things. <br />
+Getting the modification time of a file is kinda cumbersome in terms of the syntax, <br />
+working with files is often way too involved, calling external commands is boilerplaty; especially so once you literally just need the stdout as a string.</p>
+<p>Often times it felt like rust overcomplicates things. For good reason, mind you, I just happen to not care. <br />
+I'm a very selfish programmer, I don't need cases I won't come across to need to be solved.</p>
+<p>But, it is the language that rust is, and some code <em>will</em> look boilerplaty / ugly. <br />
+I've come to <em>accept</em> that, instead of being annoyed that my code isn't syntactically perfect. <br />
+Now I'm more okay with some parts being kinda hard to look at — I will simply skill solution my way into being used to it.</p>
+<p>And lastly, rust has always felt like <em>responsibility</em>.</p>
+<p>Making plugins for neovim in lua had the nice benefit of that I <em>didn't have to</em>. <br />
+I could just have some code in my own config for a couple of months, completely working. <br />
+And then, once I'm ready to, I could package it all nice and prettily.</p>
+<p>Fish is even more amazing than that, because you can have a lot of callable executables in single files, thanks to a technique I use and will probably talk about in the future. So, the pressure of writing something new in fish is also really really small.</p>
+<p>Starting up a new CSS extension with stylus is <em>slightly</em> a process, but it's straightforward and fast enough where it's not that big of a commitment. If I want to, I can easily shrink the ridiculously large sidebar with css for some stupid website, without it breaking my flow particularly much.</p>
+<p>Rust is in a completely different league. <br />
+I have always wanted to <em>avoid</em> using rust because of the sheer pressure I put on myself.</p>
+<p>First, I need to come up with a name for a project, and create a new repository and directory for it. <br />
+Nope, you already lost me!</p>
+<p>Coming up with a project name and being happy with it are really fucking difficult, and are not something I want to do for a on-a-whim script that probably only I will use.</p>
+<p>Then, setting up rustfmt config, github action for auto-making releases, keeping track of the version and the versioning tags, remembering to push them, writing DOCUMENTATION in both the readme and source code with <code>///</code>, picking apart which information should be in which side of the documentation...</p>
+<p>IT'S TOO MUCH!</p>
+<h1 id="but-not-anymore"><a class="zola-anchor" href="#but-not-anymore" aria-label="Anchor link for: but-not-anymore">but not anymore</a></h1>
+<p>I created myself a new system that allows me to use rust for scripting in a pretty fast and straightforward way.
+No more various bullshit to take care of for the 0 users I'll have — sheer selfish programming!</p>
+<p>Let's start where I started, to figure out why I ended up creating my own system.</p>
+<p><a rel="noopener external" target="_blank" href="https://github.com/igor-petruk/scriptisto">scriptisto</a> is a really neat program that I used for the various languages I have tried. It allows you to use a compiled language for scripting, conveniently!</p>
+<p>You can run that script just like it's written in an interpreted language, because scriptisto can be used as a shebang.</p>
+<p>So, something like <code>./script.rs</code> is possible. The first time you run that script, scriptisto compiles it. On the following runs, it simply resolves to the compiled binary and runs that, without needing to recompile.</p>
+<p>I've had an amazing experience with scriptisto, and would heavily recommend it. However, it was strangely slow with rust!</p>
+<p>After the first run, the following runs <em>still</em> had awful startup time. Around 3 times slower than ruby! And ruby has a pretty shit startup time already.</p>
+<p>When you can tell the startup speed by an eye test, that means it's <em>really</em> bad. So, I decided to try using <a rel="noopener external" target="_blank" href="https://github.com/DanielKeep/cargo-script">cargo-script</a> instead, and it indeed didn't have that issue! The following runs were definitely fast!</p>
+<a href="#definitely-not-foreshadowing" id="definitely-not-foreshadowing" class="anchorina">
+  <hr></hr>
+</a>
+<p><em>Until they weren't...</em></p>
+<p>One of the first programs I wrote is called <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/velvidek.rs"><code>velvidek.rs</code></a>. <br />
+I don't use the number row; instead, right meta key + fdsrewvcxa are my numbers (1234567890). <br />
+Velvidek takes those letters, and replaces them with their appropriate digit. Using this program, I can shim in support for my number layer, without requiring me to press the right meta key. <br />
+Now instead of having to do <code>fg %2</code>, I can just do <code>f d</code>, thanks to the fish function I made that made use of velvidek. Very helpful and important addition to my <a href="https://axlefublr.github.io/suspend/">suspend-based workflow</a>.</p>
+<p>I was pressing <code>f</code> to go back to the suspended process, and noticed the operation be slower than I expected. <br />
+I use fish shell's <a rel="noopener external" target="_blank" href="https://fishshell.com/docs/current/cmds/time.html"><code>time</code></a> to check how long it takes for velvidek to execute, and see ~70ms.</p>
+<p>Well holy shit, that is entirely too slow! For a program as modular, small, and fast as this, this is ridiculously long.</p>
+<p>I was running velvidek as a script through cargo-script, so, using the shebang <code>#!/usr/bin/env run-cargo-script</code>. I decided to check how long <code>env</code> takes to figure out the path to the binary. 3ms. So, env is not the problem here.</p>
+<p>It turns out that cargo-script is wasting a lot of time doing <em>something</em>. Well this is concerning.</p>
+<p>But interestingly, a fish <em>script</em> takes around the same time! ~80ms for a roughly equivalent functionality script I tested. So, at least cargo-script is faster, or on par with a shebanged script in a different language; that's good news.</p>
+<p>The bad news is that it <em>is</em> too slow regardless. When you write a fish <em>function</em>, the time it takes to execute it is in the nanoseconds. When you turn it into a script, it gains these extra ~80ms of startup time, apparently, and so does a shebanged rust script.</p>
+<p>cargo-script caches compiled binaries as I mentioned, so I decide to time how long it takes to execute, if I call the compiled binary directly. 3ms. <br />
+It seems like it takes around 3ms to start a process on my computer, considering that both <code>env</code> and a random rust binary take around the same time.</p>
+<p>So, in other words, the binary itself is not slow; cargo-script is simply wasting time.</p>
+<p>My guess was the following: cargo-script tries too hard to not recompile, massively slowing down the general case.
+So, if I make that process stupider, I'll gain a faster general case, while probably having to recompile unecessarily more often.
+A tradeoff I'm absolutely willing to make.</p>
+<p>My idea is to compare the modification times of the script and the compiled binary.
+If the binary is older than the script, let cargo-script continue like normal, to recompile it. <br />
+If it is not older, run the binary directly, and forgo asking cargo-script for its opinion.</p>
+<p>This sounds like such an obvious solution, that it's weird they are apparently not using it. <br />
+When you feel smarter than a developer who's more impressive than you, you are <em>probably</em> wrong, and that's what I assumed as well.</p>
+<p>I'm trying my best to not reinvent the wheel though, and this pre-step possibly working would allow me to continue using most of the functionality of cargo-script, without having to recreate it for myself, to allow for optimization.</p>
+<p>Alright, first run! <br />
+The binary is older than the script, and the execution gets forwarded to cargo-script. Fair enough. <br />
+And right about now, it should recompile. Right? Right???</p>
+<p>It does not. And so my pre-step just infinitely transfers control to cargo-script, infinitely having that ~70ms startup time.</p>
+<p>Worse yet, the time difference between the binary and the script is ~5 seconds. Not <em>milliseconds</em>. So, at which point do I consider the binary "old enough" or not?</p>
+<p>Going in this direction seems fruitless. And I forgot to mention something: when using cargo-script, rust-analyzer does not help you. It requires there to be a Cargo.toml to give you lsp capabilities; if you don't have it, it gives up and does nothing.</p>
+<p>So, for a good developer experience, you kinda need to have a directory where you write the scripts to begin with, and then something that would compile that source code into a cargo-script compatible single-file script.</p>
+<p>Considering that I <em>already</em> had a "workspace" directory, I thought "fuck it" and went ahead to fully forgo using cargo-script, in favor of making my own system. It will be less convenient, but far faster to start up.</p>
+<h1 id="my-system"><a class="zola-anchor" href="#my-system" aria-label="Anchor link for: my-system">my system</a></h1>
+<p>A "workspace" directory named <code>wks</code>. I use this place to write the scripts for the first time. <br />
+There's <code>src/main.rs</code> and <code>Cargo.toml</code>. Just what is needed to make rust-analyzer work.</p>
+<p>Once I finish writing a rust script, it's now time to export it. <br />
+I have a (rust) script that takes main.rs and Cargo.toml, and joins them into a single file. <br />
+The path to the target file I want to write to, I specify as the first line in main.rs, in a comment. <br />
+<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/scriptister/export-rust-script.rs">Primary link</a>, <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/export-rust-script.rs">backup link</a>.</p>
+<p>While writing this export step, I started thinking about how I'd make a script executable. I would probably write another script, that would act as the program in the shebang. But I found something more elegant!</p>
+<p>What I want, effectively, is to:</p>
+<ol>
+<li>not pollute where the scripts are, with their compiled binaries</li>
+<li>to execute a script, you simply use the script name (for example, <code>velvidek.rs</code>)</li>
+</ol>
+<p>To achieve that, I can make use of <code>$PATH</code>! Once I compile a script, I will rename the resulting binary to the name of a the file, and put that binary somewhere on the <code>PATH</code>. This way, I'm typing in a name of a script to execute, but sneakily I'm actually executing the compiled binary stored somewhere else.</p>
+<p>This is where the second script comes in. This one is in fish though: <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/scriptister/compile-rust-script.fish">primary link</a>, <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/compile-rust-script.fish">backup link</a>.</p>
+<p>While the export script just writes to the target script file, <em>this</em> is the compilation script. It compiles the project, and copies the resulting binary somewhere on the PATH.</p>
+<p>While one ensures my work is <em>backed up</em> (as a single file "script" in my dotfiles repository), the other one actually makes sure it's executable, by providing a binary with the exact same name, that I can call.</p>
+<p>A very sneaky and elegant solution, I'd say! :3&lt;</p>
+<p>In the future, if I need to <em>edit</em> some rust script, that's where the <em>import</em> script comes into play. <br />
+<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/scriptister/import-rust-script.rs">Primary link</a>, <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/777ec42abaaa0313bf89e6bae0810de058e84f6c/scripts/scriptister/import-rust-script.rs">backup link</a>.</p>
+<p>It takes a path to a rust script that I exported into previously, splits it into main.rs and Cargo.toml, and writes those files in the workspace directory <code>wks</code>. After I import, I'm ready to edit the script in my workspace, to then export it back again.</p>
+<p>Thanks to my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>'s command harps, running all of these scripts is really easy, and this has become a way nicer workflow than I expected!</p>
+<p>Now that rust is so fast to get running, I'm way more excited to write it, and I already am rewriting some things as rust scripts, when they were written in fish before. It's super nice!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;how-to-anki&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">how to anki</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;stray-from-defaults&#x2F;" class="preview next">
+			<span class="name">stray from defaults</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

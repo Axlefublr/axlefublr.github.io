@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>optimizing paths</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;zoxide-misbehavior&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">zoxide misbehavior</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;frizz&#x2F;" class="preview next">
+			<span class="name">autocurling</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">optimizing paths</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-06-06">2025.06.06</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 6</div> -->
+				<p>The default paths that you start with, and the paths you might end up creating naturally, can be quite inconvenient to work with.</p>
+<p>In your home directory, you probably have <code>Documents</code>, <code>Downloads</code>, <code>Pictures</code>, <code>Videos</code>, etc. <br />
+To follow the semantic, you might create directories like <code>Programming</code>, <code>Notes</code>, and the like. <br />
+All of them are pretty long words, and annoyingly they all start with an uppercase letter: neither of that helps if you need to type out full paths to things pretty often.</p>
+<p>Unfortunately I do: my biggest usecase is <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish">how I handle program setups</a>, but typing out paths comes up in all sorts of places. <br />
+<code>~/Programming/Projects/Mine/Rust/2025</code> quickly becomes up exhausting to type in, over time. <br />
+Tab completing paths <em>helps</em>, but has other issues that I'll go over in another upcoming blog post<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+.</p>
+<p>To minimize effort of typing in paths, as well as travelling to such paths, some time ago I renamed most of my directory structure to all be single characters, basically. Look at the tree below:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>~</span></span>
+<span class="giallo-l"><span>  r</span></span>
+<span class="giallo-l"><span>    forks</span></span>
+<span class="giallo-l"><span>    proj</span></span>
+<span class="giallo-l"><span>    binaries</span></span>
+<span class="giallo-l"><span>    backup</span></span>
+<span class="giallo-l"><span>    info</span></span>
+<span class="giallo-l"><span>  i</span></span>
+<span class="giallo-l"><span>    tools</span></span>
+<span class="giallo-l"><span>    e</span></span>
+<span class="giallo-l"><span>      memes</span></span>
+<span class="giallo-l"><span>      themes</span></span>
+<span class="giallo-l"><span>      logos</span></span>
+<span class="giallo-l"><span>      icons</span></span>
+<span class="giallo-l"><span>    s</span></span>
+<span class="giallo-l"><span>      screenshot1.png</span></span>
+<span class="giallo-l"><span>      screenshot2.png</span></span>
+<span class="giallo-l"><span>      screenvideo.mp4</span></span>
+<span class="giallo-l"><span>  q</span></span>
+<span class="giallo-l"><span>    torrent.torrent</span></span>
+<span class="giallo-l"><span>  w</span></span>
+<span class="giallo-l"><span>    random-download.jpeg</span></span></code></pre>
+<p>The core directories, that I'll be typing in the most often, are all single characters. But deeper directories are named normally.</p>
+<p>This worked pretty well! Now to get to my screenshots directory, I simply need to type out <code>~/i/s</code>, rather than <code>~/Pictures/screenshots</code><a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+.
+But there are two things that this approach misses.</p>
+<p>First, it's ugly. <br />
+Seeing <code>~/r/proj/harp</code> in my prompt just feels kinda bad :/ <br />
+It's extra uglified by the fact that the core directories <em>are</em> single letters, but deeper directories aren't, so the path ends up looking unbalanced.</p>
+<p>Second, it's a massive pain for search for. <br />
+If you want to look for <code>Pictures</code>, you might need to filter out the normal word “pictures”, sure, but ultimately you're still narrowing things down somewhat. <br />
+But searching for <code>i</code>…</p>
+<p>I can do <code>i/</code>, but then I'm making the assumption that I immediately refer to another path fragment that is in <code>i</code>. <br />
+I could <code>/i</code>, but then I'm possibly missing myself programmatically appending the path <code>i</code> to my home directory (think <code>home_dir + "i"</code>). <br />
+<code>\bi\b</code> will show me way too many results.</p>
+<p>So no matter how I search, I either have to filter through too many things, or I possibly miss some cases where I <em>do</em> still use the path I want to search for.</p>
+<p>Additionally, I'm not doing zoxide any favors. <br />
+The core directories might as well be impossible to zoxide to, since their queries would be so non-unique; but they're short specifically so that I <em>don't have to</em> use zoxide to get to them, to be fair. <br />
+But then the deeper directories come back to being normal, common words, so zoxiding to them is <em>also</em> a pain, just of a different genre.</p>
+<p>Yesterday, I decided to take on the grueling task of renaming and restructuring directories in my <code>~</code>, to handle all of my concerns.</p>
+<p>I had multiple requirements for the new names:</p>
+<ol>
+<li>Has to be a short name, but more than 2 characters. <br />
+It will still be fast and easy to type in, while not looking too unbalanced and ugly.</li>
+<li>Has to be gibberish. <br />
+Making it way easier to search for precisely, and making it ideal for zoxide, as a nice side bonus.</li>
+<li>Has to <em>feel</em> nice to type in. <br />
+Following the point that paths are something I'll be typing out again and again in the future, I should have a comfortable time doing so.</li>
+</ol>
+<p>Here's the tree that I ended up with:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>~</span></span>
+<span class="giallo-l"><span>  fes</span></span>
+<span class="giallo-l"><span>    ack</span></span>
+<span class="giallo-l"><span>    bin</span></span>
+<span class="giallo-l"><span>    dot</span></span>
+<span class="giallo-l"><span>    eli</span></span>
+<span class="giallo-l"><span>    foe</span></span>
+<span class="giallo-l"><span>    lai</span></span>
+<span class="giallo-l"><span>    ork</span></span>
+<span class="giallo-l"><span>    wks</span></span>
+<span class="giallo-l"><span>  go</span></span>
+<span class="giallo-l"><span>  iwm</span></span>
+<span class="giallo-l"><span>    dls</span></span>
+<span class="giallo-l"><span>    lwkc</span></span>
+<span class="giallo-l"><span>    msk</span></span>
+<span class="giallo-l"><span>    osl</span></span>
+<span class="giallo-l"><span>    rnt</span></span>
+<span class="giallo-l"><span>    sco</span></span>
+<span class="giallo-l"><span>    tox</span></span>
+<span class="giallo-l"><span>    twemoji</span></span>
+<span class="giallo-l"><span>    vdi</span></span>
+<span class="giallo-l"><span>  wlx</span></span></code></pre>
+<p>As you can see, almost all of the directories are complete gibberish. Except go I guess. They really couldn't've made it <code>.go</code> instead 🙄 <br />
+I sat down, and naturally followed where my fingers like to go after typing each letter. <br />
+After I type <code>f</code>, what letter feels nice to type in next? <br />
+Then, I considered what directories are going to come after which directories.</p>
+<p><code>fes</code>, for example, will be coming after typing in <code>~/</code>; both ~ and / are on the right side of the keyboard (for me), so that's why <code>fes</code> is so left-focused. <br />
+All the directories inside of <code>fes</code> will come after <code>fes</code>, obviously, so now I optimize their names according to that. <br />
+After a heavy left-side, I now introduce the right side keys quite a bit more.</p>
+<p>I figured out what felt good by repetitively typing in the full path to the directory, and feeling it out. <br />
+For example, <code>fes</code> was first <code>int</code>!<a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+ <br />
+But after typing it out a bunch of times, I noticed that pressing <code>n</code> so close after <code>~/</code> simply didn't feel that good; which is a big nono for such a core, commonly typed directory. Additionally, <code>int</code> is a real thing that may come up in searches, as a false positive, so that's another reason to not use it.</p>
+<p>After making the highest level directories, I went on to rename a bunch of directories inside of there. Look at a tree again, but now with context of how the directory used to be called.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>~</span></span>
+<span class="giallo-l"><span>  fes &lt;- r</span></span>
+<span class="giallo-l"><span>    ack &lt;- backup</span></span>
+<span class="giallo-l"><span>    bin &lt;- binaries</span></span>
+<span class="giallo-l"><span>    dot &lt;- dotfiles</span></span>
+<span class="giallo-l"><span>    eli &lt;- auto</span></span>
+<span class="giallo-l"><span>    foe &lt;- info</span></span>
+<span class="giallo-l"><span>    lai &lt;- proj</span></span>
+<span class="giallo-l"><span>    ork &lt;- forks</span></span>
+<span class="giallo-l"><span>    wks &lt;- wks, actually. this one hasn&#39;t changed</span></span>
+<span class="giallo-l"><span>  go</span></span>
+<span class="giallo-l"><span>  iwm &lt;- i</span></span>
+<span class="giallo-l"><span>    dls     &lt;- didn&#39;t exist</span></span>
+<span class="giallo-l"><span>    lwkc    &lt;- we don&#39;t talk about this one</span></span>
+<span class="giallo-l"><span>    msk     &lt;- mus</span></span>
+<span class="giallo-l"><span>    osl     &lt;- e</span></span>
+<span class="giallo-l"><span>    rnt     &lt;- q</span></span>
+<span class="giallo-l"><span>    sco     &lt;- s</span></span>
+<span class="giallo-l"><span>    tox     &lt;- tools</span></span>
+<span class="giallo-l"><span>    twemoji</span></span>
+<span class="giallo-l"><span>    vdi     &lt;- v</span></span>
+<span class="giallo-l"><span>  wlx &lt;- w</span></span></code></pre>
+<p>You can see how a bunch of the directories took their previous name in some form, and either expanded it or collapsed it, making sure it's gibberish. <br />
+<code>tools</code> is a common word -&gt; <code>tox</code> is shorter and not a real thing. <br />
+<code>documents</code> is another word -&gt; <code>dls</code> is unique and nice to type in. <br />
+<code>backup</code> may even genuinely be used as a directory name all over the place -&gt; <code>ack</code> now has a subdirectory named <code>tua</code> which is hilarious.</p>
+<p>All of these directories I can now effortlessly zoxide to, <em>or</em> type in manually without complaining about it. I found a great balance.</p>
+<p>A question you may have now is "how the hell will you remember all of these?" — that's why the naming stage is so important to take seriously. <br />
+When creating a directory name, I let the purpose of the directory guide me into naming it naturally. <br />
+Basically, <code>ork</code> <em>feels</em> correct to me to contain my forks, and so is easily memorable. <br />
+<code>lai</code> is nonsense, but it looks beautiful to me; <em>that</em> is what makes it makes sense to me, for the purpose of storing <em>my</em> projects. <br />
+Because <code>fes</code> used to be <code>int</code>, <code>foe</code> is now really memorable to hold “info” — the path <code>int/foe</code> is peak comedy to me. Similarly to <code>ack/tua</code>.</p>
+<p>This is why I cannot give any specific suggestions to what <em>your</em> directory names should be; what feels correctest to <em>you</em> will be similarly heavily personalized. I hope I could inspire you to rethink your directory structure, to make it more <em>enjoyable</em> to traverse and look at.</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ <a href="https://axlefublr.github.io/harp/">Here it is</a></p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ I'll talk about zoxide later, don't worry. Part of god's plan.</p>
+<p><a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ The subdirectory <code>eli</code> comes from a pun based on the upper directory being named <code>int</code>. If I named a future project <code>gents</code>, I'd have a path <code>~/int/eli/gents</code>. Which is of course hilarious.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;zoxide-misbehavior&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">zoxide misbehavior</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;frizz&#x2F;" class="preview next">
+			<span class="name">autocurling</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>why even helix?</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;elegant-fish-shell-booleans&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">elegant fish shell booleans</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;helix-master-vs-stable&#x2F;" class="preview next">
+			<span class="name">helix master vs stable</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">why even helix?</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-10-21">2024.10.21</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 24</div> -->
+				<p>I've been using neovim for around two years. <br />
+I've rewritten my config three times: for the first time, when I switched to astronvim, and when I switched back from astronvim. At the most recent point, my config was 5000 lines long. <br />
+I've gotten into the habit of reading nvim help pages in their entirety, for fun. <br />
+I have also written <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/edister.nvim">s</a><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/harp-nvim">e</a><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/qfetter.nvim">v</a><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/lupa.nvim">e</a><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/selabel.nvim">n</a><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dress.nvim">!</a><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/wife.nvim">!</a> plugins. <br />
+And usually spent multiple hours every day configuring nvim.</p>
+<p>I'm glazing myself here to point out: I have obviously given nvim a good try; matter of fact the try was unreasonably good! <br />
+And the reason why I switched off nvim is not due to the lack of knowledge about nvim.</p>
+<a href="#brighter-future" id="brighter-future" class="anchorina">
+  <hr></hr>
+</a>
+<p>Considering my <a href="https://axlefublr.github.io/why-i-hate-lua/">two</a> <a href="https://axlefublr.github.io/why-i-hate-kitty/">other</a> blog posts, this one should be called "why I hate nvim", but I don't actually hate it! <br />
+I just realize that helix is simply the better option.</p>
+<p>I've been wanting a brighter future than nvim, for a long time. And while I did look at helix, there was something that stopped me from considering actually switching to it. <br />
+I'm sure you've heard of this stance, or even maybe have it yourself: "helix has no plugins, so I'll just wait for it to get them, and then I'll switch".</p>
+<p>Fair enough! That was my idea too! <br />
+However, I'm autistic, so switching to things is a whole ordeal, usually taking me multiple consecutive days, and taking a lot of time, effort, and energy. <br />
+Doesn't really make sense to wait for the plugin system, to then overwhelm myself all at once, does it? <br />
+So I decided to do it the smart way.</p>
+<h1 id="the-plan"><a class="zola-anchor" href="#the-plan" aria-label="Anchor link for: the-plan">the plan</a></h1>
+<p>First, I go on and fully discover helix. Learn the editing model, the bindings; configure it to be fairly usable, go through the entire <a rel="noopener external" target="_blank" href="https://docs.helix-editor.com/master">documentation</a> to not miss anyting. <br />
+With <em>this</em> basis, I effectively split the overwhelm into two parts, making it more manageable. <br />
+So that when the plugin system comes, I can <em>actually</em> switch. <br />
+Yes! My idea was to stick with nvim still, but think about the future in this way.</p>
+<p>I failed spectacularly... Or did helix succeed that much? <br />
+Let me elaborate on why I switched to helix so soon, despite intending not to!</p>
+<h1 id="the-editing-model"><a class="zola-anchor" href="#the-editing-model" aria-label="Anchor link for: the-editing-model">the editing model</a></h1>
+<p>Helix's "selection-&gt;action" model is ultimately the biggest reason for why I switched. <br />
+Despite being so used to vim's "action-&gt;selection" model, it took me 1-3 days to get used to helix's one. <br />
+I believe it's because it feels <em>that</em> natural!</p>
+<p>The way my brain works is something like this:</p>
+<ol>
+<li>"uhhhh right so this piece of text"</li>
+<li>"uhhhhh facken let's do this"</li>
+</ol>
+<p>rather than:</p>
+<ol>
+<li>"uhhhhh soooo let's do this ig"</li>
+<li>"with uhhhhh this text"</li>
+</ol>
+<a href="#pausing" id="pausing" class="anchorina">
+  <hr></hr>
+</a>
+<p>It's fairly often that I know <em>subconsciously</em> what I wanna do, and actively "discover" what that something actually is. <br />
+Because of that, I may take ridiculously long pauses between my keystrokes to think.</p>
+<p>Nvim has this incredibly annoying default, where your action+selection key sequences are quick time events. I'm serious! <br />
+You have to execute the whole action in some amount of time after pressing the "operator" — otherwise it will time out.</p>
+<p>You can of course disable this (via <code>:h 'timeoutlen'</code>), but this is just the start of the pattern of bad defaults in nvim. For now I will just state that since this is a default, other nvim functionality (as well as plugins), will often be designed having this behavior in mind. In short, nvim penalizes pauses.</p>
+<a href="#an-even-better-point" id="an-even-better-point" class="anchorina">
+  <hr></hr>
+</a>
+<p>Coming back to the example above, nvim makes you decide on an action first, and the selection second; right after you just decided on an action, not encouraging pauses, it makes you decide the selection too.</p>
+<p>"That's kinda rough when you put it that way, but it's not that bad, right?" — I'll make my argument less strawmanny and still showcase how it's actually really terrible.</p>
+<p>Let's do this very very common thing in nvim and fix a default: we will disable the key timeout. <br />
+We'll claim that "well yes OBVIOUSLY you change that" and transform an individual named Bob into the brother of our parent.</p>
+<p>We still have a pretty glaring issue with the editing model as a whole, even with key timeout not being an issue.</p>
+<p>Whether or not we'll even be able to make the selection is not a guarantee! <br />
+"First you select an action to do and then the area of text it acts on" is not the full story at all.</p>
+<h2 id="vim-s-actual-editing-model"><a class="zola-anchor" href="#vim-s-actual-editing-model" aria-label="Anchor link for: vim-s-actual-editing-model">vim's <em>actual</em> editing model</a></h2>
+<p>Especially without plugins to <em>help</em> (notice, not <em>solve</em>), you will often times <strong>not</strong> be able to select the text area that you <em>actually</em> want. <br />
+The more realistic model of vim is:</p>
+<ol>
+<li>Place your cursor in a position from which you'll be able to make the selection motion later</li>
+<li>Decide on what you want to do</li>
+<li>Think about the selection <em>again</em>, now actually making it</li>
+</ol>
+<p>It's a lie to say that vim has an action-&gt;selection model, because you first need to figure out if your selection will even work! <br />
+And because of things like dot repeat, and efficiency (generally doing an action via action-&gt;selection is less keystrokes than the visual mode (selection-&gt;action) equivalent, in nvim), actively picking to always use visual mode first is a known anti-pattern! <br />
+Think of any vim tutorial: things like "you should use <code>ciw</code> instead of <code>viwc</code> 🤓" are always (validly) pointed out.</p>
+<h1 id="core-philosophy-as-a-solution"><a class="zola-anchor" href="#core-philosophy-as-a-solution" aria-label="Anchor link for: core-philosophy-as-a-solution">core philosophy as a solution</a></h1>
+<p>In helix, half the time you don't even need to think about how to make the selection, because you already made it just by naturally moving around.</p>
+<p>The <code>w</code>, <code>e</code>, <code>b</code> word motions that you already know and love now also <em>select</em> the word. This is useful because in helix, you <em>always</em> operate on a selection. Matter of fact, your cursor is just a 1 column wide selection!</p>
+<p>As I've been writing this blog post, I've been moving around using the word motions — they're pretty natural for moving around in literal text. <br />
+Another thing that's very natural to want to do in literal text is to delete / change words. <br />
+This combines nicely: I move to some word, and it also <em>happens</em> to become my target. Often times, I only need to press a single key to do the action that I decide to do.</p>
+<p>The reason why you'd usually want to use <code>ciw</code> rather than <code>ce</code> in vim, is due to precision. With the former, you can act on a word no matter what, and so by spending an extra keypress, you can allow yourself to spend less mental effort. Interesting tradeoff! <br />
+It only really makes sense because to <em>see</em> what you're going to capture with a motion, you need to actively think. What if your editor thought for you?</p>
+<a href="#visuality" id="visuality" class="anchorina">
+  <hr></hr>
+</a>
+<p>This is effectively the greatest strength of helix: rather than having to spend mental cpu cycles to figure out what you'd match with a certain motion, you <em>already</em> can clearly see what you'd match, <em>always</em>. <br />
+Rather than thinking "hmmmm how do I change this word?", you think "I want to act on <em>this</em> area... oh wait! it's already selected! I guess I just <code>c</code> then!". <br />
+This seemingly small difference ends up merging together to form a <em>much</em> nicer editor experience, especially considering that the entire editor is designed around it.</p>
+<h1 id="normal-semantics"><a class="zola-anchor" href="#normal-semantics" aria-label="Anchor link for: normal-semantics">"normal" semantics</a></h1>
+<p>Something that took me a bit to <em>get</em>, is the semantic of normal mode in helix. <br />
+I can put it to words most precisely like this: <br />
+In normal mode, as you move, you <em>replace</em> your selection by every next motion. <br />
+In <em>select</em> mode, you <em>extend</em> your selection by every next motion.</p>
+<p>Pretty straightforward, isn't it! Might take some time to get used to, but ultimately it's really nice.</p>
+<p>Let me present another example of how this model aids you, without you needing to put in extra effort for extra benefit.</p>
+<p>The <code>f</code>/<code>F</code>/<code>t</code>/<code>T</code> motions replace your selection too! When you <code>f</code> towards something, you make a selection from your current cursor position to the character that you aimed for. <br />
+You may use <code>f</code> just to move and ignore the selection it makes, <br />
+or you can use <code>f</code> to <em>select</em> towards something to then delete it, for example. <br />
+Regardless of which action you decide to do, you can make the motion in the exact same way.</p>
+<h1 id="built-in-plugins"><a class="zola-anchor" href="#built-in-plugins" aria-label="Anchor link for: built-in-plugins">built in "plugins"</a></h1>
+<p>Helix has the equivalents of <a rel="noopener external" target="_blank" href="https://github.com/nvim-telescope/telescope.nvim">telescope</a>, <a rel="noopener external" target="_blank" href="https://github.com/kylechui/nvim-surround">nvim-surround</a>, <a rel="noopener external" target="_blank" href="https://github.com/folke/which-key.nvim">whichkey</a>, <a rel="noopener external" target="_blank" href="https://github.com/neovim/nvim-lspconfig">lspconfig</a>, <a rel="noopener external" target="_blank" href="https://github.com/easymotion/vim-easymotion">easymotion</a>, <a rel="noopener external" target="_blank" href="https://github.com/bkad/CamelCaseMotion">CamelCaseMotion</a>, <a rel="noopener external" target="_blank" href="https://github.com/stevearc/conform.nvim">conform.nvim</a> built in.</p>
+<p>That's pretty nice! But ultimately things being built in is just nice, not really an argument towards an editor. After all, all of the above are really known plugins in the nvim community, so it's very likely a nvim user uses some, or all of them. <br />
+Right?</p>
+<p>That point of view misses something.</p>
+<p>Neovim plugins are inherently limited by the nvim API. They can only be as good as nvim allows them to be. <br />
+Some of them may employ some hacks, or less than pretty implementation details that end up making a plugin feel <em>like a plugin</em>. <br />
+Something that was tacked onto a foundation that didn't think ahead to work nicely with that plugin's behavior. <br />
+As someone who made 7 plugins, I encountered this fact very closely.</p>
+<h2 id="telescope"><a class="zola-anchor" href="#telescope" aria-label="Anchor link for: telescope">telescope</a></h2>
+<p>An amazing plugin, fwiw. Very extendable, configurable, powerful. <br />
+<em>However</em>, it does so much while built <em>on top</em> of neovim, that it's noticeable in usage. <br />
+When I launch telescope, I can distinctly see two rendering stages: first, the window appears. Second, it's filled with text.</p>
+<p>The two stages happen slowly enough where I can clearly notice them, and it's always been jarring to me. I've since tried to switch off telescope, by discovering <a rel="noopener external" target="_blank" href="https://github.com/ibhagwan/fzf-lua">fzf-lua</a>, but turns out it's even slower in terms of the UI updates (because it uses terminal mode).</p>
+<p>On the opposite hand, <em>helix</em>'s "telescope" is built in, and when you press the hotkey to open it, all of the UI happens <em>at once</em>. It <em>opens</em>, rather than <em>loads in</em>, is how I can describe it. And god does that feel incredible!</p>
+<h2 id="whichkey"><a class="zola-anchor" href="#whichkey" aria-label="Anchor link for: whichkey">whichkey</a></h2>
+<p>Neovim's whichkey uses key timeout to reveal itself, which I've already explained being quite uncomfortable to use. But without key timeout, you get no whichkey. <br />
+This is not a point against <code>folke</code>, it's a point against a plugin that is better served by being built in. <br />
+And omg, it sure is, in helix!</p>
+<p><em>Immediately</em> as you press a key that has submappings, you get shown a whichkey menu, on the right side of the screen. <br />
+Because there's no key timeout, you can look at it for as long as you want to! This is how I was able to <em>discover</em> a large part of helix. <br />
+Generally I use <code>anki</code> to memorize all keybinds, but with a nice interface to teach me, there was far less need to do so.</p>
+<p>Because the mapping system is designed having this menu in mind, you create all of your mappings in a hierarchical fashion. <br />
+So, rather than mapping <code>mf</code> to something, you map <code>f</code> in section <code>m</code> to something. <br />
+Nvim's whichkey had to create this system for itself.</p>
+<h3 id="nicer-registers"><a class="zola-anchor" href="#nicer-registers" aria-label="Anchor link for: nicer-registers">nicer registers</a></h3>
+<p>Another neat thing it does, that completely solves an issue nvim otherwise has, is that when you access a register (via <code>"</code> by default), it <em>shows you</em> the contents of filled registers in that same whichkey menu!</p>
+<p>In nvim, you use <code>:reg</code> to look at a register's contents. But you only ever need to look at a register's contents <em>right</em> before using it in some way, and so helix does exactly that!</p>
+<p>I was never a fan of the whichkey idea overall, but helix's implementation was very helpful and improved my opinion a bit :3 <br />
+Ultimately still, it's a bit too much UI for me to see jump around, so I removed it once I memorized every mapping. <br />
+In <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">my fork</a>, I added an option to disable the whichkey menu, but keep it for registers, so that's what I've been using.</p>
+<h2 id="surround"><a class="zola-anchor" href="#surround" aria-label="Anchor link for: surround">surround</a></h2>
+<p>Because nvim text objects are actually just visual selections in disguise, using text objects is often jumpy and hard to look at. <br />
+When you combine that with nvim-surround, which uses even <em>more</em> janky movement + change approaches, the experience ends up looking very "pluginy".</p>
+<p>The helix built-in surrounding mechanism doesn't have to work within such restrictive rules, as it's built into the system to begin with. <br />
+There's something really elegant and powerful it lets you do, thanks to that!</p>
+<p>Say you're writing markdown, and want to make a word <strong>bold</strong>, retroactively. <br />
+In nvim, you would do <code>ysiw*ysiw*</code>. <br />
+You <em>almost</em> could <code>ysiw*.</code>, but I believe it moves your cursor onto one of the <code>*</code>, making you first move before being able to dot repeat. <br />
+So basically, that's kinda cumbersome. And that's just a situation where you <em>can</em> use the same motion twice; that's not always the case.</p>
+<p>For example, it isn't the case if you wanted to surround a <code>word</code> in such a way, that you would get: <code>{ ['word'] }</code>. <br />
+In nvim, this is kind of a pain, because you keep needing to use a different text object every time: <code>ysiw'ysa']ysa] ysa }</code>. <br />
+Even if we assume you use a plugin that makes that last <code>ysa] ysa }</code> into a <code>ysa]{</code> (<a rel="noopener external" target="_blank" href="https://github.com/wellle/targets.vim">targets.vim</a>, I think?), we still get left with: <code>ysiw'ysa']ysa]{</code>.</p>
+<p>First, it's an obscene amount of characters to press. <br />
+But more importantly, you use THREE different text objects here, and one of them uses <code>i</code> rather than <code>a</code>. <br />
+Doing this has always been quite a pain for me, as you need to think about what you're doing with considerable amount of focus.</p>
+<a href="#consistency" id="consistency" class="anchorina">
+  <hr></hr>
+</a>
+<p>How does this work in helix? Remember that "motions replace your selection" thing? What if I told you surrounding did this too? <br />
+Genious! Of course it would! <br />
+Due to this convenient consistency, executing the two examples I just gave is very simple.</p>
+<p>The first one, considering that you already selected the word, is: <code>ms*ms*</code>. <br />
+After the first surround, your selection updates to <em>contain</em> the new characters you just added. So you don't need to "fix" your selection or anything! <br />
+You unfortunately can't dot repeat that second <code>ms*</code> in helix yet, which is quite annoying :c <br />
+In nvim it wasn't that big of a deal because you had to fix your position anyway, but it would be way nicer to have in helix because you <strong>don't</strong> need to fix the selection.</p>
+<p>The second example is just fantastic, especially in comparison: <code>ms'ms[ms ms{</code>. <br />
+All you need to do is <em>just</em> keep saying what you want to surround with. <br />
+Not having to fix your position, or use a different text object, REALLY helps here! <br />
+I can do this blindly without really needing to focus much, so it's quite a big win.</p>
+<h2 id="autopairs"><a class="zola-anchor" href="#autopairs" aria-label="Anchor link for: autopairs">autopairs</a></h2>
+<p>Not much to say about this one, it just works! <br />
+You can define what your autopairs are globally, and then also define them per-language, in a very obvious configuration format. <br />
+Very possible that I just picked a wrong plugin, out of the million that exist, but in neovim adding an autopair was a chore, that also ended up working differently from all the other autopairs already enabled by default, in a jarring way.</p>
+<h2 id="lsp"><a class="zola-anchor" href="#lsp" aria-label="Anchor link for: lsp">lsp</a></h2>
+<p>Oh my FUCKING god do I despise neovim's lsp integration. <br />
+Somehow despite all of my experience and knowledge, when it comes to the editor, I still see lsp configuration as half magic. <br />
+Fucking 5 or so different plugins doing god knows what in magicky ways, requiring you to do a lot of guesswork to configure in any non-standard way (that lsps sometimes require (rust-analyzer)). <br />
+With this structure, hanging on by a thread, it still takes up like 50 or so milliseconds off your startup time, which is pretty horrendous. You then may spend a lot of effort on optimizing that startup time, too. Which is a craft of its own...</p>
+<p>I forgot to mention this, but helix starts instantly. If you get all the neovim plugins that "exist" in helix, and lazy load them properly, neovim will still take longer to put you into a buffer, than helix will. You get everything, while not sacrificing speed.</p>
+<p>And the lsp integration is <em>really</em> simple and lovely. In your <code>languages.toml</code>, you define which lsps you want to use (you can just specify multiple of them per-language if you want!) and what arguments they should be given to start properly. <br />
+That's in theory, at least. In practice it's probably already done for you by helix contributors. So all you need to do is install the lsp so it's in your <code>$PATH</code>, and blammo — the lsp just works. I'll repeat that: in the general case, to get an lsp to work, you <em>just</em> install it. Often times you won't even really need to configure it.</p>
+<p>Formatting is similarly simple: you define how to call it (if it's not already done for you), and then can use <code>:fmt</code> or the auto-format option (configured globally <em>and</em> per language, also).</p>
+<p>There's no non-lsp diagnostic sources like in none-ls or nvim-lint, unfortunately. But it's a tradeoff I'm willing to make, because I only lost fish shell diagnostics, which aren't that important to me anyway. I'm sure it'll get added in eventually, though!</p>
+<h1 id="registers-part-2"><a class="zola-anchor" href="#registers-part-2" aria-label="Anchor link for: registers-part-2">registers part 2</a></h1>
+<p>Let's go back to registers for a bit. The way that helix handles them is what initially made me <em>consider</em> switching to begin with.</p>
+<p>In nvim, when you yank into a named (<code>[a-z]</code>) register, you <em>also</em> yank into the default register (<code>"</code>). I always found this annoying! <br />
+Imagine a situation where you yanked something, and are travelling through the file to paste it elsewhere. <br />
+As you travel, you notice another piece of text that you want to <em>also</em> take with you.</p>
+<p>What do you do in this situation? Correct, you eat sand and annoyingly come back for it later. Or use my plugin that I didn't publish.</p>
+<p>You might present uppercase registers (<code>[A-Z]</code>) as a solution, but appending, rather than overwriting a register doesn't necessarily solve the problem. <br />
+If the important yank you made is a characterwise yank, appending to it most likely isn't what you want at all. <br />
+Even if both the important yank 1 and important yank 2 are linewise, there's no guarantee that they are related; you might want to paste them separately. <br />
+Separating them after the fact seems like an annoying workaround.</p>
+<p>And let's not forget: you yanked to the <em>default</em> register. So you can't even append to it anyway. <br />
+And you can't retroactively move it into another register, without coming back and reyanking, or without using <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/edister.nvim">my plugin</a> that I did publish.</p>
+<p>All of this hassle because yanking, even to a named register, still touches your default register. A non-unfuckable situation that I ran into often (enough to have made to plugins to work around it). <br />
+In helix, it <em>obviously</em> just yanks to the register you specified. Duh! You specified a register, that register should be used. Pretty straightforward!</p>
+<p>Now that same situation is colored in a different light: <br />
+You yank something important, then find <em>another</em> thing you want to yank. <br />
+You just select a register and continue on! :D <br />
+And as you collect these important yanks, when you access yet another register, helix will tell you which registers you're already using, implying what the free ones are. <br />
+So (if you pay attention) you won't even accidentally overwrite an important yank!</p>
+<a href="#price-of-mistakes" id="price-of-mistakes" class="anchorina">
+  <hr></hr>
+</a>
+<p>Using registers is always an <em>active</em> decision for me. Because of this, it's common that I yank something, and then think "wait nevermind, I actually want this in register <code>x</code>". This "nevermind" thing happens most commonly when my current default register contents <em>aren't</em> important.</p>
+<p>In neovim, if you "misyank" something, you then need to re-specify the area you targeted. <br />
+<code>yiw</code> then "whoops" then <code>"xyiw</code>. Get more and more annoying, the more complex text objects you use.</p>
+<p>Even if you used visual mode for your selection, you can't <em>just</em> reyank: the selection is gone, and you have to press <code>gv</code> to restore it.</p>
+<p>In helix, after you yank something, you can re-yank without any such hassle. <code>y</code> "whoops" <code>"xy</code>. That's it.</p>
+<p>The selection actually staying like that is a common "omg that's so nice" exclaim I do to myself, about helix. <br />
+But there are places where, at least at first, it's just really weird!</p>
+<a href="#strange-consistency" id="strange-consistency" class="anchorina">
+  <hr></hr>
+</a>
+<p>Remember how your cursor is just a single-width selection? Helix stays consistent to the idea of selections mattering more than your cursor in this interesting way: <br />
+By default, <code>a</code> appends after your selection, and <code>i</code> prepends before your selection.</p>
+<p>Yes, really! <em>Not</em> your cursor!</p>
+<p>This means that if you have <code>word</code> selected, and your cursor is at <code>wor█</code>, <br />
+when you press <code>i</code>, you will start inserting here: <code>|word</code>, <br />
+rather than here: <code>wor|d</code>. <br />
+Same case with <code>a</code>, just in the opposite direction.</p>
+<p>"Ok that's just ridiculous" you might say, and at first I agreed with you! <br />
+While I did, I remapped <code>a</code> and <code>i</code> to get the behavior we both expect:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="toml"><span class="giallo-l"><span>a</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span><span style="color: #D3AD5C;">&#39;collapse_selection&#39;</span><span>,</span><span style="color: #D3AD5C;"> &#39;append_mode&#39;</span><span>]</span></span>
+<span class="giallo-l"><span>i</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [</span><span style="color: #D3AD5C;">&#39;collapse_selection&#39;</span><span>,</span><span style="color: #D3AD5C;"> &#39;insert_mode&#39;</span><span>]</span></span></code></pre>
+<p>But after using helix for some time, I actually removed these bindings! <br />
+Helix is <em>very</em> consistent with acting on selections specifically, and when you want to act on a <em>cursor</em>, it expects you to press <code>;</code> first, to collapse selections. <br />
+Having <code>a</code> and <code>i</code> fall out of this rule became annoying, rather than helpful, as I got used to pressing <code>;</code> when I need to.</p>
+<p>But aside from consistency, turns out it's just kinda nice!</p>
+<a href="#ai" id="ai" class="anchorina">
+  <hr></hr>
+</a>
+<p>Say you're writing a sentence, and as you move through it, you got some word selected. <br />
+You can pick whether you want to insert before <em>or</em> after the word, without having to adjust your position! <br />
+It's just <code>a</code> or <code>i</code>, depending on where you want to end up :D</p>
+<p>Even more powerfully, this behavior of <code>a</code> and <code>i</code> makes <em>surrounding</em> things really easy. First you press <code>i</code> and type the left delimiter in, then <code>a</code> to type in the right one. <br />
+I remember there was a very hyperspecific feature in nvim-surround to let you do exactly this; here it's just part of the editing model, which is fascinating!</p>
+<p>However, I half-think that this <code>a</code>/<code>i</code> behavior is more of a side effect than intended behavior — your selection is updated when typing in with <code>a</code>, but isn't with <code>i</code>. So far that hasn't given me problems, but it <em>does</em> feel like a bug. Maybe will get fixed someday!</p>
+<p>I'll admit, all this selection business takes a while to get used to, but actually now I prefer it. Even in my fish shell "helix mode", I re-made this behavior, that's how much I like it!</p>
+<a href="#pasting" id="pasting" class="anchorina">
+  <hr></hr>
+</a>
+<p>Another example is <code>p</code> and <code>P</code>. Yep, they also paste after and before the <em>selection</em>. <br />
+With them though, the behavior isn't particularly mind-boggling, and just ends up feeling correct immediately.</p>
+<p>Say you have <code>word</code> selected, with your cursor on <code>█ord</code>. <br />
+After you yank, to multiply <code>word</code>, you just press <code>pp</code> as many times as you need. <br />
+If you tried doing that in vim (same cursor position, after you yank with <code>yiw</code>), you'd end up with <code>wwordwordord</code>. <br />
+I massively prefer <em>just</em> pressing <code>p</code> mindlessly, rather than having to first move to the end of the word, or press <code>Pppp</code> instead. <br />
+And if I wanted to multiply backwards in vim, <code>word</code> vores itself in an even more horrifying way: <code>worworwordddword</code>.</p>
+<h1 id="aha-the-perfect-editor"><a class="zola-anchor" href="#aha-the-perfect-editor" aria-label="Anchor link for: aha-the-perfect-editor">aha! the perfect editor!</a></h1>
+<p>After all this glazing you might rightfully think "helix must be perfect!". <br />
+Is that the case? FUCK NO!</p>
+<p>The big downside of helix is its lack of maturity and slowness of development. <br />
+First of all, it doesn't have a plugin system. <br />
+Yep, not at all! <br />
+Even something like kakoune, which design is <em>against</em> the idea of plugins, <em>does</em> have a plugin system. <br />
+Your <em>shell</em> has a plugin system. That itty bitty program that you click clack commands in. <br />
+Your fridge probably has a plugin system. <br />
+Helix doesn't!</p>
+<p>And because of this, you're bound to encounter problems that are currently unsolvable, as generally a plugin for that behavior would already exist, or you'd write your own to get it. <br />
+This state of affairs makes it infuriating to use helix sometimes, because the <code>:trim</code> command has been bikeshed for over a year, and some seemingly basic lsp methods are not implemented, leading to some lsps literally not working!</p>
+<p>The example I'm immediately thinking of, is the Scala lsp not working because it can't show its startup message. This may be niche, but papercuts do pile up!</p>
+<p>Have I already mentioned that you can't complete words from the document in helix <del>stable</del> master? Yeah... <br />
+This feature is completely working and finished, <em>but</em> is floating around as a PR for seemingly no reason at all. <br />
+As I like to say: “if we consider all the unmerged completely finished and working PRs, we have a functioning editor!”. <br />
+On one hand, we already have way more than enough features to have a really fucking good editor. <br />
+Because it's designed so well, you tend to be able to work around the missing parts not too difficultly. <br />
+But still, the more I learn about helix and its decisions, the more I think it holds itself back just to reach unecessary perfection; never trading "perfect" for "done". <br />
+And basic editor features are so important, that I'd rather see them get merged asap, and then evolve over time into becoming perfect. But maybe that's unrealistic?</p>
+<h2 id="is-this-a-worthy-tradeoff"><a class="zola-anchor" href="#is-this-a-worthy-tradeoff" aria-label="Anchor link for: is-this-a-worthy-tradeoff">is this a worthy tradeoff?</a></h2>
+<p>But consider all the elegance of the editor I've discussed so far — was the slowness of development a necessary evil to achieve it? Is it the reason I even switched to helix in the first place? It's a difficult spot to be in emotionally, as I really do care deeply about this editor now 🥺.</p>
+<p>Regardless, the issues that come from not having a plugin system is why many people, including me, decide to make a personal <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>.</p>
+<p>Editing the source code of a text editor to get the missing features sounds, truthfully, insane. And like a lot of effort. That's what I thought, at least!</p>
+<p>Turns out, the developmental slowness has made the helix codebase <em>really</em> good. <br />
+I don't think I'm <em>that</em> good at rust, however I keep getting surprised at how <em>easy</em> it is to add new features in.</p>
+<p>Especially coming from a <em>lot</em> of neovim configuration, I expect to go on a whole adventure to try to make something work, and then get surprised when my endeavor cost me 5 minutes at most.</p>
+<h1 id="a-happy-dev-adventure"><a class="zola-anchor" href="#a-happy-dev-adventure" aria-label="Anchor link for: a-happy-dev-adventure">a happy dev adventure</a></h1>
+<p>One feature I have in my fork (all features are listed in the readme) is that you can remove the statusline.</p>
+<p>Vaguely remembering how the statusline works in nvim, if you were to remove it, it would be unreasonable to think to enable it back on at runtime, without reloading neovim as a whole. <br />
+I kept this assumption with helix — I put in only slight effort, <em>just</em> to be able to disable the statusline using a config option, not caring enough to implement the ability to switch it back on dynamically. <br />
+After finishing the feature, I wanted to see <em>how much</em> things break if I try to <code>:toggle should-statusline</code>. <br />
+Imagine my surprise when nothing broke 🤯 <br />
+Matter of fact, the statusline showed up with all the information up-to-date, no less!</p>
+<p>This flabbergastment of mine never stops: with every new feature I try to add, it generally goes far better than I expect. Traumatized by neovim configuration I guess! <br />
+But it <em>makes sense</em>. Of <em>course</em> an editor that feels clean and consistent is also written in a clean and consistent way.</p>
+<p>This is all to say that if you decide against using my fork for whatever reason, consider forking it yourself anyway. You'll be pleased to see the features you want be easily addable, and considering how slow helix development moves, you won't need to rebase on upstream that often. Because of this ease though, you'll gain a habit of screaming "WHY ISN'T THIS IN CORE ALREADY", like I did :&gt;</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;elegant-fish-shell-booleans&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">elegant fish shell booleans</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;helix-master-vs-stable&#x2F;" class="preview next">
+			<span class="name">helix master vs stable</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

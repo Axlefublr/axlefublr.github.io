@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>task scheduler</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<div class="preview empty previous"></div>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;nirism&#x2F;" class="preview next">
+			<span class="name">nirism</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">task scheduler</div>
+				</a>
+				<div class="date">
+					<time datetime="2026-06-18">2026.06.18</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 18</div> -->
+				<p>I've been using this neat task scheduling program called <a rel="noopener external" target="_blank" href="https://github.com/nukesor/pueue">pueue</a> for a while.
+With it, you can queue up shell commands to be executed in sequence, and/or in parallel, without “living” in a terminal window.</p>
+<p>After <a href="https://axlefublr.github.io/nirism/">my recent niri ricing improvements</a>, the no-terminal-required benefit isn't as large anymore.
+If I want some terminals out of my way, I can just throw them onto a workspace and bob will be my uncle, pretty much.
+Then, I don't really use parallelism in pueue much — generally, I just want everything executed sequentially.</p>
+<p>The <em>workflow</em> is part of what annoys me with pueue, I think.
+If the command you schedule to execute finishes with no issues — fantastic.
+But if it fails?</p>
+<p>You blammo a <code>pueue status</code>, to figure out <em>which</em> task failed.
+You then extract its id to put it into <code>pueue log &lt;id&gt;</code>.
+Ah and don't forget to <code>-f</code> to actually show the whole output.</p>
+<p>This... is kind of annoying.
+When something fails, I want to immediately jump to <em>the</em> place that failed, see the entire output, and then be able to decide on the spot what to do about the failure.
+I thought creating a pueue interface thingy would help soothe my concerns, but the inherent complexity of pueue piled up on me quickly with no clear benefit.</p>
+<p>So I thought: how about I create my own system?
+I use very few pueue features, so by limiting the scope I can make my system simple but effective.</p>
+<p>The main idea is the following: I have a terminal on one of my workspaces, that is launched on login.
+The terminal is permanently executing a script which takes shell commands (from somewhere) as input, and executes them as it gets them, sequentially.
+At the start of executing, the entire command is printed (really important for when things go wrong!).
+When it finishes without problems, I see a green “success” and a notification.
+If it didn't succeed — a red “failure”, once again a notification, and a <em>prompt</em> that asks me what to do next.</p>
+<p>When there's a window that exists <strong>entirely</strong> to show me how my tasks are going, checking when things go wrong becomes so much more pleasant.
+Rather than creating the pueue status window, locating the id, forgetting to include <code>-f</code>, and snoozing 😴, <br />
+I can just press my <kbd>g↓u</kbd> hotkey to activate the executor window, decide what to do, and press <kbd>g↓u</kbd> again to go back to whatever I was doing.
+Incredibly pleasant!</p>
+<p>Additionally, checking <em>progress</em> is fantastic.
+Downloading videos from youtube with <a rel="noopener external" target="_blank" href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> is a common usecase of mine, for pueue.
+But checking how much has downloaded so far feels like enough of a <em>process</em> that I don't feel like doing it...
+But if it's just two hotkey presses to see the latest output, that's pretty nice! :D</p>
+<h1 id="client"><a class="zola-anchor" href="#client" aria-label="Anchor link for: client">client</a></h1>
+<p>I'll be using a named pipe<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+ to pass data from the “client” to the “server”.
+Named pipes are a special type of “file”, for which read and write rules work a bit differently.
+Whenever you read from a named pipe, the content you read is no longer stored in it — it's essentially consumed.
+And notably, the <em>writing</em> side must wait for what it wrote to be read (consumed), before the writing operation can finish.
+So generally, you have one side that indefinitely continues reading from the named pipe, to make sure it never gets “clogged”, and then you write into the named pipe however you wish, it being not much different from writing into a normal ass file.</p>
+<p>Let's start with the scheduling script, which will be called by the client.
+Below is <code>schedule.fish</code>:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #EA6962;">begin</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    echo</span><span> -n</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    echo</span><span> -ne</span><span style="color: #D3AD5C;"> &#39;\0&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span><span style="color: #E49641;font-weight: bold;"> &gt;</span><span>~/.local/share/mine/task-scheduler</span></span></code></pre>
+<p>The script takes arguments (or just one), which is the shell command that you want to execute.
+It then writes it into the named pipe.
+This could be done manually for the record, it's just convenient to have a script for this, due to some extra developments we'll make next.</p>
+<p>It ends the command with the <em>null</em> character, to support multiline shell commands.
+Although feeling like I need to support that comes from a usecase that I'll solve differently — we'll get to that in due time.</p>
+<p>Scheduling a command to execute will look something like this:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">schedule.fish</span><span> ffmpeg -y -i</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">input&quot;</span><span style="color: #B58CC6;"> $</span><span>from</span><span style="color: #B58CC6;"> $</span><span>to \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -vf</span><span style="color: #D3AD5C;"> &quot;&#39;pad=ceil(iw/2)*2:ceil(ih/2)*2&#39;&quot;</span><span> \</span></span>
+<span class="giallo-l"><span style="color: #B58CC6;">   $</span><span>fake_audio \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -c</span><span>:v libx264 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -preset</span><span> medium \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -crf</span><span> 18 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -map_metadata</span><span> -1 \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -movflags</span><span> +faststart \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -c</span><span>:a aac \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -b</span><span>:a 128K \</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">   -shortest</span><span> \</span></span>
+<span class="giallo-l"><span style="color: #D3AD5C;">   &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">output&quot;</span></span></code></pre>
+<p>This scary-looking command is from one of my scripts, where I used to use pueue for the scheduling; but now I get to use my own system 😌
+I use a couple of variables in the command that I'm scheduling — they get expanded into literal arguments before actually being sent to the server.
+So the server doesn't need to resolve <code>$fake_audio</code>, <code>$input</code>, <code>$output</code>, etc: it just handles executing the already expanded shell command.
+Thanks to this, I don't have to come up with a fancy system of providing the client's environment variables into the server.
+I started developing that functionality, but soon realized that I don't need it that much 🤷‍♀️
+And if I do, I can always explicitly use <code>env</code>.</p>
+<p>One piece of environment I <em>do</em> want to provide, though, is the current working directory from which the client wanted to execute the shell command from.
+Matters a lot for relative paths.
+Let's edit the scheduler to pass this data as well:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">argparse</span><span> D= -- </span><span style="color: #B58CC6;">$</span><span>argv</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #EA6962;">begin</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> set -q _flag_D</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span> -n</span><span style="color: #B58CC6;"> $</span><span>_flag_D</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span> -ne</span><span style="color: #D3AD5C;"> &#39;\0&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span> -n</span><span style="color: #B58CC6;"> $</span><span>PWD</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span> -ne</span><span style="color: #D3AD5C;"> &#39;\0&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">    echo</span><span> -n</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">argv&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    echo</span><span> -ne</span><span style="color: #D3AD5C;"> &#39;\0&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span><span style="color: #E49641;font-weight: bold;"> &gt;</span><span>~/.local/share/mine/task-scheduler</span></span></code></pre>
+<p>Now, as a single write, we provide the working directory and the actual command; both terminated by the null character.
+Makes parsing it back out in the server side easy.</p>
+<p>By default, the working directory we pass is just the directory that the client (for example my terminal where I'm calling <code>schedule.fish</code>) is in.
+But I can also pass a different directory using the <code>-D</code> flag.
+Thanks to <code>fish</code>'s <code>argparse</code>, we get the functionality of <code>--</code> for free, so we don't have to worry about the command we're passing possibly also having a <code>-D</code> flag.</p>
+<h1 id="server"><a class="zola-anchor" href="#server" aria-label="Anchor link for: server">server</a></h1>
+<p>Here similarly, I'll unveil the full script step by step.
+This is the core idea of <code>receiver.fish</code> — the “server”.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>We make sure the named pipe actually exists, and then start indefinitely reading from it with <code>tail -f</code>.
+Every read consists of two items, that are terminated with a null character: the current working directory, and the actual command to execute.</p>
+<p>We <code>cd</code> into the directory we were given, so that we execute the provided command from <em>there</em>.
+Later we reset back to the home directory.</p>
+<p>The command reruns until it succeeds (for now), and we use the <code>&lt;/dev/tty</code> trick to fix interactive input for the command.
+Without it, if I tried to execute <code>read</code> for example, it'd just instantly fail because the command is not connected to the input of the terminal that's running the server script 🧐</p>
+<p>This already works!
+But could be nicer 😌
+So let's make it nicer!</p>
+<p>First, it's actually pretty useful information to know what directory the command is executed in.
+But only if it's <em>not</em> executed from home (<code>~</code>), cause that I can assume.
+Let's show the directory (with <code>/home/axlefublr</code> folded into <code>~</code>) before cding to it.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>first != ~</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o b58cc6</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        string</span><span> replace -r</span><span style="color: #D3AD5C;"> &quot;^</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">HOME&quot; &#39;~&#39;</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>What's even more useful, is seeing the <em>command</em> that will be executed.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>first != ~</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o b58cc6</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        string</span><span> replace -r</span><span style="color: #D3AD5C;"> &quot;^</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">HOME&quot; &#39;~&#39;</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o e491b2</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span style="color: #B58CC6;"> $</span><span>second</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Some commands don't produce any output that would make it obvious the command finished.
+So let's print a nice green “success” when a command successfully finished, and a scary red “failure” when it doesn't.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>first != ~</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o b58cc6</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        string</span><span> replace -r</span><span style="color: #D3AD5C;"> &quot;^</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">HOME&quot; &#39;~&#39;</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o e491b2</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span style="color: #B58CC6;"> $</span><span>second</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> -o a9b665</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span><span> success</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> -o ea6962</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span><span> failure</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>I will probably not be staring at the executor window as it's doing its thing.
+The entire point is to not have to, after all!
+So let's add a notification on the command finishing, successful or not.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>first != ~</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o b58cc6</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        string</span><span> replace -r</span><span style="color: #D3AD5C;"> &quot;^</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">HOME&quot; &#39;~&#39;</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o e491b2</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span style="color: #B58CC6;"> $</span><span>second</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set</span><span> -l first_word (</span><span style="color: #A9B665;">string</span><span> split </span><span style="color: #D3AD5C;">&#39; &#39;</span><span style="color: #B58CC6;"> $</span><span>second)[1]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> -o a9b665</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span><span> success</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            notify-send</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">first_word ✅&quot;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        else</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> -o ea6962</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span><span> failure</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            notify-send</span><span style="color: #D3AD5C;"> &quot;</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">first_word ❌&quot;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Showing the <em>entire</em> command in the notification sounds like the obvious pick, but have you seen the ginormous <code>ffmpeg</code> command I exampled above?
+I don't wanna see all that.
+So, I'll start by just showing the command part of the command in the notification, and in the future see if that's enough or too inspecific.</p>
+<a href="#error-handling" id="error-handling" class="anchorina">
+  <hr></hr>
+</a>
+<p>There's a reason we re-print the command we're executing every time we try to.
+Let's add some interactive error handling!</p>
+<p>When a failure occurs, I want three different options:</p>
+<ol>
+<li>run the command again with no changes</li>
+<li>ignore the failure of this command, continuing to the next command in line</li>
+<li>edit the command <em>in my editor</em>, and then run <strong>that</strong> one</li>
+</ol>
+<p>Whenever I want to ask myself of some options, I use a custom program I made some time ago: <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/wks/blob/main/src/bin/confirm.rs">confirm.rs</a><a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+.
+I pass a list of options, and embed the key to press to accept them, into the argument itself.
+For example, <code>a[c]cept</code> will be picked if I press <kbd>c</kbd>.</p>
+<p>Confirm.rs doesn't allow you to press any keys that don't pick an option.
+Well, it <em>does</em>, it just ignores them.
+So you don't have to be particularly careful!</p>
+<p>Once you do press a valid key, it's printed to stdout, and can then be compared in a if-else chain to figure out what to do next.
+This program exists to be used in shell programs, for the most part.
+Very common usecase of mine, to want to present myself with a list of options I want to pick from with a <em>single</em> (no pressing <kbd>Enter</kbd>!) key.</p>
+<p>The program is in a bit of an inconvenient format (for you) — it's not in its own repo, not on crates.io, no precompiled binaries, undocumented, etc etc.
+But for me? GOD is it convenient.
+Check out <a href="https://axlefublr.github.io/rust-scripting-pt-2/">this blog post of mine</a> to learn how this system allows me to create ad-hoc rust programs a lot easier.</p>
+<p>For the action to edit the command in my editor, I <em>could</em> write my own thing as well, but there's no need — a neat program called <code>vipe</code><a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+ lets you pipe input into it, edit it in your <code>$EDITOR</code>, and output it back to stdout. So we're gonna use it!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>first != ~</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o b58cc6</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        string</span><span> replace -r</span><span style="color: #D3AD5C;"> &quot;^</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">HOME&quot; &#39;~&#39;</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o e491b2</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span style="color: #B58CC6;"> $</span><span>second</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set</span><span> -l first_word (</span><span style="color: #A9B665;">string</span><span> split </span><span style="color: #D3AD5C;">&#39; &#39;</span><span style="color: #B58CC6;"> $</span><span>second)[1]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> -o a9b665</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span><span> success</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            notify-send</span><span style="color: #D3AD5C;"> &quot;✅ </span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">first_word&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o ea6962</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        notify-send</span><span style="color: #D3AD5C;"> &quot;❌ </span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">first_word&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        confirm.rs</span><span> failure </span><span style="color: #D3AD5C;">&#39;[r]estart&#39; &#39;[e]dit&#39; &#39;[k]ancel&#39;</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> read</span><span> -l response</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>response = k</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        else if</span><span style="color: #A9B665;"> test</span><span style="color: #B58CC6;"> $</span><span>response = e</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set</span><span> second (</span><span style="color: #A9B665;">echo</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> vipe</span><span> --suffix fish)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>If we press <kbd>k</kbd>, we break out of the loop, essentially skipping the command we're currently retrying infinitely (due to the <code>while true</code>). <br />
+If we press <kbd>e</kbd>, we change what the command even <em>is</em>, so that the next loop iteration executes something different in the <code>fish -c $second</code>. <br />
+If we press <kbd>r</kbd>, the if → else if chain after the confirm.rs <em>doesn't</em> catch it, and we reach the end of the loop, restarting executing the command without changing anything.</p>
+<p>One extra thing I did, is add printing extra blank lines with a plain <code>echo</code> so that visually separating between different commands is even clearer.</p>
+<a href="#done" id="done" class="anchorina">
+  <hr></hr>
+</a>
+<p>The task scheduler is now done!
+Now instead of using <code>pueue add</code> in my various scripts, I can use <code>schedule.fish</code> instead; yet achieve a much nicer user experience.</p>
+<video controls>
+  <source src="task-scheduler-done.mp4" type="video/mp4">
+</video>
+<p>There's a reason I can't use this for running <em>every</em> long-running command, though.</p>
+<p>In fish, I can create a hotkey that blammoes my commandline as a singular argument to <code>schedule.fish</code>, which is great but has a massive caveat: it <em>won't</em> expand the variables to their real values. The server will receive the command raw, and will try to resolve the variables — but it most likely doesn't know about them.</p>
+<p>The biggest usecase that showed itself very quickly is my <a href="https://axlefublr.github.io/blammo/">blammo</a> concept.
+The <code>in</code> variable in fish contains the current / selected files, if I open myself a fish from helix or yazi.
+I can then do something like <code>magick $in (path change-extension .webp $in)</code> for example.</p>
+<p><code>in</code> is a local variable set by my config.fish, so not only is it not known by the server, but it also would be outdated if it <em>was</em> known.
+And that's just one variable! Specialcasing for <em>just</em> that one is silly — what if I use some variables interactively, and want to schedule that command to execute?</p>
+<p>I started implementing a way to share all the environment variables, and then also all the <em>local</em> fish variables, to the server; so that it could execute the given command in the correct environment.
+I'll spare you the details, but I fairly quickly realized that it's a bad road to walk.
+Feels dirty, incredibly so, and is filled with caveats.
+I need <em>another</em> system.</p>
+<h1 id="three-months"><a class="zola-anchor" href="#three-months" aria-label="Anchor link for: three-months">three months</a></h1>
+<p>...ago, is when I started implementing this system, and writing this blog post.
+The second system that I developed at the time felt <em>fairly</em> good, but I wasn't backflipping over it.
+So finishing both the system and the blog post got kind of shelved.</p>
+<p>Until a few days ago.</p>
+<p>Niri's alt-tab / mru functionality has one downside that I think is the biggest for why I (still 😭) underuse(d :o) it. <br />
+It shows you <em><strong>all</strong></em> the windows... What?</p>
+<p>Well you see, I have direct hotkeys to reach almost <em>all</em> of the windows I have open at most times; so when I use alt tab to get to some window of interest, I also need to mentally filter through windows that I wouldn't be getting to with alt-tab to begin with. <br />
+I thought “what if I could filter out some windows from alt-tab?”</p>
+<p>And so I did! Not in a particularly sharable way, though<a href="#footnote-4" id="headnote-4" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>4</sup>
+</a>
+. I straight up hardcode the windows I never want to see, in a new mru scope called “Custom” — so now I have a hotkey that lets me alt-tab <em>only</em> through the windows of interest, ignoring all those I can get to directly.</p>
+<p>Proud of my accomplishment, I thought to implement another scope for sheer fun.
+One of the first ideas that came to mind was an Urgent scope<a href="#footnote-5" id="headnote-5" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>5</sup>
+</a>
+ — that would contain only the windows that are currently urgent/require attention.
+You might be familiar with the concept back on windows, where windows yelled at you covered in orange from the taskbar.</p>
+<p>Normally an <em>annoying</em>, rather than useful feature; but a 💡 suddenly shone.
+I can make terminals urgent <strong>intentionally</strong>.</p>
+<p>The core problem I'm trying to design to fix, are long-running commands.
+Something that I set to execute, and it maybe takes so long that I forget about it altogether.
+Or worse: something that I keep checking way too often for my own sanity. Nibble 2 /ref <br />
+I want to be <em>notified</em> of the execution finishing, and I also want to make it easy to <em>travel</em> to the window, whose command just finished.</p>
+<p>The Urgency scope helps me solve the latter question: if a long running command makes its terminal urgent after finishing, the window will appear in alt tab, and I can <strong>without thinking</strong> (very crucial) jump to it, with a simple press of a hotkey.</p>
+<h1 id="complications"><a class="zola-anchor" href="#complications" aria-label="Anchor link for: complications">complications</a></h1>
+<p>Solving the former question, though, is a bit more complicated.
+Obviously, to be notified, I send a notification.
+But I don't want to see a notification on <em>every</em> command I execute in my terminal, right?
+If I already have the terminal in focus, it's pretty obvious when a command finishes.</p>
+<p>So I need to differentiate a focused vs unfocused terminal somehow.
+Fish shell has events for that :D <code>fish_focus_in</code> and <code>fish_focus_out</code> <br />
+Yay right? Not quite... They just don't work for me for some reason?</p>
+<p>Two functions, each one catching one of the events and doing a <code>notify-send</code> for testing did <em>nothing</em>, despite indeed loading in my configuration.
+I even tried explicitly binding the escape sequence that is supposed to happen on focus in/out, to doing that <code>notify-send</code>, but that didn't work either.
+It looks like foot doesn't send these events <em>to</em> fish shell? Very unfortunate.</p>
+<h1 id="the-sorrow-ref"><a class="zola-anchor" href="#the-sorrow-ref" aria-label="Anchor link for: the-sorrow-ref">the sorrow /ref</a></h1>
+<p>The bell character is pretty cool.
+Historically it was used as a sort of notification, and modern terminals allow you to configure <em>what</em> actually happens when a bell character is printed.
+Crucially, it will make the window <em>urgent</em>, often even by default!</p>
+<p>And in foot (as well as any other terminal worth using), you can configure the bell character to produce a notification as well.
+The main difference being that the notification is <strong>only</strong> made if the window is <strong>not</strong> focused.</p>
+<p>It's kind of disappointing, actually. I rely on foot to do basically all the behavior for me...
+The fish events working would make my solution a lot more satisfying.</p>
+<p>In ~/.config/foot/foot.ini:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="ini"><span class="giallo-l"><span style="color: #7DAEA3;">[bell]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">urgent</span><span style="color: #E49641;font-weight: bold;">=</span><span>yes</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">notify</span><span style="color: #E49641;font-weight: bold;">=</span><span>yes</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">[desktop-notifications]</span></span>
+<span class="giallo-l"><span style="color: #78BF84;">command</span><span style="color: #E49641;font-weight: bold;">=</span><span>notify-send -- </span><span style="color: #D3AD5C;">&#39;🚀 ${window-title}&#39;</span></span></code></pre>
+<p>Something we lose out on here, is ability to tell <em>how</em> the command finished — with a success or a failure.
+If I knew the focused status of the window from within <em>fish</em> logic, I could send a notification with ✅ on success, and with a ❌ on failure.
+But what I'm forced to do instead, is just print the bell character every time a command finishes; that bell character is then “caught” by foot, and a notification is sent.</p>
+<p>You could add a <code>printf \a</code> into your <code>fish_prompt</code>, but I do it slightly fancier and add a hook into my config.fish:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> on_fish_postexec --on-event fish_postexec</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    bell</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>I then do something similar for nushell:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="nushell"><span class="giallo-l"><span>$env.config.hooks.pre_prompt</span><span style="color: #E49641;font-weight: bold;"> =</span><span> [ {</span><span style="color: #7DAEA3;"> printf</span><span style="color: #D3AD5C;"> \a</span><span> } ]</span></span></code></pre>
+<p>Now <em>both</em> shells notify me when they finish running a command, <em>only</em> if their controlling terminal window is <strong>not</strong> in focus, <em>and</em> I don't need to execute the command in any sort of special way — I <em>just</em> press <kbd>Enter</kbd> like usual and get a notification at the end :D</p>
+<p>There's some silver lining in just using a normal ass foot feature, though.
+<code>${window-title}</code> is a cool idea!</p>
+<p>The format I was going to do, is <code>❌ $cwd</code> / <code>✅ $cwd</code>, where <code>$cwd</code> is the basename of the current working directory of the command that finished.
+But showing the <em>window title</em> is slightly better!</p>
+<p>The window title my terminals give themselves are <em>already</em> the basename of the current working directory, unless ☝️ I gave that terminal some sort of static window title.
+For instance, I have a permanently staying terminal titled <code>toggleterm</code>, that is named that way so that my hotkey to toggle it works.
+And so, seeing a <code>🚀 toggleterm</code> is a lot more useful than seeing <code>🚀 ~</code></p>
+<p>This adventure made me more intentional about titling, altogether.
+Previously, all non-statically named terminals were just called <code>foot</code>.
+But to make the Custom and Urgent mru scopes more useful, showing the basename of the working directory via the title became a lot more significant.</p>
+<p>Something helpful, as well, is that if a command <em>fails</em>, its title is now not just <code>niri</code>, but <code>niri ❌</code>.
+So the issue of <code>🚀</code> being too vague is kind of healed by this.</p>
+<p>I start a command, and go away.
+After some time, it fails, and I get a notification saying <code>🚀 niri</code>.
+I press <kbd>meta+r</kbd> to open the urgent window picker, and see the actual window title is <code>niri ❌</code>.
+That means that I definitely should go check out what went wrong, and maybe try again.
+But if all I wanted to do is to execute the command and then close the terminal (if it succeeded), here I would be able to do so, right from the mru ui, <em>without</em> needing to first actually <em>go</em> to the window — a lack of a <code>❌</code> in its title would mean that it finished successfully, and can be closed safely.</p>
+<h1 id="finishing-touches"><a class="zola-anchor" href="#finishing-touches" aria-label="Anchor link for: finishing-touches">finishing touches</a></h1>
+<p>Pretty goated workflow, isn't it?
+I can spawn as many terminals with long-running commands as I want, and then jump to all the finished ones (or not even; just close them) very easily and <strong>mindlessly</strong>.
+A solution you don't have to think about is often the best solution.</p>
+<p>One small caveat though. As is, the receiver we talked about in the first section <strong>isn't</strong> made urgent.
+I do have a separate hotkey to go to it specifically, but I love the idea of instinctively pressing <kbd>meta+r</kbd>, whenever “something finishes”, rather than having to mentally separate the receiver from other finishing terminals.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A9B665;">mkfifo</span><span> ~/.local/share/mine/task-scheduler </span><span style="color: #E49641;font-weight: bold;">2&gt;</span><span>/dev/null</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">set</span><span> -l this_window_id (</span><span style="color: #A9B665;">nu</span><span> --no-std-lib -n -c</span><span style="color: #D3AD5C;"> &#39;niri msg -j windows | from json | where app_id starts-with foot | where title == &quot;receiver&quot; | get id | first&#39;</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">tail</span><span> -f ~/.local/share/mine/task-scheduler |</span><span style="color: #EA6962;"> while</span><span> read -z first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    and</span><span> read -z second</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    if</span><span> test </span><span style="color: #B58CC6;">$</span><span>first != ~</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o b58cc6</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        string</span><span> replace -r</span><span style="color: #D3AD5C;"> &quot;^</span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">HOME&quot; &#39;~&#39;</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        cd</span><span style="color: #B58CC6;"> $</span><span>first</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    while</span><span> true</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o e491b2</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span><span style="color: #B58CC6;"> $</span><span>second</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set</span><span> -l first_word (</span><span style="color: #A9B665;">string</span><span> split </span><span style="color: #D3AD5C;">&#39; &#39;</span><span style="color: #B58CC6;"> $</span><span>second)[1]</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        fish</span><span> -c</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> &lt;</span><span>/dev/tty</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>status -eq 0</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> -o a9b665</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span><span> success</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            notify-send</span><span style="color: #D3AD5C;"> &quot;✅ </span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">first_word&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            echo</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> -o ea6962</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        notify-send</span><span style="color: #D3AD5C;"> &quot;❌ </span><span style="color: #B58CC6;">$</span><span style="color: #D3AD5C;">first_word&quot;</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        niri</span><span> msg action set-window-urgent --id</span><span style="color: #B58CC6;"> $</span><span>this_window_id</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        confirm.rs</span><span> failure </span><span style="color: #D3AD5C;">&#39;[r]estart&#39; &#39;[e]dit&#39; &#39;[k]ancel&#39;</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> read</span><span> -l response</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        set_color</span><span> normal</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">        echo</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        if</span><span> test </span><span style="color: #B58CC6;">$</span><span>response = k</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">            break</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        else if</span><span style="color: #A9B665;"> test</span><span style="color: #B58CC6;"> $</span><span>response = e</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">            set</span><span> second (</span><span style="color: #A9B665;">echo</span><span style="color: #B58CC6;"> $</span><span>second</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> vipe</span><span> --suffix fish)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">        end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">    end</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cd</span><span> ~</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Normally, just doing <code>bell</code><a href="#footnote-6" id="headnote-6" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>6</sup>
+</a>
+ would do the job, but in this case it would do a bit <em>too</em> much job.
+We already make notifications, and they also come with success/failure differentiation.
+<code>bell</code>ing would not only make the window urgent, but send <em>another</em>, now useless notification.
+So I just make the window urgent manually 🤷‍♀️</p>
+<p>I thought about removing the distinction here altogether, just so I could do a basic <code>bell</code>, but in terms of the <em>receiver</em>, it's way too important to be able to ignore successes.
+Say I schedule 5 baalorlord vods to get downloaded — I don't want to feel pressured to keep checking after <em>each</em> of those finishes downloading.</p>
+<p>Which is unlike non-receiver command finishes — an offshoot command I may execute from a normal terminal I probably <em>do</em> want to come back to / handle as soon as it finishes, regardless of status.</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ Check <code>man fifo 7</code> for more info on them.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/wks/blob/f64cf837ee456626bcaa8d2c185b6939f5c15b5d/src/bin/confirm.rs">Backup link</a></p>
+<p><a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ <code>moreutils</code> package on arch.</p>
+<p><a href="#headnote-4" id="footnote-4" class="headnote" title="Click to go back">
+  <sup>4</sup>
+</a>
+ It's available in my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/niri">niri fork</a>, take a look if you're interested.</p>
+<p><a href="#headnote-5" id="footnote-5" class="headnote" title="Click to go back">
+  <sup>5</sup>
+</a>
+ <em>This</em> is more shareable though! <a rel="noopener external" target="_blank" href="https://github.com/niri-wm/niri/pull/4208">It's available as a pr</a></p>
+<p><a href="#headnote-6" id="footnote-6" class="headnote" title="Click to go back">
+  <sup>6</sup>
+</a>
+ I never made this clear, but <code>bell</code> is my fish alias for <code>printf \a</code>. Slightly cleaner semantics.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<div class="preview empty previous"></div>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;nirism&#x2F;" class="preview next">
+			<span class="name">nirism</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

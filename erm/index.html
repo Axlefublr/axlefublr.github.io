@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>every row modifiers</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;on-wake-actions&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">change wallpaper on wake</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;floorp&#x2F;" class="preview next">
+			<span class="name">bye bye firefox</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">every row modifiers</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-04-14">2025.04.14</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 12</div> -->
+				<p>An AI hallucinated, and god am I thankful that it did.</p>
+<a href="#start" id="start" class="anchorina">
+  <hr></hr>
+</a>
+<p>I've been trying to find reasons to finally switch to <a rel="noopener external" target="_blank" href="https://github.com/jtroo/kanata">kanata</a>: I've tried it before in the past, and while it was really cool, ultimately it didn't feel worth the effort.</p>
+<p><strong>But</strong>! If I collect enough significant advantages over <a rel="noopener external" target="_blank" href="https://github.com/xremap/xremap">xremap</a>, I'll be able to power through the magnitudional task of reading through the docs, and processing the very hard concept of how remapping works in kanata.</p>
+<p>First, my friend <a rel="noopener external" target="_blank" href="https://discord.com/users/660129612256247845">amandin</a> <em>swears by</em> homerow mods. I've tried them out before and they didn't work out :c <br />
+But maybe there's something special about his approach that is only possible in kanata? (spoiler: yes but not his).</p>
+<p>My <a href="https://axlefublr.github.io/magazines/">magazine</a> implementation is like, 900+ lines of yaml. Hilariously, I want to add even more! But doing this with xremap is just not viable anymore... Maybe kanata has the answer, with all its extra functionality?</p>
+<p>I was talking with chatgpt, trying to compare xremap to kanata before I decide to embark on this journey. <br />
+It told me that xremap operates on a higher level than kanata: kanata using evdev, and xremap being on the OS level. <br />
+For a remapping program, it's better to be lower, so this got me convinced that I should switch to kanata!</p>
+<h1 id="thank-the-hallucinaton"><a class="zola-anchor" href="#thank-the-hallucinaton" aria-label="Anchor link for: thank-the-hallucinaton">thank the hallucinaton!</a></h1>
+<p>Turns out that both xremap and kanata operate on the same level (evdev). <br />
+Thankfully I realized this only <em>after</em> I finished my switch to kanata: thinking that I'll get a performance benefit (smaller delays) helped me stay motivated :3</p>
+<p>Little did I know that I'll be getting myself into <em>larger</em> delays! Because I now use home row mods 🥳</p>
+<h1 id="every-row-mods"><a class="zola-anchor" href="#every-row-mods" aria-label="Anchor link for: every-row-mods">every row mods</a></h1>
+<p>The basic idea of home row mods, is for you to make <kbd>a</kbd>, <kbd>s</kbd>, <kbd>d</kbd>, <kbd>f</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd>, <kbd>;</kbd> into tapholdy modifiers. <br />
+If you just tap the key, it produces the key. If you <em>hold</em> the key, it becomes a modifer like <kbd>Shift</kbd>.</p>
+<p>The computer does not (yet) read your mind, so it needs some semantic to figure out what is a tap and what is a hold. <br />
+Usually tapholdies wait for a timeout, after which the key will act as its hold variation. If you <em>released</em> the key before this timeout elapsed, it will fire the tap variation.</p>
+<p>So this is pretty interesting! <br />
+Your muscle memory is <em>strongly</em> used to keys doing their action as soon as you <em>press</em> them, not <em>release</em> them. <br />
+When you first try home row modifiers, they feel very weird exactly for this reason.</p>
+<p>But the biggest reason for why people might give up on home row modifiers, is because of the <em>home row</em> part. <br />
+<em>Some</em>, but not <strong>all</strong> keys acting only on release feels <em>very</em> confusing and spotty! You can reasonably get used to this behavior if all keys acted the same way, but if only <em>some</em> of them do, it's way too tricky to get comfortable with!</p>
+<p>So I came up with a 💥ive idea: I will make <em>every single key</em> tapholdy, even if I don't yet have a usecase for the hold behavior. This is just to get consistency across <em>all</em> keys I press (except <kbd>Enter</kbd> for now, incidentally), while also allowing easier addition of extra behavior onto key holds, without having to retrain my muscle memory every time.</p>
+<h1 id="an-important-caveat"><a class="zola-anchor" href="#an-important-caveat" aria-label="Anchor link for: an-important-caveat">an important caveat</a></h1>
+<p>Having to actively wait for a timeout to elapse to use <em>any</em> modifier doesn't sound like a good value proposition. <br />
+This is why kanata provides an alternative variant of the usual <code>tap-hold</code> action: <code>tap-hold-release</code>.</p>
+<p>If you press and release a key while holding a tapholdy, it will automatically be considered as a holdy. <br />
+This variation is our second thing that makes tapholdies viable! I hate it when <em>waiting</em> is an input; but if I can learn an alternative way to use my keyboard to circumvent it, I'm far more excited about the whole idea!</p>
+<p>It's fairly difficult to get used to, don't get me wrong, but I assume I'll eventually get very comfortable at making sure to release keys before releasing their respective tapholdy.</p>
+<p>Here's another variation, that sounds even better, until you actually use it :p <br />
+<code>tap-hold-press</code> considers a tapholdy to be a holdy if you <em>press</em> another key while holding it. <br />
+Rather than press and <em>release</em> of the above action, <em>just</em> the press is enough.</p>
+<p>This makes using modifiers heavenly! But typing normally? Hellish! <br />
+You don't realize how often you're pressing another key before releasing the first one, until you try to use <code>tap-hold-press</code>. <br />
+I encourage you to try, though! There's probably a level of typing speed at which this doesn't matter that much, but at mine (~75) it's pretty unbearable.</p>
+<h1 id="the-goodies"><a class="zola-anchor" href="#the-goodies" aria-label="Anchor link for: the-goodies">the goodies</a></h1>
+<p>Now that we've talked about how to make tapholdies viable, let me share how I made them useful for myself!</p>
+<p><a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/kanata/kanata.kbd">Here's my kanata config.</a></p>
+<p>First, I made <kbd>d</kbd>/<kbd>k</kbd> to holdy into <kbd>ctrl</kbd>, <kbd>s</kbd>/<kbd>l</kbd> -&gt; <kbd>shift</kbd>, <kbd>f</kbd>/<kbd>j</kbd> -&gt; <kbd>alt</kbd>, and <kbd>w</kbd>/<kbd>o</kbd> -&gt; <kbd>meta</kbd>.</p>
+<p>I never need to press <kbd>shift</kbd> along with <kbd>meta</kbd>, which allowed me to free up <kbd>a</kbd>/<kbd>;</kbd> for other uses, where pressing possibly <em>all</em> modifiers (except <kbd>meta</kbd>) at once is significant.</p>
+<p>So now, my tapholdy <kbd>a</kbd> acts as an arrow keys layer! Along with things like <kbd>pagedown</kbd>, <kbd>pageup</kbd>, <kbd>home</kbd>, <kbd>end</kbd>, <kbd>backspace</kbd>, <kbd>delete</kbd>, <kbd>tab</kbd>, and even <kbd>enter</kbd>.</p>
+<p>Back in xremap, I also had an arrow keys layer similar to this one. However, instead of being a <em>while held</em> layer, it was a <em>toggleable</em> layer, that was much more of a pain to use because even for a single arrow down I'd have to press <kbd>capslock+f</kbd> twice.</p>
+<p>But now that I can just hold <kbd>a</kbd> instead of trying to come up with a modifier for which I have no available key, I can easily use the arrow keys layer as a "while held"! <br />
+Absolutely stupid hotkeys like discord's <kbd>ctrl+shift+alt+[down|up]</kbd> and firefox's <kbd>ctrl+shift+[pgup|pgdn]</kbd> are now not just viable, but <em>easy</em> to press!</p>
+<p>I value remappability in programs so strongly (and it's part of the reason why I <a href="https://axlefublr.github.io/floorp/">switched to floorp</a>) because I refuse to press the really uncomfortable default hotkeys that plague every program. <kbd>ctrl+f</kbd>? <kbd>ctrl+d</kbd>? No thank you. <br />
+But now they're not a problem!</p>
+<p>So aside from just making things more comfortable, home row mods also allow me to <em>chill</em> about remapping every program I use to make it viable: since I can press anything easily now, I can just stick with the defaults of most things and not worry about it!</p>
+<p>Tapholdy <kbd>;</kbd> is my numpad layer. Always hated reaching for the number row, so now I have this neat virtual numpad: 1234567890 = fdsrewvcxa <br />
+Tapholdy <kbd>/</kbd> leads me to the function key layer (F1-F12), and mimics the number layout of the numpad layer. F11 goes on q, F12 on z. Sue me. <br />
+<kbd>e</kbd>, <kbd>i</kbd> and <kbd>'</kbd> are layers for the various "global functionality" hotkeys I used to have in xremap. <br />
+Things that used to be on capslock or the meta key, possibly with extra modifiers, are just a single key away now!</p>
+<p>I hate the effort it takes to type various symbols, like @*#`&amp;, etc. This is why some time ago in xremap, I made capslock + the right side keys to output all these symbols, placed how I like! <br />
+The downside is that with a single modifier, I can't exactly place <em>all</em> the special characters on the keys that I'd like, and some of them still need to be on an extra modifier aside from capslock, to fit. <br />
+This is why I use <kbd>x</kbd> and <kbd>c</kbd> as my <em>two</em> symbol layers!</p>
+<p>Now not only do I get to place all of the symbols onto my preferred keys, but I also get a bunch of unoccupied spaces! That's where the next thing comes in.</p>
+<p>On linux, you can press <kbd>ctrl+shift+u</kbd> almost everywhere to insert a unicode symbol by typing in its codepoint. <br />
+Kanata has an interesting hacky action called <code>unicode</code> that uses this exact mechanism, to allow you to enter unicodes on a whim.</p>
+<p>To my great surprise, it actually works and does so consistently! So I made use of the free spaces on my symbol layer, to have them <code>unicode</code> other things I commonly use: “”—‼️™</p>
+<p>But the concept of the <kbd>x</kbd> and <kbd>c</kbd> layers is still, for the most part, for "special characters" rather than emojis. And I use emojis a lot! <br />
+So that's why I decided to add <em>another</em> layer that is specifically for entering emojis. This layer uses the keys <kbd>r</kbd> and <kbd>u</kbd> so that I can comfortably use both sides of my keyboard to assign emoji shortcuts. Here are some of the emojis that are on this layer now: 😭🤯👏✍️🗣️💀🔥🚀🐐←↓↑→😋🥺❌✅</p>
+<h2 id="this-deserves-a-section"><a class="zola-anchor" href="#this-deserves-a-section" aria-label="Anchor link for: this-deserves-a-section">this deserves a section</a></h2>
+<p>Now onto the final tapholdy, the one that fully wraps me in excitement and awe at my decision to switch to 1. kanata 2. every row modifiers. A layer so good that it can make the entire journey worth it by itself. <br />
+Meet the venerable 𝕄𝕆𝕌𝕊𝔼 𝕄𝕆𝔻𝔼</p>
+<p>(I just went and made a doublestruck letter layer for this, lol)</p>
+<p>I have tried many times to make mouse mode work, and have attempted multiple very different approaches. <br />
+All of them ended up being constantly forgotten about, as none of them are truly <em>comfortable</em> to use.</p>
+<p>Since I have so many free modifiers, and am interested in making full use of kanata, I decided to try making a mouse mode again. I did not expect for it to be this amazing!</p>
+<p>I hold <kbd>Space</kbd> to enable the layer, and that's quite important for reasons I'll explain later. <br />
+<kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd> move the mouse directionally.</p>
+<p>For the first 300ms, the moving speed is quite slow. But after that, the mouse moves at a good pace. <br />
+I found that, for better or worse, it's most natural for me to get "more or less there" with the mouse, and then do microadjustments to actually pinpoint the place I want to click. <br />
+By starting slow, I can play into this naturality: I can easily tap multiple times to adjust the precise position, but move plentily fast on hold!</p>
+<p>As I mentioned, usually the mouse mode is something I didn't use in normal operation, but instead only when I felt like being extra. But <em>this</em> I actually feel like using almost always, over the real mouse!</p>
+<p>Initially I went with the obvious <kbd>u</kbd>, <kbd>i</kbd>, <kbd>o</kbd> for the left, middle, right clicks, but during usage I realized something interesting: moving the mouse with the mouse mode feels <em>so</em> good, that I can actually consider click-dragging over text to select it... Yes really! <br />
+Holding <kbd>u</kbd> with one of, or multiple of <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd>, <kbd>l</kbd> feels really uncomfortable, as I didn't design with the thought in mind. <br />
+That's why I put <kbd>f</kbd> to be left click, <kbd>d</kbd> to right click, <kbd>s</kbd> to middle click, and this is also the reason why <kbd>Space</kbd>, rather than my initial <kbd>z</kbd>, is the key that enables mouse mode.</p>
+<p>Sounds perfect at this point, right? Now I can move and then click with no interruption, as well as easily be able to click and drag, with any of the three mouse buttons! <br />
+But I got another idea: since I'm already supporting click dragging with all three buttons, why wouldn't I also support holding modifiers while clicking? <br />
+<kbd>s</kbd>, <kbd>d</kbd> and <kbd>f</kbd> would be required for this, so I moved left click onto <kbd>a</kbd>, right click to <kbd>;</kbd>, middle click to <kbd>'</kbd>.</p>
+<p>Incidentally, mouse wheel scrolling are ←↑↓→ on <kbd>m</kbd>, <kbd>,</kbd>, <kbd>.</kbd>, <kbd>/</kbd> and the back / forward buttons are on <kbd>[</kbd> / <kbd>]</kbd></p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">conclusion</a></h1>
+<p>It took me around 3 days to get comfortable using this entire system. I might be spotty at some hotkeys here and there, but normal operation feels quite solid already. <br />
+This sounds like a pretty fast learning curve to me!</p>
+<p>Not having to cry over horrendous hotkeys, or over keys being too far away to be viable to press, is truly heavenly. <br />
+If you haven't tried every row mods, and <strong>especially</strong> if you have and gave up, I encourage you to apply my approaches and tips to make this system viable for yourself too. It's a lifechanger!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;on-wake-actions&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">change wallpaper on wake</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;floorp&#x2F;" class="preview next">
+			<span class="name">bye bye firefox</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

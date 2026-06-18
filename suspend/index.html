@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>suspend is actually neat</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;stray-from-defaults&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">stray from defaults</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;safety-razor&#x2F;" class="preview next">
+			<span class="name">safety razors slap</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">suspend is actually neat</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-12-31">2024.12.31</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 7</div> -->
+				<p>Part of why <a href="https://axlefublr.github.io/why-i-hate-kitty/">I still use kitty</a> is because its window manipulation is goated. <br />
+You can create windows (panes), tabs, overlay windows (panes) and os windows using hotkeys. <br />
+That's cool enough on its own, but you can do all of that from a <em>script</em> too!
+This lets you integrate window manipulation into a bunch of places, so it's quite workflow-building.</p>
+<p>Say I'm in helix, and want to run some shell command.
+I can of course use <code>:sh</code>, but it's pretty cumbersome, so I'd rather use my actual terminal.</p>
+<p>Not only can I <em>just</em> create a new pane, I can create it in the same cwd as the current one, or as the same cwd as <em>helix</em> is in (<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">my helix fork</a> exclusive feature), or in the parent directory of the current helix buffer (helix fork specific also).</p>
+<p>This isn't a post on why kitty is amazing, because as I expressed in the past, I <em>hate</em> kitty.
+I more so want to shed light on that my window manipulating workflow is super solid, so there was never a need to look into the shell feature called "suspending".</p>
+<p>Plus, it's kind of confusing and last time I tried it, it felt wonky.</p>
+<a href="#yoink" id="yoink" class="anchorina">
+  <hr></hr>
+</a>
+<p>I happened to be reading a <a rel="noopener external" target="_blank" href="https://jvns.ca/blog/2024/07/03/reasons-to-use-job-control/">blog post</a> by Julia Evans some time ago, and it goes on to explain the benefits of actually using job control. <br />
+(It was a great read but) at this point I don't really remember a single point; all I remember is that "job control <em>can</em> be kinda wonky but it's also super neat".</p>
+<p>I decided to give it another try. <br />
+While in helix for example, instead of opening another pane to run a shell command (only to close the pane right after), I would instead <em>suspend</em> helix and execute the command in the shell that I already had open.</p>
+<p>Very very quickly I realized that I absolutely love it!</p>
+<h1 id="command-output"><a class="zola-anchor" href="#command-output" aria-label="Anchor link for: command-output">command output</a></h1>
+<p>When I create a new pane to run a shell command, I'll probably close it right after. <br />
+Having windows I forgot about <em>open</em> feels messy, after all.</p>
+<p>But when I close a pane, naturally I lose all the output of the commands that I ran previously.</p>
+<p>This doesn't happen with a suspending workflow!
+The output of previous commands actually <em>stays</em> and I can look at it again as many times as I want to.</p>
+<p>Better yet, I can switch back and forth between helix and the shell output very quickly — as fast as I would be switching between multiple (fullscreened) windows.
+(But with the benefit of not needing to clean anything up)</p>
+<p>This factor really started to shine once I was fucking around with colors using <code>pastel</code>. <br />
+I couldn't quite get the correct lightness factor on some color, and so I was going back and forth between helix and my shell, using the previous color (displayed in the output) as the input to a new <code>pastel darken 0.01</code> command; then, going back to helix to try out where I was actually using the color.</p>
+<p>This worked so amazingly for me because I never felt like I needed to clean up a pane after I'm "done". <br />
+With a pane, I might've closed it early and lost output that I then would realize I need, a couple of seconds later. <br />
+And in the same fashion, keeping multiple windows open feels quite bloaty, and I see it disrupt my worklow in a way that suspending simply doesn't.</p>
+<h1 id="toggle-hotkey"><a class="zola-anchor" href="#toggle-hotkey" aria-label="Anchor link for: toggle-hotkey">toggle hotkey</a></h1>
+<p>Another thing that helps a lot in the workflow, is how natural it is to make a hotkey for it.</p>
+<p>With a pane, you need a hotkey to <em>create</em> a window, and a different hotkey to switch between windows.
+Then maybe even another hotkey to switch windows <em>backwards</em>.</p>
+<p>I don't need that with suspend! <br />
+The hotkey is simply <kbd>ctrl+z</kbd> to suspend; and I made a hotkey in my <em>shell</em> to run <code>fg</code> — that puts the latest job into the foreground.</p>
+<p>I do something in helix and realize I need to run a command.</p>
+<ol>
+<li><kbd>ctrl+z</kbd></li>
+<li>run command</li>
+<li><kbd>ctrl+z</kbd> <em>again</em>, now to go back to helix</li>
+<li>FIN</li>
+</ol>
+<p>Rather than:</p>
+<ol>
+<li>hotkey 1 to create a new pane</li>
+<li>run command</li>
+<li>hotkey 2 to close it</li>
+<li>FIN?</li>
+<li>oh fACK I needed that output, now I have to repeat this process to get it back</li>
+</ol>
+<a href="#strong" id="strong" class="anchorina">
+  <hr></hr>
+</a>
+<p>Neither of these are particularly <em>that</em> strong of arguments; ultimately this suspending workflow simply felt <em>neat</em>. <br />
+So try it out, maybe you're be as overjoyed as I am!</p>
+<p>However, I was still missing a part of my windowing workflow power. <br />
+As I mentioned, I can do something like "create pane in the working directory of <em>helix</em>" or "... in the parent directory of the current helix buffer".</p>
+<p>The pane creating hotkeys know about this info because I explicitly pass it; how would suspend know about it?</p>
+<p>By me <em>forcing</em> it to know! 😈</p>
+<a href="#force" id="force" class="anchorina">
+  <hr></hr>
+</a>
+<p>In my helix fork, I made the suspend action write the current buffer's parent directory to a path, and the current helix cwd to a different path. <br />
+Then for yazi, I wrote a small plugin that writes the current directory path to both of those files every time I change directory.</p>
+<p>Now, I have a hotkey in my shell on <kbd>ctrl+y</kbd> that toggles between the two paths listed in those two files.</p>
+<p>So now, instead of needing to create a new pane in some specific directory with dedicated mappings, I can <em>retroactively</em> cd into the directory from which I want to execute the command.</p>
+<p>I'm working on a new script in helix, and want to run it. <br />
+I suspend helix, and press <kbd>ctrl+y</kbd> to switch to the parent directory of that script, and simply do <code>./script.fish</code>. <br />
+I press <kbd>ctrl+y</kbd> only once, assuming that my shell's cwd and <em>helix</em>'s cwd match up; <br />
+if they didn't, I'd have to press <kbd>ctrl+y</kbd> twice.</p>
+<blockquote>
+<p>Note that my <kbd>ctrl+z</kbd> is actually on <kbd>capslock+w</kbd> and <kbd>ctrl+y</kbd> is on <kbd>capslock+e</kbd> <br />
+So these two hotkeys are actually way more ergonomic to press than the <em>real</em> <kbd>ctrl+z</kbd> and <kbd>ctrl+y</kbd> would be</p>
+</blockquote>
+<p>Me storing helix's cwd solves the other part of of the windowing workflow — "create pane in the cwd of <em>helix</em>". <br />
+Except, it does it <em>better</em>.</p>
+<p>With the windowing workflow, I need to proactively think about how to create my new window. <br />
+"Which cwd do I need?"</p>
+<p>Even if I just default to helix's cwd, I'm bound to have to use a different mapping to open windows from helix, than I usually would anywhere else. <br />
+And even then, I still need to proactively think about creating windows in the parent directory of a buffer.</p>
+<p>The suspend workflow wins here yet again, because I <em>fix</em> my current working directory, instead of having to <em>prepare</em> it.</p>
+<p>The thought process in this workflow is way simpler.</p>
+<ol>
+<li>I need to execute a command</li>
+<li>suspend</li>
+<li><em>starts writing command</em></li>
+<li>"oh right I need to execute it from the parent directory of that buffer"</li>
+<li><em>presses <kbd>ctrl+y</kbd></em></li>
+<li><em>continues writing command and executes it</em></li>
+</ol>
+<p>I don't even need to <em>delete</em> the command and then re-write it; the cwd fix is on a hotkey! <br />
+So this process is <em>incredibly</em> smooth 😋</p>
+<a href="#hope" id="hope" class="anchorina">
+  <hr></hr>
+</a>
+<p>I hope I was able to show you how a suspend-driven workflow can work really well! <br />
+Try out using job control more, maybe you will discover that you love it too!</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;stray-from-defaults&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">stray from defaults</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;safety-razor&#x2F;" class="preview next">
+			<span class="name">safety razors slap</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

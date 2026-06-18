@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>my usb drive experience</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;recent-helix-burst&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">newest helix master features</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;magazines&#x2F;" class="preview next">
+			<span class="name">magazines</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">my usb drive experience</div>
+				</a>
+				<div class="date">
+					<time datetime="2024-11-15">2024.11.15</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 11</div> -->
+				<p>I hate buffering, so I download practically every youtube video I watch using yt-dlp. <br />
+That's all fun and great, however my 256gb laptop is slowly running out of space! <br />
+Well... that's a bit of an overestimation: I have hours upon hours of content downloaded and am still at only 71% usage, but that number freaks me out regardless!</p>
+<p>You may reasonably suggest to upgrade my SSD to something like 1 terabytes. <br />
+However, I find it boring! Often times when I solve some issue, I do it with a completely different agenda in mind.</p>
+<a href="#suboptimal" id="suboptimal" class="anchorina">
+  <hr></hr>
+</a>
+<p>If I upgrade the SSD, I just end up never having to worry about storage again (I keep everything pretty clean, so 1tb is more than enough) and learn <em>nothing</em>. <br />
+But if I try to solve the issue with a <em>usb drive</em>, now <em>that's</em> interesting.</p>
+<p>I know Linux's mechanics for mounting a drive, but mostly on paper — I've done them before, but they aren't something that I do often enough to put deeply into my workflow. If I <em>have to</em> use a usb drive, I'll learn about all the steps surrounding it more deeply, so I get a "learning benefit" by trading in effectiveness of the solution, lol.</p>
+<a href="#simple-parts" id="simple-parts" class="anchorina">
+  <hr></hr>
+</a>
+<p>As I've made clear, I don't have deep knowledge, but let's go through the simple parts that you may want to know, if you didn't already!</p>
+<p>On windows, new drives appear separately, as new drives. With their own letter and everything. If you get beyond drive <code>Z</code>, your computer explodes. Simple stuff.</p>
+<p>Linux does this differently! You don't get another <code>/</code> or anything like that — <em>you</em> get to decide where the (usb) drive lives by <em>mounting</em> it. You say to the filesystem: "hey, act like this usb drive is located here".</p>
+<a href="#mounting" id="mounting" class="anchorina">
+  <hr></hr>
+</a>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">sudo</span><span> mount /dev/sda1 /mnt/usb</span></span></code></pre>
+<p>Looks like a pretty simple command! What was most non-obvious to me in it, is the <em>directories</em> passed.</p>
+<p>"What in the living and dying hell is <code>/dev/sda1</code>?" — that is our usb drive! Well... saying that is a bit misleading. That name is not at all guaranteed and might be different for you, and that's if the drive got recognized to begin with!</p>
+<a href="#lsblk" id="lsblk" class="anchorina">
+  <hr></hr>
+</a>
+<p>So, let's call <code>lsblk</code> in our terminal and look at the output to try to find our drive:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span></span>
+<span class="giallo-l"><span>sda           8:0    1 230.5G  0 disk </span></span>
+<span class="giallo-l"><span>└─sda1        8:1    1 230.5G  0 part /mnt/usb</span></span>
+<span class="giallo-l"><span>nvme0n1     259:0    0 238.5G  0 disk </span></span>
+<span class="giallo-l"><span>├─nvme0n1p1 259:1    0  1000M  0 part /efi</span></span>
+<span class="giallo-l"><span>└─nvme0n1p2 259:2    0 237.5G  0 part /</span></span></code></pre>
+<p>Don't worry, it's confusing to me too! -1 clue what <code>MAJ:MIN</code> means, and <code>RM</code> is a wonder to me as well. Forget about <code>RO</code>. Anyway, I'm going to focus on the part that's going to be useful to you first.</p>
+<p>In the <code>NAME</code> column, thingies are shown in a tree structure. <br />
+<code>nvme0n1</code> is the name of my SSD drive! and <code>sda</code> is the name of the usb disk. Yipee 🥳</p>
+<a href="#tree-structure" id="tree-structure" class="anchorina">
+  <hr></hr>
+</a>
+<p>However, there's still this tree structure. This confused me, but now I finally realize what's happening: the items that are branches (with the <code>└</code> before them) are <em>partitions</em> of the above drive. <em>These</em> are what you should be pointing at when trying to specify a drive somewhere, <em>not</em> that parent item.</p>
+<p>So, what we did so far is the following: inserted the usb drive into some port, executed <code>lsblk</code> and found a drive that isn't our SSD. Then looked at all the partitions (branches) it has (may have more than 1 potentially) and took <em>that</em> as the thing that we'll be calling our usb drive.</p>
+<a href="#arbitrary-mount-point" id="arbitrary-mount-point" class="anchorina">
+  <hr></hr>
+</a>
+<p>That <code>/mnt/usb</code> directory is actually pretty arbitrary! The <code>/mnt</code> directory is a conventional place where you can <strong>m</strong>ou<strong>nt</strong> your various drives. <br />
+It is not the only place however, I <em>believe</em> ext4 (the linux filesystem you're probably using) allows you to mount things anywhere.</p>
+<p>So, in the <code>/mnt</code> directory I created a directory called <code>usb</code>. Just makes sense to name it that way, you can name it whatever you want!</p>
+<p>Keep in mind that <code>/mnt</code> is restricted, so you'll have to create <code>usb/</code> with elevated privileges:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">sudo</span><span> mkdir /mnt/usb</span></span></code></pre><a href="#restriction" id="restriction" class="anchorina">
+  <hr></hr>
+</a>
+<p>Because <code>/mnt</code> is restricted, <code>/mnt/usb/</code> is going to be restricted too. Considering that this our lovely personal usb drive, it makes sense to <em>own</em> it.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">sudo</span><span> chown username:username /mnt/usb</span></span></code></pre>
+<p>Viola, now the directory is actually ours 🥰. I sure hope you replaced <code>username</code> with your <em>actual</em> username!</p>
+<a href="#we-can-start-now" id="we-can-start-now" class="anchorina">
+  <hr></hr>
+</a>
+<p>After explaining what the directories mean, now <code>sudo mount /dev/sda1 /mnt/usb</code> makes a bit more sense. <br />
+We finally can start actually using our usb drive, as if it's just a normal directory on our filesystem!</p>
+<a href="#massive" id="massive" class="anchorina">
+  <hr></hr>
+</a>
+<p>The 61 gigabytes of content I had downloaded, I now started moving to my shiny new drive.</p>
+<p>Quickly issues started to arise, and my mirror rolled its eyes 🙄 when I said "I told you this would be a learning experience!".</p>
+<p>Sixty one gigabytes of data is quite a lot! Understandable that it would take some time to move. But it was getting ridiculous! <br />
+In my very rough count, it took TWO whole minutes to move a single gigabyte. The drive I bought is usb 3.1 so I was flabbergasted, but brushed it off as "damn I guess usbs are that slow still". <br />
+The last time I needed to use a usb drive <em>not</em> to install linux was back on windows, so I had no recollection of a good transfer speed. <br />
+However, in an interesting turn of events, this turned out to be a chehov's gun. Yes I am making a cliffhanger in a blog post, what about it &gt;:D</p>
+<a href="#fine" id="fine" class="anchorina">
+  <hr></hr>
+</a>
+<p>I don't need to move a whole ass 61gb of data often, if at all, so this slow transfer speed seemed to be an okay-ish tradeoff for the extra space I now get. <br />
+My internet speed will be the bigger bottleneck anyway.</p>
+<p>After ~4 hours (or so it felt), the moving <em>finally</em> finished. I excitedly went ahead to download more youtube videos, now to the <em>usb drive</em>, rather than my SSD.</p>
+<p>Exciting! <br />
+As I download the new videos, I decide to watch one I already have downloaded, at the same time. <br />
+After a while, I notice a <em>horrifying fact</em>... There's buffering now! <br />
+What the fuck? The whole reason I download all youtube videos I watch is to <em>avoid</em> buffering.</p>
+<a href="#fucked" id="fucked" class="anchorina">
+  <hr></hr>
+</a>
+<p>So I guess write speed is a bottleneck in the place that matters more: my watching experience... 😭</p>
+<p>Well, let's think about this: currently I have 6 videos downloading. All of them are written to the usb. <br />
+I'm not sure how read vs write conflict, but I'm sure writing that much introduces some congestion. <br />
+I guess I just have to download videos while not watching them at the same time! <br />
+That's kinda bad, but I can easily get used to it, no big deal.</p>
+<p>After my downloads all finished, I decided to test by watching another downloaded youtube video. Surely now the buffering is gone; there's no writes coming into the usb! <br />
+Oh my god... I am horrified to discover that I <em>still</em> have buffering... It's <em>maybe</em> not as bad, but this thought may just be powered entirely by bias.</p>
+<p>Let's start another chehov's gun here, and talk about something that <em>seems</em> unrelated.</p>
+<a href="#lights" id="lights" class="anchorina">
+  <hr></hr>
+</a>
+<p>I despise when hardware, like my laptop, earphones, headphones, speakers, power switches, phones, have some lights on them. <br />
+The reason for them to exist is to tell you information, like the charge percentage, connection state, on / off position. <br />
+However, I'm autistic! Those random lights can be a real bother when I'm trying to sleep, and yet my room lights up.</p>
+<p>When I first inserted my new usb drive, I was horrified to find out that it has a light on it too... <br />
+I guess I should've checked for that, but the design of the usb drive had nothing to suggest a light; <br />
+matter of fact, the light is <em>inside</em> of the usb, in a sorta awkward fashion.</p>
+<p>I would never expect that I would not only <em>like</em> this light, but also find it useful.</p>
+<p>I eventually naturally noticed that it stays solid some times, and blinks other times. <br />
+This <em>has to</em> mean something, right? Turns out that if it's blinking, some io operations are being done with the usb drive; if it's solid, none are happening.</p>
+<p>Nope, surprisingly enough I didn't read the manual on the usb drive (<code>HS-USB-M220P/256G/U3</code>); I discovered this behavior via another way:</p>
+<p>I remembered the <code>sync</code> command on linux. It flushes the read/write data to make sure it reaches its destination, <em>finalizing</em> all the read-write caches.</p>
+<p>As I was watching that youtube video I downloaded, with no other downloads happening at the moment, the light <em>was</em> flashing. <br />
+Fair enough, it's reading from the drive to let me watch the current video. So I close it, but still see it flashing even after waiting for a couple of seconds. <br />
+I do <code>sync</code> and eventually the flashing goes away 🤯 <br />
+So <em>maybe</em>, the weird buffering issue happened because of write caches staying for too long?</p>
+<p>Nope. Cool guess though.</p>
+<p>We handled chehov's gun #2, but didn't actually move to the solution.</p>
+<p>Let's check up on chehov's gun #1! What about those super slow write speeds anyway?</p>
+<a href="#specs" id="specs" class="anchorina">
+  <hr></hr>
+</a>
+<p>After not being to fix this buffering issue, it made me think: <br />
+I bought my laptop 2-3 years ago, for a pretty solid price, <em>new</em>. <br />
+How the fuck would it only have usb 2.0 ports? <br />
+That sure sounds unlikely!</p>
+<p>So this time I <em>do</em> google the <a rel="noopener external" target="_blank" href="https://www.asus.com/laptops/for-home/everyday-use/asus-m515-amd-ryzen-5000-series/techspec/">specs of my laptop</a>. <br />
+Europe! I <em>do</em> have a usb 3.x port!</p>
+<p>You might reasonably ask "how the hell do you not know that already?"</p>
+<p>Good question!</p>
+<p>I noticed a long time ago that usb 3.x ports are colored blue, to make them easy to tell apart from usb 2.0. <br />
+This seemed so consistent, that I simply ignored one of my ports as a possible solution.</p>
+<p>I have nothing to lose by trying to prove myself wrong, so I insert the usb into the one port I haven't tried, mount it, and try moving a big ass video file, that would usually take 2+ minutes to move.</p>
+<p>Well holy shit! It's moving <em>waaayyy</em> faster! Yes! This is definitely a 3.x port! <br />
+(however it is still massively slower than what I expected out of 3.x).</p>
+<h1 id="aha-chehov-s-gun-1-solved-everything"><a class="zola-anchor" href="#aha-chehov-s-gun-1-solved-everything" aria-label="Anchor link for: aha-chehov-s-gun-1-solved-everything">aha! chehov's gun #1 solved everything!</a></h1>
+<p>Right?..</p>
+<p>Wrong 😭</p>
+<p>Sure, moving stuff is now way faster, and I got a sense of regret due to the 4 hours of useless extra waiting, <br />
+but fascinatingly enough, I <em>still</em> had weird pauses in mpv.</p>
+<p>And as always, A™ Configuration™ Option™ saved the day.</p>
+<p>Turns out if you set <code>cache=yes</code> in your mpv config file, it will automatically prefetch the video you're watching wayyyy forwards, completely eliminating the pauses (that I call buffering), <em><strong>even</strong></em> if you're also downloading like 6 videos at the same time. <br />
+God I love mpv 😩 /srs</p>
+<p>Yipee 🥳</p>
+<h1 id="would-be-better-to-know-about-this-prior-wouldn-t-it"><a class="zola-anchor" href="#would-be-better-to-know-about-this-prior-wouldn-t-it" aria-label="Anchor link for: would-be-better-to-know-about-this-prior-wouldn-t-it">would be better to know about this prior, wouldn't it?</a></h1>
+<p>Nope, not really!</p>
+<p>I decided to buy a usb drive specifically to run myself into issues like all of these, and <em>learn</em> things by solving them. <br />
+I succeeded in that exact goal SPECTACULARLY. The decision went <em>exactly</em> according to plan.</p>
+<p>First, I now know that I have a usb 3.x port, and that the other two are usb 2.0.</p>
+<p>Then, for once I like a light in my hardware! <br />
+Thankfully, it turns off when the laptop goes to sleep (thank god). <br />
+I like it now because of how nice it feels to <em>have</em> the information of io operations given to me at all times. <br />
+If I notice the light blinking at a time where I don't expect, it's something that I can look into / investigate, rather than not know at all. <br />
+If you saw my window manager bar, you'd say "yep checks out". (I have like a billion widgets)</p>
+<p>Knowing the io operation information also made me <em>accept</em> a lesson I always thought to be unecessary bullshit.</p>
+<p>Since childhood, back on windows, people around me always said to right click the usb drive and click "safe remove". <br />
+I did it at first, of course, but after a while I noticed that it's just completely useless. Does seemingly nothing.</p>
+<p><em>Now</em> that I actually see the io operations by the light, I won't just pull out the usb all willy-nilly: it's <em>clear</em> that I would be fucking over <em>something</em>.</p>
+<p>So what I now do is first <code>sync</code>, and then <code>sudo umount /mnt/usb</code>. <br />
+For a shortcut that does <em>both</em> at the same time: <code>sudo eject /mnt/usb</code>.</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">conclusion</a></h1>
+<p>I sure learnt a lot! And still have the opportunity to learn more: experimenting with the drive's filesystem, figuring out an auto-mounting solution (requiring sudo every time will, I'm sure, get annoying), or maybe another problem I don't yet realize I have!</p>
+<p>And all these reasons are why it's sometimes reasonable to go for the worse solution, if you feel that it will lead you to something more important! :3</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;recent-helix-burst&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">newest helix master features</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;magazines&#x2F;" class="preview next">
+			<span class="name">magazines</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>proxy things</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;blammo&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">blammo</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;harp&#x2F;" class="preview next">
+			<span class="name">harp</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">proxy things</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-07-27">2025.07.27</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 20</div> -->
+				<p>I'm unfortunately in russia. <br />
+Since the start of the war, most services have left the country, now requiring a vpn to use.</p>
+<p>But funny thing — so did the <em>vpns</em>!</p>
+<p>First, some now required a vpn to access them (the another vpn). <br />
+Sounds pretty useless, but I could conceivably use some bad free vpn to then enable the good one, disconnect the free one and continue using the good one until I reboot. <br />
+So that worked to an extent, but it didn't last that long. <br />
+One by one, vpns started massively throttling, taking tens of minutes to connect, and eventually just not connecting at all. <br />
+Express, Nord, Air, Surfshark, CyberGhost, Private Internet Access, Proton, Windscribe, Mullvad — are all vpns I've used or tried using, until ultimately they <em><strong>all</strong></em> broke.</p>
+<p>I'm in quite a salted vegetable here, I certainly need to access things like discord, youtube, spotify, and most of the internet honestly; what do I do?</p>
+<h1 id="the-name-of-this-heading-would-be-a-spoiler-to-the-dramatic-tension-of-the-previous-sentence"><a class="zola-anchor" href="#the-name-of-this-heading-would-be-a-spoiler-to-the-dramatic-tension-of-the-previous-sentence" aria-label="Anchor link for: the-name-of-this-heading-would-be-a-spoiler-to-the-dramatic-tension-of-the-previous-sentence">the name of this heading would be a spoiler to the dramatic tension of the previous sentence</a></h1>
+<p>VPNs are not the first technology that allows you to avoid geo-restrictions. <br />
+Thanks to my friend's effortful history lesson on networking, I got a better idea of what a <em>proxy</em> is. <br />
+Better enough to now consider it as a possible solution.</p>
+<p>A proxy, in my understanding, is a server that can make requests <em>for you</em>. <br />
+It's exactly like sexism actually:<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+ you, the russian woman, saying something to another server is rejected. <br />
+So you ask a man (the proxy) to say the same thing <em>for you</em>, and give you the response — now it suddenly works.</p>
+<p>VPNs often work globally on your system which is very convenient,
+but you do tend to <em>need</em> geo-restriction-unlocking for only a few places. <br />
+Those few places, usually, allow you to configure the proxy!</p>
+<p>There are HTTP proxies you can find out there for free, but really shouldn't:
+the S part of HTTPS is very important for the <em>security</em> of your data, as without TLS,
+the data you send will be visible to the proxy itself — a bank password that you enter, for example. <br />
+Finding free HTTP<em>S</em> proxies is then a <em>privacy</em> concern, so I decided to <em>buy</em> one instead.</p>
+<h1 id="for-the-russians"><a class="zola-anchor" href="#for-the-russians" aria-label="Anchor link for: for-the-russians">for the russians</a></h1>
+<p>In this section I'll go over my exact process for buying a proxy, <br />
+but if you're not russian you're better off using some store that's not specifically tailored to russians. <br />
+Google for “buy https proxy” and you'll probably get there.</p>
+<p>Although, I'd recommend actually going through with my suggestions in the blog post, after you've completed it — I will be omitting some things until later notice for dramatic effect.</p>
+<p>As a hilarious way to force non-russian readers to skip this section, I'll write it <em>in</em> russian.</p>
+<p>Нашла сайт, где можно купить прокси: <a rel="noopener external" target="_blank" href="https://proxys.io/en">https://proxys.io/en</a> <br />
+Когда юзала VPNы, самые лучшие результаты у меня были используя сервера в Нидердландах, поэтому решила купить и прокси там же.</p>
+<p>Я плачу криптой, если честно уже не помню почему; <br />
+Для этого я использую сервис <a rel="noopener external" target="_blank" href="https://lk.matbea.com/en">MATBEA</a>. <br />
+У них ещё есть приложение на андроид, оно мне кажется более приветливым, так что обычно использую его.</p>
+<p>С помощью MATBEA, можно обменяться валютой с человеком —
+вы отправляете классические деньги со своего банка (тинькофф например<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+), <br />
+они подтверждают что пришло, <br />
+и крипта, которую MATBEA держит во время операции<a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+ приходит к вам на аккаунт.</p>
+<p>Но на протяжении этой операции, есть несколько коммиссий из-за которых сложно предугадать сколько денег в итоге попадёт на счёт proxys.io. <br />
+Так что моя личная стратегия, ложить на 30% больше денег на счёт матби, чем я собираюсь в итоге получить на счёт proxys.io. <br />
+Не волнуйтесь, реальная коммиссия не буквально 30%, это больше для безопасности, чтобы потом в жопу не ебаться когда вдруг не хватает 0.003 биткоина. <br />
+Как моя подруга сказала на этот счёт: “лучше перебдеть чем недобдеть”.</p>
+<p>И так, план следующий:</p>
+<ol>
+<li>Выберите https прокси которую хотите купить</li>
+<li>Оплата через крипту</li>
+<li>Вам выставится адрес, на который нужно отправить какое-то количество скорее всего биткоина</li>
+<li>Идите на матби</li>
+<li>Переводите чуть побольше чем надо на матби аккаунт с помощью “Пополнить”</li>
+<li>Сделайте “Обмен” на валюту, которую proxys.io от вас хочет</li>
+<li>Жмите “Отправить”, на адрес получателя</li>
+<li>Восемь раз отмерьте (проверьте что правильно скопировали и вставили адрес, или просканиуйте qr-код)</li>
+<li>Один раз отрежьте (отправляйте, но поставьте низкий приоритет чтобы не было ебейших комиссий)</li>
+<li>Ждите миллиард лет, пока деньги дойдут до proxys.io. У меня это обычно занимает где-то час</li>
+</ol>
+<p>Готово! Теперь у вас есть прокси 🥳 <br />
+Юпииииии</p>
+<p>Блять ненавижу писать по-русски, это намного сложнее чем по английски 😭 <br />
+Но “бит” смешной так что надо было 😤</p>
+<h1 id="po-susekam"><a class="zola-anchor" href="#po-susekam" aria-label="Anchor link for: po-susekam">по сусекам</a></h1>
+<p>I have an https proxy now! :D <br />
+And I paid just 2.67$ (monthly) for it!</p>
+<p>VPN prices generally <em>start</em> at 5$, so that's a pretty damn stellar deal,
+considering how effective the proxy later became for me. <br />
+So even if you aren't in my situation, and VPNs <em>do</em> work for you, using a proxy might still be more cost-effective, if nothing else!</p>
+<a href="#information" id="information" class="anchorina">
+  <hr></hr>
+</a>
+<p>The proxy comes with a set of “information” that you're going to use to plug it into places. <br />
+Let's name all of them, so that they're a bit more familiar!<a href="#footnote-4" id="headnote-4" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>4</sup>
+</a>
+</p>
+<table><thead><tr><th>thingy</th><th>namey</th></tr></thead><tbody>
+<tr><td>162.3.164.178</td><td>ip address / hostname</td></tr>
+<tr><td>8676</td><td>port</td></tr>
+<tr><td>user223767</td><td>username</td></tr>
+<tr><td>eIwB7xB</td><td>password</td></tr>
+</tbody></table>
+<p>The ip address + port are probably discoverable enough<a href="#footnote-5" id="headnote-5" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>5</sup>
+</a>
+ where someone unwanted could get access to your proxy, so it will usually come with a username and password as well. <br />
+You are meant to keep these secret 😼</p>
+<p>A lot of places that let you configure a proxy, simply have separate fields for each of the 4 values. <br />
+But some don't!</p>
+<p>The following syntax is something you might see yourself using in those other places:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>user223767:eIwB7xB@162.3.164.178:8676</span></span></code></pre>
+<p>i.e.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>username:password@ip:port</span></span></code></pre>
+<p>It's rare to use them bare like this though, usually you're expected to give a link:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>https://user223767:eIwB7xB@162.3.164.178:8676</span></span>
+<span class="giallo-l"><span>https://username:password@ip:port</span></span></code></pre><h1 id="it-works-sorta"><a class="zola-anchor" href="#it-works-sorta" aria-label="Anchor link for: it-works-sorta">it works... sorta</a></h1>
+<p>The main, and almost <em>only</em> place where I need georestriction unlocking, is my browser. <br />
+Through some steps (that I'll teach you later), I was successfully able to use my new proxy, <br />
+and no longer needed to jump through 5 free vpns :D</p>
+<p>It seemed surprisingly straightforward, and continued working for a while, until I switched to <a href="/content/floorp/index.md">floorp</a>. <br />
+In firefox, everything worked just how you'd expect. <br />
+But on floorp, suddenly, youtube videos were not playing 🤔</p>
+<p>Note, the entire rest of the website was working, just not actual playback. <br />
+At the time, this put me into anxiety mode; I was considoring<a href="#footnote-6" id="headnote-6" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>6</sup>
+</a>
+ using firefox specifically for youtube, but that sounded like quite a shitty tradeoff. <br />
+Firefox and floorp handle proxies differently <em>somehow</em>.
+I wasn't quite sure why yet.</p>
+<p>My favorite puppy<a href="#footnote-7" id="headnote-7" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>7</sup>
+</a>
+ helped me solve this, with some bespoke setup that involved its VPS' socks4 proxy. <br />
+Still not exactly sure what all this is, but now I'm hearing this 🧦 term when it comes to proxies. Interesting.</p>
+<p>And so, I was paying for my own proxy to use for most things, and using my partner's socks4 proxy for youtube. <br />
+Feels kinda bleghy, right? <br />
+Shouldn't my own proxy already accomplish everything?</p>
+<p>I realized my grave underunderstanding recently, while trying to set up discord. <br />
+<em>Web</em> discord is just fine for me, but it's crucially missing the ctrl+123456789 hotkeys, so I really wanted to try out vesktop to get those. <br />
+Both fortunately and unfortunately, <em>there</em> the proxy setup was more difficult to figure out. <br />
+As I was trying different things, I came across a new nugget of knowlege: <br />
+“https proxies are solid for TCP, but fucky for UDP. socks5 solves this though”</p>
+<p>Through my friend's networking history lesson, I got a slightly better idea of what TCP and UDP are usually used for. <br />
+And UDP, crucially, is used for <em>video playback</em>, among other things!</p>
+<p>Huh! The exact thing that's <em>not</em> working off of my proxy in floorp. <br />
+Hmmm… So if I had a socks5 proxy, this might get solved?</p>
+<p>I was playing around in my proxys.io (where I bought my proxy) account, and happened to enter into the proxy's information page again. <br />
+I discovered a new field, that I never understood or paid attention to before: “socks5 port”.</p>
+<p>Well holy shit! <br />
+Does this mean that my proxy is a socks5 proxy <em>too</em>, rather than only https?</p>
+<p>I reconfigure the proxy in my browser to use socks5 instead of https, and provide the new port. <br />
+I restart my browser and rush into youtube, to be completely dumbfounded by seeing that <em><strong>it works</strong></em>.</p>
+<p>Hoooooooly fucking shit I was paying for this proxy for more than half a year at this point, and all I fucking needed to do was realize that socks5 is a level up from https, rather than being some fancy other genre,
+and that it's simply something I should be using everywhere I can,
+to make more things work more easily.</p>
+<h1 id="ok-ok-let-s-use-this-proxy-let-s-use-this-proxy-in-our-apps"><a class="zola-anchor" href="#ok-ok-let-s-use-this-proxy-let-s-use-this-proxy-in-our-apps" aria-label="Anchor link for: ok-ok-let-s-use-this-proxy-let-s-use-this-proxy-in-our-apps">ok ok let's use this proxy, let's use this proxy in our apps</a></h1>
+<p>(<a rel="noopener external" target="_blank" href="https://www.youtube.com/watch?v=H1M7Fj6T91c">/ref</a>)</p>
+<p>Socks5 is the new nugget of information, because of which I wanted you to read more before acting; <br />
+When buying a proxy, make sure it's <em>both</em> an https <em>and</em> a socks5 proxy —
+that makes it much more powerful and appliable in more scenarios.</p>
+<p>Let's start with the most common one!</p>
+<h2 id="firefox"><a class="zola-anchor" href="#firefox" aria-label="Anchor link for: firefox">firefox</a></h2>
+<p>The firefox / floorp / zen / etc setup is pretty simple. <br />
+It <em>should</em> be as simple in chromium-based browsers, for the record, but you'll have to find that out yourself :p</p>
+<p>Install the <a rel="noopener external" target="_blank" href="https://addons.mozilla.org/en-GB/firefox/addon/foxyproxy-standard/">FoxyProxy extension</a>. <br />
+Grant it the permissions it's asking for, and allow it to run in private windows. <br />
+Go to the extension's settings → Proxies.</p>
+<p>Here we're going to add our proxy <em>as a socks5 one</em>. <br />
+Press the “Add” button, and fill in the hostname, port (specifically the socks5 one, not the https one!), username, password. <br />
+Set “Type” to SOCKS5. <br />
+I have “Proxy DNS” enabled, but I'm not sure if we need to honestly.</p>
+<p>Now, add these patterns:</p>
+<table><thead><tr><th>cludation</th><th>pattern</th></tr></thead><tbody>
+<tr><td>include</td><td>*</td></tr>
+<tr><td>exclude</td><td>*localhost*</td></tr>
+<tr><td>exclude</td><td>*127.0.0.1*</td></tr>
+</tbody></table>
+<p>As you use the proxy, you may find places that you specifically don't want to proxy, and will be able to exclude them here. <br />
+Crucially, though, we begin by excluding localhost —
+you don't want to proxy your own computer's local network.</p>
+<p>You can also handle this the other way around: by <strong>not</strong> proxying anything by default, and adding stuff to proxy as you go. <br />
+But if you're a russian reading this blog post, you probably want to proxy everything by default, due to how much stuff is blocked in russia nowadays. <br />
+If you're in China, similar idea probably applies.</p>
+<p>Now, press “Save” and enable the proxy by clicking on the extension button, and pressing “Proxy by patterns” —
+That variant uses the patterns that we just provided above.</p>
+<p>After a browser restart for good measure (shouldn't be needed usually), your proxy should be working! 🥳</p>
+<h2 id="android"><a class="zola-anchor" href="#android" aria-label="Anchor link for: android">android</a></h2>
+<p>It is the socks5 revelation that let me use my proxy on my <em>phone</em> too, while in the past I could only use it helpfully on my pc. <br />
+We're going to use an app called “Drony”. <br />
+It's not on play store, so simply google “drony apk” and pick your favorite sketchy website to download it from.</p>
+<p>In the app, swipe right to get to settings, go to “not wi-fi (mobile, ethernet, …)”. <br />
+Fill in the hostname, port, username, password; set “Proxy type” to “SOCKS5”. <br />
+Go back, and now press on “Wi-fi”. <br />
+If you don't have any networks listed, you're probably chill already.
+Otherwise, pick the first one probably, and fill in the details exactly like above, again.</p>
+<p>Go back twice and swipe left back to the log tab, and press the “Off” button so that it's “On”. <br />
+The proxy should now be working, globally, on your phone 🥳</p>
+<p>After figuring this out, I have effectively doubled the value I get from my proxy for the price that I pay for it. <br />
+2.67$ for my pc <em>and</em> phone? Insane!</p>
+<p>I was really excited about how straightforward this solution is, and wanted to help out some russian that I know. <br />
+Found a friend that was also doing the 5 vpns strat, and made them go through the setup process, using my proxy's information. <br />
+It worked perfectly!</p>
+<p>Kinda strange, isn't it? <br />
+Usually, setting up something one <em>someone else</em>'s device is bound to not work in many strange ways, but this time everything just worked perfectly with no finagling. <br />
+So it seems like it's reproducible! :D</p>
+<p>“Works on my machine”? Nah! “Works on <em>your</em> machine”.</p>
+<h2 id="etc"><a class="zola-anchor" href="#etc" aria-label="Anchor link for: etc">etc</a></h2>
+<p>Now onto the more interesting to explain genre of proxiable things: “other”. <br />
+I'm assuming you're on linux, btw.</p>
+<p>There are these three interesting environment variables: <code>http_proxy</code>, <code>https_proxy</code>, <code>all_proxy</code>. <br />
+One / some / all of them are understood by various apps, including but not limited to cli programs, to configure their proxy. <br />
+Interestingly, they are indeed specified as lowercase, rather than uppercase, which is quite unusual for environment variables.</p>
+<p>In my usage, I could never just stick to providing one of them, and for them to work, so the safest best is to provide all three. <br />
+All of them use the <code>https://username:password@ip:port</code> syntax, so to launch some app with your proxy, you'd do something like:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>http_proxy=https://username:password@ip:port https_proxy=https://username:password@ip:port all_proxy=https://username:password@ip:port some-app</span></span></code></pre>
+<p>I'm not 100% sure, but like 80% sure that you still can provide http<em>s</em> to the http_proxy variable, despite it seemingly expecting the proxy without TLS. <br />
+Both <code>http_proxy</code> and <code>https_proxy</code> expect the <em>http</em> version of your proxy, rather than socks5; <br />
+<code>all_proxy</code> doesn't have such a restriction, so you can provide the socks5 version of your proxy with <code>socks5://username:password@ip:port</code>.</p>
+<p>But both of that, I believe, is a “usually” — <code>http_proxy</code> and <code>https_proxy</code> <em>might</em> allow socks5 in some apps, and sometimes <code>all_proxy</code> will not understand socks5.</p>
+<p>All this “knowledge” is collected by me via experience and reading random stuff, so I'm very much farming corrections here :D <br />
+Dm me on discord @Axlefublr or <a href="mailto:axlefublr.ls@gmail.com">email me</a> if I'm wrong on some things directly above, I'd love to learn!</p>
+<p>The 3 variables you can quite easily expect to work in various networking-related cli programs, like <code>curl</code>. <br />
+But otherwise, their usefulness can be quite varied.</p>
+<p>If a given program allows you to pass the proxy to it directly, via a flag or a config option or some such, <em>that</em> is much more likely to work. <br />
+But the three <del>proxyteers</del> variables can potentially save your ass if you don't seem to have a more “proper” way to provide a proxy, yet they (the vars) surprisingly work.</p>
+<p>Now let's talk about proxying something that <em>doesn't</em> care about the proxyteers.</p>
+<h2 id="electron"><a class="zola-anchor" href="#electron" aria-label="Anchor link for: electron">electron</a></h2>
+<p>Discord is an Electron app; <br />
+I believe Electron doesn't come pre-built with <code>(https?|all)_proxy</code> support,
+so whether you can use the variables depends on the specific app. <br />
+Well, for discord it doesn't work at least, neither does it for vesktop.</p>
+<p>However! I found a cool electron flag: <code>--proxy-server</code>. <br />
+<em>This</em> should be supported in <em>any</em> electron app, as I assume electron takes care of the networking things, including the proxy. <br />
+It has an interesting limitation that we haven't yet considered, though:</p>
+<blockquote>
+<p>Use a specified proxy server, which overrides the system setting. <br />
+This switch only affects requests with HTTP protocol, including HTTPS and WebSocket requests. <br />
+It is also noteworthy that not all proxy servers support HTTPS and WebSocket requests. <br />
+The proxy URL does not support username and password authentication per Chromium issue.</p>
+</blockquote>
+<p>Our proxy requires a username and password, so we can't pass it directly into the flag, how we usually can. <br />
+Electron not understanding username + password proxies might actually be the reason <br />
+why <code>(https?|all)_proxy</code> don't work —
+maybe they actually do, just not when username and password are required.</p>
+<p>To work around this, we need to somehow convert our proxy to a non-passworded one, so that we could just provide the hostname:port.</p>
+<h3 id="privoxy"><a class="zola-anchor" href="#privoxy" aria-label="Anchor link for: privoxy">privoxy</a></h3>
+<p>↑ is the program that will allow us to do that!</p>
+<p>Really frequently, various programs that allow you to do fancy things with proxies are really fucking complicated to make work. <br />
+How often have you heard “just use wireguard”? And yet I find it extremely overwhelming... <br />
+So I was both quite surprised and happy that privoxy <em>isn't</em> like that, and its setup was incredibly simple :D</p>
+<p>First of all, install it of course.
+On arch, it's just <code>privoxy</code> in the repos. <br />
+On not arch, I hope it's also just as easily installable :3</p>
+<p>The default config file is in <code>/etc/privoxy/config</code>. <br />
+Add the following at the absolute end of it:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>forward-socks5 / username:password@address:port .</span></span></code></pre>
+<p>With your <em>actual</em> username, password, ip address, and 🧦🧦🧦🧦🧦 port, of course.</p>
+<p>That's the entire config!! It's literally that shrimple :&gt;</p>
+<p>You can now enable the systemd service that should come with your installation, with:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">sudo</span><span> systemctl enable --now privoxy</span></span></code></pre>
+<p>It will both start the privoxy service right <em>now</em>, <strong>and</strong> on subsequent logins. <br />
+If you don't have the systemd service for one reason or another, <br />
+just run it yourself with <code>privoxy /etc/privoxy/config</code> — it daemonizes by default anyway.</p>
+<p>Right! I forgot to explain what it even does hehehehe</p>
+<p>Basically, we're starting a uhhhhh thingy on our local network, into which we can send requests. <br />
+I think it's not a lie to just call it a proxy? Yeah we're starting a proxy locally I think! <br />
+So this local proxy can accept requests, and <em>relays</em> them to our main, <em>actual</em> (and passworded) proxy. <br />
+Meaning that we get to specify an address + port without needing to specify the username + password 🥳</p>
+<p>The “information” of privoxy is <code>127.0.0.1</code> for the ip address, and <code>8118</code> for the port, by default. <br />
+You can check if it's actually working with this command:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">curl</span><span> --proxy http://127.0.0.1:8118 https://httpbin.org/ip</span></span></code></pre>
+<p>It should 1. not infinitely hold and 2. show you information about your <em>actual</em> proxy !</p>
+<p>Coming back to the discord situation, I was eventually able to run it with:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A9B665;">discord</span><span> --proxy-server=127.0.0.1:8118</span></span></code></pre>
+<p>Which is so awesome! <br />
+I'm surprised I was able to figure out so much in one day and <em>actually</em> make discord work, rather than giving up. <br />
+The power of proxies seems to scale indefinitely, directly proportional to your networking skills; <br />
+Slowly but surely, I seem to gain those, due to the consequences of this stupid ass war. <br />
+Although I sure wish I didn't have to do this out of requirement! lol</p>
+<h1 id="final-battle"><a class="zola-anchor" href="#final-battle" aria-label="Anchor link for: final-battle">final battle</a></h1>
+<p>Now using the discord <em>app</em>, I start to type out some message sharing my excitement; <br />
+But I get stopped when trying to use yet another “fancy quote” or 🤯 or ←↓↑→ — the horror! <br />
+Discord doesn't support <code>wtype</code>...</p>
+<p>I have <a href="https://axlefublr.github.io/erm/">a lot</a> of direct hotkeys to various symbols and emojis, and <em>all</em> of them use <code>wtype</code> to be entered. <br />
+This is a really big deal to me, much more than ctrl+number hotkeys :(</p>
+<p>A pretty obvious first idea is “it's probably some wayland thing” — discord is probably running in xwayland mode unecessarily, so <strong>w</strong>type not working is not surprising. <br />
+But funny thing is, discord <em>doesn't</em> have a wayland version anyway! How the fuck did this happen lmao!</p>
+<p>So I try to handle this by using vesktop instead 🧐 <br />
+There, forcing wayland <em>is</em> actually a thing you can do, but no dice on the wtype issue anyway :c</p>
+<p>Since there is no one singular way to force wayland for apps, I decided to just keep throwing shit at the wall until it worked. <br />
+I started with the basic variables and flags, but at the end I ended up with this monstrosity:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span>MOZ_ENABLE_WAYLAND</span><span style="color: #E49641;font-weight: bold;">=</span><span style="color: #D3AD5C;">1</span><span> NATIVE_WAYLAND</span><span style="color: #E49641;font-weight: bold;">=</span><span style="color: #D3AD5C;">1</span><span> ELECTRON_OZONE_PLATFORM_HINT</span><span style="color: #E49641;font-weight: bold;">=</span><span style="color: #D3AD5C;">auto</span><span style="color: #A9B665;"> \</span></span>
+<span class="giallo-l"><span>GDK_BACKEND=wayland QT_QPA_PLATFORM=wayland SDL_VIDEODRIVER=wayland</span><span style="color: #928374;"> \</span></span>
+<span class="giallo-l"><span>vesktop --proxy-server=127.0.0.1:8118 --ozone-platform-hint=wayland</span><span style="color: #928374;"> \</span></span>
+<span class="giallo-l"><span>--ozone-platform=wayland --enable-features=WaylandWindowDecorations</span><span style="color: #928374;"> \</span></span>
+<span class="giallo-l"><span>--enable-features=WebRTCPipeWireCapturer --enable-features=UseOzonePlatform --gtk-version=4</span></span></code></pre>
+<p>The shit, to everyone's great surprise, did <em>not</em> work. How curious.</p>
+<p>Actually, after I forced wayland (even the normal-er way), some hotkeys that <em>were</em> still somehow working, <em>stopped</em> working. <br />
+By some wild magic, vesktop running in x11 mode supported <em>some</em> <code>wtype</code>s, but not most.
+No clue what semantic it used, ngl. <br />
+You'd think that <strong>w</strong>type would be better supported on <strong>w</strong>ayland, rather than x11, so that still throws me for a loop.</p>
+<p>“Alright” I thought, <br />
+“That's not a very fruitful thought” the reader replied, <br />
+— I'll try webcord!</p>
+<p>I'd much rather be using vesktop; a lot of people I know praise it to heaven, and I've heard of webcord like once or twice. <br />
+But honestly I just want my symbol hotkeys to work in a discord that is also a separate app, so I'll take what I can get. <br />
+Except, <code>wtype</code> doesn't work there either :/</p>
+<p>I say <code>wtype</code>, but this isn't really program-specific! <br />
+There's this global linux hotkey <kbd>ctrl+shift+u</kbd>, that allows you to type in a symbol's unicode, and replaces your input with the actual symbol. <br />
+<code>wtype</code> uses the same mechanism for inserting the symbol, just skips the unicode input step.</p>
+<p>This hotkey is really neat actually! <br />
+I used to memorize unicodes and enter symbols directly using it, in the past 🤓 <br />
+This was back on x11, where <code>xdotool type</code> was incredibly slow for me for whatever reason; so take note that the existence of the hotkey is not even wayland-specific!</p>
+<p>The downside of it, as we now see, is that it doesn't work in <em>some</em> (incredibly rare) apps. <br />
+Anki is one example, but I can easily forgo being able to use my symbol hotkeys there, as I use my own card adding solution anyway, that allows me to use helix instead. <br />
+But a <em>chat</em> app?...</p>
+<p>Conclusion: there is no way (yes, dear reader, I'm baiting you to potentially solve my entire problem if you happen to know how) to make wtype work on any discord apps that are worth using. <br />
+This is a massive dealbreaker for me, soooo I guess I'm sticking with web discord?</p>
+<p>You'd think I'm saying “aw dang” right about now, but actually I'm not that sad about how this adventure turned out! <br />
+Sure, I end up without app discord, but in return I learned <br />
+the difference between https and socks5 proxies, <br />
+the fact that my proxy is <em>also</em> a socks5 one, <br />
+how I can make use of socks5 to make the proxy more powerful,
+<em><strong>and</strong></em> work on mobile, <br />
+helped a friend cave out of the same awful vpn situation, <br />
+and learned how to strip my proxy off of its username + password, <br />
+including now being able to proxy <em>any</em> electron applications, <br />
+oh and I fixed spotify btw :D using the privoxy trick once again.</p>
+<p>Similar to my <a href="https://axlefublr.github.io/my-usb-drive-experience/">other journeys</a>, the reward of <em>knowledge</em> is much more valuable than the <em>practicality</em> of the result. <br />
+Hell, I could conceivably sell my knowledge to normies, helping them set up a proxy! <br />
+Is that a <em>job</em> I'm thinking about? 🤯</p>
+<p>Considering the sheer price difference between a vpn, as well as (usually) much better performance, setting up a proxy for someone is a genuine service that will end up saving them money in the long term 🤔 something to think about :&gt;</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ I found this analogy hilarious more than anything, don't take it too seriously :D</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ До сих пор злюсь немного на их ребрендинг. <br />
+Какой нахуй Т-банк?? Тинькофф звучит намного более приятно.... <br />
+Это как твиттер → х. <br />
+Х блять!</p>
+<p><a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ Благодаря чему эта, казалось бы рисковая, операция, на самом деле безопасная!</p>
+<p><a href="#headnote-4" id="footnote-4" class="headnote" title="Click to go back">
+  <sup>4</sup>
+</a>
+ These are all example values; the “information”s of your proxy will be different, but are going to <em>look</em> about the same, so this serves as a reference.</p>
+<p><a href="#headnote-5" id="footnote-5" class="headnote" title="Click to go back">
+  <sup>5</sup>
+</a>
+ Sheer guess.</p>
+<p><a href="#headnote-6" id="footnote-6" class="headnote" title="Click to go back">
+  <sup>6</sup>
+</a>
+ The wrong spelling is tribute to my friend skoove :3 <br />
+It's one of her cutest misspellings</p>
+<p>Am I overusing footnotes? <br />
+I feel that you being able to jump <em>back</em> easily makes me spam them a lot more strongly than I should otherwise hahaha</p>
+<p><a href="#headnote-7" id="footnote-7" class="headnote" title="Click to go back">
+  <sup>7</sup>
+</a>
+ Reference to <a rel="noopener external" target="_blank" href="https://www.youtube.com/@ChuckleSandwich">Chuckle Sandwich</a>, while mentioning my puppygirl partner at the same time.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;blammo&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">blammo</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;harp&#x2F;" class="preview next">
+			<span class="name">harp</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

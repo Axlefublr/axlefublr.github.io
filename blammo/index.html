@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>blammo</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;i-overuse-anki&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">i overuse anki</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;proxies&#x2F;" class="preview next">
+			<span class="name">proxy things</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">blammo</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-07-30">2025.07.30</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 8</div> -->
+				<p>I use the <a rel="noopener external" target="_blank" href="https://github.com/sxyazi/yazi">yazi</a> file manager, and like it a lot! <br />
+Most of my file operations, including even <code>cd</code>ing sometimes, is done directly from yazi. <br />
+Which is why I add a couple of powerful special hotkeys to it!</p>
+<p>For example, I quite often need to cut videos; <br />
+Unlike a normal person, I refuse to use an actual editing app, and instead I do it with <code>ffmpeg</code>. <br />
+I wrote some <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/fish/fun/ffmpeg.fish">interactive ffmpeg fish functions</a>, and integrated them into yazi: <br />
+On a press of a hotkey, all the files that I selected in yazi get passed to the function, and iterated on one by one.
+I then answer “questions” to edit the videos however I wish.</p>
+<p>This is really neat, but not super scaleable in a sense: <br />
+I can't make a hotkey for every ad-hoc action, can I?</p>
+<p>It makes sense to have shortcuts to the really common actions, but you won't know if an action is common or not until you've already done it quite a few times. <br />
+If you're too quick, you might end up with a “dead” hotkey in your configuration, <br />
+But if you don't provide yourself <em>any</em> shortcut, doing The™ Action™ might be really laborious.<a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+</p>
+<p>I came up with an idea that lets me seamlessly connect yazi's selected files to my shell, and I find the design really cool and nushell-like :D</p>
+<h1 id="fishangling"><a class="zola-anchor" href="#fishangling" aria-label="Anchor link for: fishangling">fishangling</a></h1>
+<p>Let's start with how I reached the idea in the first place; why it even needed to exist.</p>
+<p>Yazi allows you to make mappings that call shell commands. <br />
+In those, you have access to <code>$@</code>, which means “absolute filespaths to all the currently selected files”. <br />
+To handle spaces, you seem to need to specifically enclose the <code>$@</code> in doublequotes.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>&#39;shell --confirm -- ouch decompress &quot;$@&quot;&#39;</span></span></code></pre>
+<p>The <code>--</code> argument allows us to not have to quote the command itself — everything after <code>--</code> is considered a raw part of the actual command.</p>
+<p>This works, as you'd expect! <br />
+I can select multiple archives and decompress them all with a hotkey<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+. <br />
+But it's rare for me to just call commands directly; <br />
+Often times, I write some sort of functionality in a fish shell function, and invoke it with <code>fish -c</code>. <br />
+All my various ffmpeg functions are written in fish, for example:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>&#39;&#39;&#39;</span></span>
+<span class="giallo-l"><span>shell --block --confirm -- fish -c &#39;ffmpeg_convert_to_mp3 &quot;$@&quot;&#39;</span></span>
+<span class="giallo-l"><span>&#39;&#39;&#39;</span></span></code></pre>
+<p>Except... this doesn't work. <br />
+<code>"$@"</code>, that <em>just</em> expanded absolutely correctly, no longer does inside of an argument to <code>fish -c</code>.</p>
+<p>You see, I immediately assumed that the <code>$@</code> syntax in yazi is its <em>own</em> thing, rather than the usual POSIX <code>$@</code>; <br />
+Fish shell actually uses <code>$argv</code> to mean the same thing, so I guess I can simply use that, neat :D</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>&#39;&#39;&#39;</span></span>
+<span class="giallo-l"><span>shell --block --confirm -- fish -c &#39;ffmpeg_convert_to_mp3 &quot;$argv&quot;&#39;</span></span>
+<span class="giallo-l"><span>&#39;&#39;&#39;</span></span></code></pre>
+<p>Except...... It also doesn't work. <br />
+So <code>$@</code> <em>is</em> a yazi-specific thing, and perhaps it only expands correctly when provided as a separate argument, on its own, rather than part of a bigger argument 🧐</p>
+<p>I'm being pretty vague here, with “doesn't work”, but that's because the semantics I still don't fully understand, and my experiences with them are very blurry. <br />
+I feel that sometimes, it expanded all the paths into a single string, rather than multiple arguments, <br />
+other times, didn't expand anything at all, <br />
+maybe it didn't handle spaces correctly?</p>
+<p>Regardless, I decided to create my own solution for providing the list of arguments into fish from yazi, that worked by far more clear and guessable rules.</p>
+<p>Welcome to “blammo”! <br />
+Yeah, I really didn't think much about the name of this thing, and it just kinda stayed “blammo” forever 😭 <br />
+If you've been reading my blog posts for some time, you might've noticed how much I love this word, lol. <br />
+Fun fact, my insane overuse of it comes directly after <a rel="noopener external" target="_blank" href="https://www.youtube.com/watch?v=Eqo7rMUKm9A">this video</a>!</p>
+<h1 id="blammation"><a class="zola-anchor" href="#blammation" aria-label="Anchor link for: blammation">blammation</a></h1>
+<p>I wrote this simple yazi plugin:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="lua"><span class="giallo-l"><span style="color: #928374;">--- @sync entry</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">return</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">	entry</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #EA6962;"> function</span><span>()</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		local</span><span> collector</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #D3AD5C;"> &#39;&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		for</span><span> _, url</span><span style="color: #EA6962;"> in</span><span style="color: #A9B665;"> pairs</span><span>(cx.active.selected) </span><span style="color: #EA6962;">do</span></span>
+<span class="giallo-l"><span>			collector</span><span style="color: #E49641;font-weight: bold;"> =</span><span> collector</span><span style="color: #E49641;font-weight: bold;"> ..</span><span style="color: #A9B665;"> tostring</span><span>(url) </span><span style="color: #E49641;font-weight: bold;">..</span><span style="color: #D3AD5C;"> &#39;</span><span style="color: #928374;">\n</span><span style="color: #D3AD5C;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		if</span><span style="color: #E49641;font-weight: bold;"> #</span><span>collector</span><span style="color: #E49641;font-weight: bold;"> ==</span><span style="color: #E491B2;"> 0</span><span style="color: #EA6962;"> then</span></span>
+<span class="giallo-l"><span>			collector</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #A9B665;"> tostring</span><span>(cx.active.current.hovered.url) </span><span style="color: #E49641;font-weight: bold;">..</span><span style="color: #D3AD5C;"> &#39;</span><span style="color: #928374;">\n</span><span style="color: #D3AD5C;">&#39;</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		local</span><span> file</span><span style="color: #E49641;font-weight: bold;"> =</span><span style="color: #A9B665;"> io.open</span><span>(</span><span style="color: #D3AD5C;">&#39;/home/axlefublr/.cache/mine/blammo&#39;</span><span>, </span><span style="color: #D3AD5C;">&#39;w&#39;</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		if</span><span> file</span><span style="color: #EA6962;"> then</span></span>
+<span class="giallo-l"><span>			file:</span><span style="color: #A9B665;">write</span><span>(collector)</span></span>
+<span class="giallo-l"><span>			file:</span><span style="color: #A9B665;">close</span><span>()</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">		end</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">	end</span><span>,</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>Yazi is in very active development, for more better than for the worse; <br />
+So don't expect this to straight up work if you're reading this post in the future.</p>
+<p>The main idea, though, is pretty simple: <br />
+We take the full paths of all files we have selected, and convert them into a string which has one path per line. <br />
+If we don't have any <em>selected</em>, we simply take the filepath that our cursor is currently on. <br />
+And we write that to some file.</p>
+<p>The path doesn't matter, but I like to use <code>~/.cache/mine</code> to hold various cache-like files that I don't want removed on reboots, which would happen if I put it in <code>/tmp</code>. <br />
+I have the opposite idea also, where I hold files I <em>do</em> want eventually auto-cleared in <code>/tmp/mine</code>.</p>
+<p>Anyway, after you put the above code into <code>~/.config/yazi/plugins/blammo.yazi/main.lua</code>, you can now access it in your yazi mappings with <code>plugin blammo</code>. <br />
+When you call the plugin, it stamps the current selected files into a file, which you can immediately read as a list of arguments. <br />
+In shells, you can <code>cat some-file</code>, and it will convert each line in a separate argument. <br />
+Which is very clean, simple, safe, and nifty!</p>
+<p>We can now fix the previous ffmpeg mapping I was trying to create:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>[ &#39;plugin blammo&#39;, &#39;shell --block --confirm -- fish -c &quot;ffmpeg_convert_video (cat ~/.cache/mine/blammo)&quot;&#39; ]</span></span></code></pre>
+<p>And this <strong>does</strong> work 🥳</p>
+<p>Having to type out the blammo filepath for every hotkey is a bit laborious, though, so I made myself a nifty little fish alias:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">function</span><span> blammo</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    cat</span><span> ~/.cache/mine/blammo</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>So now, the yazi mapping is:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>[ &#39;plugin blammo&#39;, &#39;shell --block --confirm -- fish -c &quot;ffmpeg_convert_video (blammo)&quot;&#39; ]</span></span></code></pre>
+<p>This solves the issue I had at the time, but highlights something interesting: <br />
+I was just able to, effectively, reach into the context of yazi, from outside of yazi 🤔 <br />
+As long as it's properly updated, nothing is stopping me from using <code>(blammo)</code> just interactively in my shell!</p>
+<p>I made my quit and <a href="https://axlefublr.github.io/suspend/">suspend</a> hotkeys <code>blammo</code> first, so that leaving yazi ensures the blammations are up to date.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>{ on = &#39;:&#39;, run = [ &#39;plugin blammo&#39;, &#39;quit&#39; ], desc = &#39;Exit the process&#39; },</span></span>
+<span class="giallo-l"><span>{ on = &#39;&lt;C-z&gt;&#39;, run = [ &#39;plugin blammo&#39;, &#39;suspend&#39; ], desc = &#39;Suspend the process&#39; },</span></span></code></pre>
+<p>Now I can select some files in yazi, suspend with <kbd>ctrl+z</kbd>, and execute some arbitrary shell command on the files I had selected!</p>
+<p>I recently had a usecase, where I wanted to convert a video into webp (which you can apparently do):</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">magick</span><span> (</span><span style="color: #A9B665;">blammo</span><span>) (</span><span style="color: #A9B665;">blammo</span><span style="color: #E49641;font-weight: bold;"> |</span><span style="color: #A9B665;"> path</span><span> change-extension webp)</span></span></code></pre>
+<p>I love it!! <br />
+But it's a <em>biiiiit</em> wordy — typing out <code>(blammo)</code> is more syntax than I'd like 🤔</p>
+<p>So I came up with a funny but reasonably solid hack! <br />
+At the end of my <code>fish_prompt</code> function, I put the following line:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">set</span><span> -g</span><span style="color: #EA6962;"> in</span><span> (</span><span style="color: #A9B665;">blammo</span><span style="color: #E49641;font-weight: bold;"> 2&gt;</span><span>/dev/null)</span></span></code></pre>
+<p><code>fish_prompt</code> is the function that runs every time your prompt needs to be drawn. <br />
+Meaning, <em>before every command</em>. <br />
+So, we put yazi's latest selected files into a global variable <code>in</code>, that we can then use directly as the list of filepaths!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #A9B665;">magick</span><span style="color: #B58CC6;"> $</span><span>in (</span><span style="color: #A9B665;">path</span><span> change-extension webp </span><span style="color: #B58CC6;">$</span><span>in)</span></span></code></pre>
+<p>And if we do indeed select multiple files, you could blammo a loop:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="fish"><span class="giallo-l"><span style="color: #EA6962;">for</span><span> the </span><span style="color: #EA6962;">in</span><span style="color: #B58CC6;"> $</span><span>in</span></span>
+<span class="giallo-l"><span style="color: #A9B665;">    magick</span><span style="color: #B58CC6;"> $</span><span>the (</span><span style="color: #A9B665;">path</span><span> change-extension webp </span><span style="color: #B58CC6;">$</span><span>the)</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>Semantically, this is quite a bit better :D</p>
+<p>In nushell, <code>$in</code> means “whatever was piped into the current thing”, so here it's as if we're piping the list of filenames into fish, quite neat!</p>
+<h1 id="p-s"><a class="zola-anchor" href="#p-s" aria-label="Anchor link for: p-s">p.s.</a></h1>
+<p>Ahhhh... no better way to get the correct solution than to post the wrong one on the internet 😌<a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+ <br />
+The <em>yazi author</em> read this blog post, and shared the more proper way of doing what <code>(blammo)</code> was initially made for!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>&#39;&#39;&#39;</span></span>
+<span class="giallo-l"><span>shell --block -- fish -c &#39;ffmpeg_convert_to_mp3 &quot;$argv&quot;&#39; &quot;$@&quot;</span></span>
+<span class="giallo-l"><span>&#39;&#39;&#39;</span></span></code></pre>
+<p>First of all, you can now omit the <code>--confirm</code> flag. <br />
+But more importantly, you can probably intuit the semantics of yazi's <code>"$@"</code> now.</p>
+<p>It is only resolved as a <em>top level</em> argument to the overall command; it's not a find and replace across all text of all arguments. <br />
+So here, we specify <em>the fish program</em> in the string after <code>-c</code>. <br />
+The program makes use of the arguments provided to it. <br />
+After the stringed fish program, we pass arguments to it with <code>"$@"</code>.</p>
+<p>With <em>this</em> knowledge, you can now avoid needing blammo to pass selected files to predefined mappings, and can use this concept to pass arguments into other interpreted programming languages, like nushell probably.</p>
+<p>But the main idea of blammo, and why I wrote this in the first place — connecting yazi's selected files into your shell — is still alive and useful, even with this new discovery! :D</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ Sounds similar to the types of situations that <a href="https://axlefublr.github.io/harp/">harp</a> solves, doesn't it? <br />
+You're correct! Harp could be implemented into yazi to provide a pretty nice productivity boost, but <em>so far</em> I don't find myself executing enough commands from the context of yazi to really need harp.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ I'm aware of the built in yazi unarchiver, but it's been super wonky for me. <br />
+I'd much rather use the behavior I'm more familiar with, using <code>ouch</code>. <br />
+This hotkey still exists, but I actually made “opening” archives automatically use <code>ouch decompress</code>. <br />
+How did I do that? Exercise for the reader 😌</p>
+<p><a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ To be fair, I never <em>asked</em> anywhere for how to solve the issue of passing arguments to fish, neither have I searched. <br />
+I have a tendency to solve my problems my own way before considering grabbing some pre-existing solution :&gt;</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;i-overuse-anki&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">i overuse anki</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;proxies&#x2F;" class="preview next">
+			<span class="name">proxy things</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>harp</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;proxies&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">proxy things</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;zoxide-misbehavior&#x2F;" class="preview next">
+			<span class="name">zoxide misbehavior</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">harp</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-07-20">2025.07.20</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 60</div> -->
+				<p>Travelling to files in text editors is very slow at best.</p>
+<p>There are four main ways to travel to a file from your text editor. Let's discuss them.</p>
+<h1 id="fuzzy-picker"><a class="zola-anchor" href="#fuzzy-picker" aria-label="Anchor link for: fuzzy-picker">fuzzy picker</a></h1>
+<p>Your telescope, or snacks file picker; your helix file picker. Your vscode <kbd>ctrl+p</kbd> fuzzy file picker, even. The classic.</p>
+<p>You search through a list of all files in the current directory, using a fuzzy search algorithm — you can type <code>aaa</code> and it will match <code>banana</code>.</p>
+<p>This approch is what neovim users claim to be the silver bullet to file traversal. Something that <em>solves</em> travelling between files quickly and efficiently. <br />
+“I can get to any file in just a few keystrokes!” is a notion I reject categorically. <br />
+Efficient fuzzy searching is non-intuitive; it's something you actively learn to do.</p>
+<p>Think of lsp suggestions. Say you want to complete a function with a really long name: <code>here_is_my_longly_named_function</code>. <br />
+The efficient approach to matching it is probably going to be <code>himlnf</code> — type in the first letter of each subword, to almost guarantee that it will be the first match. <br />
+Let's not kid ourselves; this is not intuitive. <br />
+Despite me knowing the <code>himlnf</code> trick, I'll still <em>naturally</em> start typing <code>here_…</code>, and then complete the name of the function once it appears in my lsp suggestions. <br />
+Fuzzy lsp suggestion matching is something I have to make the <em>active decision</em> to do. Or perhaps, something that I would have to <em>train</em> myself to always do. I don't think I'm alone in this.</p>
+<p>I'm not saying fuzzy matching is <em>bad</em>. Hell no! I'll pick fuzzy matching almost always over substring matching. <br />
+But this is not my point. My point is that <em>efficient</em> fuzzy matching spends mental cycles; in most cases what you'll end up doing is just typing in a substring rather than a heavily optimized fuzzy matcher.</p>
+<p>Coming back to the fuzzy file picker. <br />
+Most files in a project you probably don't have to visit often, so simply using a substring is no big deal. <br />
+But there will be some files you interact with over and over again, where using simply a substring over and over again will become very painful. <br />
+And <em>that's</em> where you decide to put in the extra mental effort, and figure out an efficient enough, and nice-to-type enough fuzzy matcher.</p>
+<p>“I can get to any file in just a few keystrokes!” — this is where we disagree: my definition of "few" and your definition of "few" seems to be quite different. <br />
+Or rather, if "few" is to be taken literally, that's an unacceptable cost to me.</p>
+<p>From experience of coming up with these good fuzzy matching strings, they tend to be 4-5 characters. <br />
+We add in the extra 2 keys pressed to invoke the picker to begin with, and pressing <kbd>Enter</kbd> to accept the result. <br />
+That is 7-9 keys pressed to get to a single file. SEVEN TO NINE ENTIRE KEYS.</p>
+<p>Alright fair enough, mister seven-to-nine keys man (what a weird nickname you have, too), I don't mean to yuck your yum. <br />
+You got your perfect sequence of keys to press to get to a specific file, and now you're golden. <br />
+Sure, it's kinda a lot of keys to press, but you got it in your muscle memory now, and you're super quick at entering those now!</p>
+<p>Until tragedy befalls you… You create a new file 😨 What horror! <br />
+And now it's <em>that</em> file that appears first in the result list, after entering your perfect fuzzy matcher, <br />
+rather than the file that you were aiming for!</p>
+<p>And now you sheepishly refine the query you got so used to, to match the old file correctly again. <br />
+You might've needed to add one or two extra keys to press for the query, too. <br />
+And the scariest part? In the future, this may happen again… <br />
+Worse yet, there will be files that you are <strong>unable</strong> to place as the first result, making you always have to press <kbd>Down</kbd> or <kbd>ctrl+p</kbd> or what have you.</p>
+<p>Obviously I'm being dramatic here, but this both conveys my point and is probably fun for you to read :) <br />
+Fuzzy searching to travel across files you travel to <em>really really</em> frequently is both inefficient <em>and</em> inconsistent. Reasonable enough for rare files though.</p>
+<p>Aside from the optimal query being <em>long</em>, it has a pretty big chance to not be enjoyable to type in anyway. <br />
+It's common that file structures of projects are made in such a way, that you end up needing to match really annoying paths. <br />
+And you can't exactly optimize your file structure to fit the fuzzying need; at least not for every project.</p>
+<h1 id="file-explorers"><a class="zola-anchor" href="#file-explorers" aria-label="Anchor link for: file-explorers">file explorers</a></h1>
+<p>File trees, or file lists, like <a rel="noopener external" target="_blank" href="https://github.com/stevearc/oil.nvim">oil.nvim</a> (my beloved) — UI that presents the files visually, and tends to allow you to do file operations, like creating new files, deleting them, renaming them, etc, but also <em>opening</em> them.</p>
+<p>Where these shine is <em>file operations</em>, rather than being a fast way to <em>get</em> to some file. <br />
+“Open file tree in the parent directory of the current buffer” very much comes in handy to jump between multiple closely related files. <br />
+Also, using a tree / file list helps to get a better grasp of the overall project structure; something that's hard to do with a fuzzy file picker.</p>
+<p>But actually ←↓↑→ing through directories and files to jump to some file is of course inefficient — it's more so something you do when you aren't sure what file you even want. <br />
+In other words, file explorers are good, but for other usecases; not for fast and efficient file traversal.</p>
+<h1 id="lsp-actions"><a class="zola-anchor" href="#lsp-actions" aria-label="Anchor link for: lsp-actions">lsp actions</a></h1>
+<p>Go to: definition, declaration, type definition, implementation; Open fuzzy picker for: symbols in the current buffer, the entire project, outgoing calls, incoming calls, references.</p>
+<p><del>All</del> most of those are instrumental for a normal dev workflow, and of course I use them actively.</p>
+<p>But the reason why they don't solve the entire question completely, is because they are all lsp reliant. <br />
+You have to have an lsp for the given language, and set up to actually work; also, it needs to implement the above lsp actions. <br />
+Then, your <em>editor</em> needs to be able to interpret them, too (helix doesn't have incoming/outgoing calls, for example).</p>
+<p>And even after all of that, lsp tends to take quite some time to start up. <br />
+In rust, especially, by the time the lsp gives you the ability to use its actions, you probably would've already travelled to the file and place that you wanted to get to, by using any combination of the other methods.</p>
+<p>Once the lsp is started up and working, the usecase question still exists: you don't always want to jump to a type, or function, or a part of the source code, even. <br />
+For its intended usecase, lsp actions are very helpful and powerful, but definitely not a generic cure for every usecase.</p>
+<h1 id="edit-command"><a class="zola-anchor" href="#edit-command" aria-label="Anchor link for: edit-command">:edit command</a></h1>
+<p><code>:edit</code> in neovim, <code>:open</code> in helix; basically, opening a file by typing in its relative (or full) path directly.</p>
+<p>The big part of this method is the existence of <kbd>Tab</kbd>.</p>
+<p>Say you want to complete the path <code>~/programming/dotfiles/colors.css</code>. <br />
+You start typing <code>~/p</code> and press <kbd>Tab</kbd>. <br />
+In your home directory, you also have directory <code>progesterone</code>, so you get shown both results; <br />
+Pressing <kbd>Tab</kbd> once accepts <code>progesterone</code>, pressing it twice will accept <code>programming</code>. <br />
+Basically, you have to rotate through the results.</p>
+<p>However, if you typed <code>~/progr</code> and pressed <kbd>Tab</kbd>, now you <em>don't</em> have to choose: there is only one valid match for the substring <code>progr</code>! And it's <code>programming</code>. <br />
+So, to complete the path <code>~/programming/dotfiles/colors.css</code> most efficiently, I'd type <code>~/progr&lt;Tab&gt;/d&lt;Tab&gt;/colo&lt;Tab&gt;</code>.</p>
+<p>You can pretty quickly realize how it's beneficial for a path to become unique quickly; <code>Downloads</code> and <code>Documents</code> both existing make me kinda mad for this reason. <br />
+While you can <a href="https://axlefublr.github.io/optimizing-paths/">optimize directory names</a> like <code>Downloads</code>, <code>Documents</code>, etc to be faster and easier to tab complete (or type in), there will ultimately be some directories that you cannot / should not optimize, like <code>~/.config</code>, <code>~/.local/share</code>, <code>~/.cache</code>. <br />
+They unfortunately also carry wonderful semantics, that make a lot of sense to make use of. And of course, they are used by all of your programs! But getting to them is a pain! :c</p>
+<p>With perfect fuzzy queries, you at least have a bit more space to move around in. <br />
+With tab completing a path, you need to complete each part of the path separately, rather than being able to match the entirety of the full path with some perfect fuzzy query. <br />
+Considering that it's not often that tab completing supports fuzzy matching, it makes the most sense to get used to (and internalize) perfect tab queries for the paths you might want to travel to often.</p>
+<p>Why even use this method ever? <br />
+Fuzzy matching file pickers generally open within your current working directory, and if you're in <code>~/fes/dot</code> rather than <code>~/.config</code>, you won't be able to pick a file that's in <code>~/.config</code>. So that's the main reason you'd ever use <code>:edit</code> over fuzzy picking. <br />
+Once again, this solution is not the bees knees; matter of fact, it might be the absolute worst approach, depending on how you look at it! :»</p>
+<h1 id="bookmarking"><a class="zola-anchor" href="#bookmarking" aria-label="Anchor link for: bookmarking">bookmarking</a></h1>
+<p>As you find pathing pain points, you might be led towards a certain idea.</p>
+<p>You find yourself editing some specific config file over and over again; <br />
+<code>cd</code>ing into some same directory. <br />
+So you decide to make a mapping in your editor to open that file, <br />
+And an alias in your shell to <code>cd</code> to the directory.</p>
+<p>Yay! Now a pain point is gone :» <br />
+You can navigate to things you navigate to often, quicker and more comfortably. <br />
+But there's an issue: this method doesn't scale that well.</p>
+<p>First, you start with having aliases for <code>~/.config</code>, <code>~/.local/share</code>, <code>~/.cache</code>. <br />
+All directories that you will for sure be jumping to over and over again. <br />
+But then you suddenly realize you need to jump to a directory <code>~/.local/share/Steam/steamapps/common/Enter the Gungeon/mods</code>.</p>
+<p>Navigating into your config (which you have on a mapping, let's say), finding the new place where you'd like to add the alias (<a href="https://axlefublr.github.io/consider-sorting/">unless that's not a problem for you</a>), and typing in that path + the syntax for making an alias is undeniably a bit of a workflow break. <br />
+It is something you stop to do, and at best will spend 20 seconds on. Then “wait, what was I doing again? ah right”. I experienced this many times.</p>
+<p>So you might be led to making some hotkey that creates an alias for you, and also adds it to your configuration. But while that solves the stoppage issue, it has another one.</p>
+<p>You create an alias for that enter the gungeon mods directory, and after some time you realize you don't play the game anymore, and haven't been using its alias for a long time. <br />
+This alias indeed used to be quite a useful one, but now it's just trash in your shell configuration; something that you need to scroll through / think through when doing something unrelated. Unclean.</p>
+<h1 id="solution"><a class="zola-anchor" href="#solution" aria-label="Anchor link for: solution">solution</a></h1>
+<p>I created a bookmarking system, where I both “get” and “set” the data interactively, on a hotkey, and therefore don't experience any stoppages. <br />
+The name of each bookmark is simply a <em>key</em> that I press, rather than a name I have to type out. <br />
+All of these bookmarks are kept in a json file, so that I can easily back them up, and so the same bookmarks could be reused in multiple different programs for possibly different purposes, and different contexts.</p>
+<p>This is how the program <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/harp">harp</a> came to life.</p>
+<p>There are multiple concepts that harp the idea (rather than harp the program) brings to the table.</p>
+<p>First, I need to be able to store multiple separate sets of bookmarks (a bookmark is called a “harp”): in our beginner example, I want a set of harps which stores file paths, and another set of harps that stores directory paths. <br />
+To accomodate this, harp has “sections”. A section is a namespace, that isolates a set of harps, so that they don't conflict with other sets of harps. <br />
+So I may have a harp section named <code>harp_files</code> that will store file paths, and another harp section named <code>harp_dirs</code> that will store directory paths.</p>
+<p>Next, I mentioned that a given harp (bookmark) is named via me pressing some key. I have a harp <code>a</code>, a harp <code>f</code>, a harp <code>ctrl+j</code>. <br />
+These harp keys / names are called “registers”. <br />
+You can think of vim registers, that you access via <code>"a</code> — harp registers are a very similar idea. <br />
+Under each register, we hold some data. <br />
+So, file path harp <code>a</code> may store the path <code>~/fes/dot/colors.css</code>. <br />
+Directory harp <code>alt+k</code> may store the path <code>~/fes/lai/bog</code><a href="#footnote-1" id="headnote-1" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>1</sup>
+</a>
+. <br />
+The data of a register is called a “harp”.</p>
+<p>Since registers are simply keys that I press, they can start to collide pretty quick: <br />
+<em>this</em> is why we have sections to separate the sets of registers — I can simultenously have a file harp <code>a</code>, and a directory harp <code>a</code>, and they won't conflict.</p>
+<p>To accomodate this entire idea, I would need to interact with a <code>HashMap&lt;HashMap&lt;String, Vec&lt;String&gt;&gt;&gt;</code> in every program that I want to implement harp in. <br />
+I would also need to interact with the json file that actually holds this data, deserializing it into the program, and then serializing it again. <br />
+This is quite doable in some programs, but completely impossible in others; <br />
+That's where harp <em>the program</em> comes into play: it's a single, simple interface to interact with harps.</p>
+<p>In most places, I simply use <code>harp</code> as an external shell command, to either supply data, or get data from stdout of. <br />
+In other cases where I'm editing the rust source code, I can use <code>harp</code> as a library. <br />
+This ends up making it <em>much</em> simpler and faster to integrate harp into a given program, as all the boilerplate steps are taken care of for me by <code>harp</code>.</p>
+<h1 id="harp-actions"><a class="zola-anchor" href="#harp-actions" aria-label="Anchor link for: harp-actions">harp actions</a></h1>
+<p>Let's start looking into what a harp implementation ends up looking like on a more practical scale, now that we have the main concepts understood. <br />
+I'll be showcasing the harp implementation I have in my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>, but the ideas are quite flexible and can be implemented into other editors and various programs.</p>
+<p>The main idea of how harp is practically useful is via “harp action”s. <br />
+Each harp action has a “set” and a “get” method. <br />
+“set” takes some data from the environment, and stores it. <br />
+“get” retrieves that stored data, and uses it somehow.</p>
+<h2 id="file-harps"><a class="zola-anchor" href="#file-harps" aria-label="Anchor link for: file-harps">file harps</a></h2>
+<p>The most basic harp action, the one that started it all: file harps. <br />
+File harp <em>set</em> takes the filepath of the current buffer, and stores it. <br />
+File harp <em>get</em> retrieves the stored path, and <em>opens</em> it in the editor.</p>
+<p>Even just this is flabbergastingly powerful. <br />
+All of your various offshoot config files that you want to jump to frequently? <br />
+Set file harps for them, and now you can get to them incredibly quickly.</p>
+<p>Most of what I do is edit config files… So I use this a <em>lot</em>. <br />
+I have file harps bound on <kbd>space+s</kbd>, so to get to all of my most wanted files, I only need to press three keys. <br />
+Helix config — <kbd>space+s+c</kbd> <br />
+Foot config (what a strange combination of words) — <kbd>space+s+f</kbd> <br />
+<a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/eli/setup/dode.fish">Program setups</a> — <kbd>space+s+d</kbd>; yada yada etc etc.</p>
+<p>Now, how did I <em>set</em> all of those harps? <br />
+<kbd>space+S</kbd> is my file harp <em>set</em> hotkey! pretty natural, right? :3 <br />
+I get to the file that I want to mark, and press <kbd>space+S+some_key</kbd>. <br />
+Similar to how the get action interactively asks me for a key to press, the set action does too.</p>
+<p>Immediately as I realize I want to access the same file over and over again, I set a harp for it on the fly, and just continue on: I don't need to divert myself into some config file, I just press a key!</p>
+<a href="#why-config" id="why-config" class="anchorina">
+  <hr></hr>
+</a>
+<p>I strangely specify “config files”; there's nothing about file harps that enforces you to use them only for config files though! <br />
+Why did I choose that wording?</p>
+<p>You will set file harps for the files that you visit the most often, as I mentioned. <br />
+When coming up with a harp you'll like using for a file, you go through an interesting process.</p>
+<p>Say I want to make a harp for my helix config. <br />
+I access it so often that I don't want to press <kbd>h</kbd> for it, which would be the most obvious key to pick. <br />
+<kbd>c</kbd> feels quite comfortable to press, so I'll go with that.</p>
+<p>I have a file where I store various <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/colors.css">colors I use often</a>. <br />
+The obvious harp key for it is <kbd>c</kbd>, but it's already taken by my helix config! <br />
+I could of course just move the helix config to somewhere else, but I don't want to: it's far more important and common than going to my colors file. <br />
+Next idea is to put the colors file at capital <kbd>C</kbd>, but whoops! It's already taken by my <a href="https://axlefublr.github.io/how-to-anki/">anki</a> css file. <em>That</em> one I could reasonably move as it's not particularly important, but I decide I don't wanna bother right now, <br />
+and arrive at <kbd>ctrl+c</kbd>.</p>
+<p>Because of <a href="https://axlefublr.github.io/erm/">home row mods</a>, it's actually still quite convenient to press for me, so it's still a good harp key. <br />
+But you can probably see how, as you harp more and more files, you'll end up making bigger and bigger compromises with yourself, coming up with less and less memorable harps, which ends up in you underusing them — you're never quite sure what that one harp was for that one file, because it's <kbd>ctrl+alt+y</kbd> or some shit at this point.</p>
+<p>This poor scalability is the reason why I specify “config files” — within this scope, I absolutely have more than enough potential nice harps to use, and don't have to get to the <kbd>ctrl+alt+y</kbd> point (unless it specifically makes sense for some given file). <br />
+But this poor scalability is what will make it unpleasant / unlikely / unreasonable to use harps for temporary-ish files, like files in some project you're working on.</p>
+<p>Now this is the part where you'll shit you're pants. I solved this.</p>
+<p>I present to you the next harp concept 🗣️✍️🔥:</p>
+<h1 id="relativity"><a class="zola-anchor" href="#relativity" aria-label="Anchor link for: relativity">relativity</a></h1>
+<p>The default harp relativity is “global” — it's not relative to anything and the sections used for the harp actions are also normal: <code>harp_files</code>, <code>harp_dirs</code>, etc. <br />
+When you set a global harp, you'll be able to get to it no matter where you are. <br />
+This is the default behavior for all harp actions.</p>
+<p>But other relativities, aside from “global”, work in a different way. <br />
+They limit the <em>scope</em> of your reach depending on some context from your editor.</p>
+<p>Let's learn with an example. <br />
+Say I'm working on my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">helix fork</a>, and noticed a file that I want to harp: <code>helix-term/src/commands.rs</code> <br />
+The obvious harp key that comes to mind is <kbd>c</kbd>. <br />
+But as you've now seen above, all of <kbd>c</kbd>, <kbd>C</kbd> and even <kbd>ctrl+c</kbd> are already taken; <br />
+And I sure as hell don't want to use <kbd>alt+c</kbd> for this.</p>
+<p>The “directory” relativity comes to the rescue! <br />
+Rather than using the global <code>harp_files</code> section, the directory relativity creates a new section by using your current working directory. <br />
+I store my helix fork at path <code>~/fes/ork/hx</code>, and when I open the editor to work on the editor (lol), <br />
+<code>~/fes/ork/hx</code> <em>also</em> becomes the current working directory of <em>helix</em>. <br />
+<strong>That</strong> is what's used by the directory relativity, and you end up using the section <code>harp_files_~/fes/ork/hx</code>. <br />
+Notice how the path to the current working directory became a part of the section name! <br />
+This is how all relativities are implemented :3</p>
+<p>What this actually <em>gives</em> us, is the following behavior.</p>
+<p>I press <kbd>space+S</kbd> to set a new harp for <code>helix-term/src/commands.rs</code>, <br />
+and see <code>harp file set (global)</code> in my prompt, notifying me that I'm currently in the global relativity (using section <code>harp_files</code>). <br />
+Next, I press <kbd>.</kbd> to switch to the directory relativity, <br />
+and notice that in my prompt: <code>harp file set (directory)</code> (now using section <code>harp_files_~/fes/ork/hx</code>). <br />
+I now press the actual key I want to use for the harp — <kbd>c</kbd>. <br />
+The harp is now set! And it will not conflict with that other harp I have on <kbd>c</kbd> for my helix config, because it's stored in a different section!</p>
+<p>Chances are, if I want to go to <code>helix-term/src/commands.rs</code>, that means that I already opened the helix fork directory and started helix there. <br />
+So storing the harp for the file <em>globally</em> doesn't really make any sense — it's quite a waste! <br />
+Storing it “inside” the only directory from which I'll ever want to access it is far more efficent.</p>
+<p>So, to reiterate, now I press <kbd>space+s+c</kbd> to harp into my helix config (from anywhere), <br />
+and press <kbd>space+s+.+c</kbd> to harp into <code>helix-term/src/commands.rs</code> (from <code>~/fes/ork/hx</code>).</p>
+<p>I can create and use project specific harps, resulting in the seemingly restrictive system being quite scaleable!</p>
+<p><em>All</em> relativities<a href="#footnote-2" id="headnote-2" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>2</sup>
+</a>
+ exist for <em>all</em> harp actions<a href="#footnote-3" id="headnote-3" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>3</sup>
+</a>
+. <br />
+Some relativities don't make logical sense for some harp actions, so I'll introduce the other ones as they come up in usefulness for the other harp actions, as we go.</p>
+<p><a href="#headnote-2" id="footnote-2" class="headnote" title="Click to go back">
+  <sup>2</sup>
+</a>
+ You only know “global” and “directory” so far. <br />
+<a href="#headnote-3" id="footnote-3" class="headnote" title="Click to go back">
+  <sup>3</sup>
+</a>
+ You only know harp files and have <em>heard</em> of harp directories so far.</p>
+<p>You might find yourself almost always using the directory relativity for file harps; That's a pretty reasonable approach! <br />
+You can change the default relativity <em>per</em> harp action. <br />
+For example, you could set file harps to automatically assume the “directory” relativity. <br />
+Then to access the global relativity again, you'd have to press <kbd>'</kbd> before the harp key, but would no longer need to press <kbd>.</kbd> every single time for the directory relativity — <em>that</em> is now your default instead of “global”. <br />
+As you discover your own harp workflow, you'll find the relativities you use most for each harp action, and will be able to make it more ergonomic and fast 🚀 for yourself :3</p>
+<h2 id="directory-harps"><a class="zola-anchor" href="#directory-harps" aria-label="Anchor link for: directory-harps">directory harps</a></h2>
+<p>Harps don't have to be exclusive to your editor! <br />
+This harp action exists for me both in helix, <em>and</em> fish shell!</p>
+<p>Zoxide is wonderful, but still requires me to type at least a few characters to get to a specific directory that I want. <br />
+And if I stand my ground and use only one character, it'll likely jump me to the wrong directory; <br />
+at least, I can never tell ahead of time where I'll end up in, and so it all ends up being a waste of mental cycles.</p>
+<p>Instead, I use directory harps! <br />
+“set” takes my current working directory,
+“get” <code>cd</code>s into it.</p>
+<p>My shell, of course, has a current working directory; but did you know your editor (helix / nvim) has its own, separate, current working directory? That's the reason I have directory harps for both!</p>
+<p>I do a lot of configuration, so I always need to travel to my dotfiles directory quickly and directly. <br />
+Directory harp <code>d</code> lets me jump to <code>~/fes/dot</code>. <br />
+My blog, similarly, is something I need to get to often; <code>~/fes/lai/bog</code> is on harp <code>x</code>. <br />
+The various notes I have that may or may not be temporary are extra important to be instantenous: <code>~/fes/foe</code> on <code>k</code>. <br />
+I fuck up something in a <a href="https://axlefublr.github.io/magazines/">magazine</a> — use harp <code>m</code> to quickly get to <code>~/.local/share/magazine</code> and <code>git reset</code> some magazine action.</p>
+<p>I used the keys/letters that were easiest for me to remember for each path, so they got into my muscle memory pretty quickly. <br />
+I now consistently save mental effort getting to these directories, and can instead think about anything else instead :&gt; <br />
+I never had to type out any of those paths to <em>set</em> them, either! <br />
+I simply get to that directory somehow (maybe by using zoxide, too!), then press <kbd>ctrl+alt+m+some_key</kbd> in my shell. <br />
+My current working directory is automatically passed, so no need to provide it manually!</p>
+<p>Then in helix, if I ever realize I need to change directory to one of those paths, I can use the directory harp action <em>within helix</em> — I made <em>shell</em> directory harps and <em>helix</em> directory harps share the same section, so setting a harp in one will set it in the other! Very convenient.</p>
+<p>The pain point of <code>~/.config</code>, <code>~/.local/share</code>, etc, is also completely solved by directory harps! And <em>you</em> get to decide what key makes the most sense to you to press to get to them. <br />
+With fuzzying, you get your perfect query enforced on you — with harp, <em>you</em> get to name it. <br />
+<code>~/.local/share</code> makes you feel like pressing <kbd>z</kbd>? Sure whatever. <br />
+<code>~/.cache</code> is <kbd>ctrl+alt+h</kbd>? You go girl.</p>
+<h1 id="i-lied"><a class="zola-anchor" href="#i-lied" aria-label="Anchor link for: i-lied">I lied</a></h1>
+<p>None of the relativities are particularly useful with directory harps! So let's talk about a lie I told you.</p>
+<p>My harp file <em>set</em> hotkey is not actually <kbd>space+S</kbd>!</p>
+<p>Changing relativities is not a one time deal: <kbd>.</kbd> to switch to the directory relativity, <kbd>'</kbd> to switch to the global one, and other relativities you do not yet know, all act as <em>hotkeys</em>.</p>
+<p>You press those keys to change your current ‘mode’. <br />
+What this means, is that you can press them as many times as you want — you can jump between the relativities, doing like 15 “nevermind”s, before ultimately deciding (or cancelling with <kbd>Escape</kbd>) on the one that you want and pressing the actual harp key. <br />
+<kbd>.'.'.''.'.'..'.'..'</kbd> is something you can press in sequence while using a harp action, and it's completely normal.</p>
+<p>It didn't always function this way, and I am really satisfied with my recent harp refactor that made this behavior possible. <br />
+I really enjoy not being rushed to pick, and instead be able to stay 🤔ing for a while until I decide.</p>
+<p>My previous set hotkey <em>was</em> <kbd>space+S</kbd> at the time, and I quite disliked how I needed to think <em>ahead of time</em> (which is quite <a href="https://axlefublr.github.io/why-even-helix/">unhelix-like</a>) whether I wanted to set or to get. <br />
+Then also, having to hold shift for the set variants made a certain upcoming harp action kind of not worth it to use, to its fullest extent. <br />
+And that's why I made the change:</p>
+<p>Pressing <kbd>Space</kbd> while in a harp action toggles between the <code>get</code> variant, and the <code>set</code> variant. <br />
+Instead of pressing your “harp file get” hotkey to open a file, and your “harp file set” hotkey to harp it, you <em>simply</em> use your “harp file” mapping, and <em>then</em> decide. <br />
+You start off in the <code>get</code> mode, but can press <kbd>Space</kbd> to go into the set mode. <br />
+Then if you realized you didn't want to set, you can simply press <kbd>Space</kbd> again to go back to get. <br />
+And you can do this infinitely! Very stimmy.</p>
+<h2 id="relative-file-harps"><a class="zola-anchor" href="#relative-file-harps" aria-label="Anchor link for: relative-file-harps">relative file harps</a></h2>
+<p>As I started actively using harp, I noticed an interesting pattern. <br />
+Project structures are often not that unique!</p>
+<p>In a rust project, there will always be <code>Cargo.toml</code>, one or both of <code>src/main.rs</code> / <code>src/lib.rs</code>. Possibly <code>.rustfmt.toml</code>. <br />
+In lua, <code>.luarc.json</code> might be something you want to access every so often. <br />
+Basically every project will have a <code>README.md</code>, maybe a <code>CONTRIBUTING.md</code>; some of my projects have a <code>RELEASE.md</code> that is automatically attached to the github release.</p>
+<p>With harp, you might find yourself <em>set</em>ting the same relative paths over and over again, per each project. <br />
+And the file first needs to exist and be open, for you to <em>set</em> it, so that's a lil extra effort as well. <br />
+Seems like a bit of a waste, no?</p>
+<p>Relative file harps solve this.</p>
+<p>When normal file harps store the <em>full</em> path, relative file harps only store the <em>relative</em> path of the buffer, from your current working directory.</p>
+<p>So say your cwd is <code>~/fes/dot</code> and you have <code>~/fes/dot/project.txt</code> open. <br />
+If you set a normal file harp for it, the entire <code>~/fes/dot/project.txt</code> would be stored, and you would only be able to travel to <code>~/fes/dot</code>'s <code>project.txt</code> file. <br />
+But if you set a <em>relative</em> file harp, only <code>project.txt</code> is stored. <br />
+And now, whenever you <em>get</em> the harp, you will open the <code>project.txt</code> file of the <em>current</em> project, rather than some exact file.</p>
+<p>What this lets you do is access files that do not even exist yet! <br />
+Rather than having to first create the file somehow, you immediately jump to where it would be, and on your next write it will automatically get created. <br />
+So we're solving two problems here:</p>
+<ol>
+<li>having to set harps for the same files for every project is laborious</li>
+<li>having to first create the files to then make harps for is laborious also</li>
+</ol>
+<p>To reiterate: use relative file harps when you might want to get to different <em>actual</em> files, but that are of the same <em>structure</em>. <br />
+Use normal file harps when you want to get to <em>exact</em> files.</p>
+<p>Here are my relative harps:</p>
+<table><thead><tr><th>Register</th><th>Filepath</th></tr></thead><tbody>
+<tr><td><kbd>r</kbd></td><td>README.md</td></tr>
+<tr><td><kbd>e</kbd></td><td>RELEASE.md</td></tr>
+<tr><td><kbd>k</kbd></td><td><a href="https://axlefublr.github.io/magazines/">project.txt</a></td></tr>
+<tr><td><kbd>g</kbd></td><td>.gitignore</td></tr>
+<tr><td><kbd>j</kbd></td><td>justfile</td></tr>
+<tr><td><kbd>l</kbd></td><td>lib.rs</td></tr>
+<tr><td><kbd>c</kbd></td><td>Cargo.toml</td></tr>
+<tr><td><kbd>m</kbd></td><td>main.rs</td></tr>
+</tbody></table>
+<p>I underuse relative harps honestly; I should harp some more 🗣️</p>
+<h2 id="register-harps"><a class="zola-anchor" href="#register-harps" aria-label="Anchor link for: register-harps">register harps</a></h2>
+<p>If you're a vim / helix / kakoune user, you might have noticed how using harps is kinda similar to using vim registers. <br />
+With vim registers, you access a “key”, and then get text that you can interact with in some way; usually by pasting it.</p>
+<p>In helix, the contents of your registers do not stay across sessions, making them fairly useless. <br />
+And that's why register <em>harps</em> is a very useful idea!</p>
+<p>As I (hopefully) mentioned already, <em>set</em>ting a harp makes it <em>instantly</em> available in <em>all</em> sessions, <br />
+so you don't have to worry about helix “forgetting” the contents of your registers after you exit it.</p>
+<p>To <em>set</em> a register harp, first simply copy (yank) something to your <code>default-yank-register</code> <br />
+(<code>"</code> by default (meaning that you simply copy normally, no special magic required)). <br />
+This is the “context” that this harp action uses for the set action: it takes the contents in the <code>default-yank-register</code>.</p>
+<p>Later on when you <em>get</em> that register, it places the stored contents back into your <code>default-yank-register</code>, letting you paste them normally.</p>
+<p>I'm gitty of the power of this harp action, and explaining it to you!! <br />
+But first, let's introduce <em>another</em> relativity :o</p>
+<h2 id="filetype-relativity"><a class="zola-anchor" href="#filetype-relativity" aria-label="Anchor link for: filetype-relativity">filetype relativity</a></h2>
+<p>You can make a harp relative to the current buffer's filetype. <br />
+It uses the filetype that helix sets for the buffer, rather than just taking the buffer's file extension! <br />
+So if you use the filetype relativity on a markdown file, <code>!markdown</code> will be appended to the section name, rather than <code>!.md</code> that you may have expected. <br />
+The filetype relativity even works for files that don't <em>have</em> a “real” filetype! <br />
+When the buffer doesn't resolve to any real filetype, its filetype is set to “text”. <br />
+So, if you use the filetype relativity in an <code>example.txt</code> file, <code>!text</code> will be appended to the section name.</p>
+<p>To switch to the filetype relativity, press <kbd>;</kbd> while accessing a harp action.</p>
+<h2 id="back-to-register-harps"><a class="zola-anchor" href="#back-to-register-harps" aria-label="Anchor link for: back-to-register-harps">back to register harps</a></h2>
+<p>The filetype relativity + register harps lets us create a simple snippet system!</p>
+<p>For example, <a href="https://axlefublr.github.io/why-i-hate-lua/">I despise lua</a>, and don't like how long it takes to type in the syntax for a function object / closure, and I also happen to dislike the default snippets that the lua language server provides for them.</p>
+<p>I could yank the following:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="lua"><span class="giallo-l"><span style="color: #EA6962;">function</span><span>()</span></span>
+<span class="giallo-l"><span>  →</span></span>
+<span class="giallo-l"><span style="color: #EA6962;">end</span></span></code></pre>
+<p>(the <code>→</code> there is a tab)</p>
+<p>And put it into a filetype-relative register harp (just make sure you're in a lua file while you do this). <br />
+Now I can “summon” it whenever I want, by pressing <code>&lt;space&gt;w;f</code> + the paste key<a href="#footnote-4" id="headnote-4" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>4</sup>
+</a>
+.</p>
+<p>Pressing 4 keys to get to it <em>may</em> be not worth it for you for the specific example, but you can probably see how a bunch of various language-specific boilerplate you don't like typing out can instead be harped, consistently saving you effort :3 <br />
+In my personal usage, I find myself using the filetype relativity the most often with register harps, so I set it as my default relativity for them. <br />
+In other words, getting that function object syntax example is just <code>&lt;space&gt;wf</code> for me.</p>
+<p>Also, I use register harps really frequently for shebang lines! <br />
+For example:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env fish</span></span></code></pre>
+<p>I store this in register harp <kbd>#</kbd>, relative to the <code>fish</code> language. Then I store the following relative to <code>nushell</code>:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #928374;">#!/usr/bin/env -S nu -n --no-std-lib</span></span></code></pre>
+<p>Once again, <em>also</em> in harp <kbd>#</kbd>.</p>
+<p>So you can create a semantic for yourself that makes it easy to remember the <em>intent</em> behind a harp, yet store many different ones thanks the various relativities. <br />
+Here, it makes sense for me that a shebang line starts with a <kbd>#</kbd>, and so I use that key as a neat mnemonic. <br />
+Making use of easy to remember mnemonics / going with what feels the most natural is a great way to make a good use of harp.</p>
+<a href="#another-alternative" id="another-alternative" class="anchorina">
+  <hr></hr>
+</a>
+<p>Another good default relativity you could use instead of global, is the directory relativity. <br />
+Then, by default, you will simply have vim-like registers that are scoped to a project, so you can use them a bit more willy-nillily than global ones or filetype-relative ones, and simply temporarily switch your relativity when you <em>do</em> want those.</p>
+<p>No need to worry about your registers disappearing, and no need to worry what else you saved for later while working on a completely different project.</p>
+<p>Sometimes, I keep them for long, though! <br />
+For example, I keep the syntax required to make a footnote<a href="#footnote-5" id="headnote-5" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>5</sup>
+</a>
+ in this blog, as two register harps — <br />
+one for the head part of the note (the uppercase number in the previous sentence) and another for the foot part of the note (what you are jumped to). <br />
+I need to type in the index myself, so to make it easy to do so, I leave in <code>j</code> in place of the number. <br />
+Once I paste the syntax, I can hop directly to <code>j</code> to then replace with the index. <br />
+This workflow makes it much more comfortable to create footnotes!</p>
+<h2 id="search-harps"><a class="zola-anchor" href="#search-harps" aria-label="Anchor link for: search-harps">search harps</a></h2>
+<p>Whenever you search for something, the search pattern you used is stored in the <code>/</code> register. <br />
+Interestingly, this works not only for the <code>search</code> action (<kbd>/</kbd>), but also for the “ripgrep project” action (<code>global_search</code>).</p>
+<p>When you <em>set</em> a search harp, the regex pattern in your <code>/</code> register is stored. <br />
+When you <em>get</em> a search harp, the pattern is taken from storage and placed back into your <code>/</code> register.</p>
+<p>The way that searching and the <code>/</code> register works in helix specifically makes this a very nice to use and flexible functionality. <br />
+You see, <code>/</code> doesn't store “your <em>last</em> search”, it stores “your search”. <br />
+So when you change the contents of your <code>/</code> register, you change what you will be searching for when you press <kbd>n</kbd>/<kbd>N</kbd>. <br />
+There's no need for the harp action to automatically trigger a “and now you jump to the match!” action, <em>you</em> get to decide how you proceed. <br />
+So you can get a search harp, and then decide to jump backwards with <kbd>N</kbd>, or forwards with <kbd>n</kbd> — harp doesn't make the decision for you because helix's design doesn't require it to, muah!</p>
+<p>But another really powerful thing that filling the <code>/</code> register does for you, comes back to <code>global_search</code> once again. <br />
+If you open <code>global_search</code> and don't type in any pattern yet, it shows the pattern stored in the <code>/</code> register, greyed out. <br />
+Now, if you press <kbd>Enter</kbd>, it is automatically accepted as your input.</p>
+<p>In other words, you could get a search harp, then invoke <code>global_search</code> and simply press enter, to search for a stored query!</p>
+<p>This capability is not unique to <code>global_search</code> though, as if you press <code>/</code> to do a buffer search, you will <em>also</em> see the same greyed out search pattern that you can accept with <kbd>Enter</kbd>. <br />
+Ooooor, you can press <kbd>Up</kbd> to actually paste in that pattern, for you to <em>edit</em>.</p>
+<p>Searching and the search register semantics in helix are very clean, as you can see; <br />
+It is thanks to this that register harps is the first harp action that makes great use of <em>every</em> relativity! <br />
+Let's go through them.</p>
+<h3 id="directory"><a class="zola-anchor" href="#directory" aria-label="Anchor link for: directory">directory</a></h3>
+<p>The <code>global_search</code> capability lets us have lsp-like capabilities without relying on an lsp! <br />
+First you notice what things you keep searching for in the project, and interactively try to match them with regex by using <kbd>/</kbd>.</p>
+<p>You can take your time doing so, trying out different approaches until you confirm it works by simply <kbd>n</kbd>ing to it. <br />
+Then, you set a harp for that, using the directory relativity.</p>
+<p>Now, whenever you want to search for the query again, you <em>get</em> this search harp you created, open <code>global_search</code> and press enter. <br />
+Especially if the directory relativity is your default one for search harps, this is not too bad! <br />
+Considering it's your first result, you simply press <kbd>Enter</kbd> again, but you don't <em>necessarily</em> have to use this functionality for intentionally a single result. <br />
+You can also make a query that searches for potentially many things, so that you can quickly gain an overlay over all of them. <br />
+The simplest example of this in the context of the directory relativity, is checking the <em>usage</em> of some given thing.</p>
+<p>But of course, if you can use an lsp for this sort of basic functionality, use it. <br />
+The benefit of using search harps instead is for when you don't have access to an lsp, or it is obscenely slow, or you want to check references for a thing which is not technically a symbol (“get all comments”, as an example).</p>
+<p>Plus, the lsp starts loading once you're actually in some file, and generally to get all references of a symbol, you need to first <em>arrive</em> at that symbol. <br />
+There will be some situations where it's just much faster to use a search harp, especially if you keep reopening this given project and travelling to the same thing.</p>
+<h3 id="filetype"><a class="zola-anchor" href="#filetype" aria-label="Anchor link for: filetype">filetype</a></h3>
+<p>We created a basic snippet system with register harps, and now we can use <em>search</em> harps to create a basic textobject system!</p>
+<p>The idea is pretty simple: you create regexes to jump to some syntactical structures.</p>
+<p>Here's a search harp I made for rust:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>-&gt; [^ ]+</span></span></code></pre>
+<p>Using it, I can jump to a function's output type:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="rust"><span class="giallo-l"><span style="color: #EA6962;">pub fn</span><span style="color: #A9B665;"> count</span><span>(</span><span style="color: #E49641;font-weight: bold;">&amp;</span><span style="color: #7DAEA3;">self</span><span>)</span><span style="color: #E49641;font-weight: bold;"> -&gt;</span><span style="color: #7DAEA3;"> usize</span><span> {</span></span>
+<span class="giallo-l"><span style="color: #7DAEA3;">    self</span><span>.count.</span><span style="color: #A9B665;">map_or</span><span>(</span><span style="color: #E491B2;">1</span><span>,</span><span style="color: #E49641;font-weight: bold;"> |</span><span>v</span><span style="color: #E49641;font-weight: bold;">|</span><span> v.</span><span style="color: #A9B665;">get</span><span>())</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>Here, I would arrive at <code>-&gt; usize</code>.</p>
+<p>Unfortunately, helix uses rust regex, rather than <code>fancyregex</code>, so backreferences are not possible; I'd like to remove the <code>-&gt; </code> from the selection that's made, but still use it in the pattern — currently that's not a thing I can do.</p>
+<p>I looked into replacing <code>regex</code> with <code>fancyregex</code> in helix, but I couldn't even figure out where to start, ngl. <br />
+Maybe in the future, me or someone else will do this, and then search-based text objects are going to become even more powerful than they already can be.</p>
+<a href="#pubfun" id="pubfun" class="anchorina">
+  <hr></hr>
+</a>
+<p>You can jump to the previous / next function using <kbd>[f</kbd> and <kbd>]f</kbd>, in helix. <br />
+This is pretty neat and useful, but often has inconvenient semantics. <br />
+<em>Closures</em> generally count as functions, and if you have a function inside of a function, that will count too. <br />
+While in reality, I want to “jump to the next function” the most often for the usecase of travelling through the file the fastest, arriving at some top level function. <br />
+Having to travel through every itty bitty closure makes this not particularly viable.</p>
+<p>We can once again use filetype search harps for this usecase, using a simple pattern:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>^pub fn</span></span></code></pre>
+<p>Here I specificially search for all <em>public</em> functions that are top level; <br />
+So <em>methods</em> wouldn't get caught with this — this can be either beneficial or detrimental depending on what you want, but you have the power to define what exactly you want, by changing the regex! :D</p>
+<p>Maybe jumping to a <em>function</em> specifically is not that useful to you, but overall being able to jump to the next public top-level <em>symbol</em> is — you could simply use <code>^pub </code> in that case. <br />
+Regardless of what you want, <em>you</em> get to decide what search “shortcuts” you have, by creating them all to fit <em>your</em> specific needs. <br />
+Not having to make do with overly specific design restrictions is part of why I love harp so much.</p>
+<h3 id="global"><a class="zola-anchor" href="#global" aria-label="Anchor link for: global">global</a></h3>
+<p>Coming back to how we used search harps with the directory relativity, we can also make use of <code>global_search</code> with the global relativity.</p>
+<p><code>TODO</code>, <code>FIXME</code>, <code>BUG</code>, <code>HACK</code>, etc are something that you may either see or even use in your code, as pointers for things to take a look at in the future. <br />
+You could make a global search harp for them all (or some of them), to be able to quickly get an overview of all places of note, via <code>global_search</code>.</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>\bTODO|FIXME|BUG|HACK\b</span></span></code></pre>
+<p>…And here you go.</p>
+<p>So far this is the only pattern that I can expect to be useful in any language and any project, but I'm sure there are more things like that! <br />
+For example, the <code>[[sort etc]]</code> of <a href="https://axlefublr.github.io/consider-sorting/">my autosorter</a> could potentially be a useful pattern to keep stored 🤔</p>
+<h3 id="buffer"><a class="zola-anchor" href="#buffer" aria-label="Anchor link for: buffer">buffer</a></h3>
+<p>And now I introduce to you the last, fourth harp relativity: buffer. <br />
+You can make your harps local to the absolute filepath of the current buffer. <br />
+You can access it by pressing <kbd>,</kbd> while using a harp action.</p>
+<p>Vim-like marks, inherently, store a line+column position. <br />
+What this means, is that if you add or remove line(s) before that position, you invalidate the stored position. <br />
+At best, you'll be slightly off, but at worst you're now storing a completely useless position. <br />
+With vim-like marks, you will find yourself updating the position over and over again, making yourself disheartened to use marks at all.</p>
+<p>With buffer-relative search harps, we can implement a marking system that completely avoids this issue.</p>
+<p>Select some area of your code, that is like a landmark. Then, press <kbd>*</kbd> to search for it. <br />
+Now if you set a search harp for it relative to the buffer, you can invoke it at any time to quickly jump to it! <br />
+I use this so frequently, that buffer relativity is my default one for search harps.</p>
+<p>Thanks to <kbd>*</kbd>, you don't actually need to enter the search pattern yourself a lot of the time, making the <em>set</em> process quite comfortable. <br />
+In this same sense, you can consider how helpful it can be for the previous relativities of search harps, too.</p>
+<p>To show how I use buffer-relative search harps, let's take my <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/dotfiles/blob/main/helix/generator.py">helix config generating script</a>.</p>
+<p>To define my mappings, I have hashmaps per each mode combination that I want to have mappings for. <br />
+Basically, I can just add a mapping to <code>normal_select_mappings</code> to add it to both modes, rather than having to separately add it to <code>normal_mappings</code> and <code>select_mappings</code>. <br />
+Since all of these hashmaps are huge, it's incredibly helpful to be able to jump to each of them individually. <br />
+The variable definitions are unique, and that helps them be unique search patterns!</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>normal_select_mappings: dict[str, Any] = {</span></span>
+<span class="giallo-l"><span>normal_mappings: dict[str, Any] = {</span></span>
+<span class="giallo-l"><span>select_mappings: dict[str, Any] = {</span></span></code></pre>
+<p>With all of them, I can simply select the entire line and press <kbd>*</kbd> to search for it; <br />
+This way, I can make a search harp with no extra hassle. <br />
+I'm not going to a line+column position, but <em>searching</em> for <code>normal_select_mappings: dict[str, Any] = {</code>. <br />
+Thanks to it being a search, I will always land at where the landmark is actually located, not at where it <em>was</em> located.</p>
+<p>You don't necessarily need to only match a single thing, though. <br />
+You can also make a buffer-relative search harp that can take you to multiple places.</p>
+<p>I have two layers in my <a href="https://axlefublr.github.io/erm/">kanata config</a>, that let me launch programs quickly. <br />
+In the config file, I might want to jump to either of the two layers, and so I unify them under a single search harp! <br />
+This is how the two layer definitions start:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>(deflayermap (apps)</span></span>
+<span class="giallo-l"><span>(deflayermap (apps-revengeance)</span></span></code></pre>
+<p>So I can use the pattern <code>\(deflayermap \(apps</code> to grab them <em>both</em> in a single search harp, and then simply press <kbd>n</kbd> to get to either one I want to get to.</p>
+<p>Aside from being genuinely specific to some file, the buffer relativity can act as your “I really don't wanna think about harps conflicts right now” relativity, that you can use for the truly ad-hoc harp that you don't intend to use later.</p>
+<h2 id="mark-harps"><a class="zola-anchor" href="#mark-harps" aria-label="Anchor link for: mark-harps">mark harps</a></h2>
+<p>Search harps for navigating to some specific place, still, are best suited for things that you intend to get back to at least every so often. <br />
+After all, you need to think about whether the given search pattern will stay valid (are you sure you aren't going to change the contents of the line you're using as a landmark?), and you do need to press an extra key (<kbd>n</kbd> usually) or even multiple keys (when using <code>global_search</code> + searh harps).</p>
+<p>But for ad-hoc things (“I just need to store this position quickly, I'll come back to it in a sec”), or for things that you're sure will remain unchanging for the most part, <em>mark harps</em> are a better pick.</p>
+<p>Setting a mark harp stores the filepath of the current buffer, and your line + column position in it. <br />
+Getting a mark harp opens the stored filepath, and travels to the line + column position stored.</p>
+<p>This makes it a much better ad-hoc harp action, as to set one, you don't need to come up with an appropriate search pattern, you simply <em>set</em> and go on with your day. <br />
+The position invalidation argument I made in the search harp section still remains true, so mark harps are best used for when an invalidated position wouldn't matter that much.</p>
+<p>The helix jump list is not trustworthy, it keeps invalidating itself for seemingly no good reason. <br />
+And when <em>it</em> invalidates, the position you explicitly stored with <kbd>ctrl+s</kbd> is simply <em>gone</em>, rather than just <em>off</em>, like it <em>might</em> be with mark harps.</p>
+<p>I find the directory relativity to make the most sense as a default for mark harps<a href="#footnote-6" id="headnote-6" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>6</sup>
+</a>
+. <br />
+You scope your ad-hocs per project, so you never need to worry about overriding something you were working on 5 seconds ago, in a different project. <br />
+Yet, it's not as restrictive as defaulting to the buffer relativity: since mark harps remember the buffer path as well, you can more freely express “wherever I last been” — you don't need to first remember which file you were in, to then jump to a position inside of.</p>
+<p>This harp action is the most recent, actually! <br />
+Search harps are so good, that I didn't feel the need for this harp action to exist; <br />
+I also trusted the jumplist more than I should have.</p>
+<p>Pressing an uppercase letter to set something this “fast”, also felt like a bad value proposition. <br />
+So it's <em>this</em> harp action that sparked the “space to toggle get/set” change, as well as the refactor that made it possible.</p>
+<p>Now that I have mark harps, they're really nice! <br />
+Being able to turn my brain off and not worry about losing my train of workflow is really convenient.</p>
+<h2 id="command-harps"><a class="zola-anchor" href="#command-harps" aria-label="Anchor link for: command-harps">command harps</a></h2>
+<p>On set, the last command mode :command you executed (stored in the <code>:</code> register) is stored. <br />
+On get, it is <em>executed</em>.</p>
+<p>In classic harp fashion, the process of setting is interactive. <br />
+First, you try out the command, until you finalize it into the one you want to store. <br />
+Only <em>after</em> do you actually “commit” it.</p>
+<p>If I just made you enter the command into an inputbox, you could have a typo, or simply be using the command incorrectly, and never be the wiser! <br />
+At least, not until the next time you plan to <em>use</em> that harp, where it may be crucial to not distract yourself with fixing some harp command :p</p>
+<p>Of course, there might be some commands that you want to store without necessarily running them first; Something destructive perhaps? <br />
+For those usecases, you can simply write out the command in some buffer, and copy it directly into the <code>:</code> register. <br />
+That will allow you to fill the “context” that command harps use, without running the command just yet.</p>
+<a href="#command-expansions" id="command-expansions" class="anchorina">
+  <hr></hr>
+</a>
+<p>This is by far the most <em>powerful</em> harp action, and is my second most used one, after file harps. <br />
+The kakoune design, that helix takes after, makes storing :commands quite flexible.</p>
+<p>First, helix has command expansions. Variables that expand to some string, depending on some context. <br />
+The most useful one that immediately comes to mind, is <code>%(buffer_name)</code> — it resolves to the path of the buffer. <br />
+Through trying it out, though, I found it largely inconsistent and strange, so my fork adds the following 4 useful command expansions:</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="plain"><span class="giallo-l"><span>full_path</span></span>
+<span class="giallo-l"><span>relative_path</span></span>
+<span class="giallo-l"><span>buffer_parent</span></span>
+<span class="giallo-l"><span>working_directory</span></span></code></pre>
+<p>You can probably guess what they resolve to; otherwise you can read about their semantics in the <a rel="noopener external" target="_blank" href="https://github.com/Axlefublr/helix">readme of the fork</a>.</p>
+<p>I <em>believe</em> that command expansions can be used in <em>any</em> :command. <br />
+But there are a couple of most useful ones.</p>
+<p><code>:run-shell-command</code>, or just <code>:sh</code>, lets you execute a shell command asyncronously, and will show its output in a popup, once it finishes.</p>
+<p>You don't always want to do things asyncronously, though; <br />
+We can use the <code>%sh()</code> command expansion for the syncronous usecases! <br />
+<code>%sh(echo hi)</code> will execute the shell command <code>echo hi</code>, wait for it to finish, and then resolve to the output.</p>
+<p>The call of a :command itself is syncronous, so <code>%sh()</code> <em>must</em> resolve to a value before the :command that contains the <code>%sh()</code> actually runs.</p>
+<p>To make use of this property, you have the <code>:echo</code> command. <br />
+It displays the arguments given to it in the messages line (rather than in a popup). <br />
+You can use <code>%sh()</code> inside of <code>:echo</code> to effectively mimic <code>:sh</code>, but ensure it's syncronous. <br />
+This little bit of knowledge may especially be useful for your mappings, not just harps.</p>
+<p><code>:noop</code> is exactly like <code>:echo</code>, except it doesn't show the output in the messages line. <br />
+It's made basically specifically for doing <code>%sh()</code>, but when you don't care about the output.</p>
+<p><code>:insert-output</code> and <code>:append-output</code> are like <code>:sh</code>, but will insert the output of the command before/after the cursor; syncronously.</p>
+<p><code>:pipe</code> pipes the contents of your selections into a shell command, and replaces them (contents) with the output of that shell command. <br />
+Each selection is piped individually, rather than collected somehow.</p>
+<p><code>:pipe-to</code> is the same thing as <code>:pipe</code>, but the contents of your selection(s) are not replaced. <br />
+Basically, you can <em>use</em> your selection(s) as input to a command, without caring about the output.</p>
+<p>With such powerful building blocks, you can create quite complex editing actions, without the editor having to provide them for you. <br />
+However, typing in a lot of powerful commands can quickly become impractical. <br />
+Sure, you can <code>:pipe</code> into <code>shuf</code> and not worry much about it<a href="#footnote-7" id="headnote-7" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>7</sup>
+</a>
+, but what about more complex commandlines?</p>
+<p>For really really common things you do you might create hotkeys. <br />
+But for many other ones, doing so is highly impractical for many different reasons!</p>
+<p>Having to modify your config for something you aren't even sure you're going to use yet, is painful. <br />
+If that hotkey is actually project specific, now you're polluting a project with yet another config file (for helix). <br />
+What if you only need this command for this specific file, or for a filetype?</p>
+<p>A lot of power that's impractical to use is a good hint that harp could make it a lot better. <br />
+And oh god does it do exactly that!</p>
+<h3 id="global-1"><a class="zola-anchor" href="#global-1" aria-label="Anchor link for: global-1">global</a></h3>
+<p>You might want to <code>:toggle-option</code> something in a highly specific way, that doesn't happen often enough to warrant a hotkey. <br />
+For example, I don't use my left gutter at all.
+But I <em>could</em> foresee wanting to temporarily enable it to see the git hunks in a buffer.</p>
+<p>I used to have a hotkey for this, but I found myself using it so rarely that I kept forgetting what the hotkey is. <br />
+That's because all the other, more convenient / easy to remember hotkeys are already occupied by other things, so the “toggle gutter” hotkey is in a rough spot. <br />
+I can now simply move it to be a command harp, on something like global harp <code>g</code>, and be quite happy about it!</p>
+<p>My <code>:write</code> hotkey is just <kbd>'</kbd>. <br />
+Just a few days ago, a new flag has been added to <code>:write</code>, that allows you to write <em>without</em> formatting the file first — <code>--no-format</code>. <br />
+This sounds pretty useful of a thing! But I'm not yet sure if I'd actually use it in my workflow. <br />
+So I can blammo it on global command harp <code>w</code> and let time tell me if I need the functionality or not. <br />
+This is because I will <em>never</em> bother typing in the long ass <code>--no-format</code> flag normally — I <em>need</em> a shortcut of some kind to even consider using the feature.</p>
+<p>Being able to “try out” things before considering putting them into your direct mappings, I've found to be incredibly helpful.</p>
+<h4 id="open"><a class="zola-anchor" href="#open" aria-label="Anchor link for: open">:open</a></h4>
+<p>Command harps are so powerful that they can completely mimic a whole entire different harp action! /hj</p>
+<p>The <code>:open</code> command lets you open some file, which is exactly what file harps do. <br />
+You could, if you wanted to, make a <em>command</em> harp that <code>:open</code>s some file, which is really funny. <br />
+But there's a genuine usecase for this, too — opening <em>directories</em>.</p>
+<p>If you try to <code>:open</code> a directory rather than a file, a fuzzy file search is opened for that directory instead<a href="#footnote-8" id="headnote-8" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>8</sup>
+</a>
+ <br />
+So if you keep finding yourself specifically fuzzy searching for files in some directory, making a command harp with <code>:open</code> for it could be a pretty great solution.</p>
+<p>Directory harps exist, sure, but they are more so meant to travel to directories that you intend to <em>stay</em> in. <br />
+If <em>all</em> you ever want to do is open a singular file in a directory, travelling to it, opening the fuzzy finder, and then <code>:cd -</code>ing feels like a bit of a waste.</p>
+<p><a href="#headnote-8" id="footnote-8" class="headnote" title="Click to go back">
+  <sup>8</sup>
+</a>
+ Fun fact: this also works on the commandline. <br />
+<code>helix .</code> will open helix, and immediately launch the file picker, for example.</p>
+<h3 id="filetype-1"><a class="zola-anchor" href="#filetype-1" aria-label="Anchor link for: filetype-1">filetype</a></h3>
+<p>The filetype relativity is where it's really at. <br />
+You can make harps harps to do language-specific run-like things.</p>
+<p>Almost every filetype you can “run” in some sort of sense. <br />
+Interpreted languages usually go like <code>:sh intlang %(full_path)</code>. <br />
+Compiled languages want you to compile and <em>then</em> run the file, so that's something like <code>:sh complang compile %(full_path) ; ./build/debug/bin</code>. <br />
+Some have a convenient command to compile+run in a single step, like <code>:sh coollang run</code>. <br />
+For something like html, you might just want to use your browser with <code>:sh xdg-open %(full_path)</code>.</p>
+<p>And that's just “run”!
+You don't have to stop there. <br />
+You can have filetype command harps for “lint”, “build”, “build but use <a rel="noopener external" target="_blank" href="https://github.com/nukesor/pueue">pueue</a>”, “test”, “open docs”, “pipe my selection into the interpreter, rather than the whole file”, and any other language specific <em>actions</em> that you might wanna do.</p>
+<p>What I recommend for this workflow, is to try to use the same keys for the same sort of semantic, so that they're easier to remember. <br />
+Just like always using <code>#</code> for the shebang register harps, remember? <br />
+My “run” is always on <code>s</code>, my “open docs” always on <code>d</code>, “build” always on <code>b</code>.</p>
+<a href="#piping" id="piping" class="anchorina">
+  <hr></hr>
+</a>
+<p><code>:pipe</code> can come in useful for implementing custom code actions, by using a custom script. <br />
+You could use <code>:insert-output</code> as a way to generate some boilerplate for a language (if, for example, it is not static (where it'd make more sense to use a register harp instead)).</p>
+<p>As an example, you could make a command harp that generates the java class boilerplate. <br />
+Usually the name of the class is the same as the name of the file, so you could use <code>%sh(full_path)</code>, then extract the basename, and pass it on to your script that outputs the boilerplate.</p>
+<p>If the <em>input</em> to the script is not deterministic like that, you could instead use <code>:pipe</code> — <br />
+Type in the input in the buffer, then select it and use the command harp that <code>:pipe</code>s it into the afforementioned script.</p>
+<p>Thanks to all this, filetype-relative command harps can become a very useful extension to your lsps.</p>
+<h3 id="directory-1"><a class="zola-anchor" href="#directory-1" aria-label="Anchor link for: directory-1">directory</a></h3>
+<p>Some actions are <em>project</em> specific, not just language specific.</p>
+<p>To “run” a markdown file, I'll probably want to convert it to html and open that html in my browser. <br />
+For this blog though, I use <a rel="noopener external" target="_blank" href="https://github.com/getzola/zola"><code>zola</code></a>. <br />
+So, I made myself a <em>directory</em>-relative command harp that “compiles” the blog with zola and opens it in my browser.</p>
+<p>Because of treesitters, I can't just <code>cargo build --release</code> my helix fork normally, so my <em>language</em>-relative build harp for rust isn't sufficient. <br />
+And so, I have a project-relative harp to install my helix fork.</p>
+<p>It doesn't have to be so language action focused, though. <br />
+Ultimately, if you find yourself running <em>some</em> command frequently, shell or not, for a given project, directory-relative command harps can help you. <br />
+You can think of them as your personal justfile directly in your editor, that you don't need to gitignore or commit upstream.</p>
+<h3 id="buffer-1"><a class="zola-anchor" href="#buffer-1" aria-label="Anchor link for: buffer-1">buffer</a></h3>
+<p>You can sometimes find yourself doing hyperspecific transformations in specific files, over and over again.</p>
+<p>In my loago<a href="#footnote-9" id="headnote-9" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>9</sup>
+</a>
+ helper script, I have this section…</p>
+<pre class="giallo" style="color: #D4BE98; background-color: #00000000;"><code data-lang="nushell"><span class="giallo-l"><span style="color: #EA6962;">const</span><span> known</span><span style="color: #E49641;font-weight: bold;"> =</span><span> {</span></span>
+<span class="giallo-l"><span>	razor</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 4</span></span>
+<span class="giallo-l"><span>	bed</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 6</span></span>
+<span class="giallo-l"><span>	towels</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 7</span></span>
+<span class="giallo-l"><span>	vacuum</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 8</span></span>
+<span class="giallo-l"><span>	update</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 10</span></span>
+<span class="giallo-l"><span>	bottle</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 15</span></span>
+<span class="giallo-l"><span>	keyboard</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 30</span></span>
+<span class="giallo-l"><span>	filter</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 45</span></span>
+<span class="giallo-l"><span>	fsrs</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 60</span></span>
+<span class="giallo-l"><span>	toothbrush</span><span style="color: #E49641;font-weight: bold;">:</span><span style="color: #E491B2;"> 122</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>…That I constantly want to sort by the <em>numbers</em>, rather than key names. <br />
+I don't know of a way to express this semantic directly (and so I'll write a crystal program for this eventually), but in this file specifically all the numbers are the second <em>field</em>. <br />
+So I can use <code>:pipe sort -nk 2</code> as a buffer-relative command harp, to solve this usecase 🥳</p>
+<p>This is pretty convenient — instead of feeling rushed to create a generic solution for the problem, I can for now make a hyperspecific one, and use the buffer relativity to store it in a convenient way.</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">conclusion</a></h1>
+<p>This is the conclusion part of the blog post, that sums up everything you've read, and provides an emotional release to all the effort you've spent reading. <br />
+It creates a logical stop to the experience, naturally leading you to exclaim “wow! what a read”, or some such.</p>
+<a href="#fr-now" id="fr-now" class="anchorina">
+  <hr></hr>
+</a>
+<p>I've been on and off writing this blog post for over 50 days so I wanted to spare myself writing a genuine conclusion hahahaha <br />
+I'm sure you're tired from reading, too, genuine thank you for taking the time. <br />
+Hope you can now take the harp concept, and make it as, if not even <em>more</em> useful for yourself, as it is for me.</p>
+<h1 id="sike"><a class="zola-anchor" href="#sike" aria-label="Anchor link for: sike">sike</a></h1>
+<p>I come back yet again! <br />
+It's now 2025.12.10 (i.e. almost half a year since this post's initial release), and I have new thoughts (and features :o)</p>
+<p>Harp doesn't have a “view all currently set registers” feature, half on purpose and half due to my laziness.</p>
+<p>If you are given a chance to <em>look</em> at your existing registers, you will ultimately feel encouraged to <em>clean them up</em> all the time. <br />
+It can feel like a bit of a waste of time, considering how relativities give you essentially infinite registers, that you'll then indefinitely clean. <br />
+My thought process was that if you need some sort of view to remember what key you placed some harp on, <br />
+it's probably because you placed it on an unmemorable key, and should instead re-make the harp on a better one.</p>
+<p>This is the hotkey master in me talking, mainly: <strong>the</strong> thing I am best at, is creating hotkey systems. <br />
+So both creating memorable hotkeys and remembering them is my forte.</p>
+<p>My thinking works quite well for <em>most</em> harp actions.
+There's not much effort in making a file or cwd harp for example. <br />
+But once you get into the more fancy harp actions, my approach starts to crumble.</p>
+<p>Making <em>any</em> harp is somewhat of a mental energy investment: “what key should I use, that feels the most ‘correct’ for this file / working directory / search pattern / etc?”, “what relativity should I use for this?”, “should I store this as a mark or as a search harp?”. <br />
+This investment is worth it mainly because of how much mental energy you <em>save</em> in the future, over time.</p>
+<p>You decide to pay this price, and make a somewhat complex / long command harp. <br />
+It sets up the testing environment for this project in some specific way, massively helping you iterate on it faster. <br />
+You use it quite a lot, feeling sheer bliss over how productive it helps you be.</p>
+<p>But new excitements come! <br />
+You switch to working on a new project for a while, with it own harps and gimmicks.
+Many months go by, and you come back to the first project again. <br />
+“Uhhhhhh what was that useful harp again?”<a href="#footnote-10" id="headnote-10" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>10</sup>
+</a>
+ — you try the most likely key that you might've placed it on, but it does a completely different command, maybe starting some build that now you need to annoyingly figure out how to cancel. <br />
+“Hmmm what about this one?” — ‘harp <code>h</code> unset’ it tells you.</p>
+<p>Well... I don't want to just keep mashing keys until I find it.
+Maybe some of my command harps are quite destructive, after all.
+Ugh, it's frustrating but I think it's not worth trying to re-find the harp, let me remake it again.</p>
+<p>But here's a caveat when it comes to making things, as a developer. <br />
+The first time, the energy investment is fueled by your excitement at how cool the thing you're creating is going to be.
+For example, you're learning nushell! And making this specific command is great practice that you're quite pumped for. <br />
+But the <em>second</em> time solving the same exact problem, you're not quite as excited. <br />
+Well, it would be one thing if it was the same <em>problem</em>, but no you solved LITERALLY this already, so it feels even worse to have to redo.</p>
+<p>This wouldn't matter much if the command was short and simple, but you made quite a bit of a monster of a command harp. <br />
+It inserts the dates in some specific way, autofills some info by curling an api, and even does your dishes for you. <br />
+“Grrrr I don't wanna do all that again”.</p>
+<p>You toss it up as a skill issue with using harp and do indeed do it again. <br />
+But this experience will be remembered by your psyche. <br />
+Maybe next time, you won't feel so ready to make a harp <em>as</em> complex. <br />
+“What if I lose it again?”</p>
+<a href="#discovery" id="discovery" class="anchorina">
+  <hr></hr>
+</a>
+<p>Yes, what I noticed over months of using harp, is that the current system <em>discourages</em> you from using harps to their full potential, hilariously. <br />
+You will be taught to only make harps that you're <strong>sure</strong> you can remember, or only if they're easy enough to remake. <br />
+The latter type you end up using once and never again, because it's too much of a pain to try to remember where you put them.</p>
+<p>What's the point of all these infinite potential keys if my human brain can only remember a subsection of them!</p>
+<p>NOT ANYMORE!</p>
+<p>Now harp actually <strong>does</strong> show you all of the set registers you have. <br />
+In every harp action, in every relativity. <br />
+You don't need to go into some submode to take a look — they are displayed to you automatically in the whichkey-like window<a href="#footnote-11" id="headnote-11" class="footnote" title="You'll be able to jump back here painlessly.">
+  <sup>11</sup>
+</a>
+</p>
+<p>Now you press your hotkey for command harps, and immediately see all the registers you have for your default relativity (which let's say stays <code>global</code>). <br />
+You press <kbd>.</kbd> and go into the directory relativity: the whichkey window changes to now show the command harps in the directory relativity. <br />
+You can keep changing relativities, or get/set, and throughout all of that, the whichkey menu will continue reminding you what you currently have set.</p>
+<p>This reopens harp possibilities to insane extents! <br />
+I've already noticed just how much more harps I'm using, thanks to me never <em>losing</em> any. <br />
+If I can be sure I can <em>keep</em> the harp with me forever, I feel a lot more <em>encouraged</em> to completely abuse them 🚀 <br />
+(which is the whole point!!)</p>
+<p>I forked a gtk theme and am “fixing” it; but the file is fucking six to seven thousand lines long so it's a massive pain in the asss to traverse. <br />
+Despite that, before making this whichkey feature, I was rawdogging travel for the most part! No harps for what can so benefit from them. <br />
+But <em>after</em> implementing it? Oooh boy!</p>
+<p>I made a command harp to reopen gtk3-widget-factory on loop for me (useful to test how my changes look),
+started using marks a lot more frequently for quick “remember this position” movements,
+made command harps for converting colors (no hsl in gtk3 😭),
+register harps for common colors I'm using in the theme,
+and now also <em>search</em> harps to jump to various rules quickly.</p>
+<p>I am now <em>actually</em> living the harp dream, making use of them as much as I intended for them to be used. <br />
+I used to say quite frequently: “oh yeah even I underuse harps, I should use them more” — this was due to a misdesign!</p>
+<a href="#bad-defaults" id="bad-defaults" class="anchorina">
+  <hr></hr>
+</a>
+<p>Even <em>before</em> reigniting my usage of harps, I noticed how <em>uncomfortable</em> it is to switch relativites, with them all being on keys that aren't on the home row. <br />
+<kbd>,</kbd>, <kbd>.</kbd>, <kbd>;</kbd>, <kbd>'</kbd> all make <em>sense</em> as defaults, but if you use relativities a LOT, pressing those keys becomes jarring after a while.</p>
+<p>I changed them to <kbd>j</kbd> → buffer, <kbd>k</kbd> → global, <kbd>l</kbd> → directory. <br />
+Yay, now they're all on the home row! And are a <em>lot</em> more pleasant to reach thanks to it. <br />
+But they are <em>ridiculous</em> as defaults...</p>
+<p>Because now you can't use <kbd>j</kbd>/<kbd>k</kbd>/<kbd>l</kbd> as <em>registers</em>! <br />
+I'm okay losing out on that, but forcing <em>you</em> to, too, feels pretty wack.</p>
+<p>So now the hotkeys are configurable! <br />
+You can decide for yourself: what keys switch to what relativity, what key switches get/set (instead of <kbd>Space</kbd>), and what keys do the mystery XXX and YYY I'm going to explain in the next section.</p>
+<p>The <em>defaults</em> stay the “reasonable but kinda yuck to use” <kbd>,</kbd>, <kbd>.</kbd>, <kbd>;</kbd>, <kbd>'</kbd>, <kbd>Space</kbd>, for the record.</p>
+<a href="#delete" id="delete" class="anchorina">
+  <hr></hr>
+</a>
+<p>Now that you can <em>view</em> your set registers, you have to be able to delete some of them, too; so that all the ones you are no longer using aren't creating a visual mess that takes up half your screen.</p>
+<p>I do still think that it's unfortunate that you'll be encouraged to clean things up (often a bit of a waste of time), but it's just SO worth it considering how much more easily you can rely on and abuse harps, now that you can see them.</p>
+<p>When you invoke a harp action, you start in <code>get</code> mode and get a view of all of the set registers. <br />
+At this point, you can press <kbd>Backspace</kbd>: after that, the next key that you press will get <em>deleted</em>, the ui will update to reflect that deletion, and you'll go back to <code>get</code> mode.</p>
+<p>So <code>del</code> is a new mode, along with <code>get</code> and <code>set</code>, but unlike the latter two, it only stays for a single key and <strong>doesn't</strong> finish / close the harp action (only brings you back to <code>get</code>). <br />
+So you can press <kbd>Backspace</kbd><kbd>a</kbd><kbd>Backspace</kbd><kbd>b</kbd><kbd>Backspace</kbd><kbd>c</kbd> to delete three different registers in a sequence — you enter the <code>del</code> mode three different times here.</p>
+<p>At first, I made the del mode “stay”: once you pressed <kbd>Backspace</kbd>, all of the following keys would be deletions, and you'd need to press <kbd>Space</kbd> to go back to <code>get</code> when you wanted to. <br />
+Very quickly I started to accidentally delete harps that I was meaning to <code>get</code> 💀 <br />
+So I changed it to the “chord the next key” variation that is the current behavior — it seems a lot more natural.</p>
+<p>If you press <kbd>Backspace</kbd> and go “nevermind actually”, you can go back to <code>get</code> without deleting anything by pressing <kbd>Space</kbd>, or close the action altogether by pressing <kbd>Escape</kbd>.</p>
+<p>There will be some situations where you want to delete <em>all</em> of the registers in a section, and for that you can press <kbd>Alt+Backspace</kbd>, instead of spamming <kbd>Backspace</kbd> + a key. <br />
+That hotkey works regardless of the mode you're currently in (get / set / del), and will put you into <code>set</code> after clearing the registers. <br />
+The thinking here is that you're <em>probably</em> cleaning things up because you want to set a new harp on a blank canvas 🎨</p>
+<p>These two hotkeys are the mystery XXX and YYY I mentioned! So you can change them too 😌</p>
+<h1 id="footnotes"><a class="zola-anchor" href="#footnotes" aria-label="Anchor link for: footnotes">footnotes</a></h1>
+<p><a href="#headnote-1" id="footnote-1" class="headnote" title="Click to go back">
+  <sup>1</sup>
+</a>
+ To your possible surprise, yes this is a <a href="https://axlefublr.github.io/optimizing-paths/">real file path</a> I have. It's for this blog!</p>
+<p><a href="#headnote-4" id="footnote-4" class="headnote" title="Click to go back">
+  <sup>4</sup>
+</a>
+ Which is <kbd>p</kbd> for you, but <kbd>o</kbd> <a href="https://axlefublr.github.io/stray-from-defaults/">for me</a>. <br />
+Also, you don't necessarily have to <em>paste</em> it. You can replace your selection with it, for example! <br />
+So register harps simply blammo the text into your <code>default-yank-register</code>, and then you can use it how you normally would — no specialcasey usage required!</p>
+<p><a href="#headnote-5" id="footnote-5" class="headnote" title="Click to go back">
+  <sup>5</sup>
+</a>
+ Like this one!</p>
+<p><a href="#headnote-6" id="footnote-6" class="headnote" title="Click to go back">
+  <sup>6</sup>
+</a>
+ The global one is still the <em>actual</em> default though, as usual.</p>
+<p><a href="#headnote-7" id="footnote-7" class="headnote" title="Click to go back">
+  <sup>7</sup>
+</a>
+ Although my fork introduces a :random command that lets you randomize the contents of your selections, rather than specifically lines.</p>
+<p><a href="#headnote-9" id="footnote-9" class="headnote" title="Click to go back">
+  <sup>9</sup>
+</a>
+ A chore-tracking program of mine that I will eventually write a blog post about.</p>
+<p><a href="#headnote-10" id="footnote-10" class="headnote" title="Click to go back">
+  <sup>10</sup>
+</a>
+ Hell, do you even remember that that harp exists?</p>
+<p><a href="#headnote-11" id="footnote-11" class="headnote" title="Click to go back">
+  <sup>11</sup>
+</a>
+ I'm referring to the menu that appears on the bottom right when you use chorded mappings, or when you try to <code>select_register</code>. In helix terms, its proper name is <code>auto-info</code> — which is a stupid and unmemorable name.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;proxies&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">proxy things</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;zoxide-misbehavior&#x2F;" class="preview next">
+			<span class="name">zoxide misbehavior</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>

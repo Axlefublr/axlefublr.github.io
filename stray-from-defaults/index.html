@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS"
+			href='https://axlefublr.github.io/rss.xml'
+		/>
+		
+		<meta charset="UTF-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="robots" content="index, follow">
+
+<title>stray from defaults</title>
+
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,700;1,14..32,400;1,14..32,700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=block" rel="stylesheet">
+
+<link rel="stylesheet" href="https://axlefublr.github.io/css/style.css" />
+
+
+	</head>
+
+	<body>
+		<div>
+<div id="gland">
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">rust for... scripting?</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;suspend&#x2F;" class="preview next">
+			<span class="name">suspend is actually neat</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<div class="marginalizer">
+		<div class="minority">
+			<header>
+				<a href="..">
+					<div class="title">stray from defaults</div>
+				</a>
+				<div class="date">
+					<time datetime="2025-01-02">2025.01.02</time>
+				</div>
+			</header>
+			<main>
+				<!-- <div class="reading-time">reading time: 5</div> -->
+				<p>Vim has made a stupid design decision, and we're still eating shit many years later.</p>
+<p>It prioritised mnemonics, rather than ergonomics.</p>
+<p>The issue is pretty apparent: mnemonics are helpful for the first, like, <em>week</em> while you're learning vim for the first time. <br />
+And then many <em>years</em> later you still end up using the same non-optimal mappings.</p>
+<a href="#the-mappings" id="the-mappings" class="anchorina">
+  <hr></hr>
+</a>
+<p>One of the most frequent things you do in a text editor, is copy. <br />
+And yet it's mapped to one of the most annoying keys to press: <kbd>y</kbd>. While powered by a big stretch of a mnemonic that we just came to accept: "yank".</p>
+<p>And yet <kbd>s</kbd> sits there undisturbed, in one of the most prime finger positions on the home row, doing what <code>cl</code> can also do.</p>
+<blockquote>
+<p>Don't get me wrong: I loved using <kbd>s</kbd>, but it is too convenient of a placement.</p>
+</blockquote>
+<p>I hate pressing <kbd>p</kbd> almost as much as pressing <kbd>y</kbd>. <br />
+It is another example of an 😩 key used for one of the most common actions. Except, pasting is probably more common than copying.</p>
+<p><kbd>o</kbd> is one of the <em>nicest</em> to press keys, yet it's there for a fairly niche action: creating a new line.</p>
+<p>What I find myself doing the most after creating a new line, is to create <em>another</em> line. <br />
+Because <kbd>o</kbd> puts you into insert mode, the natural way to create another line is by pressing enter. <br />
+Yet, the hand motion of switching from <kbd>o</kbd> to <kbd>Enter</kbd> is pretty cumbersome.</p>
+<p>What is the most common usecase for <kbd>A</kbd>? <br />
+In my experience, it's to add in a <code>;</code> or a <code>,</code>. <br />
+However, if you correctly use both shifts, the hand movement to do an action like this is a bit too ridiculous: for such a <em>common</em> usecase, having to move your pinky <em>aaaaallllll</em> the way from the right shift to <code>;</code> ends up compiling into an annoyance.</p>
+<p>The choice of <kbd>a</kbd> is also strange in a different way. <br />
+To insert at the <em>left</em> of the cursor, you press the <em>right</em> key (<kbd>i</kbd>). To insert at the <em>right</em> of the cursor, you press the <em>left</em> key (<kbd>a</kbd>). <br />
+???</p>
+<h1 id="you-can-stop-eating-shit"><a class="zola-anchor" href="#you-can-stop-eating-shit" aria-label="Anchor link for: you-can-stop-eating-shit">you can stop eating shit</a></h1>
+<p>Defaults are made to be CHANGED from. <br />
+It's great when they are good to begin with, but that's not always the case. <br />
+Do not be afraid of <em>change</em> when it can provide you a much nicer experience.</p>
+<p>My copy key is now <kbd>s</kbd>. <br />
+What's the mnemonic? "Steal"? <br />
+Wrong question. I don't <em>need</em> a mnemonic! If the mapping <em>feels</em> right, your muscle memory adjusts pretty quick!</p>
+<p>Now I don't have to travel across the Alps just to copy something: the key is on my home row.</p>
+<p>My paste key is <kbd>o</kbd>. <br />
+<em>Much</em> nicer to press than <kbd>p</kbd>! And in addition, something like <code>yyp</code> is now <code>sso</code>, which I find to simply be much more enjoyable.</p>
+<p>Insert new line is now on <kbd>a</kbd>. <br />
+Now when I insert a new line, the motion of my right hand to reach <kbd>Enter</kbd> is much smoother! <br />
+Smoother even if I do "insert new line above" (<kbd>A</kbd>) first; all I need to do is slightly move the right pinky from right shift to <kbd>Enter</kbd>.</p>
+<p>Insert <em>after</em> the cursor is on <kbd>p</kbd>. <br />
+This was risky in my head, because I don't <em>like</em> pressing <kbd>p</kbd>. But very quickly I realized just how much nicer it is than <kbd>a</kbd> for the purpose.</p>
+<p>First of all, it <em>is</em> on the right side of <kbd>i</kbd>! So, <kbd>i</kbd> and <kbd>p</kbd> now play along with a consistent semantic of "this one is on the left, this means <em>before</em>" and "this one is on the right, this means <em>after</em>".</p>
+<p>But even better than that, appending is AMAZING now! <br />
+The hand movement to append a <code>;</code> or <code>,</code> at the end of the line is way smaller now, and feels really comfortable. <br />
+Also generally, pressing right shift is more difficult than pressing <em>left</em> shift anyway; so overall there's less hand movement for something that I do really frequently, especially while writing a blog post for example.</p>
+<a href="#conclusion" id="conclusion" class="anchorina">
+  <hr></hr>
+</a>
+<p>After changing these, it took me <em>maybe</em> two days to get used to the new mappings. This is simply because of how much more <em>fitting</em> they feel in my head, and to my fingers.</p>
+<p>You will have your own gripes that you will solve differently than me, but I wanted to shed light on that it <em>can</em> be <strong>really</strong> beneficial to change defaults, even when they are as strong-rooted as the ones I listed.</p>
+<p>It's true: a lot of <em>other</em> programs will replicate vim, and have semantically fitting <code>hjkl</code>, <code>y</code>, <code>p</code>, etc mappings. <br />
+What do you do about that?</p>
+<p>Personally, I just context switch, or reconfigure the mappings.
+This may seem like a lot of effort, or a non-ideal solution, but look at it from a different lens: why <em>would</em> you sacrifice your experience in the place where you spend most of your time (your editor), just for some <em>other</em> program to feel consistent?</p>
+<p>I do agree, context switching is annoying, but can be learned: if you have a strong thought of "this is a different program", you can eventually stop caring that its mappings are inconsistent with what you remapped.
+Or, you know, remap them in that program as well.</p>
+
+			</main>
+		</div>
+	</div>
+	<section class="promo-holder">
+	<a class="promo" target="_blank" id="bluesky" href="https://bsky.app/profile/axlefublr.bsky.social">Bluesky</a>
+	<a class="promo" target="_blank" id="github" href="https://github.com/Axlefublr">Github</a>
+	<a class="promo" target="_blank" id="discord" title="Alternatively, dm me @Axlefublr" href="https://discord.gg/bgVSg362dK">Discord server</a>
+	<a class="promo" target="_blank" id="email" href="mailto:axlefublr.ls@gmail.com">Email</a>
+	<a class="promo" target="_blank" id="rss" href="/rss.xml">RSS</a>
+</section>
+
+	<nav>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;rust-scripting&#x2F;" class="preview previous">
+			<span class="direction">&lt;-</span>
+			<span class="name">rust for... scripting?</span>
+		</a>
+	
+	<a href=".." class="go-home">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1625 1300" width="30" height="30" fill="#b58cc6">
+			<g transform="scale(1,-1) translate(-20,-1290)">
+				<path
+					d="M1408 544V64q0-26-19-45t-45-19h-384v384H704V0H320q-26 0-45 19t-19 45v480q0 5 1 6l575 474 575-474q1-2 1-6zm223 69l-62-74q-8-9-21-11h-3q-13 0-21 7L832 1112 140 535q-12-8-24-7-13 2-21 11l-62 74q-8 10-7 23.5T37 657l719 599q32 26 76 26t76-26l244-204v195q0 14 9 23t23 9h192q14 0 23-9t9-23V840l219-182q10-8 11-21.5t-7-23.5z" />
+			</g>
+		</svg>
+	</a>
+	
+		<a href="https:&#x2F;&#x2F;axlefublr.github.io&#x2F;suspend&#x2F;" class="preview next">
+			<span class="name">suspend is actually neat</span>
+			<span class="direction">-&gt;</span>
+		</a>
+	
+</nav>
+
+	<footer id="bottom"></footer>
+</div>
+</div>
+	</body>
+</html>
