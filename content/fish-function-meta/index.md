@@ -1,7 +1,6 @@
 +++
 title = 'the fish function meta'
-date = '2026-06-20'
-draft = true
+date = '2026-06-23'
 +++
 
 In other shells, when you want to add a custom function, you add it to your config. Obviously. \
@@ -172,7 +171,7 @@ No, don't put `funcsave` into your config.fish, that's the worst you can possibl
 # the fish function meta
 
 The concept is pretty simple.
-Instead of putting your functions into config.fish, put them in a separate script. Put a relevant `funcsave` after every function.
+Instead of putting your functions into config.fish, put them in a separate script. Put a relevant `funcsave` after every function you define.
 To update the functions stored in `~/.config/fish/functions/` to the ones defined in this script, after you add a new function or edit an existing one, simply run the script.
 
 Take a look at my [core.fish](https://github.com/Axlefublr/dotfiles/blob/main/fish/fun/core.fish) for example.
@@ -209,18 +208,11 @@ Extensions of the standard library, almost.
 If I wanted to edit the behavior of `catait`, for example, I would edit it here and then run the script, updating the *stored* `catait` in the process. \
 I like to keep the functions sorted alphabetically for easier organization, but that's optional.
 
-`funcsave` makes a status message saying “your function x got saved to ~/.config/fish/functions/x.fish” which is fine interactively, but annoying when using this workflow.
-I run the script *from my editor*, so I see a comically long output of `funcsave`s when I do. \
-That's why I put `>/dev/null` after every `funcsave`: to silence that message.
-The `--save` of `alias` is effectively a `funcsave` too; so I silence it there as well.
+`funcsave` makes a status message saying “your function x got saved to ~/.config/fish/functions/x.fish” which is fine interactively, but annoying when it fills your screen.
+So I put `>/dev/null` after every `funcsave` to silence that output.
+The `--save` of `alias` is effectively a `funcsave`; so I silence that too.
 
-In my [dotfiles repo](https://github.com/Axlefublr/dotfiles), I make a [subdirectory called fun/](https://github.com/Axlefublr/dotfiles/tree/main/fish/fun), where I store all such function-defining scripts.
-I add it to `$PATH` by running `fish_add_path ~/fes/dot/fish/fun`, so that every function-making script I can execute in my terminal with *just* its name, without needing to point to its full path.
-
-❗path caveat should be a footnote
-
-Using separate scripts, I get to define the categories that I split my functions to, basically.
-Although just using one ginormous function-defining script is honestly viable too.
+In my [dotfiles repo](https://github.com/Axlefublr/dotfiles), I make a [subdirectory called fun/](https://github.com/Axlefublr/dotfiles/tree/main/fish/fun), where I store all such function-defining scripts{{fn(i=3)}}.
 
 I use builtin.fish for builtin fish functions, such as `fish_greeting`, `fish_title`, etc. \
 Due to how huge it is, prompt.fish is a separate file for my custom fish shell prompt. \
@@ -228,12 +220,57 @@ bindings.fish is where I configure my interactive shell bindings, as even *those
 ffmpeg.fish is my collection of interactive video and audio editing functions, using `ffmpeg`. \
 magazine.fish is the implementation of my [magazine system](@/magazines.md).
 
-❗I was optimizing fish startup time, and you'd think that all the billion functions I make would catch up to me, but no they are genuinely free. I have 201 functions currently, for context
-❗why function over script? if this is something that I *may* call from fish shell, there's not much reason not to. starting a separate script file takes some time, just like any other binary / executable; but running a function doesn't have the cruft of all that, so it's a lot instanter. I might as well do `fish -c do_super_niche_action` in various places over `do_super_niche_action.fish`, for that nifty speed benefit. gets even insaner with `fish -Nc`, but unlike with nushell, I haven't been needing *that* level of optimization
+Using separate scripts, I get to define the *categories* that I split my functions to.
+Although just using one ginormous function-defining script is honestly viable too.
 
-❗is this all in the docs? *yeah*, but it's pretty rare for someone to read the docs on the shell they just started using. they just use it and bob's their uncle. and even if they do, probably not the *entire* docs to discover that this is THE fish way; as imo fish doesn't make this entire shenanigan clear enough in the mainline documentation
+# promises
 
-❗lazyloading completions
+I've been yelling COMPLETELY FREE this entire blog post, and there is no gotcha! They genuinely are!
+
+I was optimizing fish's startup time some time ago, as I noticed it took longer to draw my prompt than it used to; longer enough for me to visually notice. \
+Did my 201 custom fish functions finally catch up to me? \
+You'd think, right? But nope, the biggest cause ended up being flatpak, lmao.
+
+Aaaaall of my functions are completely lazyloaded!
+So you can completely freely create as many as you want, with no downside.
+
+# habits
+
+You may still ask: “but why a function over a script?”
+
+Starting a *script* from a fish session, or any executable / binary for that matter, takes more time than starting a fish *function*.
+So if I'm likely to call some functionality *from* fish shell, it might as well be a function, for that extra speed!
+
+Then for *outside* of fish shell, in my testing, `functionality.fish` and `fish -c functionality` take pretty much exactly the same time to execute.
+No reason not to improve the performance of the common case, by making it a function 🤷‍♀️
+
+Aside from speed, ergonomics improve too imo. \
+Creating a **whole** ass file, `chmod`ding it, opening it, adding a shebang, for it to *just* be this: …
+```fish
+#!/usr/bin/env fish
+
+not test -p ~/.local/share/mine/waybar-gaming && mkfifo ~/.local/share/mine/waybar-gaming
+tail -f ~/.local/share/mine/waybar-gaming
+```
+…I find upsetting. This could've been an ~~email~~ fish function.
+Stupid fucking waybar why don't you take arguments!!!
+
+For slightly more involved logic, a script still doesn't make a lot of sense to me, because I find it easy to forget some *file* exists; but a fish function I actually have a chance to come across, when I am adding my next one and trying to find its alphabetically correct spot, lol. \
+There are probably a bunch of files in my [dotfiles repo](https://github.com/Axlefublr/dotfiles) that I have no clue still exist.
+
+I *have* been trying to use scripts more frequently, though.
+The golden spot I found for myself, is functionality I'm *sure* I won't forget, because I will necessarily be using it all the time. \
+Brightest example of this is my [internet-searching fish script](https://github.com/Axlefublr/dotfiles/blob/main/lai/internet-search.fish).
+I am very unlikely to run it *from* fish — I have it bound on a hotkey instead.
+Previously I would just `fish -c internet_search` in the hotkey and it'd be totally fine, but it's nice being able to jump directly to this functionality by opening a file, rather than opening a file first, and *then* searching inside of it.
+
+But, again, I find that only makes sense for things I would *know* how to look for, not for things I'm only more or less sure about.
+
+# how did I miss this!
+
+The information required to derive most of my tips *is* in the docs, but it's very not front and center.
+Fish doesn't make it a point to teach you this pretty *core* part of itself. \
+Can you imagine my frustration when people complain fish is slow? Fish is not slow, fish is a bad teacher{{fn(i=5)}}.
 
 # footnotes
 
@@ -246,4 +283,15 @@ I'm more so explaining how *I'm* using the term in this blog post, rather than h
 {{hn(i=2)}} Slightly fun fact: <kbd>Alt+e</kbd> is mnemonic for $**E**DITOR, and <kbd>Alt+v</kbd> is mnemonic for $**V**ISUAL.
 Both of these environment variables are meant to contain your favorite text editor, but EDITOR is more recent than VISUAL.
 
-❗some readers may encounter [this *exact* error message] when executing this. in such cases, it's entirely their fault
+{{hn(i=3)}} I recommend adding that directory to `$PATH`{{fn(i=4)}} so that you can run any function-defining script using just the script's name, rather than needing to point to its full path.
+
+{{hn(i=4)}} You can easily do that by executing `fish_add_path ~/path/to/your/fun/`, once.
+Some readers may encounter this *exact* error message when executing the command:
+```
+Skipping non-existent path: ~/path/to/your/fun
+No paths to add, not setting anything.
+```
+In that case, it's entirely their fault.
+
+{{hn(i=5)}} Okay well *technically* fish shell *executes* somewhat slower than bash. But not to a human-noticeable degree. \
+*The* thing that is easiest to notice, though, is startup time. And if it's an issue you've been having, I have assigned Mr. Bob to be the brother of your parent.
