@@ -3,7 +3,7 @@ title = 'rust for... scripting?'
 date = '2025-01-04'
 +++
 
-If the title of this blog post is a genuine question you have, and you want to just skip to the most reasonable solution: <spoiler>use cargo-script</spoiler>
+If the title of this blog post is a genuine question you have, and you want to just skip to the most reasonable solution: <spoiler tabindex="0">use cargo-script</spoiler>
 
 # why
 
