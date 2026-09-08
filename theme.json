@@ -9,7 +9,7 @@
 	"tokenColors": [
 		{
 			"scope": [
-				"variable.parameter.url"
+				"keyword.operator.type.modifier"
 			],
 			"settings": {
 				"fontStyle": "bold",
@@ -28,7 +28,11 @@
 				"punctuation.definition.entity",
 				"punctuation.separator",
 				"punctuation.separator.key-value",
-				"punctuation.semi"
+				"punctuation.semi",
+				"punctuation.definition.block",
+				"meta.return.type.arrow",
+				"variable.other.readwrite",
+				"punctuation.accessor"
 			],
 			"settings": {
 				"fontStyle": "normal",
@@ -49,20 +53,27 @@
 		},
 		{
 			"scope": [
-				"keyword.control",
-				"keyword.local",
-				"keyword.global",
-				"keyword.other",
-				"storage.type.attribute",
-				"punctuation.definition.keyword",
 				"entity.other.keyframe-offset",
+				"keyword.control",
 				"keyword.control.at-rule",
-				"keyword.other.unit",
+				"keyword.control.conditional",
+				"keyword.control.flow",
+				"keyword.control.switch",
+				"keyword.global",
+				"keyword.local",
 				"keyword.operator.logical",
+				"keyword.other",
 				"keyword.other.important",
+				"keyword.other.unit",
+				"punctuation.definition.keyword",
+				"storage.modifier",
+				"storage.type",
+				"storage.type.attribute",
 				"support.constant.media",
-				"variable.parameter.keyframe-list",
-				"storage.type"
+				"storage.type.class",
+				"storage.type.enum",
+				"keyword.operator.expression",
+				"variable.parameter.keyframe-list"
 			],
 			"settings": {
 				"fontStyle": "normal",
@@ -71,14 +82,26 @@
 		},
 		{
 			"scope": [
-				"keyword.operator",
-				"keyword.operator.pipe",
-				"keyword.control.nushell",
 				"entity.name.tag.wildcard",
+				"keyword.control.nushell",
+				"keyword.operator",
 				"keyword.operator.arithmetic",
 				"keyword.operator.combinator",
 				"keyword.operator.comparison",
-				"keyword.operator.pattern"
+				"keyword.operator.pattern",
+				"keyword.operator.pipe",
+				"keyword.operator.rest",
+				"keyword.operator.control",
+				"punctuation.definition.tag.directive",
+				"keyword.operator.assignment",
+				"keyword.operator.optional",
+				"keyword.generator.asterisk",
+				"keyword.generator",
+				"punctuation.accessor.optional",
+				"punctuation.separator.key-value",
+				"constant.language.import-export-all",
+				"keyword.operator.type.modifier",
+				"storage.type.function.arrow"
 			],
 			"settings": {
 				"fontStyle": "bold",
@@ -110,8 +133,11 @@
 			"scope": [
 				"entity.name.class",
 				"variable.language.self",
+				"variable.language.this",
 				"entity.name.type",
-				"entity.name.section.group-title"
+				"entity.name.section.group-title",
+				"keyword.operator.new",
+				"entity.other.inherited-class"
 			],
 			"settings": {
 				"fontStyle": "normal",
@@ -147,7 +173,11 @@
 				"constant.other.unicode-range",
 				"punctuation.separator.dash.unicode-range",
 				"variable.parameter.url",
-				"meta.attribute"
+				"constant.language.boolean.true",
+				"constant.language.boolean.false",
+				"meta.attribute",
+				"entity.other.attribute-name.directive",
+				"variable.other.constant"
 			],
 			"settings": {
 				"fontStyle": "normal",
@@ -166,6 +196,12 @@
 				"support.type.property-name",
 				"support.type.vendored.property-name",
 				"variable.font-feature",
+				"entity.name.tag.directive",
+				"storage.type.class.jsdoc",
+				"punctuation.definition.block.tag.jsdoc",
+				"variable.other.enummember",
+				"meta.object-literal",
+				"meta.definition.property",
 				"entity.name.function.macro"
 			],
 			"settings": {
