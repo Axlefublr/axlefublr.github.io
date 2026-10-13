@@ -23,7 +23,7 @@ But that's just for the manual sorting I do, like in the setup function holder a
 
 However even with that functionality, it can still feel a bit too manual to feel worth it, not gonna lie.
 
-This is why I wrote a neat lil program called [partialsort.rs](https://github.com/Axlefublr/dotfiles/blob/main/eli/partialsort.rs)!
+This is why I wrote a neat lil program called [partialsort.rs](https://github.com/Axlefublr/wks/blob/main/src/bin/partialsort.rs)!
 
 > This isn't exactly a promo, as the program is written as a [wks script](@/rust-scripting/index.md) rather than a normal repo-ed rust program that you could install more easily
 
