@@ -1,0 +1,19 @@
+{% component fl(id) %}
+<a href="#footnote-{{id}}" id="headnote-{{id}}" class="footnote" title="You'll be able to jump back here painlessly."> <sup>{{id}}</sup> </a>
+{% endcomponent fl %}
+
+{% component bl(id) %}
+<a href="#headnote-{{id}}" id="footnote-{{id}}" class="headnote" title="Click to go back"> <sup>{{id}}</sup> </a>
+{% endcomponent bl %}
+
+{% component hr(id) %}
+<a href="#{{id}}" id="{{id}}" class="anchorina">
+  <hr></hr>
+</a>
+{% endcomponent hr %}
+
+{% component video(path) %}
+<video controls>
+  <source src="{{path}}.mp4" type="video/mp4">
+</video>
+{% endcomponent video %}
