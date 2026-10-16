@@ -3,10 +3,20 @@
 <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="robots" content="index, follow">
-{% if page.title %}
-<title>{{ page.title }}</title>
+{% if page is defined %}
+    {% if page.title %}
+        <title>{{ page.title }}</title>
+    {% else %}
+        <title>{{ config.title }}</title>
+    {% endif %}
+{% elif section is defined %}
+    {% if section.title %}
+        <title>{{ section.title }}</title>
+    {% else %}
+        <title>{{ config.title }}</title>
+    {% endif %}
 {% else %}
-<title>{{ config.title }}</title>
+    <title>{{ config.title }}</title>
 {% endif %}
 {% block css %}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
