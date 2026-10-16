@@ -51,7 +51,7 @@ And so you have to do the job of this colored line yourself by making sure you u
 Another tip which I've been using prior but not as conciously: warm up the area you plan to shave. Most straghtforward way is to apply some very warm water to the area.
 This allegedly makes your hair softer, making it easier to shave off.
 
-{{ hr(id="first-time") }}
+{{ <hr id="first-time" /> }}
 
 So, I finish shaving with a safety razor for the first time, and wow! \
 My skin feels FAR less damaged than it usually is with a normal razor. \

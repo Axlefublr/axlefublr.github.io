@@ -61,7 +61,7 @@ When you complete something that has characters that need to be escaped, previou
 Say you are completing a directory named `my directory`. \
 Previously, it would turn into `my\ directory`, now it will turn into `'my directory'`.
 
-{{ hr(id="done") }}
+{{ <hr id="done" /> }}
 
 I opened the release notes, saw the ridiculously small scrollbar, and got terrified like "HOW HUGE IS THIS UPDATE??", but turns out the page is so long because it contains *all* the release notes.
 

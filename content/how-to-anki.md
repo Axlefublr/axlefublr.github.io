@@ -304,7 +304,7 @@ Getting to the *core*, the *meat* of the question, without all the extra fluff, 
 
 I'll expand on card creation in [this upcoming section](#card-creation), but for now let's stop at the idea that cards should be very minimal.
 
-{{ hr(id="minimal") }}
+{{ <hr id="minimal" /> }}
 
 Great! We put ascii cards into the “Ascii” deck and morse cards into the “Morse” deck.
 
@@ -344,7 +344,7 @@ You feel you have 3 new cards per day in you¹, and you want 1 of them to always
 
 To express something like this, you *need* to split into two decks.
 
-{{ hr(id="two-decks") }}
+{{ <hr id="two-decks" /> }}
 
 If you were okay with just doing the categories in order, with all 3 new cards being for the same category, you wouldn't need two decks! \
 The “Reposition” action in the card browser (<kbd>ctrl+shift+s</kbd>) would allow you to put all the categories' cards in the order that you want, even if you *created* them all in the wrong order¹.
@@ -491,14 +491,14 @@ Although by default, a note type creates just one card.
 On the left side, you can see an edit field, with three radio buttons above. \
 Here, you define the html template for the cards to be creates with this note type.
 
-The main juice that actually makes note types useful at all, is `{{Front}}`. \
-`{{Front}}` is a template (that I'll be calling a shortcode) that is replaced with the resulting html that you put in a field.
+The main juice that actually makes note types useful at all, is `{% raw %}{{Front}}{% endraw %}`. \
+`{% raw %}{{Front}}{% endraw %}` is a template (that I'll be calling a shortcode) that is replaced with the resulting html that you put in a field.
 
 Notice the name: `Front`. This is a name of one of the fields of this note type. \
 In the previous section, I mentioned that fields aren't used automatically. \
 *We* get to decide where and how they show up, by putting them in explicitly.
 
-Say we created a field called `Extra`. We can now add `{{Extra}}` somewhere in the template for the note type, and the text (resulting html) that we put in this `Extra` field is going to show up there!
+Say we created a field called `Extra`. We can now add `{% raw %}{{Extra}}{% endraw %}` somewhere in the template for the note type, and the text (resulting html) that we put in this `Extra` field is going to show up there!
 
 #### Back Template
 
@@ -509,7 +509,7 @@ The real semantic of the first and second templates is the following:
 1. This is how the card looks when I'm presented the question, and haven't yet answered the card.
 2. This is how the card looks when I answered the question, and pressed space to see the answer.
 
-By default, the Front side of the card is also included in the Back side, using the special shortcode `{{FrontSide}}`. \
+By default, the Front side of the card is also included in the Back side, using the special shortcode `{% raw %}{{FrontSide}}{% endraw %}`. \
 It takes the entire Front side html, and blammoes it in the Back side template.
 
 There's nothing stopping you from removing it, though. You can simply remove it from the Back side template, and you won't see the front of the card after pressing space. \
@@ -559,7 +559,7 @@ However, as I mentioned, I won't be teaching you how to make use of this, becaus
 For the most part, adding two cards per each note, just to learn the question from both sides, is a waste of effort, in my experience. \
 I used to learn languages using anki in the past, and there the reverse thingy *was* helpful, but for what I use anki right now, it's fairly useless.
 
-{{ hr(id="note-type-meta") }}
+{{ <hr id="note-type-meta" /> }}
 
 Viola! Now you have the necessary knowledge to learn about the card organizing meta that I've made for myself. I hope you'll like it as much as I do!
 
@@ -582,7 +582,7 @@ In terms of the note types, I basically only have Basic and Cloze. Except, I spl
 I think this is niche? But I use it so much that it made sense to make a shortcut like this for myself, rather than always having to wrap things in a codeblock in the html of the card manually.
 
 The approach is pretty simple: you come up with an element (I use `<cd></cd>`) and make css for that element to display it as a codeblock. \
-The note type then wraps `{{Front}}` in that element like `<cd>{{Front}}</cd>`. Blammo.
+The note type then wraps `{% raw %}{{Front}}{% endraw %}` in that element like `<cd>{% raw %}{{Front}}{% endraw %}</cd>`. Blammo.
 
 I will link to my html templates and css file, but be warned: I made this specifically for myself so I give no guarantees it will be a good starting point.
 
@@ -670,7 +670,7 @@ If you make one complicated question, you will hit your head against it time and
 
 Similarly, if you expect yourself to give a big, multi-stage answer to a single question, you should also split it into multiple cards.
 
-{{ hr(id="thanks") }}
+{{ <hr id="thanks" /> }}
 
 Thanks for reading! This took me multiple months to write, lmao. Kinda burnt out on it; you might've noticed towards the end. Hope my experience will be useful to you!
 

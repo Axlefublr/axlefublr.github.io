@@ -38,11 +38,11 @@ This greatly reduces the size, while not being that huge of a difference in qual
 
 Original, at 19mb:
 
-{{ video(path="original") }}
+{{ <video path="original" /> }}
 
 Compressed, at 2.5mb:
 
-{{ video(path="compressed") }}
+{{ <video path="compressed" /> }}
 
 You probably *can* tell a difference between the two, but I wouldn't say that it's staggering. The *size* difference **is** staggering, though! \
 The compressed version, in this case, is 8 times smaller! Much easier to fit into the tight limits of discord.
@@ -51,7 +51,7 @@ Thanks to how I wrote it, the original file is kept too! \
 So if I'm not restricted by size, I can choose to send the original. \
 The recording is also automatically [copyl](@/uri-list/index.md)ed, letting me immediately <kbd>ctrl+v</kbd> it wherever I want! :3
 
-{{hr(id="toggle")}}
+{{ <hr id="toggle" /> }}
 
 Let's now get into how I made this into a toggle!
 
@@ -101,7 +101,7 @@ This time, since the `/tmp/mine/recordilock` file exists, we go into the first b
 
 Now that the `wf-recorder` process is finished (which takes some time), the initial script can continue execution. \
 It does the compressing with ffmpeg, then deletes the lockfile. We could, if we wanted to, immediately start a new recording now. \
-The `copyl` that is now called `sl.fish` because I'm returning half a year after initially writing this blog post{{fn(i=1)}} copies the uri link to the recording into my clipboard, letting me easily paste it into anywhere.
+The `copyl` that is now called `sl.fish` because I'm returning half a year after initially writing this blog post{{<fl id="1" />}} copies the uri link to the recording into my clipboard, letting me easily paste it into anywhere.
 
 This is a lot better!
 Than dedicating a terminal window for the recording script, and then manually pressing <kbd>ctrl+c</kbd> on it to finish it. \
@@ -198,12 +198,12 @@ Now it's clear what's currently happening, if anything! \
 After you press the hotkey the second time, you can quickly confirm that the recording did indeed complete, and is now compressing. \
 Once it's in the compressing stage, you basically wait for the waybar module to become empty again — *that's* the marker that it `copyl`ed, and is now pasteable 🚀
 
-{{video(path="recording")}}
+{{<video path="recording" />}}
 
 I can't exactly show you all the steps, but here's my waybar saying “recording”, lol!
 
 # footnotes
 
-{{hn(i=1)}} This whole section of me explaining how to make a toggle hotkey for this is new! \
+{{<bl id="1" />}} This whole section of me explaining how to make a toggle hotkey for this is new! \
 Writing this on 2025.08.04 \
 You see, previously (as can be seen in the example recordings above) I had a wack solution that used kitty's `send-signal` capabilities, that was too hyperspecific to share.

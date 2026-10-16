@@ -43,7 +43,7 @@ But if it's just two hotkey presses to see the latest output, that's pretty nice
 
 # client
 
-I'll be using a named pipe{{fn(i=1)}} to pass data from the “client” to the “server”.
+I'll be using a named pipe{{<fl id="1" />}} to pass data from the “client” to the “server”.
 Named pipes are a special type of “file”, for which read and write rules work a bit differently.
 Whenever you read from a named pipe, the content you read is no longer stored in it — it's essentially consumed.
 And notably, the *writing* side must wait for what it wrote to be read (consumed), before the writing operation can finish.
@@ -279,7 +279,7 @@ Showing the *entire* command in the notification sounds like the obvious pick, b
 I don't wanna see all that.
 So, I'll start by just showing the command part of the command in the notification, and in the future see if that's enough or too inspecific.
 
-{{hr(id="error-handling")}}
+{{ <hr id="error-handling" /> }}
 
 There's a reason we re-print the command we're executing every time we try to.
 Let's add some interactive error handling!
@@ -289,7 +289,7 @@ When a failure occurs, I want three different options:
 2. ignore the failure of this command, continuing to the next command in line
 3. edit the command *in my editor*, and then run **that** one
 
-Whenever I want to ask myself of some options, I use a custom program I made some time ago: [confirm.rs](https://github.com/Axlefublr/wks/blob/main/src/bin/confirm.rs){{fn(i=2)}}.
+Whenever I want to ask myself of some options, I use a custom program I made some time ago: [confirm.rs](https://github.com/Axlefublr/wks/blob/main/src/bin/confirm.rs){{<fl id="2" />}}.
 I pass a list of options, and embed the key to press to accept them, into the argument itself.
 For example, `a[c]cept` will be picked if I press <kbd>c</kbd>.
 
@@ -305,7 +305,7 @@ The program is in a bit of an inconvenient format (for you) — it's not in its 
 But for me? GOD is it convenient.
 Check out [this blog post of mine](@/rust-scripting-pt-2/index.md) to learn how this system allows me to create ad-hoc rust programs a lot easier.
 
-For the action to edit the command in my editor, I *could* write my own thing as well, but there's no need — a neat program called `vipe`{{fn(i=3)}} lets you pipe input into it, edit it in your `$EDITOR`, and output it back to stdout. So we're gonna use it!
+For the action to edit the command in my editor, I *could* write my own thing as well, but there's no need — a neat program called `vipe`{{<fl id="3" />}} lets you pipe input into it, edit it in your `$EDITOR`, and output it back to stdout. So we're gonna use it!
 
 ```fish
 #!/usr/bin/env fish
@@ -353,12 +353,12 @@ If we press <kbd>r</kbd>, the if → else if chain after the confirm.rs *doesn't
 
 One extra thing I did, is add printing extra blank lines with a plain `echo` so that visually separating between different commands is even clearer.
 
-{{hr(id="done")}}
+{{ <hr id="done" /> }}
 
 The task scheduler is now done!
 Now instead of using `pueue add` in my various scripts, I can use `schedule.fish` instead; yet achieve a much nicer user experience.
 
-{{video(path="task-scheduler-done")}}
+{{<video path="task-scheduler-done" />}}
 
 There's a reason I can't use this for running *every* long-running command, though.
 
@@ -390,10 +390,10 @@ It shows you ***all*** the windows... What?
 Well you see, I have direct hotkeys to reach almost *all* of the windows I have open at most times; so when I use alt tab to get to some window of interest, I also need to mentally filter through windows that I wouldn't be getting to with alt-tab to begin with. \
 I thought “what if I could filter out some windows from alt-tab?”
 
-And so I did! Not in a particularly sharable way, though{{fn(i=4)}}. I straight up hardcode the windows I never want to see, in a new mru scope called “Custom” — so now I have a hotkey that lets me alt-tab *only* through the windows of interest, ignoring all those I can get to directly.
+And so I did! Not in a particularly sharable way, though{{<fl id="4" />}}. I straight up hardcode the windows I never want to see, in a new mru scope called “Custom” — so now I have a hotkey that lets me alt-tab *only* through the windows of interest, ignoring all those I can get to directly.
 
 Proud of my accomplishment, I thought to implement another scope for sheer fun.
-One of the first ideas that came to mind was an Urgent scope{{fn(i=5)}} — that would contain only the windows that are currently urgent/require attention.
+One of the first ideas that came to mind was an Urgent scope{{<fl id="5" />}} — that would contain only the windows that are currently urgent/require attention.
 You might be familiar with the concept back on windows, where windows yelled at you covered in orange from the taskbar.
 
 Normally an *annoying*, rather than useful feature; but a 💡 suddenly shone.
@@ -535,7 +535,7 @@ tail -f ~/.local/share/mine/task-scheduler | while read -z first
 end
 ```
 
-Normally, just doing `bell`{{fn(i=6)}} would do the job, but in this case it would do a bit *too* much job.
+Normally, just doing `bell`{{<fl id="6" />}} would do the job, but in this case it would do a bit *too* much job.
 We already make notifications, and they also come with success/failure differentiation.
 `bell`ing would not only make the window urgent, but send *another*, now useless notification.
 So I just make the window urgent manually 🤷‍♀️
@@ -547,14 +547,14 @@ Which is unlike non-receiver command finishes — an offshoot command I may exec
 
 # footnotes
 
-{{hn(i=1)}} Check `man fifo 7` for more info on them.
+{{<bl id="1" />}} Check `man fifo 7` for more info on them.
 
-{{hn(i=2)}} [Backup link](https://github.com/Axlefublr/wks/blob/f64cf837ee456626bcaa8d2c185b6939f5c15b5d/src/bin/confirm.rs)
+{{<bl id="2" />}} [Backup link](https://github.com/Axlefublr/wks/blob/f64cf837ee456626bcaa8d2c185b6939f5c15b5d/src/bin/confirm.rs)
 
-{{hn(i=3)}} `moreutils` package on arch.
+{{<bl id="3" />}} `moreutils` package on arch.
 
-{{hn(i=4)}} It's available in my [niri fork](https://github.com/Axlefublr/niri), take a look if you're interested.
+{{<bl id="4" />}} It's available in my [niri fork](https://github.com/Axlefublr/niri), take a look if you're interested.
 
-{{hn(i=5)}} *This* is more shareable though! [It's available as a pr](https://github.com/niri-wm/niri/pull/4208)
+{{<bl id="5" />}} *This* is more shareable though! [It's available as a pr](https://github.com/niri-wm/niri/pull/4208)
 
-{{hn(i=6)}} I never made this clear, but `bell` is my fish alias for `printf \a`. Slightly cleaner semantics.
+{{<bl id="6" />}} I never made this clear, but `bell` is my fish alias for `printf \a`. Slightly cleaner semantics.

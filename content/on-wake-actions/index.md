@@ -83,7 +83,7 @@ Sleep / suspend the computer, then wake it up. The wallpaper should change! :D
 
 If you set this all up, and `systemctl --user status wake.service` shows an error saying "wallpaper-change-script.fish wasn't found", it is entirely your fault.¹ /j
 
-{{ hr(id="ps") }}
+{{ <hr id="ps" /> }}
 
 ¹ I'm making fun of the strawman reader that didn't intuit to change `/home/username/r/dot/scripts/wallpaper-change-script.fish` to the actual location of their wallpaper changing script. \
 In the case you forgot to chmod the script (or the suspend handling one), that's far more understandable.

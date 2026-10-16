@@ -13,7 +13,7 @@ It's silly to put every niche functionality you wrote, as a *function* into your
 So I don't blame you for continuing this trend after switching to fish shell.
 But the thing is, if used correctly, functions are COMPLETELY FREE in fish shell!
 
-{{hr(id="it-is-sad-how-wrong-you-are")}}
+{{ <hr id="it-is-sad-how-wrong-you-are" /> }}
 
 Fish has a custom lazy-loading mechanism for functions. \
 When you try to execute a command, fish (roughly) starts with these steps:
@@ -55,13 +55,13 @@ funcsave bell
 ```
 is what you can execute to place the `bell` function we interactively defined earlier, into its own file, at `~/.config/fish/functions/bell.fish`.
 
-Now *not only* do we have this function available in the current session, but we'll also still have it in *future* sessions, and EVEN in all *current* **other** sessions{{fn(i=1)}}.
+Now *not only* do we have this function available in the current session, but we'll also still have it in *future* sessions, and EVEN in all *current* **other** sessions{{<fl id="1" />}}.
 As far as I know, fish doesn't define a specific timeframe of when the new function gets synced to *other* sessions, but I would roughly describe it as “in due time”.
 
 Well, if you just *created* the `~/.config/fish/functions/bell.fish` file by `funcsave`ing `bell`, it will of course appear instantly in other sessions.
 But if you *overrode* the already existing file, the update will arrive to other sessions in a few seconds, in my experience.
 
-{{hr(id="lowdiff")}}
+{{ <hr id="lowdiff" /> }}
 
 This is *already* better than putting the function into your config.fish.
 If you have multiple terminals open, you don't gotta do shit to update them — by the time you focus them again, they are probably already updated. \
@@ -71,9 +71,9 @@ However. Personally, I don't find it comfortable to write fish functions interac
 Yeah I'm losing tab-complete and history suggestions by doing that, but I'm [not a big fan](https://axlefublr.github.io/harp/) of tab complete to begin with.
 
 Fish comes with two built in hotkeys that let you edit the current commandline in your `$EDITOR`: <kbd>Alt+e</kbd> and <kbd>Alt+v</kbd>.
-They are alternatives to each other, no difference in behavior{{fn(i=2)}}.
+They are alternatives to each other, no difference in behavior{{<fl id="2" />}}.
 
-{{video(path="edit-commandline")}}
+{{<video path="edit-commandline" />}}
 
 Using these hotkeys, I can write a new fish function in my editor! \
 Buuuuut, I have this [fancy snippet](@/harp/index.md) for fish function boilerplate, and you don't.
@@ -81,7 +81,7 @@ Writing out `function` + `end` is still not peak ergonomics.
 
 No need for anything fancy though! Try `funced`:
 
-{{video(path="funced")}}
+{{<video path="funced" />}}
 
 `funced` stands for func*edit*.
 If you `funced` a function that doesn't exist yet, you get the `function` + `end` boilerplate for free.
@@ -212,7 +212,7 @@ I like to keep the functions sorted alphabetically for easier organization, but 
 So I put `>/dev/null` after every `funcsave` to silence that output.
 The `--save` of `alias` is effectively a `funcsave`; so I silence that too.
 
-In my [dotfiles repo](https://github.com/Axlefublr/dotfiles), I make a [subdirectory called fun/](https://github.com/Axlefublr/dotfiles/tree/main/fish/fun), where I store all such function-defining scripts{{fn(i=3)}}.
+In my [dotfiles repo](https://github.com/Axlefublr/dotfiles), I make a [subdirectory called fun/](https://github.com/Axlefublr/dotfiles/tree/main/fish/fun), where I store all such function-defining scripts{{<fl id="3" />}}.
 
 I use builtin.fish for builtin fish functions, such as `fish_greeting`, `fish_title`, etc. \
 Due to how huge it is, prompt.fish is a separate file for my custom fish shell prompt. \
@@ -270,22 +270,22 @@ But, again, I find that only makes sense for things I would *know* how to look f
 
 The information required to derive most of my tips *is* in the docs, but it's very not front and center.
 Fish doesn't make it a point to teach you this pretty *core* part of itself. \
-Can you imagine my frustration when people complain fish is slow? Fish is not slow, fish is a bad teacher{{fn(i=5)}}.
+Can you imagine my frustration when people complain fish is slow? Fish is not slow, fish is a bad teacher{{<fl id="5" />}}.
 
 # footnotes
 
-{{hn(i=1)}} What I'm calling a “session” is after you execute `fish` to enter fish, but before you exit it with `exit` or <kbd>Ctrl+d</kbd> or closing the terminal.
+{{<bl id="1" />}} What I'm calling a “session” is after you execute `fish` to enter fish, but before you exit it with `exit` or <kbd>Ctrl+d</kbd> or closing the terminal.
 Executing an inline fish script via `fish -c '…'` is also a session; until the command finishes executing.
 Running a fish script counts as a session as well, although it is *not* an **interactive** session.
 
 I'm more so explaining how *I'm* using the term in this blog post, rather than how fish shell itself uses it, though.
 
-{{hn(i=2)}} Slightly fun fact: <kbd>Alt+e</kbd> is mnemonic for $**E**DITOR, and <kbd>Alt+v</kbd> is mnemonic for $**V**ISUAL.
+{{<bl id="2" />}} Slightly fun fact: <kbd>Alt+e</kbd> is mnemonic for $**E**DITOR, and <kbd>Alt+v</kbd> is mnemonic for $**V**ISUAL.
 Both of these environment variables are meant to contain your favorite text editor, but EDITOR is more recent than VISUAL.
 
-{{hn(i=3)}} I recommend adding that directory to `$PATH`{{fn(i=4)}} so that you can run any function-defining script using just the script's name, rather than needing to point to its full path.
+{{<bl id="3" />}} I recommend adding that directory to `$PATH`{{<fl id="4" />}} so that you can run any function-defining script using just the script's name, rather than needing to point to its full path.
 
-{{hn(i=4)}} You can easily do that by executing `fish_add_path ~/path/to/your/fun/`, once.
+{{<bl id="4" />}} You can easily do that by executing `fish_add_path ~/path/to/your/fun/`, once.
 Some readers may encounter this *exact* error message when executing the command:
 ```
 Skipping non-existent path: ~/path/to/your/fun
@@ -293,5 +293,5 @@ No paths to add, not setting anything.
 ```
 In that case, it's entirely their fault.
 
-{{hn(i=5)}} Okay well *technically* fish shell *executes* somewhat slower than bash. But not to a human-noticeable degree. \
+{{<bl id="5" />}} Okay well *technically* fish shell *executes* somewhat slower than bash. But not to a human-noticeable degree. \
 *The* thing that is easiest to notice, though, is startup time. And if it's an issue you've been having, I have assigned Mr. Bob to be the brother of your parent.

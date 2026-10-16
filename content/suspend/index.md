@@ -18,7 +18,7 @@ I more so want to shed light on that my window manipulating workflow is super so
 
 Plus, it's kind of confusing and last time I tried it, it felt wonky.
 
-{{ hr(id="yoink")}}
+{{ <hr id="yoink" /> }}
 
 I happened to be reading a [blog post](https://jvns.ca/blog/2024/07/03/reasons-to-use-job-control/) by Julia Evans some time ago, and it goes on to explain the benefits of actually using job control. \
 (It was a great read but) at this point I don't really remember a single point; all I remember is that "job control *can* be kinda wonky but it's also super neat".
@@ -71,7 +71,7 @@ Rather than:
 4. FIN?
 5. oh fACK I needed that output, now I have to repeat this process to get it back
 
-{{ hr(id="strong") }}
+{{ <hr id="strong" /> }}
 
 Neither of these are particularly *that* strong of arguments; ultimately this suspending workflow simply felt *neat*. \
 So try it out, maybe you're be as overjoyed as I am!
@@ -83,7 +83,7 @@ The pane creating hotkeys know about this info because I explicitly pass it; how
 
 By me *forcing* it to know! 😈
 
-{{ hr(id="force") }}
+{{ <hr id="force" /> }}
 
 In my helix fork, I made the suspend action write the current buffer's parent directory to a path, and the current helix cwd to a different path. \
 Then for yazi, I wrote a small plugin that writes the current directory path to both of those files every time I change directory.
@@ -122,7 +122,7 @@ The thought process in this workflow is way simpler.
 I don't even need to *delete* the command and then re-write it; the cwd fix is on a hotkey! \
 So this process is *incredibly* smooth 😋
 
-{{ hr(id="hope") }}
+{{ <hr id="hope" /> }}
 
 I hope I was able to show you how a suspend-driven workflow can work really well! \
 Try out using job control more, maybe you will discover that you love it too!

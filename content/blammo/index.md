@@ -18,7 +18,7 @@ I can't make a hotkey for every ad-hoc action, can I?
 
 It makes sense to have shortcuts to the really common actions, but you won't know if an action is common or not until you've already done it quite a few times. \
 If you're too quick, you might end up with a “dead” hotkey in your configuration, \
-But if you don't provide yourself *any* shortcut, doing The™ Action™ might be really laborious.{{fn(i=1)}}
+But if you don't provide yourself *any* shortcut, doing The™ Action™ might be really laborious.{{<fl id="1" />}}
 
 I came up with an idea that lets me seamlessly connect yazi's selected files to my shell, and I find the design really cool and nushell-like :D
 
@@ -35,7 +35,7 @@ To handle spaces, you seem to need to specifically enclose the `$@` in doublequo
 The `--` argument allows us to not have to quote the command itself — everything after `--` is considered a raw part of the actual command.
 
 This works, as you'd expect! \
-I can select multiple archives and decompress them all with a hotkey{{fn(i=2)}}. \
+I can select multiple archives and decompress them all with a hotkey{{<fl id="2" />}}. \
 But it's rare for me to just call commands directly; \
 Often times, I write some sort of functionality in a fish shell function, and invoke it with `fish -c`. \
 All my various ffmpeg functions are written in fish, for example:
@@ -169,7 +169,7 @@ In nushell, `$in` means “whatever was piped into the current thing”, so here
 
 # p.s.
 
-Ahhhh... no better way to get the correct solution than to post the wrong one on the internet 😌{{fn(i=3)}} \
+Ahhhh... no better way to get the correct solution than to post the wrong one on the internet 😌{{<fl id="3" />}} \
 The *yazi author* read this blog post, and shared the more proper way of doing what `(blammo)` was initially made for!
 
 ```
@@ -192,13 +192,13 @@ But the main idea of blammo, and why I wrote this in the first place — connect
 
 # footnotes
 
-{{hn(i=1)}} Sounds similar to the types of situations that [harp](@/harp/index.md) solves, doesn't it? \
+{{<bl id="1" />}} Sounds similar to the types of situations that [harp](@/harp/index.md) solves, doesn't it? \
 You're correct! Harp could be implemented into yazi to provide a pretty nice productivity boost, but *so far* I don't find myself executing enough commands from the context of yazi to really need harp.
 
-{{hn(i=2)}} I'm aware of the built in yazi unarchiver, but it's been super wonky for me. \
+{{<bl id="2" />}} I'm aware of the built in yazi unarchiver, but it's been super wonky for me. \
 I'd much rather use the behavior I'm more familiar with, using `ouch`. \
 This hotkey still exists, but I actually made “opening” archives automatically use `ouch decompress`. \
 How did I do that? Exercise for the reader 😌
 
-{{hn(i=3)}} To be fair, I never *asked* anywhere for how to solve the issue of passing arguments to fish, neither have I searched. \
+{{<bl id="3" />}} To be fair, I never *asked* anywhere for how to solve the issue of passing arguments to fish, neither have I searched. \
 I have a tendency to solve my problems my own way before considering grabbing some pre-existing solution :>

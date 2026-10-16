@@ -12,7 +12,7 @@ What are they? Some special types, or special syntax introduced by the shell?
 
 Not at all actually, they're *just* strings, like `asdf` and `the` would be.
 
-{{ hr(id="test") }}
+{{ <hr id="test" /> }}
 
 You usually use `test` to check for various common equality comparisons, in shell scripting.
 
@@ -24,7 +24,7 @@ end
 
 If the string in variable `var` is equal to `thingy`, output `yeppies`.
 
-{{ hr(id="if-semantics") }}
+{{ <hr id="if-semantics" /> }}
 
 Let's examine more closely *why* we need `test` here to begin with.
 
@@ -45,7 +45,7 @@ end
 If there is the word `struct` in the file `args.rs`, output `yeppies`. \
 I'm saying all this to highlight: `if` *just* wants to execute a command as its condition, that's it.
 
-{{ hr(id="command") }}
+{{ <hr id="command" /> }}
 
 You can even store the command in a variable:
 
@@ -58,7 +58,7 @@ end
 
 The variable `$command`, will expand to be `rg 'struct' args.rs`, so this is basically equivalent to the codeblock above, where we *don't* use a variable.
 
-{{ hr(id="booleans") }}
+{{ <hr id="booleans" /> }}
 
 Coming back to booleans:
 
@@ -76,7 +76,7 @@ end
 Despite `true` and `false` looking colorful, and therefore seeming "special", in your editor, \
 they are actually both *just* strings, so both if statements here will execute their codeblock.
 
-{{ hr(id="false") }}
+{{ <hr id="false" /> }}
 
 I always thought, for some reason, that `false` will evaluate to, well, *false* in `test`, but now that I think about it, why would it?
 

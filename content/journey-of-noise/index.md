@@ -109,7 +109,7 @@ Anyway! The method I have access to is the following:
 
 Initially, it's worded more confusingly and it's never mentioned how the rpm changes *between* the minimum and maximum temperature. My guess is that it's linear, but I don't actually know. A fan graph would make this clear *and* configurable.
 
-{{ hr(id="temperatures") }}
+{{ <hr id="temperatures" /> }}
 
 I have no clue what temperatures are "good". I never had the ability to optimize fan speed, and so I never had a reason to monitor temperatures. \
 The information I've been able to find is that "as long as you're under 90, you're fine!" but that's not very helpful! I won't listen because that *sounds* like awful advice! \

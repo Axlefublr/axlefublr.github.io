@@ -114,7 +114,7 @@ I changed these after like *months* of using the same config, so don't be afraid
 Hell, I'm even changing these values as I'm writing this blog post! \
 Changed 6ms → 5ms, 1px → 0px → 1px, 200ms → 160ms → 210ms, 10px → 9px.
 
-{{hr(id="simple-math")}}
+{{ <hr id="simple-math" /> }}
 
 When playing around with the values, I found a convenient (although a bit naive) way to compare the overall maximum speeds of the different settings.
 
@@ -151,7 +151,7 @@ I want it to be viable to click and *drag* all three possible buttons, while mov
 That is why <kbd>j</kbd> is left click, <kbd>k</kbd> is right click, and <kbd>m</kbd> is middle click.
 
 So one side, the left, is for movement. And the right side is for clickment.
-That's why it's so important that the key that enters mouse mode is *Space* — I will be using **both** sides of my keyboard, so holding something like <kbd>z</kbd> instead{{fn(i=1)}} would just be deeply unpleasant.
+That's why it's so important that the key that enters mouse mode is *Space* — I will be using **both** sides of my keyboard, so holding something like <kbd>z</kbd> instead{{<fl id="1" />}} would just be deeply unpleasant.
 
 But aside from making dragging viable, I also made clicking with a modifier, and even *dragging* with a modifier viable in mouse mode.
 |Key|Modifier|
@@ -408,7 +408,7 @@ Not a whole number, screen is cum again.
 I fix this in my fork, by rounding the target zoom level in exponential increments.
 So instead of 20.25, I arrive at just 20. And in the earlier example, I arrive at 3 instead of 2.5.
 
-{{video(path="zooming")}}
+{{<video path="zooming" />}}
 
 I very often use zoom for my various cssing adventures; being able to look that closely at pixels is incredibly helpful.
 Plus I wear glasses, and even despite them, computer things are often too small for me to comfortably look at.
@@ -427,10 +427,10 @@ You can find the wallpapers that are currently in my rotation [here](https://git
 There's quite a lot of different things I need to do during this.
 Have a look first, I'll explain after.
 
-{{video(path="wallpaper")}}
+{{<video path="wallpaper" />}}
 
 I found a wallpaper I like enough to send to my [discord server](https://discord.gg/bgVSg362dK)'s “wallpapers” channel.
-I open it in full so that it's not preview quality, right click, copy image, compress it{{fn(i=2)}}, disable mouse mode to go to the first workspace and paste it in. \
+I open it in full so that it's not preview quality, right click, copy image, compress it{{<fl id="2" />}}, disable mouse mode to go to the first workspace and paste it in. \
 I jump back to workspace 2, enable mouse mode again, and continue looking at wallpapers.
 I use a hotkey to jump into the grey area between the recommended images, so that no annoying ui pops up as I scroll.
 As I find wallpapers that look interesting, I middle click on them and jump back to the center with the grey area hotkey.
@@ -453,7 +453,7 @@ As you may know, I [hate pressing y](@/stray-from-defaults/index.md), so I make 
 <kbd>x</kbd> I forgot to showcase in the recording: it displays the image in my clipboard with my image viewer.
 Say I like the image I'm looking at enough to consider adding it to my collection; I'll open it in full, copy it to my clipboard, and then press <kbd>x</kbd> to see how it would look like as an actual wallpaper.
 
-{{video(path="view-with-x")}}
+{{<video path="view-with-x" />}}
 
 # convenience layers and their inconveniences
 
@@ -647,20 +647,20 @@ And after it, see me actually *use* mouse mode in some screen recordings.
 
 Well I say “in full”, but I'm obviously `; …`ing the mouse mode-irrelevant parts out of here.
 
-{{video(path="discord-mouse-usage")}}
+{{<video path="discord-mouse-usage" />}}
 
 Despite discord having a fair bit of keyboard navigation, I find mouse mode so comfy that I often use it over it 🤷‍♀️
 
-{{video(path="horizontal-scrolling")}}
+{{<video path="horizontal-scrolling" />}}
 
 Easy, pleasant, smooth horizontal scrolling, followed by some vertical scrolling.
 
-{{video(path="satty")}}
+{{<video path="satty" />}}
 
 I'm having performance issues while being recorded; doing something actually intentional tends to be smoother.
 But yeah, I do genuinely use mouse mode for even image editing programs!
 
-{{video(path="nubby")}}
+{{<video path="nubby" />}}
 
 Yes, I'm serious. I sometimes play **games** with mouse mode.
 
@@ -668,6 +668,6 @@ Get inspired goddammit! Everyone should have **a**, and should have an **amazing
 
 # footnotes
 
-{{hn(i=1)}} It's actually what I went with at first! Before I realized I could actually achieve comfortable drag.
+{{<bl id="1" />}} It's actually what I went with at first! Before I realized I could actually achieve comfortable drag.
 
-{{hn(i=2)}} Discord without nitro lets you upload only up to 10mb, so I have a hotkey that compresses the image in clipboard to fit into that restraint. In the recording you see a notification briefly flash: the compressing mechanism started and immediately stopped, because the image is under 10mb to begin with, so the original is kept.
+{{<bl id="2" />}} Discord without nitro lets you upload only up to 10mb, so I have a hotkey that compresses the image in clipboard to fit into that restraint. In the recording you see a notification briefly flash: the compressing mechanism started and immediately stopped, because the image is under 10mb to begin with, so the original is kept.

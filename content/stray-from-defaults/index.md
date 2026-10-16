@@ -10,7 +10,7 @@ It prioritised mnemonics, rather than ergonomics.
 The issue is pretty apparent: mnemonics are helpful for the first, like, *week* while you're learning vim for the first time. \
 And then many *years* later you still end up using the same non-optimal mappings.
 
-{{ hr(id="the-mappings") }}
+{{ <hr id="the-mappings" /> }}
 
 One of the most frequent things you do in a text editor, is copy. \
 And yet it's mapped to one of the most annoying keys to press: <kbd>y</kbd>. While powered by a big stretch of a mnemonic that we just came to accept: "yank".
@@ -64,7 +64,7 @@ But even better than that, appending is AMAZING now! \
 The hand movement to append a `;` or `,` at the end of the line is way smaller now, and feels really comfortable. \
 Also generally, pressing right shift is more difficult than pressing *left* shift anyway; so overall there's less hand movement for something that I do really frequently, especially while writing a blog post for example.
 
-{{ hr(id="conclusion") }}
+{{ <hr id="conclusion" /> }}
 
 After changing these, it took me *maybe* two days to get used to the new mappings. This is simply because of how much more *fitting* they feel in my head, and to my fingers.
 

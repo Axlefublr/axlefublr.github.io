@@ -23,13 +23,13 @@ So you can search by *specifically* documentation by using `%doc`:
 
 ![](./picker-column-search.webp)
 
-{{ hr(id="shorter-hander") }}
+{{ <hr id="shorter-hander" /> }}
 
 Or just `%d`! The column matcher just needs to be unique, from the start of the column name; you don't have to use the full name.
 
 ![](./picker-shorter-column-search.webp)
 
-{{ hr(id="dual-wielding") }}
+{{ <hr id="dual-wielding" /> }}
 
 You can combine a normal search with a column search:
 
@@ -45,7 +45,7 @@ The `global_search` action used to prompt you for the search in the commandline 
 
 ![](./global-search.webp)
 
-{{ hr(id="also-column") }}
+{{ <hr id="also-column" /> }}
 
 Also has a column you can additionally filter by:
 

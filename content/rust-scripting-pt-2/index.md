@@ -65,7 +65,7 @@ A file with an `.rs` extension existing in `src/bin/` makes cargo automatically 
 If I want to `cargo run` the `consume.rs` script, I do `cargo run --bin consume`.
 Pretty straightforward!
 
-To make this ergonomic to use, I can put `:sh cargo run --bin %(buffer_stem)` into a [command harp](@/harp/index.md) in my helix{{fn(i=1)}}.
+To make this ergonomic to use, I can put `:sh cargo run --bin %(buffer_stem)` into a [command harp](@/harp/index.md) in my helix{{<fl id="1" />}}.
 With it, I can express “run the script I am currently looking at” (in my editor), on a singular hotkey that I can put into my muscle memory.
 
 Then to “release” a script, I first do `cargo build --release --bin %(buffer_stem)`, and then `cp` over the resulting binary into the directory where I hold my wks binaries, appending the `.rs` extension at the end.
@@ -79,7 +79,7 @@ It was a mess!
 
 In the new system, I *just* create a new `.rs` file in `src/bin/` and I'm done.
 
-{{hr(id="cargotoml")}}
+{{ <hr id="cargotoml" /> }}
 
 Next thing that you might see in the file structure, is that all the binaries *share* a singular `Cargo.toml`.
 This is fantastic!
@@ -156,7 +156,7 @@ pub use std::sync::LazyLock;
 
 And now all of those modules, structs and traits are all in scope immediately, in all of my scripts.
 
-{{hr(id="alias")}}
+{{ <hr id="alias" /> }}
 
 Kind of by habit I still made myself a nice alias to make reaching existing and creating new scripts more ergonomic, but it's not even that needed honestly.
 I have this simple template file:
@@ -205,14 +205,14 @@ Whatever the test script used to be before then is wiped clean, and I can immedi
 
 Recently realized how nice this is in practice.
 I was working on a new helix feature as usual, and for some reason `the.get(1..)` was returning me `None`, despite `the` being at least two characters long (in fact more).
-I do a simple `wks test` and check out the test case in a “pure” environment, unlike helix, and was able to figure out the core of the issue{{fn(i=2)}} really quickly :D
+I do a simple `wks test` and check out the test case in a “pure” environment, unlike helix, and was able to figure out the core of the issue{{<fl id="2" />}} really quickly :D
 It was such a pleasant workflow!
 
 The [repo that holds wks](https://github.com/Axlefublr/wks) is public!
 Check it out, and maybe make use of the idea for your own nice collection of itty bitty rust “scripts”.
 
 # footnotes
-{{hn(i=1)}} “My” is very significant there, `buffer_stem` is a custom command expansion in [my helix fork](https://github.com/Axlefublr/helix). Normally you would need to use `%(file_path_absolute)`, converting it into its basename without the extension in one way or another.
+{{<bl id="1" />}} “My” is very significant there, `buffer_stem` is a custom command expansion in [my helix fork](https://github.com/Axlefublr/helix). Normally you would need to use `%(file_path_absolute)`, converting it into its basename without the extension in one way or another.
 
-{{hn(i=2)}} The first character was `€`, a multibyte character. `get` on a `&str` returns `None` if you try to index inside of a multibyte character.
+{{<bl id="2" />}} The first character was `€`, a multibyte character. `get` on a `&str` returns `None` if you try to index inside of a multibyte character.
 To work around this, I used `the.char_indices().nth(1)` to get the index of the second character, and then used that value in the afforementioned `get`.

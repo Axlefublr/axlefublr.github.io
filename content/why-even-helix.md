@@ -12,7 +12,7 @@ And usually spent multiple hours every day configuring nvim.
 I'm glazing myself here to point out: I have obviously given nvim a good try; matter of fact the try was unreasonably good! \
 And the reason why I switched off nvim is not due to the lack of knowledge about nvim.
 
-{{ hr(id="brighter-future") }}
+{{ <hr id="brighter-future" /> }}
 
 Considering my [two](@/why-I-hate-lua.md) [other](@/why-I-hate-kitty/index.md) blog posts, this one should be called "why I hate nvim", but I don't actually hate it! \
 I just realize that helix is simply the better option.
@@ -49,7 +49,7 @@ rather than:
 1. "uhhhhh soooo let's do this ig"
 2. "with uhhhhh this text"
 
-{{ hr(id="pausing") }}
+{{ <hr id="pausing" /> }}
 
 It's fairly often that I know *subconsciously* what I wanna do, and actively "discover" what that something actually is. \
 Because of that, I may take ridiculously long pauses between my keystrokes to think.
@@ -59,7 +59,7 @@ You have to execute the whole action in some amount of time after pressing the "
 
 You can of course disable this (via `:h 'timeoutlen'`), but this is just the start of the pattern of bad defaults in nvim. For now I will just state that since this is a default, other nvim functionality (as well as plugins), will often be designed having this behavior in mind. In short, nvim penalizes pauses.
 
-{{ hr(id="an-even-better-point") }}
+{{ <hr id="an-even-better-point" /> }}
 
 Coming back to the example above, nvim makes you decide on an action first, and the selection second; right after you just decided on an action, not encouraging pauses, it makes you decide the selection too.
 
@@ -98,7 +98,7 @@ This combines nicely: I move to some word, and it also *happens* to become my ta
 The reason why you'd usually want to use `ciw` rather than `ce` in vim, is due to precision. With the former, you can act on a word no matter what, and so by spending an extra keypress, you can allow yourself to spend less mental effort. Interesting tradeoff! \
 It only really makes sense because to *see* what you're going to capture with a motion, you need to actively think. What if your editor thought for you?
 
-{{ hr(id="visuality") }}
+{{ <hr id="visuality" /> }}
 
 This is effectively the greatest strength of helix: rather than having to spend mental cpu cycles to figure out what you'd match with a certain motion, you *already* can clearly see what you'd match, *always*. \
 Rather than thinking "hmmmm how do I change this word?", you think "I want to act on *this* area... oh wait! it's already selected! I guess I just `c` then!". \
@@ -189,7 +189,7 @@ First, it's an obscene amount of characters to press. \
 But more importantly, you use THREE different text objects here, and one of them uses `i` rather than `a`. \
 Doing this has always been quite a pain for me, as you need to think about what you're doing with considerable amount of focus.
 
-{{ hr(id="consistency") }}
+{{ <hr id="consistency" /> }}
 
 How does this work in helix? Remember that "motions replace your selection" thing? What if I told you surrounding did this too? \
 Genious! Of course it would! \
@@ -254,7 +254,7 @@ You just select a register and continue on! :D \
 And as you collect these important yanks, when you access yet another register, helix will tell you which registers you're already using, implying what the free ones are. \
 So (if you pay attention) you won't even accidentally overwrite an important yank!
 
-{{ hr(id="price-of-mistakes") }}
+{{ <hr id="price-of-mistakes" /> }}
 
 Using registers is always an *active* decision for me. Because of this, it's common that I yank something, and then think "wait nevermind, I actually want this in register `x`". This "nevermind" thing happens most commonly when my current default register contents *aren't* important.
 
@@ -268,7 +268,7 @@ In helix, after you yank something, you can re-yank without any such hassle. `y`
 The selection actually staying like that is a common "omg that's so nice" exclaim I do to myself, about helix. \
 But there are places where, at least at first, it's just really weird!
 
-{{ hr(id="strange-consistency") }}
+{{ <hr id="strange-consistency" /> }}
 
 Remember how your cursor is just a single-width selection? Helix stays consistent to the idea of selections mattering more than your cursor in this interesting way: \
 By default, `a` appends after your selection, and `i` prepends before your selection.
@@ -293,7 +293,7 @@ Having `a` and `i` fall out of this rule became annoying, rather than helpful, a
 
 But aside from consistency, turns out it's just kinda nice!
 
-{{ hr(id="ai") }}
+{{ <hr id="ai" /> }}
 
 Say you're writing a sentence, and as you move through it, you got some word selected. \
 You can pick whether you want to insert before *or* after the word, without having to adjust your position! \
@@ -306,7 +306,7 @@ However, I half-think that this `a`/`i` behavior is more of a side effect than i
 
 I'll admit, all this selection business takes a while to get used to, but actually now I prefer it. Even in my fish shell "helix mode", I re-made this behavior, that's how much I like it!
 
-{{ hr(id="pasting") }}
+{{ <hr id="pasting" /> }}
 
 Another example is `p` and `P`. Yep, they also paste after and before the *selection*. \
 With them though, the behavior isn't particularly mind-boggling, and just ends up feeling correct immediately.

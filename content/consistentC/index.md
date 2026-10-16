@@ -19,7 +19,7 @@ turns out the idea of "selections matter, not your cursor" applies here as well!
 
 # showcase
 
-{{ video(path="lines") }}
+{{ <video path="lines" /> }}
 
 You create a new cursor below the current *selection*, **not** the current line!
 
@@ -28,7 +28,7 @@ So you could possibly make use of this by selecting two lines, and then effectiv
 The usecase that comes in mind immediately is some long `if` chain, where the bodies are all a single line, \
 and you want to change something in all (or some) of the conditions / bodies.
 
-{{ video(path="something-else") }}
+{{ <video path="something-else" /> }}
 
 To be fair, I have yet to use this for anything, but found the consistency really cool. \
 Being able to express editing desires in such an elegant way is part of why I switched to helix!

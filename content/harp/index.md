@@ -156,7 +156,7 @@ These harp keys / names are called “registers”. \
 You can think of vim registers, that you access via `"a` — harp registers are a very similar idea. \
 Under each register, we hold some data. \
 So, file path harp `a` may store the path `~/fes/dot/colors.css`. \
-Directory harp `alt+k` may store the path `~/fes/lai/bog`{{fn(i=1)}}. \
+Directory harp `alt+k` may store the path `~/fes/lai/bog`{{<fl id="1" />}}. \
 The data of a register is called a “harp”.
 
 Since registers are simply keys that I press, they can start to collide pretty quick: \
@@ -204,7 +204,7 @@ Similar to how the get action interactively asks me for a key to press, the set 
 
 Immediately as I realize I want to access the same file over and over again, I set a harp for it on the fly, and just continue on: I don't need to divert myself into some config file, I just press a key!
 
-{{hr(id="why-config")}}
+{{ <hr id="why-config" /> }}
 
 I strangely specify “config files”; there's nothing about file harps that enforces you to use them only for config files though! \
 Why did I choose that wording?
@@ -273,11 +273,11 @@ and press <kbd>space+s+.+c</kbd> to harp into `helix-term/src/commands.rs` (from
 
 I can create and use project specific harps, resulting in the seemingly restrictive system being quite scaleable!
 
-*All* relativities{{fn(i=2)}} exist for *all* harp actions{{fn(i=3)}}. \
+*All* relativities{{<fl id="2" />}} exist for *all* harp actions{{<fl id="3" />}}. \
 Some relativities don't make logical sense for some harp actions, so I'll introduce the other ones as they come up in usefulness for the other harp actions, as we go.
 
-{{hn(i=2)}} You only know “global” and “directory” so far. \
-{{hn(i=3)}} You only know harp files and have *heard* of harp directories so far.
+{{<bl id="2" />}} You only know “global” and “directory” so far. \
+{{<bl id="3" />}} You only know harp files and have *heard* of harp directories so far.
 
 You might find yourself almost always using the directory relativity for file harps; That's a pretty reasonable approach! \
 You can change the default relativity *per* harp action. \
@@ -438,7 +438,7 @@ end
 (the `→` there is a tab)
 
 And put it into a filetype-relative register harp (just make sure you're in a lua file while you do this). \
-Now I can “summon” it whenever I want, by pressing `<space>w;f` + the paste key{{fn(i=4)}}.
+Now I can “summon” it whenever I want, by pressing `<space>w;f` + the paste key{{<fl id="4" />}}.
 
 Pressing 4 keys to get to it *may* be not worth it for you for the specific example, but you can probably see how a bunch of various language-specific boilerplate you don't like typing out can instead be harped, consistently saving you effort :3 \
 In my personal usage, I find myself using the filetype relativity the most often with register harps, so I set it as my default relativity for them. \
@@ -459,7 +459,7 @@ So you can create a semantic for yourself that makes it easy to remember the *in
 Here, it makes sense for me that a shebang line starts with a <kbd>#</kbd>, and so I use that key as a neat mnemonic. \
 Making use of easy to remember mnemonics / going with what feels the most natural is a great way to make a good use of harp.
 
-{{hr(id="another-alternative")}}
+{{ <hr id="another-alternative" /> }}
 
 Another good default relativity you could use instead of global, is the directory relativity. \
 Then, by default, you will simply have vim-like registers that are scoped to a project, so you can use them a bit more willy-nillily than global ones or filetype-relative ones, and simply temporarily switch your relativity when you *do* want those.
@@ -467,7 +467,7 @@ Then, by default, you will simply have vim-like registers that are scoped to a p
 No need to worry about your registers disappearing, and no need to worry what else you saved for later while working on a completely different project.
 
 Sometimes, I keep them for long, though! \
-For example, I keep the syntax required to make a footnote{{fn(i=5)}} in this blog, as two register harps — \
+For example, I keep the syntax required to make a footnote{{<fl id="5" />}} in this blog, as two register harps — \
 one for the head part of the note (the uppercase number in the previous sentence) and another for the foot part of the note (what you are jumped to). \
 I need to type in the index myself, so to make it easy to do so, I leave in `j` in place of the number. \
 Once I paste the syntax, I can hop directly to `j` to then replace with the index. \
@@ -543,7 +543,7 @@ Unfortunately, helix uses rust regex, rather than `fancyregex`, so backreference
 I looked into replacing `regex` with `fancyregex` in helix, but I couldn't even figure out where to start, ngl. \
 Maybe in the future, me or someone else will do this, and then search-based text objects are going to become even more powerful than they already can be.
 
-{{hr(id="pubfun")}}
+{{ <hr id="pubfun" /> }}
 
 You can jump to the previous / next function using <kbd>[f</kbd> and <kbd>]f</kbd>, in helix. \
 This is pretty neat and useful, but often has inconvenient semantics. \
@@ -643,7 +643,7 @@ The position invalidation argument I made in the search harp section still remai
 The helix jump list is not trustworthy, it keeps invalidating itself for seemingly no good reason. \
 And when *it* invalidates, the position you explicitly stored with <kbd>ctrl+s</kbd> is simply *gone*, rather than just *off*, like it *might* be with mark harps.
 
-I find the directory relativity to make the most sense as a default for mark harps{{fn(i=6)}}. \
+I find the directory relativity to make the most sense as a default for mark harps{{<fl id="6" />}}. \
 You scope your ad-hocs per project, so you never need to worry about overriding something you were working on 5 seconds ago, in a different project. \
 Yet, it's not as restrictive as defaulting to the buffer relativity: since mark harps remember the buffer path as well, you can more freely express “wherever I last been” — you don't need to first remember which file you were in, to then jump to a position inside of.
 
@@ -673,7 +673,7 @@ Of course, there might be some commands that you want to store without necessari
 For those usecases, you can simply write out the command in some buffer, and copy it directly into the `:` register. \
 That will allow you to fill the “context” that command harps use, without running the command just yet.
 
-{{hr(id="command-expansions")}}
+{{ <hr id="command-expansions" /> }}
 
 This is by far the most *powerful* harp action, and is my second most used one, after file harps. \
 The kakoune design, that helix takes after, makes storing :commands quite flexible.
@@ -718,7 +718,7 @@ Basically, you can *use* your selection(s) as input to a command, without caring
 
 With such powerful building blocks, you can create quite complex editing actions, without the editor having to provide them for you. \
 However, typing in a lot of powerful commands can quickly become impractical. \
-Sure, you can `:pipe` into `shuf` and not worry much about it{{fn(i=7)}}, but what about more complex commandlines?
+Sure, you can `:pipe` into `shuf` and not worry much about it{{<fl id="7" />}}, but what about more complex commandlines?
 
 For really really common things you do you might create hotkeys. \
 But for many other ones, doing so is highly impractical for many different reasons!
@@ -756,13 +756,13 @@ The `:open` command lets you open some file, which is exactly what file harps do
 You could, if you wanted to, make a *command* harp that `:open`s some file, which is really funny. \
 But there's a genuine usecase for this, too — opening *directories*.
 
-If you try to `:open` a directory rather than a file, a fuzzy file search is opened for that directory instead{{fn(i=8)}} \
+If you try to `:open` a directory rather than a file, a fuzzy file search is opened for that directory instead{{<fl id="8" />}} \
 So if you keep finding yourself specifically fuzzy searching for files in some directory, making a command harp with `:open` for it could be a pretty great solution.
 
 Directory harps exist, sure, but they are more so meant to travel to directories that you intend to *stay* in. \
 If *all* you ever want to do is open a singular file in a directory, travelling to it, opening the fuzzy finder, and then `:cd -`ing feels like a bit of a waste.
 
-{{hn(i=8)}} Fun fact: this also works on the commandline. \
+{{<bl id="8" />}} Fun fact: this also works on the commandline. \
 `helix .` will open helix, and immediately launch the file picker, for example.
 
 ### filetype
@@ -784,7 +784,7 @@ What I recommend for this workflow, is to try to use the same keys for the same 
 Just like always using `#` for the shebang register harps, remember? \
 My “run” is always on `s`, my “open docs” always on `d`, “build” always on `b`.
 
-{{hr(id="piping")}}
+{{ <hr id="piping" /> }}
 
 `:pipe` can come in useful for implementing custom code actions, by using a custom script. \
 You could use `:insert-output` as a way to generate some boilerplate for a language (if, for example, it is not static (where it'd make more sense to use a register harp instead)).
@@ -816,7 +816,7 @@ You can think of them as your personal justfile directly in your editor, that yo
 
 You can sometimes find yourself doing hyperspecific transformations in specific files, over and over again.
 
-In my loago{{fn(i=9)}} helper script, I have this section…
+In my loago{{<fl id="9" />}} helper script, I have this section…
 ```nu
 const known = {
 	razor: 4
@@ -843,7 +843,7 @@ This is pretty convenient — instead of feeling rushed to create a generic solu
 This is the conclusion part of the blog post, that sums up everything you've read, and provides an emotional release to all the effort you've spent reading. \
 It creates a logical stop to the experience, naturally leading you to exclaim “wow! what a read”, or some such.
 
-{{hr(id="fr-now")}}
+{{ <hr id="fr-now" /> }}
 
 I've been on and off writing this blog post for over 50 days so I wanted to spare myself writing a genuine conclusion hahahaha \
 I'm sure you're tired from reading, too, genuine thank you for taking the time. \
@@ -878,7 +878,7 @@ You use it quite a lot, feeling sheer bliss over how productive it helps you be.
 But new excitements come! \
 You switch to working on a new project for a while, with it own harps and gimmicks.
 Many months go by, and you come back to the first project again. \
-“Uhhhhhh what was that useful harp again?”{{fn(i=10)}} — you try the most likely key that you might've placed it on, but it does a completely different command, maybe starting some build that now you need to annoyingly figure out how to cancel. \
+“Uhhhhhh what was that useful harp again?”{{<fl id="10" />}} — you try the most likely key that you might've placed it on, but it does a completely different command, maybe starting some build that now you need to annoyingly figure out how to cancel. \
 “Hmmm what about this one?” — ‘harp `h` unset’ it tells you.
 
 Well... I don't want to just keep mashing keys until I find it.
@@ -900,7 +900,7 @@ But this experience will be remembered by your psyche. \
 Maybe next time, you won't feel so ready to make a harp *as* complex. \
 “What if I lose it again?”
 
-{{hr(id="discovery")}}
+{{ <hr id="discovery" /> }}
 
 Yes, what I noticed over months of using harp, is that the current system *discourages* you from using harps to their full potential, hilariously. \
 You will be taught to only make harps that you're **sure** you can remember, or only if they're easy enough to remake. \
@@ -912,7 +912,7 @@ NOT ANYMORE!
 
 Now harp actually **does** show you all of the set registers you have. \
 In every harp action, in every relativity. \
-You don't need to go into some submode to take a look — they are displayed to you automatically in the whichkey-like window{{fn(i=11)}}
+You don't need to go into some submode to take a look — they are displayed to you automatically in the whichkey-like window{{<fl id="11" />}}
 
 Now you press your hotkey for command harps, and immediately see all the registers you have for your default relativity (which let's say stays `global`). \
 You press <kbd>.</kbd> and go into the directory relativity: the whichkey window changes to now show the command harps in the directory relativity. \
@@ -936,7 +936,7 @@ and now also *search* harps to jump to various rules quickly.
 I am now *actually* living the harp dream, making use of them as much as I intended for them to be used. \
 I used to say quite frequently: “oh yeah even I underuse harps, I should use them more” — this was due to a misdesign!
 
-{{hr(id="bad-defaults")}}
+{{ <hr id="bad-defaults" /> }}
 
 Even *before* reigniting my usage of harps, I noticed how *uncomfortable* it is to switch relativites, with them all being on keys that aren't on the home row. \
 <kbd>,</kbd>, <kbd>.</kbd>, <kbd>;</kbd>, <kbd>'</kbd> all make *sense* as defaults, but if you use relativities a LOT, pressing those keys becomes jarring after a while.
@@ -953,7 +953,7 @@ You can decide for yourself: what keys switch to what relativity, what key switc
 
 The *defaults* stay the “reasonable but kinda yuck to use” <kbd>,</kbd>, <kbd>.</kbd>, <kbd>;</kbd>, <kbd>'</kbd>, <kbd>Space</kbd>, for the record.
 
-{{hr(id="delete")}}
+{{ <hr id="delete" /> }}
 
 Now that you can *view* your set registers, you have to be able to delete some of them, too; so that all the ones you are no longer using aren't creating a visual mess that takes up half your screen.
 
@@ -979,20 +979,20 @@ These two hotkeys are the mystery XXX and YYY I mentioned! So you can change the
 
 # footnotes
 
-{{hn(i=1)}} To your possible surprise, yes this is a [real file path](@/optimizing-paths/index.md) I have. It's for this blog!
+{{<bl id="1" />}} To your possible surprise, yes this is a [real file path](@/optimizing-paths/index.md) I have. It's for this blog!
 
-{{hn(i=4)}} Which is <kbd>p</kbd> for you, but <kbd>o</kbd> [for me](@/stray-from-defaults/index.md). \
+{{<bl id="4" />}} Which is <kbd>p</kbd> for you, but <kbd>o</kbd> [for me](@/stray-from-defaults/index.md). \
 Also, you don't necessarily have to *paste* it. You can replace your selection with it, for example! \
 So register harps simply blammo the text into your `default-yank-register`, and then you can use it how you normally would — no specialcasey usage required!
 
-{{hn(i=5)}} Like this one!
+{{<bl id="5" />}} Like this one!
 
-{{hn(i=6)}} The global one is still the *actual* default though, as usual.
+{{<bl id="6" />}} The global one is still the *actual* default though, as usual.
 
-{{hn(i=7)}} Although my fork introduces a :random command that lets you randomize the contents of your selections, rather than specifically lines.
+{{<bl id="7" />}} Although my fork introduces a :random command that lets you randomize the contents of your selections, rather than specifically lines.
 
-{{hn(i=9)}} A chore-tracking program of mine that I will eventually write a blog post about.
+{{<bl id="9" />}} A chore-tracking program of mine that I will eventually write a blog post about.
 
-{{hn(i=10)}} Hell, do you even remember that that harp exists?
+{{<bl id="10" />}} Hell, do you even remember that that harp exists?
 
-{{hn(i=11)}} I'm referring to the menu that appears on the bottom right when you use chorded mappings, or when you try to `select_register`. In helix terms, its proper name is `auto-info` — which is a stupid and unmemorable name.
+{{<bl id="11" />}} I'm referring to the menu that appears on the bottom right when you use chorded mappings, or when you try to `select_register`. In helix terms, its proper name is `auto-info` — which is a stupid and unmemorable name.

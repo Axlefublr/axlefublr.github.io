@@ -23,7 +23,7 @@ Thanks to my friend's effortful history lesson on networking, I got a better ide
 Better enough to now consider it as a possible solution.
 
 A proxy, in my understanding, is a server that can make requests *for you*. \
-It's exactly like sexism actually:{{fn(i=1)}} you, the russian woman, saying something to another server is rejected. \
+It's exactly like sexism actually:{{<fl id="1" />}} you, the russian woman, saying something to another server is rejected. \
 So you ask a man (the proxy) to say the same thing *for you*, and give you the response — now it suddenly works.
 
 VPNs often work globally on your system which is very convenient,
@@ -53,9 +53,9 @@ As a hilarious way to force non-russian readers to skip this section, I'll write
 У них ещё есть приложение на андроид, оно мне кажется более приветливым, так что обычно использую его.
 
 С помощью MATBEA, можно обменяться валютой с человеком —
-вы отправляете классические деньги со своего банка (тинькофф например{{fn(i=2)}}), \
+вы отправляете классические деньги со своего банка (тинькофф например{{<fl id="2" />}}), \
 они подтверждают что пришло, \
-и крипта, которую MATBEA держит во время операции{{fn(i=3)}} приходит к вам на аккаунт.
+и крипта, которую MATBEA держит во время операции{{<fl id="3" />}} приходит к вам на аккаунт.
 
 Но на протяжении этой операции, есть несколько коммиссий из-за которых сложно предугадать сколько денег в итоге попадёт на счёт proxys.io. \
 Так что моя личная стратегия, ложить на 30% больше денег на счёт матби, чем я собираюсь в итоге получить на счёт proxys.io. \
@@ -89,10 +89,10 @@ VPN prices generally *start* at 5$, so that's a pretty damn stellar deal,
 considering how effective the proxy later became for me. \
 So even if you aren't in my situation, and VPNs *do* work for you, using a proxy might still be more cost-effective, if nothing else!
 
-{{hr(id="information")}}
+{{ <hr id="information" /> }}
 
 The proxy comes with a set of “information” that you're going to use to plug it into places. \
-Let's name all of them, so that they're a bit more familiar!{{fn(i=4)}}
+Let's name all of them, so that they're a bit more familiar!{{<fl id="4" />}}
 
 |thingy|namey|
 |------|-----|
@@ -101,7 +101,7 @@ Let's name all of them, so that they're a bit more familiar!{{fn(i=4)}}
 |user223767|username|
 |eIwB7xB|password|
 
-The ip address + port are probably discoverable enough{{fn(i=5)}} where someone unwanted could get access to your proxy, so it will usually come with a username and password as well. \
+The ip address + port are probably discoverable enough{{<fl id="5" />}} where someone unwanted could get access to your proxy, so it will usually come with a username and password as well. \
 You are meant to keep these secret 😼
 
 A lot of places that let you configure a proxy, simply have separate fields for each of the 4 values. \
@@ -133,11 +133,11 @@ In firefox, everything worked just how you'd expect. \
 But on floorp, suddenly, youtube videos were not playing 🤔
 
 Note, the entire rest of the website was working, just not actual playback. \
-At the time, this put me into anxiety mode; I was considoring{{fn(i=6)}} using firefox specifically for youtube, but that sounded like quite a shitty tradeoff. \
+At the time, this put me into anxiety mode; I was considoring{{<fl id="6" />}} using firefox specifically for youtube, but that sounded like quite a shitty tradeoff. \
 Firefox and floorp handle proxies differently *somehow*.
 I wasn't quite sure why yet.
 
-My favorite puppy{{fn(i=7)}} helped me solve this, with some bespoke setup that involved its VPS' socks4 proxy. \
+My favorite puppy{{<fl id="7" />}} helped me solve this, with some bespoke setup that involved its VPS' socks4 proxy. \
 Still not exactly sure what all this is, but now I'm hearing this 🧦 term when it comes to proxies. Interesting.
 
 And so, I was paying for my own proxy to use for most things, and using my partner's socks4 proxy for youtube. \
@@ -425,23 +425,23 @@ Considering the sheer price difference between a vpn, as well as (usually) much 
 
 # footnotes
 
-{{hn(i=1)}} I found this analogy hilarious more than anything, don't take it too seriously :D
+{{<bl id="1" />}} I found this analogy hilarious more than anything, don't take it too seriously :D
 
-{{hn(i=2)}} До сих пор злюсь немного на их ребрендинг. \
+{{<bl id="2" />}} До сих пор злюсь немного на их ребрендинг. \
 Какой нахуй Т-банк?? Тинькофф звучит намного более приятно.... \
 Это как твиттер → х. \
 Х блять!
 
-{{hn(i=3)}} Благодаря чему эта, казалось бы рисковая, операция, на самом деле безопасная!
+{{<bl id="3" />}} Благодаря чему эта, казалось бы рисковая, операция, на самом деле безопасная!
 
-{{hn(i=4)}} These are all example values; the “information”s of your proxy will be different, but are going to *look* about the same, so this serves as a reference.
+{{<bl id="4" />}} These are all example values; the “information”s of your proxy will be different, but are going to *look* about the same, so this serves as a reference.
 
-{{hn(i=5)}} Sheer guess.
+{{<bl id="5" />}} Sheer guess.
 
-{{hn(i=6)}} The wrong spelling is tribute to my friend skoove :3 \
+{{<bl id="6" />}} The wrong spelling is tribute to my friend skoove :3 \
 It's one of her cutest misspellings
 
 Am I overusing footnotes? \
 I feel that you being able to jump *back* easily makes me spam them a lot more strongly than I should otherwise hahaha
 
-{{hn(i=7)}} Reference to [Chuckle Sandwich](https://www.youtube.com/@ChuckleSandwich), while mentioning my puppygirl partner at the same time.
+{{<bl id="7" />}} Reference to [Chuckle Sandwich](https://www.youtube.com/@ChuckleSandwich), while mentioning my puppygirl partner at the same time.

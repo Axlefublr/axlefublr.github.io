@@ -58,7 +58,7 @@ Feet is the “navigation” layer, remapping <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k
 ```
 
 The meta layer itself doesn't need to have any mappings yet — we use it as just the meta modifier for now. \
-But for that to work, we use `multi` to *also* send the meta key down press, as long as we keep holding <kbd>w</kbd>.{{fn(i=1)}}
+But for that to work, we use `multi` to *also* send the meta key down press, as long as we keep holding <kbd>w</kbd>.{{<fl id="1" />}}
 
 Erotic and feet don't refer to a real modifier though: they are custom layers, not inherently made to mean anything, and are given purpose by us. \
 In erotic, I use `select-next-tab` and `select-prev-tab` as abstractions for however the fuck I actually do that; the *real* right side action is unimportant here, and would make things confusing for no benefit :p
@@ -110,7 +110,7 @@ Right now, we'll make hotkeys directly in kanata, expecting <kbd>ef↓</kbd> —
 <kbd>e↓[jk]</kbd> selects the next / previous tab. \
 Let's make <kbd>ef↓[jk]</kbd> *extend* that selection.
 
-{{video(path="select-extend")}}
+{{<video path="select-extend" />}}
 
 ...Where do we put those hotkeys at, though? \
 Erotic doesn't hold some actual modifier for us, and neither do feet. \
@@ -233,9 +233,9 @@ So in total, I want: \
 <kbd>e↓[jk]</kbd> to select a tab \
 <kbd>ef↓[jk]</kbd> to extend the current selection \
 <kbd>wef↓[jk]</kbd> to move selected tabs \
-<kbd>we↓[jk]</kbd> to *switch* to the previous / next tab{{fn(i=2)}}.
+<kbd>we↓[jk]</kbd> to *switch* to the previous / next tab{{<fl id="2" />}}.
 
-{{video(path="move-switch")}}
+{{<video path="move-switch" />}}
 
 Here is our new config, with all the added enterers and combining layers that we need.
 
@@ -408,6 +408,6 @@ If in the future you get a cool idea for a layer that might need composite layer
 
 # footnotes
 
-{{hn(i=1)}} We don't actually need the meta layer at all currently; omitting it entirely and making <kbd>w</kbd> be *just* `lmet` on the right side would suffice. But we're going to need this layer for later.
+{{<bl id="1" />}} We don't actually need the meta layer at all currently; omitting it entirely and making <kbd>w</kbd> be *just* `lmet` on the right side would suffice. But we're going to need this layer for later.
 
-{{hn(i=2)}} More specifically, this will skip over unloaded tabs.
+{{<bl id="2" />}} More specifically, this will skip over unloaded tabs.

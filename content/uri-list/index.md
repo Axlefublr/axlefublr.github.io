@@ -28,7 +28,7 @@ Lets me go on discord and just <kbd>ctrl+v</kbd> the file.
 
 I'm fairly certain that this is the mechanic that file managers use for drag and drop functionality, so this solves the need for a gui file manager or a file picker in practically every place 🤯
 
-{{ hr(id="alias") }}
+{{ <hr id="alias" /> }}
 
 First, it makes a lot of sense to make an alias for this. I'm on fish, so the syntax may differ for you:
 
@@ -44,13 +44,13 @@ Now I can do something like `copyl blackbeard-writing.gif` while my current work
 I don't like typing in paths though, so for the usecase of picking a file I will generally use `yazi`. \
 I made a mapping that does `copyl` there, and now the process of sending memes or whatever else is really nice! [termfilechooser](https://github.com/GermainZ/xdg-desktop-portal-termfilechooser) begone!
 
-{{ hr(id="filotkis") }}
+{{ <hr id="filotkis" /> }}
 
 A more overcomplicated idea, is that now you can put *files* on **hotkeys**. \
 Use something like [xremap](https://github.com/xremap/xremap) for hotkeys that put specific files into your clipboard, like above; now you can drive a meme to the ground even faster! This is what you get by learning linux 😎 \
 For this idea to be slightly more viable though, I heavily recommend using harp. Changing your xremap configuration every time you wanna update your image hotkeys is bound to be very annoying.
 
-{{ hr(id="screen-record") }}
+{{ <hr id="screen-record" /> }}
 
 Also, this is useful for screen recordings. \
 Screenshotting tools generally put the image into your clipboard, so you just paste it directly. \

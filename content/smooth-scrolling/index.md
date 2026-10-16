@@ -50,7 +50,7 @@ general.smoothScroll.msdPhysics.continuousMotionMaxDeltaMS = 3
 This, as far as I understand, basically means “every how many milliseconds is the smooth scrolling logic calculated?” \
 It's 12 by default, so 3 is a lot more smooth! At least by an eye test.
 
-{{video(path="showcase")}}
+{{<video path="showcase" />}}
 
 Here's how all these settings applied look like! \
 Keep in mind, there might be some fps loss in the recording, so it likely looks even smoother irl.

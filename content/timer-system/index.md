@@ -168,7 +168,7 @@ I add custom logic that checks if the provided alarm time is in the past; and if
 As for *timer* timestamps, I can do something like `1h20m37s` instead of `1h 20m 37s`, which helps a lot actually!
 In something I'll explain later.
 
-{{hr(id="starting")}}
+{{ <hr id="starting" /> }}
 
 Once I call `request-timer.fish`, I get myself an inputbox.
 In my input, the first word is the *name* / title of the time counter, and the following values are timestamps to start timers / alarms for.
@@ -177,7 +177,7 @@ In my input, the first word is the *name* / title of the time counter, and the f
 
 As you can see, I have *history* of all the time counters I've created; so once I make a particular one, I won't have to fully retype it in the future.
 
-{{hr(id="timestamps")}}
+{{ <hr id="timestamps" /> }}
 
 I reiterate: timestamp***s***.
 
@@ -186,7 +186,7 @@ Something crucial about the timer system is that it allows me to create *one* wi
 For example when using my glue gun, I set two timers: one for 90 seconds to wait for the glue gun to heat up, and then another timer for 5 minutes to wait for the glue I just set, to cool down. \
 That's why the possibility of the `1h20m37s` syntax is so helpful: without it, I'd have to somehow inject spaces into the timestamp, before providing it to `termdown`; so that I could type in each as one argument within `request-timer.fish`.
 
-{{hr(id="yes-point")}}
+{{ <hr id="yes-point" /> }}
 
 There would be no point in multiple timers if they *literally* executed one after the other.
 Once a time counter finishes, I get notified; and a *prompt* is given to me:
@@ -281,11 +281,11 @@ But then... needlessly creating a new line just to close the notification feels 
 
 Fish lets you hook into FocusIn and FocusOut events though! :D
 So I could clear notifications on every FocusIn?
-*Yeah*, but foot doesn't send those events by default; you necessarily need to “enable” it on shell startup{{fn(i=1)}}.
+*Yeah*, but foot doesn't send those events by default; you necessarily need to “enable” it on shell startup{{<fl id="1" />}}.
 And that isn't *exactly* free: if you run a `cat` with no arguments, then switch back and forth from that terminal, you'll see a bunch of `^[[I^[[O` printed.
 In effect, you'll be seeing those characters every so often in otherwise completely normal program output, and it's kind of very annoying.
 
-{{video(path="focus-events")}}
+{{<video path="focus-events" />}}
 
 I don't know, I might still play with the focus idea in the future, but at the time it felt like a fool's errand.
 For now, I just create the notifications, and make the window urgent *manually*.
@@ -391,7 +391,7 @@ So now when I try to reboot, three things are checked:
 If one of those is true, the reboot / poweroff is rejected, and just doesn't happen.
 And of course, I get a notification telling me why it didn't happen.
 
-It just saved me today actually: I was recompiling niri after fixing a bug in one of my patches, so I wrote a `while true` loop{{fn(i=2)}} in a shell to effectively reboot as soon as the compilation was done.
+It just saved me today actually: I was recompiling niri after fixing a bug in one of my patches, so I wrote a `while true` loop{{<fl id="2" />}} in a shell to effectively reboot as soon as the compilation was done.
 I noticed that despite the compilation finishing, I still wasn't rebooted! \
 I look at the output and see “refusing: ongoing time counters”...
 What time counters?? → Ohhhhh the washing machine, right!
@@ -400,7 +400,7 @@ Without this safety fence, I would probably have forgotten about the washing mac
 
 # footnotes
 
-{{hn(i=1)}} You would rightfully kill me if I never actually told you how.
+{{<bl id="1" />}} You would rightfully kill me if I never actually told you how.
 
 ![](./nvm-figured-it-out.jpg)
 
@@ -414,5 +414,5 @@ printf '\x1b[?1004l'
 to disable it.
 See `man foot-ctlseqs` for more details.
 
-{{hn(i=2)}} Why I didn't just schedule `suspend` right after scheduling the niri compilation, is an exercise to the reader.
+{{<bl id="2" />}} Why I didn't just schedule `suspend` right after scheduling the niri compilation, is an exercise to the reader.
 I believe there is sufficient information in this blog post, to figure out the reason. If not, read the [task scheduler](@/task-scheduler/index.md) blog post as a hint.

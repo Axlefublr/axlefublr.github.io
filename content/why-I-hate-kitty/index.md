@@ -6,14 +6,14 @@ date = 2024-09-13
 I say "god I hate kitty" a lot, but I usually can't think of examples for *why* on the spot. \
 I just encountered yet another "god I hate" about kitty, so I'm gonna write it down while it's hot to transfer why I hate this terminal emulator so much.
 
-{{ hr(id="desire") }}
+{{ <hr id="desire" /> }}
 
 I wanted a certain feature: in the tab bar, usually I want tabs to just have their number displayed, and nothing else. But optionally, I should be able to add a title to an individual tab.
 
 You might reasonably think "oh that sure sounds like a job for a plugin" and in any other app, something this specific would require a plugin, yes. \
 Kitty, however, picks to be between a rock and a hard place.
 
-{{ hr(id="tab-title-template") }}
+{{ <hr id="tab-title-template" /> }}
 
 Usually when configuring things, ideas come to mind because I already have a very vague idea of how to do it / assume it's doable. \
 It was the case here too: there's an option called `tab_title_template` that lets you define the text displayed in each individual tab in the tab bar.
@@ -22,7 +22,7 @@ Aside from feeling a bit wonky ([have a look](https://sw.kovidgoyal.net/kitty/co
 
 So I put in the title there and went on to configure.
 
-{{ hr(id="fish") }}
+{{ <hr id="fish" /> }}
 
 A lot of terminal applications change the shell title (or window title you would usually call it?), so once I configured them to not, I was able to get to `fish_title`.
 
@@ -35,7 +35,7 @@ I used an arbitrary variable called `title` that I could set to do that overridi
 
 That sounds like a finished job, doesn't it? But here comes in kitty, trying to be useful in the most annoying way.
 
-{{ hr(id="title-reporting") }}
+{{ <hr id="title-reporting" /> }}
 
 `fish_title` runs before and after making your shell prompt, and there *can* be times where fish doesn't report its title, or sets it to a blank string, before setting it again.
 
@@ -47,7 +47,7 @@ Imagine my horror when after doing so, I still see `fish`. \
 ??? wtf the title is supposed to be blank now? \
 And *now* I realize that fish was doing its work perfectly fine, and there was no issue there to begin with — it was *kitty*'s default messing things up.
 
-{{ hr(id="kitty-default") }}
+{{ <hr id="kitty-default" /> }}
 
 So *turns out* (I don't think it's documented, at least I wasn't able to come across this in the documentation) in kitty, if your shell hasn't got the shell title set, it will default to whatever the current app running is. \
 That `fish` was kitty saying "hey! you're running fish!" because I was just looking at my shell.
@@ -58,7 +58,7 @@ Eureka! 🥳
 
 You know what this means now? The fish shell titling mechanism is effectively useless, because kitty will interrupt and set a default intermittently with fish, so the tab title will jump jarringly and is therefore not worth using.
 
-{{ hr(id="set-tab-title") }}
+{{ <hr id="set-tab-title" /> }}
 
 I set the `shell_integration` kitty option to `no-title`. \
 While we disabled `fish_title`, some programs can still set the shell title themselves, and that option ensures that it's ignored. Now only kitty has the capability to set its own tab titles.
@@ -72,13 +72,13 @@ All that plus I'll feel more pressured to title tabs that I don't actually care 
 
 Between a rock and a hard place.
 
-{{ hr(id="disable") }}
+{{ <hr id="disable" /> }}
 
 A VERY obvious solution that you might've just thought about is to just disable this default kitty functionality that sets the titles to begin with. Very reasonable! I thought about it too, but you can't disable it, as far as I'm aware 💀
 
 You might now think "well surely that's a bug! you should open an issue about this" which is once again reasonable, but I already got burned on that with kitty.
 
-{{ hr(id="infamous-dev") }}
+{{ <hr id="infamous-dev" /> }}
 
 Kitty is infamous, first and foremost, for its unbearable dev. He instantly closes issues (which in itself is not an issue (lol)), rudely disregarding often times *reasonable* concerns.
 
@@ -93,7 +93,7 @@ That seemed like an obvious misstep but I've been taught by others that sometime
 ...Instantly rejected with something along the lines of "this is stupid, the `hollow` shape shows that kitty is unfocused". \
 This is awful on multiple levels.
 
-{{ hr(id="the-user-knows-better") }}
+{{ <hr id="the-user-knows-better" /> }}
 
 Sure, `cursor_shape` being `hollow` by default would be stupid, but there *should* be an option to set it, because it's up to the *USER* to decide that for themselves. \
 You **never** fully know the usecase of each user, and should allow them to be "stupid" if that's what they actually want. \
@@ -106,20 +106,20 @@ This same exact feature request I opened as an *issue* in ghostty, the dev said 
 
 If this was my *only* interaction with the kitty dev, I would give him the benefit of the doubt (although would still be annoyed), but all I hear about the kitty dev from people is mostly stories like mine.
 
-{{ hr(id="that is why") }}
+{{ <hr id="that is why" /> }}
 
 Coming back to shell titles: this is why it's not worth the effort to open an issue to make the default kitty titling behavior disableable.
 
 I could potentially change it in source code and compile my own kitty, but I have no clue how to compile kitty — it feels like a big mishmash of everything that I really wouldn't want to work with, even though I *do* keep a [helix fork](https://github.com/Axlefublr/helix).
 
-{{ hr(id="session") }}
+{{ <hr id="session" /> }}
 
 Next I came across [session files](https://sw.kovidgoyal.net/kitty/overview/#sessions). \
 "Surely the bee's knees" I thought — they allow you to specify a bunch of kitty commands to execute on startup. \
 Buuuut on startup of the *instance*, so they won't control each individual window / tab, which is what I would need. \
 Even calling `set_tab_title` in the session file didn't do anything for even the first window (which I don't exactly get).
 
-{{ hr(id="watchers") }}
+{{ <hr id="watchers" /> }}
 
 The final possibility is "watchers". Python scripts that listen on kitty events and execute kitty code on them. That's what I'm guessing they are anyway, because I dismissed them instantly out of this thought process: \
 Oppositely from session files, the watcher would run on... when exactly? Let's say I'm lucky and there's a "title changed" event. \
@@ -127,7 +127,7 @@ Will that event run on *startup*? This is only based on my overall experience us
 I have no reason to think this except kitty being similarly horrible to me like 20 other times, so this isn't really a "point". \
 For all I know, watchers might be the bee's knees but at this point I was tired and making a python script to work around yet another "nice" kitty behavior didn't seem worth it.
 
-{{ hr(id="giving-up") }}
+{{ <hr id="giving-up" /> }}
 
 So I give up. I get hyperfocused on things like this often and that can put me in a spiral. I went and did some house chores, until I got another idea...
 
@@ -138,7 +138,7 @@ In `tab_title_template`, this is offhandedly mentioned:
 I mostly diregarded this because what in the living and dying hell is "string formatting machinery".
 The limits of how it actually works are not well defined in the docs, so that's why I went on to try other options that *felt* viable, before coming to this one.
 
-{{ hr(id="possibility") }}
+{{ <hr id="possibility" /> }}
 
 In the docs, we get this example: `{layout_name[:2].upper()}` \
 I realize that I can at least slice strings and call methods on them. \
@@ -148,7 +148,7 @@ To reiterate the behavior that I want: usually the tab titles are ` 1 `, where 1
 
 So I need to somehow filter *all* titles that kitty might automatically set (i.e. any possible name for a program). I also need to handle the space after the number and before the title, and the rightmost space, to keep to correct padding.
 
-{{ hr(id="viola") }}
+{{ <hr id="viola" /> }}
 
 Behold: yet another kitty wack solution that does what I want, through a hack:
 ```
@@ -172,7 +172,7 @@ if I always start my tab titles with a space, I get to solve two issues in one a
 2. Type in ` gist` (with a space before)
 3. Bob becomes the brother of your parent
 
-{{ hr(id="overcooked") }}
+{{ <hr id="overcooked" /> }}
 
 So while I have my desired behavior, I'm obviously unhappy about it. It's a hack as clear as day.
 

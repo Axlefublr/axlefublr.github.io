@@ -15,7 +15,7 @@ What this resulted in, is that I don't take notes **at all**. \
 I either make an anki card, or discard the information. \
 This has been working really well as I've already expressed, but has a more *hidden* caveat I noticed only recently.
 
-{{hr(id="quickshell")}}
+{{ <hr id="quickshell" /> }}
 
 I want to make myself an analog clock :3 \
 Maybe a window, maybe an overlay widget; \
@@ -53,13 +53,13 @@ How about I employ a fun learning trick I like to use?
 Instead of focusing *only* and **exactly** on my specific usecase, I'll use that problem as a motivator to go learn something larger.
 
 I want to make hotkeys that use `niri --json` to do various windowing actions — cool, I'll learn nushell as it lets me operate on json conveniently, *among many other things*. \
-Would be cool if [floorp](@/floorp/index.md)'s wrapped tabs were all of equal size, rather than the last row expanding the tabs on it — epic, I'll learn css grid and only *after* realize that the idea was not feasible{{fn(i=1)}} \
+Would be cool if [floorp](@/floorp/index.md)'s wrapped tabs were all of equal size, rather than the last row expanding the tabs on it — epic, I'll learn css grid and only *after* realize that the idea was not feasible{{<fl id="1" />}} \
 I want an analog clock — nice, I'll learn *quickshell*.
 
 How exciting!
 New learning project :D \
 I start reading quickshell's docs, and open the docs of QtQuick… Only to find myself in **terror**. \
-There is **so much**!{{fn(i=2)}}
+There is **so much**!{{<fl id="2" />}}
 
 So many pages, so many thingies, *so much to learn*. \
 And all of this somooch (💋) will end up as anki cards, maintained in my memory forever, only for me possibly to never use like, 90% of it. \
@@ -136,7 +136,7 @@ That's reasonable don't get me wrong, but having to press enter twice to open an
 This way, I'm just a single key (<kbd>i</kbd>) away from fuzzy searching files I want to open, compared to the equivalent helix global hotkey variant. \
 Except, I get a bunch more other actions I can do easily, and methods I can use to travel to some file or directory, which is very helpful.
 
-So helpful in fact, that `mdw` having an optimized name is not actually that useful — I've zoxided into it *maybe* once or twice so far{{fn(i=3)}}. I just do everything from the yazi that my global hotkey opens! \
+So helpful in fact, that `mdw` having an optimized name is not actually that useful — I've zoxided into it *maybe* once or twice so far{{<fl id="3" />}}. I just do everything from the yazi that my global hotkey opens! \
 But there are plenty of possible optimized names, so it's not that big of a deal to overoptimize 😌
 After all, I really like how `mdw` fits semantically as a name :3
 
@@ -245,7 +245,7 @@ A really nifty program for viewing history of contributions over time, getting a
 Pretty awesome! However, I don't think I have *ever* used git blame :p \
 So you can probably see how I wouldn't have yet used `git-who` either — yet the anki cards remain. Simply hilarious!
 
-{{hr(id="conclusion")}}
+{{ <hr id="conclusion" /> }}
 
 I can't wait until I finish converting all of this and that into notes, and can get back into *learning* new things.
 
@@ -277,11 +277,17 @@ I announced writing this blog post on my [discord server](https://discord.gg/bgV
 Really puts into words, how silly my obsession of “anki only, no notes” was. \
 Now all that's left, is to **not** develop the opposite one, where I refuse anki for very good-to-anki things :p
 
+# it's been a fucking year
+
+, with some change, since I started converting my anki cards into notes. And recently (on 2026-09-11), I *finally* finished. \
+Note, I was *very* much not doing this actively.
+At the start, sure! But the process is so laborious, and of such a big scale, that over time
+
 # footnotes
 
-{{hn(i=1)}} I'm not mad about this btw — the main goal was to learn css grid, but hide the effort from my psyche with the promise of something really cool. \
+{{<bl id="1" />}} I'm not mad about this btw — the main goal was to learn css grid, but hide the effort from my psyche with the promise of something really cool. \
 I didn't get that something cool, sure, but by the time I finish learning, the urgency of the motivator has already died down — it was *used* as coal for the fire of learning 🔥
 
-{{hn(i=2)}} Actually I ended up deciding to learn `eww` instead, because the quickshell package has a package conflict that hasn't been solved in more than a week now. But I'm checking every once and again if it's fixed, and might end up learning quickshell still. Quite [tea with honey without honey no tea](https://www.youtube.com/watch?v=F986K5yNwWQ) of me :3
+{{<bl id="2" />}} Actually I ended up deciding to learn `eww` instead, because the quickshell package has a package conflict that hasn't been solved in more than a week now. But I'm checking every once and again if it's fixed, and might end up learning quickshell still. Quite [tea with honey without honey no tea](https://www.youtube.com/watch?v=F986K5yNwWQ) of me :3
 
-{{hn(i=3)}} It's been 10 days since I started converting cards and using `mdw`
+{{<bl id="3" />}} It's been 10 days since I started converting cards and using `mdw`

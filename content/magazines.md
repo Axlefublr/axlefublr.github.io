@@ -87,14 +87,14 @@ This seems like a hotpot but it's pretty intentional. \
 `&` is for *programs* that I want to discover, \
 `%` is for questions I want to discover, figure out, or take in.
 
-{{ hr(id="seemingly-simple") }}
+{{ <hr id="seemingly-simple" /> }}
 
 The two questions I have there seem simple, but they may stay there for a while because they're more loaded questions than they seem. \
 I'm sure there's more than a single way to remove the background in krita, with each being useful in a different situation — I'd want to focus on learning this properly. \
 Even more the case with [kitty](@/why-I-hate-kitty/index.md) — trying to solve this question might move me to come up with a different window managing concept that I'll then spend three more hours on. \
 Never underestimate a question, especially if you're autistic like me.
 
-{{ hr(id="vimium-c") }}
+{{ <hr id="vimium-c" /> }}
 
 I usually use the append² action for this magazine.
 
@@ -129,7 +129,7 @@ If a magazine path is listed in magazine `P`, there will never be duplicate line
 
 I could opt to join `O` and `P`, but I might want to sort a file without deduplicating lines, and may want to deduplicate lines without sorting (which you can achieve with this monstrosity: `awk '!seen[$0]++'`), so I keep them separate.
 
-{{ hr(id="dynamic") }}
+{{ <hr id="dynamic" /> }}
 
 The above examples are magazines that are fairly dynamic and moving, but there's use in magazines that are fairly static, and are made mostly to access the information faster, than necessarily change it often.
 
@@ -158,7 +158,7 @@ Usually, the output of my rofi command runner is shown in a notification that st
 That's fairly convenient as is already, but the real power lies in the copy³ action. Any time I execute a command, I can *choose* to copy its output, if I need it. \
 So, I don't have to preemtively plan to pipe the output into `xclip`, and don't have to rerun the command once I realize I want to pipe it into `xclip`. I *just* use the copy³ action.
 
-{{ hr(id="free-power") }}
+{{ <hr id="free-power" /> }}
 
 Another power I get for free, is that I can choose a line to copy⁹ from the command output.
 
@@ -197,7 +197,7 @@ I created a "subaction" meant to be the append² action replacement, but *only* 
 That makes it really non-laborious to add in new links! \
 As well as showcase how flexible magazines are, considering that I was able to make a custom action for something like this.
 
-{{ hr(id="reasoning") }}
+{{ <hr id="reasoning" /> }}
 
 Now, there's a reason I want a specific format here to begin with. I don't actually open this file directly that often. Magazine `l` is used as a "data file".
 

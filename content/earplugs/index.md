@@ -46,7 +46,7 @@ Every day, in the morning, I wash the outside of my ears with soap. \
 Be elaborate about it, don't miss the various crooks and crannies — you'll thank yourself later.
 
 But only use soap for the *outside* of your ear — *not* the ear canal itself. That at the very least *feels* like a bad idea. \
-For the ear canal, I simply take my wet finger{{fn(i=1)}} and blammo it in there, rotating it very gently and slightly. You probably know the drill. \
+For the ear canal, I simply take my wet finger{{<fl id="1" />}} and blammo it in there, rotating it very gently and slightly. You probably know the drill. \
 After doing this, ideally while the ear canal is still wet, I use q-tips.
 
 Q-tips that are stuck on *plastic* “sticks” I find to be unsafe/unstable — there have been more times than I'd like where the cotton part almost fell off inside of my ear. \
@@ -84,7 +84,7 @@ But apparently that is a very **bad** idea! So, no need for anything fancier tha
 Now, about drying. \
 You shouldn't just blammo the washed earplugs in a pile, instead give them space in between, to dry the most efficiently. \
 I like to place them sequentially, so that it's very clear to me which earplugs are the “dryest”, when I pick up another pair to use. \
-When you use *these*, or *any* other earplugs, they *should*{{fn(i=2)}} be dry.
+When you use *these*, or *any* other earplugs, they *should*{{<fl id="2" />}} be dry.
 
 You should always leave earplugs to air-dry (naturally, basically), never use anything to wipe them with. \
 Because any itty bitty piece of paper, cloth, or whatever else will be *going in your ear* — too big of a risk.
@@ -165,7 +165,7 @@ It's gimmicky as hell, but far more viable than it sounds.
 The biggest pressure that's applied while sleeping, is on the ear that's resting on the pillow. \
 You put pressure against the earplug, and in turn against your ear canal,
 moving it around in unnatural ways as you move in your sleep. \
-To an extent, you can think of it as putting the weight of your head on your ear canal.{{fn(i=3)}}
+To an extent, you can think of it as putting the weight of your head on your ear canal.{{<fl id="3" />}}
 
 When your ear is directly on the pillow, most sound is already muted, so the earplug isn't doing much there aside from creating this pressure issue. \
 So what I do, is put the earplug only into the ear that will *not* be on the pillow!
@@ -177,9 +177,9 @@ This way, I alternate the ear canal pressure throughout the night, effectively l
 And the pressure that *is* applied, is only on the “free” side, rather than the pillow side, so the sum of the pressure is reduced too. \
 Maybe this technique will work for you too!
 
-{{hn(i=3)}} This is probably not an issue on a soft pillow, though. Mine is hard.
+{{<bl id="3" />}} This is probably not an issue on a soft pillow, though. Mine is hard.
 
-{{hr(id="friend")}}
+{{ <hr id="friend" /> }}
 
 Silicone tree shaped earplugs are going to be your best friend. \
 Reliable, cheap, easy to install (lmao), surprisingly comfortable. \
@@ -247,7 +247,7 @@ We don't need the canal to be straight in this instance, we are supportive paren
 But still I find that “unwrapping” the ear is quite helpful in putting the tablet into place.
 
 For putting the tablet on your right ear, “unwrap” the ear with your left hand. \
-Now get the tablet on your right thumb close to your ear canal, and start pushing it on top of it, with a sliiiiight twist{{fn(i=4)}}. \
+Now get the tablet on your right thumb close to your ear canal, and start pushing it on top of it, with a sliiiiight twist{{<fl id="4" />}}. \
 Our goal here, mainly, is to *cover* the ear canal. Remember, we don't need to push it *inside*.
 
 Moldables are sticky by design, and are especially so when new. \
@@ -286,8 +286,8 @@ But considering that *dust buildup* is probably the highest concern, it's probab
 
 # footnotes
 
-{{hn(i=1)}} Disgusting, I know. Bear with me. Aaaargh!! 🏃‍♀️🧸
+{{<bl id="1" />}} Disgusting, I know. Bear with me. Aaaargh!! 🏃‍♀️🧸
 
-{{hn(i=2)}} Like in [rfc 2119](https://datatracker.ietf.org/doc/html/rfc2119) (lmao)
+{{<bl id="2" />}} Like in [rfc 2119](https://datatracker.ietf.org/doc/html/rfc2119) (lmao)
 
-{{hn(i=4)}} In season 2 we learn that it was the villain all along /j
+{{<bl id="4" />}} In season 2 we learn that it was the villain all along /j

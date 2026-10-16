@@ -51,7 +51,7 @@ It's tiny by default, so I made it a bit bigger with css. \
 Unfortunately in terms of icons, you have to pick among the predefined ones: you can't blammo an emoji or svg, how I'd love to be able to do. But good enough! \
 A hack you can probably use, and one that I might try out, is to *name* the workspaces using emojis, and *remove* the icon with css. That way you'll only see the name of the workspace, which just so happens to be an emoji of your choosing.
 
-{{ hr(id="i-tried-it") }}
+{{ <hr id="i-tried-it" /> }}
 
 Couple of days after writing the above sentence, I *did* try out the idea. \
 Turns out it's awesome! :D
@@ -102,7 +102,7 @@ Here's the css I use to remove the workspaces panel:
 }
 ```
 
-{{ hr(id="moving") }}
+{{ <hr id="moving" /> }}
 
 Of course, if I really couldn't move tabs across workspaces with my keyboard, I wouldn't've switched to floorp. No way. \
 But a certain feature comes to save me: "Custom actions".
@@ -153,6 +153,6 @@ In a panic, I start considering my options of solving this. I was too deep at th
 Alternative youtube frontend? Trying to make yt-dlp work again? Quitting youtube? /j \
 I was saved once again! I now have an extra proxy that *does* work for loading youtube videos in floorp (not sure why), so I can continue to use this browser in peace 😌
 
-{{ hr(id="she-cooked") }}
+{{ <hr id="she-cooked" /> }}
 
 Overall, the feeling I get from floorp is that it's a bit undercooked, but gives you the power to cook it to your preference. That is exactly how I approach most software, for better or worse, so that's a green flag for me :3

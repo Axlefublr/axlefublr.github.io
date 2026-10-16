@@ -97,10 +97,10 @@ Workspace three will now hold a bunch of my “status” windows so to speak.
 Currently on it I have open my chore tracker, calendar, a reminder thingy, a bluetooth tui, and a helix where I'm calculating my earnings.
 All except the last one I window rule to *always* open on that workspace, so now when I suddenly decide to check what chores I have to do today while working on some project, that window will not get created in the midst of a bunch of other stuff, but instead get moved onto the workspace *specifically* for status windows, helping me stay more organized.
 
-Similarly, documentation windows{{fn(i=1)}} I window rule to always appear on workspace five.
+Similarly, documentation windows{{<fl id="1" />}} I window rule to always appear on workspace five.
 Way easier to keep track of, not get lost in, and eventually clean up.
 
-{{hr(id="startup")}}
+{{ <hr id="startup" /> }}
 
 What named workspaces also allow me to do, is create more windows on startup.
 Previously I wouldn't want to do that, because a bunch of the windows would be created on the main workspace, when I prefer to keep them on some other one.
@@ -233,7 +233,7 @@ Then if I went too far, I need to manually go back 🙄
 I realize that what I want is for the selected window to always be *centered* in the alt tab ui.
 And that's exactly what I did!
 
-{{video(path="centered-mru")}}
+{{<video path="centered-mru" />}}
 
 You can find the patch in my [niri fork](https://github.com/Axlefublr/niri) or in [this thread](https://discord.com/channels/1387519366651842574/1476954416753147986) on the [niri discord server](https://discord.gg/dxEHRDCcEC).
 
@@ -281,11 +281,11 @@ When I see them in alt tab, not only does their size help me preprocess them, bu
 
 Taking care of your sizes and titles is the big reason why zooming out even the alt tab ui, I found to be a worthy tradeoff.
 
-{{hr(id="henceforth")}}
+{{ <hr id="henceforth" /> }}
 
 With all of these changes, I'm starting to get more comfortable managing *more* windows at once, and don't feel as forced to close windows immediately.
 Still trying things out, but I think this has been an awesome push to make use of moar power that niri has :3
 
 # footnotes
 
-{{hn(i=1)}} I have hotkeys that open `man …` / `… --help` / `nu -c '… --help'` in a new window, either through helix or [ov](https://axlefublr.github.io/ov/).
+{{<bl id="1" />}} I have hotkeys that open `man …` / `… --help` / `nu -c '… --help'` in a new window, either through helix or [ov](https://axlefublr.github.io/ov/).

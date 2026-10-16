@@ -81,7 +81,7 @@ After the first run, the following runs *still* had awful startup time. Around 3
 
 When you can tell the startup speed by an eye test, that means it's *really* bad. So, I decided to try using [cargo-script](https://github.com/DanielKeep/cargo-script) instead, and it indeed didn't have that issue! The following runs were definitely fast!
 
-{{ hr(id="definitely-not-foreshadowing") }}
+{{ <hr id="definitely-not-foreshadowing" /> }}
 
 *Until they weren't...*
 

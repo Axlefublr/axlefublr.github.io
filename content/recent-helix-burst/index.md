@@ -18,7 +18,7 @@ The `insert_newline` action now trims that line's trailing whitespace.
 
 So if you make custom mappings for `insert_newline`, or far more likely when you press <kbd>Enter</kbd> in insert mode, that line's trailing whitespace is automatically removed.
 
-{{ video(path="trim-trailing-whitespace") }}
+{{ <video path="trim-trailing-whitespace" /> }}
 
 While this is cool to have and will fix most trailing whitespace moving forward, the issue is the *moving forward* part. \
 Somehow we still don't have a `:trim` command or on-write hooks that would trim for us, so this on-newline behavior won't help you clean up a codebase — only to not mess up (as much) when writing a new one.
@@ -27,7 +27,7 @@ Somehow we still don't have a `:trim` command or on-write hooks that would trim 
 
 Our second on-newline feature! Although this one doesn't depend on the `insert_newline` action, and will happen even if you use something like <kbd>o</kbd> / <kbd>O</kbd>
 
-{{ video(path="extending-comments") }}
+{{ <video path="extending-comments" /> }}
 
 This feature has actually been in core for about a month I think, but I didn't rush to rebase to get it because honestly I didn't want the feature. \
 I used it back in neovim, and I found it to annoy me more often than help me. An extra `// ` / `# ` / etc to type in is not as much effort as possibly having to *fix* them. \
@@ -36,7 +36,7 @@ Additionally, in neovim the operation felt very wonky visually.
 The wonkiness is not an issue in helix, as this is a *core* feature, not something that was tacked on, so that's crossed out. \
 However the "annoying" part may still remain, as after ~1 minute of fiddling with it, I found a bug¹ when you try to extend a comment upwards, when you're at the first line in the file:
 
-{{ video(path="weird-bug") }}
+{{ <video path="weird-bug" /> }}
 
 Interestingly, there is no option to disable this auto-comment-extending behavior.
 
@@ -51,7 +51,7 @@ Set `continue-comments` in the `[editor]` section to `false`, if you want to.
 
 Now you get autocomplete for filepaths! :D
 
-{{ video(path="filepath-completions") }}
+{{ <video path="filepath-completions" /> }}
 
 If you were using my fork prior, you already had these! \
 I've been following the PR that implements this feature for a month or two, and I had it merged into my fork. \
@@ -90,7 +90,7 @@ file-types = [
 
 If you use `paste` in insert mode, that makes an undo "checkpoint":
 
-{{ video(path="paste-checkpoint") }}
+{{ <video path="paste-checkpoint" /> }}
 
 I needed to press <kbd>u</kbd> three times there, to undo the second line. \
 Previously, a single <kbd>u</kbd> would undo the whole line.
@@ -131,7 +131,7 @@ primary-paste = { command = "tee",  args = ["test-primary.txt"] } # optional
 
 For custom commands the contents of the yank/paste is communicated over stdin/stdout.
 
-{{ hr(id="wither") }}
+{{ <hr id="wither" /> }}
 
 > Yes it really said “wither”
 
@@ -195,7 +195,7 @@ If you select `just` and press <kbd>\*</kbd>, it will search for `\bjust\b`.
 So it's actually being smart about word boundaries, and only applies them when they would *work*. \
 Bravo, Vince.
 
-{{ hr(id="bravo") }}
+{{ <hr id="bravo" /> }}
 
 All of these new features are now also available in [my fork](https://github.com/Axlefublr/helix) 🥳
 

@@ -5,7 +5,7 @@ date = '2025-04-14'
 
 An AI hallucinated, and god am I thankful that it did.
 
-{{ hr(id="start") }}
+{{ <hr id="start" /> }}
 
 I've been trying to find reasons to finally switch to [kanata](https://github.com/jtroo/kanata): I've tried it before in the past, and while it was really cool, ultimately it didn't feel worth the effort.
 
