@@ -1,7 +1,7 @@
 +++
 title = 'fontconfig'
 date = '2026-11-01'
-draft = true
+draft = false
 +++
 
 I have an array of my favorite fonts :] \
